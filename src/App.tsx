@@ -1,8 +1,16 @@
+import Header from './components/Header'
+import SideBar from './components/SideBar'
+import { Outlet } from 'react-router-dom'
+import { Grid } from '@mui/material'
+import './styles/index.css'
+
 function App() {
   return (
-    <div className="App">
-      <span>hello</span>
-    </div>
+    <Grid container>
+      <Header />
+      <SideBar />
+      <Outlet />
+    </Grid>
   )
 }
 
