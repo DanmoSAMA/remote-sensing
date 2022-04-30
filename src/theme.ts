@@ -4,11 +4,12 @@ export const theme = createTheme({
   components: {},
   palette: {
     primary: {
-      main: '#F2F2F2',
-      dark: '#C9C9C9'
+      main: '#E2DCCD',
+      dark: '#E2DECD',
+      light: '#FCFBF4'
     },
     secondary: {
-      main: '#42097F'
+      main: '#01555A'
     }
   },
   typography: {

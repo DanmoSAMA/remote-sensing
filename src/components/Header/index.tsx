@@ -3,6 +3,7 @@ import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
 import { headerStyles } from './styles'
+import List from './components/List'
 import Search from './components/Search'
 import Button from './components/Button'
 
@@ -10,18 +11,19 @@ export default function Navbar() {
   return (
     <AppBar position="static" sx={headerStyles.appBar}>
       <Toolbar variant="dense">
-        <Typography variant="h1" color="inherit" fontWeight={500} fontSize={36}>
-          系统名
-        </Typography>
-        <Box sx={headerStyles.search}>
+        <Box>
           <Typography
-            variant="subtitle1"
-            color="inherit"
-            fontWeight={500}
-            fontSize={18}
+            variant="h1"
+            color="primary"
+            fontWeight={300}
+            fontSize={28.4444}
+            fontFamily={'Comfortaa'}
           >
-            关于我们
+            AI System
           </Typography>
+        </Box>
+        <List />
+        <Box sx={headerStyles.search}>
           <Search />
           <Button />
         </Box>

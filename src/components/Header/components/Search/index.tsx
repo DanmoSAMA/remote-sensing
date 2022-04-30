@@ -1,12 +1,34 @@
 import IconButton from '@mui/material/IconButton'
 import SearchIcon from '@mui/icons-material/Search'
+import Input from '@mui/material/Input'
+import FormControl from '@mui/material/FormControl'
+import Box from '@mui/material/Box'
 import { searchStyles } from './styles'
+import { useShowInput } from './hooks/useShowInput'
 
 function Search() {
+  const { showInput, setShowInput } = useShowInput()
+
   return (
-    <IconButton aria-label="search" sx={searchStyles.search}>
-      <SearchIcon sx={searchStyles.icon} />
-    </IconButton>
+    <Box sx={searchStyles.wrapper}>
+      <FormControl variant="standard" onClick={(e) => e.stopPropagation()}>
+        <Input
+          sx={searchStyles.input}
+          disableUnderline={true}
+          style={{ display: showInput ? 'inline-block' : 'none' }}
+        />
+      </FormControl>
+      <IconButton
+        aria-label="search"
+        sx={searchStyles.search}
+        onClick={(e) => {
+          e.stopPropagation()
+          setShowInput(!showInput)
+        }}
+      >
+        <SearchIcon sx={searchStyles.icon} />
+      </IconButton>
+    </Box>
   )
 }
 

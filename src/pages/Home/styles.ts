@@ -1,10 +1,11 @@
 export const homeStyles = {
   body: {
     '&': {
-      marginLeft: '240px',
       display: 'flex',
-      justifyContent: 'center',
-      position: 'relative'
+      position: 'relative',
+      height: '68rem',
+      width: '100%',
+      zIndex: 0
     }
   }
 }
