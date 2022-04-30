@@ -17,6 +17,17 @@ export const headerStyles = {
       padding: '0 53px 0 36px'
     }
   },
+  logo: {
+    '&': {
+      display: 'flex',
+      alignItems: 'center'
+    },
+    '& .svg-icon': {
+      // fontSize: '40px'
+      zoom: '1.6',
+      marginRight: '5px'
+    }
+  },
   search: {
     '&': {
       display: 'flex',
