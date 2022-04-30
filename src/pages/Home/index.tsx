@@ -1,8 +1,12 @@
+import Container from '@mui/material/Container'
+import Create from './components/Create'
+import { homeStyles } from './styles'
+
 function Home() {
   return (
-    <div>
-      <div>hello</div>
-    </div>
+    <Container sx={homeStyles.body}>
+      <Create />
+    </Container>
   )
 }
 

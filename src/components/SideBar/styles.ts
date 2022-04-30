@@ -31,7 +31,7 @@ export const sideBarStyles = {
     '& span': {
       marginLeft: '-10px',
       fontWeight: '600',
-      fontSize: '16px'
+      fontSize: '20px'
     }
   }
 }

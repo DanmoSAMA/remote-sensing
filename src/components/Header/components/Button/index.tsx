@@ -4,7 +4,7 @@ import { buttonStyles } from './styles'
 function _Button() {
   return (
     <Button variant="contained" sx={buttonStyles.button}>
-      登陆
+      登录
     </Button>
   )
 }
