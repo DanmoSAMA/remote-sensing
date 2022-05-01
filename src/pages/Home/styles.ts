@@ -3,9 +3,9 @@ export const homeStyles = {
     '&': {
       display: 'flex',
       position: 'relative',
-      height: '68rem',
+      height: '64rem',
       width: '100%',
-      zIndex: 0
+      top: '80px'
     }
   }
 }

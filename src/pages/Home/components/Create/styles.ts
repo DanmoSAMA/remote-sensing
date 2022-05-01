@@ -3,7 +3,7 @@ export const createStyles = {
     '&': {
       width: '37.25rem',
       position: 'absolute',
-      top: '17.5rem',
+      top: '13.5rem',
       left: '18.51rem'
     }
   },

@@ -1,12 +1,13 @@
 export const pictureStyles = {
   wrapper: {
     position: 'absolute',
-    top: '14rem',
+    top: '11rem',
     right: '0',
     display: 'flex',
     width: '50rem',
     height: '35rem',
-    overflow: 'hidden'
+    overflow: 'hidden',
+    zIndex: 0
   },
   item: {
     '&': {
