@@ -5,7 +5,7 @@ export const functionsStyles = {
     display: 'flex',
     width: '100%',
     justifyContent: 'space-evenly',
-    padding: '0 6rem',
+    padding: '0 6rem 0 9rem',
     boxSizing: 'border-box'
   },
   item: {

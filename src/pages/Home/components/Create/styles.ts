@@ -4,7 +4,7 @@ export const createStyles = {
       width: '37.25rem',
       position: 'absolute',
       top: '13.5rem',
-      left: '18.51rem'
+      left: '15rem'
     }
   },
   title: {
