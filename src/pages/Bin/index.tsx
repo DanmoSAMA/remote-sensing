@@ -1,9 +1,13 @@
-function Bin() {
+import Box from '@mui/material/Box'
+import Projects from './components/Projects'
+import { binStyles } from './styles'
+
+function Recent() {
   return (
-    <div>
-      <div>bin</div>
-    </div>
+    <Box sx={binStyles.wrapper}>
+      <Projects />
+    </Box>
   )
 }
 
-export default Bin
+export default Recent
