@@ -13,7 +13,7 @@ function _List() {
     <List sx={listStyles.list}>
       {listItems.map((item) => (
         <ListItem
-          selected={`/${item.route}` === pathname}
+          selected={pathname.includes(item.route)}
           button
           key={item.id}
           onClick={() => navigate(item.route)}

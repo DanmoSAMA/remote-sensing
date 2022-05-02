@@ -1,7 +1,19 @@
-export default function Create() {
+import Grid from '@mui/material/Grid'
+import Header from '../../components/Header'
+import Form from './components/Form'
+import Functions from '../../pages/Home/components/Functions'
+import { createStyles } from './styles'
+
+function Create() {
   return (
-    <div>
-      <div>hello</div>
-    </div>
+    <>
+      <Header />
+      <Grid sx={createStyles.body}>
+        <Form />
+        <Functions />
+      </Grid>
+    </>
   )
 }
+
+export default Create

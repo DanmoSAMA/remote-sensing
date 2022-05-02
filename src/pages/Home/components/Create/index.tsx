@@ -23,7 +23,12 @@ function Create() {
       <Typography variant="body1" sx={createStyles.text} mb={'40px'}>
         可实现变化检测、地物分类、目标提取、目标检测等功能 提供全方位视角展示
       </Typography>
-      <Button variant="contained" color="secondary" sx={createStyles.button}>
+      <Button
+        variant="contained"
+        color="secondary"
+        sx={createStyles.button}
+        onClick={() => navigate('/home/create')}
+      >
         <AddIcon sx={createStyles.icon} />
         新建项目
       </Button>
