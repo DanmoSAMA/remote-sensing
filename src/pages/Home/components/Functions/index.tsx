@@ -6,8 +6,11 @@ import Typography from '@mui/material/Typography'
 import IconButton from '@mui/material/IconButton'
 import { functionsStyles } from './styles'
 import { functionItems } from './consts/functionItems'
+import { useNavigate } from 'react-router-dom'
 
 function Functions() {
+  const navigate = useNavigate()
+
   return (
     <Box sx={functionsStyles.wrapper}>
       {functionItems.map((item) => (
@@ -28,7 +31,10 @@ function Functions() {
               </Typography>
             </CardContent>
           </Card>
-          <Card sx={functionsStyles.hoverItem}>
+          <Card
+            sx={functionsStyles.hoverItem}
+            onClick={() => navigate(item.route)}
+          >
             <CardContent>
               <Container sx={{ display: 'flex', justifyContent: 'center' }}>
                 <IconButton aria-label="search" sx={functionsStyles.icon}>

@@ -23,7 +23,6 @@ export const headerStyles = {
       alignItems: 'center'
     },
     '& .svg-icon': {
-      // fontSize: '40px'
       zoom: '1.6',
       marginRight: '5px'
     }

@@ -21,6 +21,11 @@ const routesConfig: RouteConfig[] = [
     path: '/bin',
     exact: true,
     element: loadable(() => import('../pages/Bin'))
+  },
+  {
+    path: 'change-detection',
+    exact: true,
+    element: loadable(() => import('../pages/ChangeDetection'))
   }
 ]
 

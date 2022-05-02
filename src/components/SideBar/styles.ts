@@ -1,37 +1,66 @@
 export const sideBarStyles = {
   drawer: {
-    width: 320,
+    width: 230,
+    borderRadius: '20px',
 
     '& .MuiDrawer-paper': {
-      width: 240,
+      width: 230,
+      height: '98vh',
       boxSizing: 'border-box',
-      backgroundColor: 'primary.main',
-      color: '#000',
+      backgroundColor: '#313131',
+      color: '#fff',
       borderRight: 'none',
-      paddingTop: '80px',
-      marginTop: '100px'
+      borderRadius: '20px',
+      marginLeft: '10px',
+      marginTop: '10px'
     },
     '& .Mui-selected': {
-      backgroundColor: '#fff!important'
+      backgroundColor: '#fff'
+    },
+    '& .Mui-selected span': {
+      color: 'secondary.main'
     },
     '& .Mui-selected:hover': {
       backgroundColor: '#fff'
     },
     '& .MuiListItem-root': {
-      marginLeft: '15px',
-      borderRadius: '10px',
-      height: '60px'
+      marginLeft: '10%',
+      width: '90%',
+      borderTopLeftRadius: '25px',
+      borderBottomLeftRadius: '25px',
+      height: '60px',
+      marginTop: '30px'
     }
   },
   icons: {
     color: '#000',
-    marginLeft: '20px'
+
+    '& .MuiIconButton-root': {
+      backgroundColor: '#fff',
+
+      '& svg': {
+        zoom: 1.4
+      }
+    }
   },
   text: {
+    marginLeft: '16px',
     '& span': {
       marginLeft: '-10px',
-      fontWeight: '600',
-      fontSize: '20px'
+      fontWeight: '300',
+      fontSize: '18px'
+    }
+  },
+  logo: {
+    '&': {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      padding: '20px'
+    },
+    '& .svg-icon': {
+      zoom: '1.6',
+      marginRight: '5px'
     }
   }
 }
