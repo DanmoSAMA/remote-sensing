@@ -12,10 +12,10 @@ export const sideBarStyles = {
       borderRight: 'none',
       borderRadius: '20px',
       marginLeft: '10px',
-      marginTop: '10px'
+      marginTop: '1vh'
     },
     '& .Mui-selected': {
-      backgroundColor: '#fff'
+      backgroundColor: '#fff!important'
     },
     '& .Mui-selected span': {
       color: 'secondary.main'
@@ -41,6 +41,9 @@ export const sideBarStyles = {
       '& svg': {
         zoom: 1.4
       }
+    },
+    '& .MuiIconButton-root:hover': {
+      backgroundColor: '#fff'
     }
   },
   text: {

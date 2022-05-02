@@ -58,6 +58,7 @@ export const functionsStyles = {
     position: 'absolute',
     bottom: '1rem',
     zIndex: 11,
+    cursor: 'pointer',
 
     '& + .mask': {
       width: '100vw',

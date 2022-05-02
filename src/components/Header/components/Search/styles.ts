@@ -15,12 +15,13 @@ export const searchStyles = {
       width: '18.75rem',
       fontSize: '18px',
       position: 'relative',
-      left: '50px'
+      left: '46px'
     },
     '& .MuiInput-input': {
       height: '50px',
       lineHeight: '50px',
-      padding: '0 10px'
+      padding: '0 55px 0 10px',
+      boxSizing: 'border-box'
     },
     '&:focus': {
       border: 'none'
