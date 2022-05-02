@@ -7,6 +7,7 @@ import { theme } from './theme'
 import Home from './pages/Home'
 import Recent from './pages/Recent'
 import Bin from './pages/Bin'
+import Create from './pages/Create'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <ThemeProvider theme={theme}>
@@ -14,7 +15,9 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       <Routes>
         <Route path="/" element={<Navigate to="/home" replace />} />
         <Route path="/" element={<App />}>
-          <Route path="home" element={<Home />} />
+          <Route path="home" element={<Home />}>
+            <Route path="create" element={<Create />} />
+          </Route>
           <Route path="recent" element={<Recent />} />
           <Route path="bin" element={<Bin />} />
         </Route>

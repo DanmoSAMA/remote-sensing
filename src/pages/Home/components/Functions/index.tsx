@@ -19,7 +19,11 @@ function Functions() {
                   {item.icon}
                 </IconButton>
               </Container>
-              <Typography fontSize={16} color={'secondary'} fontWeight={300}>
+              <Typography
+                fontSize={'1.2rem'}
+                color={'secondary'}
+                fontWeight={300}
+              >
                 {item.label}
               </Typography>
             </CardContent>
@@ -32,11 +36,11 @@ function Functions() {
                 </IconButton>
               </Container>
               <Typography
-                fontSize={16}
+                fontSize={'1.2rem'}
                 color={'secondary'}
                 fontWeight={300}
                 textAlign="center"
-                mb={'10px'}
+                mb={'0.5rem'}
               >
                 {item.label}
               </Typography>

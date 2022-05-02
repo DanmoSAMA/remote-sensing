@@ -17,6 +17,7 @@ export const projectStyles = {
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
+    position: 'relative',
 
     '&:hover + .mask': {
       display: 'block!important'
@@ -26,12 +27,12 @@ export const projectStyles = {
     },
     '& img': {
       width: '11rem',
-      marginTop: '4rem',
       borderRadius: '1rem'
     }
   },
   mask: {
     display: 'none',
+    // display: 'flex',
     width: '18rem',
     height: '18rem',
     backgroundColor: 'rgba(226, 222, 205, .7)',
@@ -39,13 +40,20 @@ export const projectStyles = {
     top: '0',
     flexDirection: 'column',
     alignItems: 'center',
+    justifyContent: 'center',
     borderRadius: '1rem',
     boxShadow: '0 5px 8px rgba(0, 0, 0, .3)'
   },
   middle: {
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center',
-    width: '10rem'
+    justifyContent: 'center'
+  },
+  bottom: {
+    textAlign: 'center',
+    color: 'secondary.main',
+    fontSize: 14,
+    position: 'absolute',
+    bottom: '0.7rem'
   }
 }

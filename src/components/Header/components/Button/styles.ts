@@ -2,9 +2,10 @@ export const buttonStyles = {
   button: {
     '&': {
       backgroundColor: 'secondary.main',
-      marginLeft: '10px',
+      marginLeft: '1rem',
       height: '50px',
-      width: '120px',
+      maxWidth: '7.5rem',
+      minWidth: '90px',
       borderRadius: '25px',
       fontSize: '18px',
       color: '#fff',

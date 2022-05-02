@@ -3,8 +3,12 @@ import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 import AddIcon from '@mui/icons-material/Add'
 import { createStyles } from './styles'
+import { useNavigate, useLocation } from 'react-router-dom'
 
 function Create() {
+  const navigate = useNavigate()
+  const { pathname } = useLocation()
+
   return (
     <Container sx={createStyles.create}>
       <Typography sx={createStyles.title} variant="h2">

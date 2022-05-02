@@ -1,4 +1,4 @@
-export const projectStyles = {
+export const binStyles = {
   wrapper: {
     width: '100%',
     height: '60vh',
@@ -26,12 +26,12 @@ export const projectStyles = {
     },
     '& img': {
       width: '11rem',
-      marginTop: '4rem',
       borderRadius: '1rem'
     }
   },
   mask: {
     display: 'none',
+    // display: 'flex',
     width: '18rem',
     height: '18rem',
     backgroundColor: 'rgba(226, 222, 205, .7)',
@@ -39,6 +39,7 @@ export const projectStyles = {
     top: '0',
     flexDirection: 'column',
     alignItems: 'center',
+    justifyContent: 'center',
     borderRadius: '1rem',
     boxShadow: '0 5px 8px rgba(0, 0, 0, .3)'
   },
@@ -47,5 +48,12 @@ export const projectStyles = {
     alignItems: 'center',
     justifyContent: 'center',
     width: '10rem'
+  },
+  bottom: {
+    textAlign: 'center',
+    color: 'secondary.main',
+    fontSize: 14,
+    position: 'absolute',
+    bottom: '0.7rem'
   }
 }

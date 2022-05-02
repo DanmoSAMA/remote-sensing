@@ -4,7 +4,7 @@ export const searchStyles = {
       display: 'flex',
       justifyContent: 'end',
       alignItems: 'center',
-      width: '400px'
+      width: '25rem'
     }
   },
   input: {
@@ -12,7 +12,7 @@ export const searchStyles = {
       backgroundColor: 'primary.light',
       boxSizing: 'border-box',
       borderRadius: '25px',
-      width: '300px',
+      width: '18.75rem',
       fontSize: '18px',
       position: 'relative',
       left: '50px'
@@ -30,8 +30,7 @@ export const searchStyles = {
     '&': {
       backgroundColor: 'primary.main',
       height: '50px',
-      width: '50px',
-      marginRight: '40px'
+      width: '50px'
     },
     '&:hover': {
       backgroundColor: 'primary.main'

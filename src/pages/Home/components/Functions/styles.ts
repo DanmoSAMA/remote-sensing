@@ -32,6 +32,8 @@ export const functionsStyles = {
   },
   icon: {
     backgroundColor: '#fff',
+    width: '2.5rem',
+    height: '2.5rem',
     marginBottom: '5px',
     zIndex: 0,
 
@@ -44,7 +46,7 @@ export const functionsStyles = {
   },
   hoverItem: {
     width: '13rem',
-    height: '11rem',
+    height: '14rem',
     // display: 'flex',
     display: 'none',
     flexDirection: 'column',
