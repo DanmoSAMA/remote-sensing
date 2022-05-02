@@ -48,23 +48,13 @@ function Project() {
           <div className="mask" style={binStyles.mask}>
             <Box sx={binStyles.middle} mb={'1rem'}>
               <SvgIcon name="open" />
-              <Typography
-                color={'000'}
-                fontSize={14}
-                fontWeight={600}
-                ml={'0.5rem'}
-              >
+              <Typography fontSize={'1rem'} fontWeight={600} ml={'0.5rem'}>
                 打开项目
               </Typography>
             </Box>
             <Box sx={binStyles.middle} mb={'1rem'}>
               <SvgIcon name="recover" />
-              <Typography
-                color={'000'}
-                fontSize={14}
-                fontWeight={600}
-                ml={'0.5rem'}
-              >
+              <Typography fontSize={'1rem'} fontWeight={600} ml={'0.5rem'}>
                 恢复项目
               </Typography>
             </Box>
@@ -72,7 +62,7 @@ function Project() {
               <SvgIcon name="delete" />
               <Typography
                 color={'000'}
-                fontSize={14}
+                fontSize={'1rem'}
                 fontWeight={600}
                 ml={'0.5rem'}
               >

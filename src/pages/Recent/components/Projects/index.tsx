@@ -52,17 +52,17 @@ function Project() {
             <Typography sx={projectStyles.bottom}>{item.name}</Typography>
           </Box>
           <div className="mask" style={projectStyles.mask}>
-            <Typography color={'secondary.main'} fontSize={14}>
+            <Typography color={'secondary.main'} fontSize={'1rem'}>
               最近编辑于
             </Typography>
-            <Typography color={'secondary.main'} fontSize={14}>
+            <Typography color={'secondary.main'} fontSize={'1rem'}>
               {item.editedTime}
             </Typography>
             <Box sx={projectStyles.middle} mt={'1rem'} mb={'1rem'}>
               <SvgIcon name="open" />
               <Typography
                 color={'000'}
-                fontSize={14}
+                fontSize={'1rem'}
                 fontWeight={600}
                 ml={'0.5rem'}
               >
@@ -73,7 +73,7 @@ function Project() {
               <SvgIcon name="delete" />
               <Typography
                 color={'000'}
-                fontSize={14}
+                fontSize={'1rem'}
                 fontWeight={600}
                 ml={'0.5rem'}
               >

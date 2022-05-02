@@ -44,7 +44,7 @@ function Functions() {
               >
                 {item.label}
               </Typography>
-              <Typography fontSize={12} color={'#000'} fontWeight={300}>
+              <Typography fontSize={'0.9rem'} color={'#000'} fontWeight={300}>
                 {item.descripion}
               </Typography>
             </CardContent>

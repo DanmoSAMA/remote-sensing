@@ -18,9 +18,9 @@ export default function Navbar() {
             variant="h1"
             color="primary"
             fontWeight={300}
-            fontSize={'28px'}
+            fontSize={'30px'}
             fontFamily={'Comfortaa'}
-            width={'160px'}
+            width={'10rem'}
           >
             AI System
           </Typography>

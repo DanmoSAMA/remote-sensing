@@ -20,7 +20,7 @@ export const projectStyles = {
     position: 'relative',
 
     '&:hover + .mask': {
-      display: 'block!important'
+      display: 'flex!important'
     },
     '& + .mask:hover': {
       display: 'flex!important'
@@ -52,7 +52,7 @@ export const projectStyles = {
   bottom: {
     textAlign: 'center',
     color: 'secondary.main',
-    fontSize: 14,
+    fontSize: '1rem',
     position: 'absolute',
     bottom: '0.7rem'
   }

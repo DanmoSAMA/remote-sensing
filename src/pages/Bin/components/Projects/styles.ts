@@ -19,7 +19,7 @@ export const binStyles = {
     alignItems: 'center',
 
     '&:hover + .mask': {
-      display: 'block!important'
+      display: 'flex!important'
     },
     '& + .mask:hover': {
       display: 'flex!important'
@@ -52,8 +52,12 @@ export const binStyles = {
   bottom: {
     textAlign: 'center',
     color: 'secondary.main',
-    fontSize: 14,
+    fontSize: '1rem',
     position: 'absolute',
     bottom: '0.7rem'
+  },
+  text: {
+    textAlign: 'center',
+    fontSize: '1rem'
   }
 }
