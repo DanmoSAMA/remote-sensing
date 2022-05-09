@@ -5,8 +5,12 @@ import FormControl from '@mui/material/FormControl'
 import Typography from '@mui/material/Typography'
 import AddIcon from '@mui/icons-material/Add'
 import { formStyles } from './styles'
+import { useState } from 'react'
 
 export default function Form() {
+  const [isCreated, setIsCreated] = useState(false)
+  const [projectName, setProjectName] = useState('')
+
   return (
     <Box sx={formStyles.wrapper}>
       <FormControl variant="standard" sx={formStyles.left}>
@@ -14,10 +18,28 @@ export default function Form() {
           disableUnderline={true}
           placeholder="请输入项目名称（不多于50个字符）"
           sx={formStyles.input}
+          onChange={(e) => setProjectName(e.target.value)}
         />
-        <Button variant="contained" sx={formStyles.button}>
+        <Button
+          variant="contained"
+          sx={formStyles.button}
+          style={{ display: !isCreated ? 'block' : 'none' }}
+          onClick={() => {
+            if (projectName.length === 0 || projectName.length > 50)
+              return alert('项目名称不合法')
+            setIsCreated(true)
+          }}
+        >
           完成创建
         </Button>
+        <Typography
+          color={'secondary.main'}
+          fontSize={'1.2rem'}
+          height={'4rem'}
+          style={{ display: isCreated ? 'block' : 'none' }}
+        >
+          创建项目完成，可使用下方功能进行分析
+        </Typography>
       </FormControl>
       <Box sx={formStyles.right}>
         <Box sx={formStyles.upload}>
