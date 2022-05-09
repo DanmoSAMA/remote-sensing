@@ -35,5 +35,14 @@ export const toolBarStyles = {
     '& svg': {
       marginRight: '6px'
     }
+  },
+  list: {},
+  listItem: {
+    color: '#fff',
+    height: '40px',
+    lineHeight: '40px',
+    borderRadius: '10px',
+    border: '1px solid #fff',
+    marginBottom: '10px'
   }
 }
