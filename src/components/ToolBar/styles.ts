@@ -2,7 +2,7 @@ export const toolBarStyles = {
   wrapper: {
     position: 'absolute',
     height: '89vh',
-    width: '300px',
+    width: '240px',
     right: '10px',
     top: '10vh',
     backgroundColor: '#313131',

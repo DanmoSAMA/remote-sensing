@@ -1,7 +1,7 @@
-import Box from '@mui/material/Box'
 import Sidebar from '../../components/SideBar'
 import ShortHeader from '../../components/ShortHeader'
 import ToolBar from '../../components/ToolBar'
+import Main from './components/Main'
 
 export default function ChangeDetection() {
   return (
@@ -9,7 +9,7 @@ export default function ChangeDetection() {
       <Sidebar />
       <ShortHeader />
       <ToolBar />
-      <Box></Box>
+      <Main />
     </>
   )
 }

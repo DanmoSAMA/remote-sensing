@@ -1,10 +1,10 @@
 export const sideBarStyles = {
   drawer: {
-    width: 230,
+    width: 200,
     borderRadius: '20px',
 
     '& .MuiDrawer-paper': {
-      width: 230,
+      width: 200,
       height: '98vh',
       boxSizing: 'border-box',
       backgroundColor: '#313131',
@@ -51,7 +51,7 @@ export const sideBarStyles = {
     '& span': {
       marginLeft: '-10px',
       fontWeight: '300',
-      fontSize: '18px'
+      fontSize: '16px'
     }
   },
   logo: {
