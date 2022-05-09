@@ -1,3 +1,0 @@
-export const cdStyles = {
-  wrapper: {}
-}

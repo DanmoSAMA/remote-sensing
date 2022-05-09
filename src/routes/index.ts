@@ -23,9 +23,29 @@ const routesConfig: RouteConfig[] = [
     element: loadable(() => import('../pages/Bin'))
   },
   {
-    path: 'change-detection',
+    path: '/analysis',
+    exact: true,
+    element: loadable(() => import('../pages/Analysis'))
+  },
+  {
+    path: '/change-detection',
     exact: true,
     element: loadable(() => import('../pages/ChangeDetection'))
+  },
+  {
+    path: '/terrain-classification',
+    exact: true,
+    element: loadable(() => import('../pages/TerrainClassification'))
+  },
+  {
+    path: '/object-extract',
+    exact: true,
+    element: loadable(() => import('../pages/ObjectExtract'))
+  },
+  {
+    path: '/object-detection',
+    exact: true,
+    element: loadable(() => import('../pages/ObjectDetection'))
   }
 ]
 
