@@ -2,12 +2,12 @@ export const mainStyles = {
   wrapper: {
     width: '100%',
     height: '75vh',
-    margin: '100px 300px 0 260px',
+    margin: '100px 270px 0 230px',
     display: 'flex'
   },
   image: {
     width: '63%',
-    marginRight: '50px',
+    marginRight: '20px',
     backgroundColor: '#bfa',
     borderRadius: '20px',
     boxSizing: 'border-box',
@@ -28,7 +28,7 @@ export const mainStyles = {
     padding: '10px'
   },
   upper: {
-    padding: '20px'
+    padding: '15px'
   },
   pairItem: {},
   addNext: {
@@ -37,7 +37,7 @@ export const mainStyles = {
     cursor: 'pointer'
   },
   resultName: {
-    padding: '20px'
+    padding: '15px'
   },
   btnArea: {
     position: 'absolute',

@@ -20,7 +20,7 @@ export default function Main() {
         <Box sx={mainStyles.function_inner}>
           <Box sx={mainStyles.upper}>
             <Typography
-              fontSize={16}
+              fontSize={'1rem'}
               color={'secondary.main'}
               fontWeight={400}
               mb={'5px'}
@@ -31,7 +31,7 @@ export default function Main() {
             <Box sx={mainStyles.addNext}>
               <SvgIcon name="add" />
               <Typography
-                fontSize={13}
+                fontSize={'0.8rem'}
                 color={'secondary.main'}
                 fontWeight={600}
                 ml={'5px'}
@@ -42,7 +42,7 @@ export default function Main() {
           </Box>
           <Box sx={mainStyles.resultName}>
             <Typography
-              fontSize={16}
+              fontSize={'1rem'}
               color={'secondary.main'}
               fontWeight={400}
               mb={'5px'}
@@ -63,7 +63,7 @@ export default function Main() {
               }}
             />
             <Typography
-              fontSize={12}
+              fontSize={'0.75rem'}
               color={'secondary.main'}
               fontWeight={400}
               mt={'5px'}

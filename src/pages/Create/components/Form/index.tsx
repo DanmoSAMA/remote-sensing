@@ -21,14 +21,28 @@ export default function Form() {
       </FormControl>
       <Box sx={formStyles.right}>
         <Box sx={formStyles.upload}>
-          <Button
-            variant="contained"
-            sx={formStyles.button}
-            style={{ width: '60%' }}
+          <input
+            accept="image/*"
+            id="contained-button-file"
+            style={{ display: 'none' }}
+            multiple
+            type="file"
+          />
+          <label
+            htmlFor="contained-button-file"
+            style={{ width: '60%', display: 'flex', justifyContent: 'center' }}
           >
-            <AddIcon style={{ marginRight: '1rem' }} />
-            上传图片
-          </Button>
+            <Button
+              variant="contained"
+              sx={formStyles.button}
+              style={{ width: '100%' }}
+              // 这一行必须
+              component="span"
+            >
+              <AddIcon style={{ marginRight: '1rem' }} />
+              上传图片
+            </Button>
+          </label>
           <Typography
             width={'60%'}
             textAlign={'center'}
