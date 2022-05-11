@@ -4,6 +4,8 @@ import Typography from '@mui/material/Typography'
 import SvgIcon from '../SvgIcon'
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
+import Group from './components/Group'
+import Item from './components/Item'
 import { toolBarStyles } from './styles'
 import { observer } from 'mobx-react-lite'
 import { ProjectStore } from '../../mobx/project'
@@ -28,6 +30,7 @@ ProjectStore.updateImgs([
 
 ProjectStore.updateImgGroup([
   {
+    id: 1,
     name: '组1',
     members: [
       {
@@ -43,6 +46,7 @@ ProjectStore.updateImgGroup([
     ]
   },
   {
+    id: 2,
     name: '组2',
     members: [
       {
@@ -92,16 +96,12 @@ function _ToolBar() {
       </Box>
       <List>
         {ProjectStore.imgGroups.map((item) => (
-          <ListItem key={item.id} sx={toolBarStyles.listItem}>
-            {item.name}
-          </ListItem>
+          <Group group={item} key={item.id} />
         ))}
       </List>
-      <List sx={toolBarStyles.list}>
+      <List>
         {ProjectStore.imgs.map((item) => (
-          <ListItem key={item.id} sx={toolBarStyles.listItem}>
-            {item.name}
-          </ListItem>
+          <Item item={item} key={item.id} />
         ))}
       </List>
     </Box>

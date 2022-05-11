@@ -1,7 +1,7 @@
 export const mainStyles = {
   wrapper: {
     width: '100%',
-    height: '75vh',
+    height: '82vh',
     margin: '100px 270px 0 230px',
     display: 'flex'
   },

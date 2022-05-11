@@ -4,3 +4,33 @@
   fill: currentColor;
   vertical-align: middle;
 }
+
+/* 右侧toolbar内用到的图标 */
+.toolbar {
+  cursor: pointer;
+  zoom: 1.4;
+  margin: 0 5px;
+}
+
+.toolbar.folder {
+  cursor: default;
+}
+
+.toolbar.right {
+  position: absolute;
+  right: 5px;
+  top: 8px;
+}
+
+.toolbar.up_down {
+  position: absolute;
+  right: 25px;
+  top: 8px;
+  zoom: 1.5;
+}
+
+.toolbar.dropdown {
+  margin: 0px 5 0 0;
+  width: 12px;
+  cursor: default;
+}
