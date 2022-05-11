@@ -8,10 +8,19 @@ export const mainStyles = {
   image: {
     width: '63%',
     marginRight: '20px',
-    backgroundColor: '#bfa',
-    borderRadius: '20px',
     boxSizing: 'border-box',
-    padding: '10px'
+    overflow: 'hidden',
+    borderRadius: '20px',
+    position: 'relative',
+
+    '& img': {
+      height: '100%',
+      borderRadius: '20px',
+      position: 'absolute'
+    },
+    '& img:nth-of-type(2)': {
+      left: '130px'
+    }
   },
   function: {
     width: '37%',

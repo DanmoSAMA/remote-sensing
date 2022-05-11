@@ -2,12 +2,30 @@ import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import SvgIcon from '../../../../components/SvgIcon'
+import { ProjectStore } from '../../../../mobx/project'
 import { mainStyles } from './styles'
+
+ProjectStore.updateChosenImgs([
+  {
+    id: 1,
+    url: 'https://z3.ax1x.com/2021/08/17/fInXEF.png',
+    name: '图片1'
+  },
+  {
+    id: 2,
+    url: 'https://z3.ax1x.com/2021/08/17/fIn4hj.png',
+    name: '图片2'
+  }
+])
 
 export default function Main() {
   return (
     <Box sx={mainStyles.wrapper}>
-      <Box sx={mainStyles.image}>Image</Box>
+      <Box sx={mainStyles.image}>
+        {ProjectStore.chosenImgs.map((item) => (
+          <img src={item.url} key={item.id} />
+        ))}
+      </Box>
       <Box sx={mainStyles.function}>
         <Typography
           fontSize={20}

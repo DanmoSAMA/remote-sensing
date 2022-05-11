@@ -7,6 +7,8 @@ class ProjectState {
   imgs: Img[] = []
   // 分组图片信息
   imgGroups: ImgGroup[] = []
+  // 被选中的两张图，在页面上呈现
+  chosenImgs: Img[] = []
 
   constructor() {
     makeAutoObservable(this)
@@ -19,6 +21,10 @@ class ProjectState {
   // 在检测完成后更新，应为async
   updateImgGroup(val: ImgGroup[]) {
     this.imgGroups = val
+  }
+
+  updateChosenImgs(val: Img[]) {
+    this.chosenImgs = val
   }
 }
 
