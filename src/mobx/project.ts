@@ -70,6 +70,10 @@ class ProjectState {
       }
     }
   }
+  // 删除waitingImgs
+  deleteWaitingImgs(id: number) {
+    this.waitingGroups = this.waitingGroups.filter((item) => item.id !== id)
+  }
 }
 
 export const ProjectStore = new ProjectState()

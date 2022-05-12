@@ -51,11 +51,12 @@ export const mainStyles = {
     backgroundColor: 'primary.dark',
     borderRadius: '20px',
     boxSizing: 'border-box',
-    padding: '10px',
-    overFlow: 'auto'
+    padding: '10px'
   },
   upper: {
-    padding: '15px'
+    padding: '15px',
+    maxHeight: '70%',
+    overflow: 'auto'
   },
   select: {
     backgroundColor: '#fff',

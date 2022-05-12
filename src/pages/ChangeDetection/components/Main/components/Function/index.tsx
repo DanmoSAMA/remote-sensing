@@ -33,7 +33,10 @@ function _Function() {
               <MySelect item={item} key={item.id} />
             ))}
           </Box>
-          <Box sx={mainStyles.addNext}>
+          <Box
+            sx={mainStyles.addNext}
+            onClick={() => ProjectStore.addWaitingImgs()}
+          >
             <SvgIcon name="add" />
             <Typography
               fontSize={'0.8rem'}

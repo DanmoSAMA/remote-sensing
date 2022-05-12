@@ -24,7 +24,10 @@ function _MySelect(props: Props) {
         marginBottom: '20px'
       }}
     >
-      <SvgIcon name="close" class="main close" />
+      <div onClick={() => ProjectStore.deleteWaitingImgs(item.id)}>
+        <SvgIcon name="close" class="main close" />
+      </div>
+
       <Box sx={{ marginLeft: '10px', width: '90%' }}>
         <FormControl required sx={{ marginBottom: '10px', minWidth: '100%' }}>
           <Select
@@ -35,7 +38,6 @@ function _MySelect(props: Props) {
                 0,
                 JSON.parse(e.target.value)
               )
-              console.log(ProjectStore.waitingGroups)
             }}
             displayEmpty
             sx={mainStyles.select}
