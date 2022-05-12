@@ -51,12 +51,16 @@ export const mainStyles = {
     backgroundColor: 'primary.dark',
     borderRadius: '20px',
     boxSizing: 'border-box',
-    padding: '10px'
+    padding: '10px',
+    overFlow: 'auto'
   },
   upper: {
     padding: '15px'
   },
-  pairItem: {},
+  select: {
+    backgroundColor: '#fff',
+    color: 'secondary.main'
+  },
   addNext: {
     display: 'flex',
     alignItems: 'center',

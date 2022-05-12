@@ -59,7 +59,7 @@ function _Group(props: Props) {
       >
         {group.members.map((item: Img) => (
           // 嵌套li会有warning，暂时不理会
-          <Item item={item} />
+          <Item item={item} key={item.id} />
         ))}
       </Box>
     </Box>

@@ -2,6 +2,7 @@ import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import SvgIcon from '../../../../../../components/SvgIcon'
+import MySelect from './components/MySelect'
 import { ProjectStore } from '../../../../../../mobx/project'
 import { mainStyles } from '../../styles'
 import { observer } from 'mobx-react-lite'
@@ -27,7 +28,11 @@ function _Function() {
           >
             待分析图片
           </Typography>
-          <Box sx={mainStyles.pairItem}></Box>
+          <Box>
+            {ProjectStore.waitingGroups.map((item) => (
+              <MySelect item={item} key={item.id} />
+            ))}
+          </Box>
           <Box sx={mainStyles.addNext}>
             <SvgIcon name="add" />
             <Typography
@@ -56,7 +61,7 @@ function _Function() {
               outline: 'none',
               width: '100%',
               boxSizing: 'border-box',
-              height: '30px',
+              height: '40px',
               padding: '5px',
               borderRadius: '10px',
               border: '1px solid #01555A'

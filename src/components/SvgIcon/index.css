@@ -5,7 +5,7 @@
   vertical-align: middle;
 }
 
-/* 右侧toolbar内用到的图标 */
+/* 右侧toolbar */
 .toolbar {
   cursor: pointer;
   zoom: 1.4;
@@ -33,4 +33,10 @@
   margin: 0px 5 0 0;
   width: 12px;
   cursor: default;
+}
+
+/*main*/
+.main.close {
+  cursor: pointer;
+  zoom: 1.3
 }
