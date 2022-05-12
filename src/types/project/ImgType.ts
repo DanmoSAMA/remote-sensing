@@ -9,3 +9,9 @@ export type ImgGroup = {
   name: string
   members: Img[]
 }
+
+export type WaitingGroup = {
+  id: number
+  oldImg: Img
+  newImg: Img
+}

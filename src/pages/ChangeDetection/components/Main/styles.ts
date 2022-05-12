@@ -12,6 +12,7 @@ export const mainStyles = {
     overflow: 'hidden',
     borderRadius: '20px',
     position: 'relative',
+    backgroundColor: 'secondary.light',
 
     '& img': {
       height: '100%',
@@ -19,7 +20,23 @@ export const mainStyles = {
       position: 'absolute'
     },
     '& img:nth-of-type(2)': {
-      left: '130px'
+      left: '20%'
+    }
+  },
+  placeholder: {
+    backgroundColor: 'secondary.main',
+    height: '100%',
+    width: '80%',
+    borderRadius: '20px',
+    position: 'absolute',
+    left: '20%',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+
+    '& svg': {
+      zoom: '3'
     }
   },
   function: {

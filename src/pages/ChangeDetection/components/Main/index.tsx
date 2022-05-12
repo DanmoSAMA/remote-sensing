@@ -22,9 +22,23 @@ export default function Main() {
   return (
     <Box sx={mainStyles.wrapper}>
       <Box sx={mainStyles.image}>
-        {ProjectStore.chosenImgs.map((item) => (
-          <img src={item.url} key={item.id} />
-        ))}
+        {ProjectStore.chosenImgs.length > 0 ? (
+          ProjectStore.chosenImgs.map((item) => (
+            <img src={item.url} key={item.id} />
+          ))
+        ) : (
+          <Box sx={mainStyles.placeholder}>
+            <SvgIcon name="not_upload" />
+            <Typography
+              color="#fff"
+              fontSize={'1.2rem'}
+              width="65%"
+              mt={'20px'}
+            >
+              当前未上传待分析图像，请先在检测区中上传待分析图像
+            </Typography>
+          </Box>
+        )}
       </Box>
       <Box sx={mainStyles.function}>
         <Typography
@@ -45,7 +59,7 @@ export default function Main() {
             >
               待分析图片
             </Typography>
-            <Box sx={mainStyles.pairItem}>todo...</Box>
+            <Box sx={mainStyles.pairItem}></Box>
             <Box sx={mainStyles.addNext}>
               <SvgIcon name="add" />
               <Typography
