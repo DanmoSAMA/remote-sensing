@@ -2,8 +2,10 @@ import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import SvgIcon from '../../../../components/SvgIcon'
+import Function from './components/Function'
 import { ProjectStore } from '../../../../mobx/project'
 import { mainStyles } from './styles'
+import { observer } from 'mobx-react-lite'
 
 ProjectStore.updateChosenImgs([
   {
@@ -18,101 +20,14 @@ ProjectStore.updateChosenImgs([
   }
 ])
 
-export default function Main() {
+function _Main() {
   return (
     <Box sx={mainStyles.wrapper}>
-      <Box sx={mainStyles.image}>
-        {ProjectStore.chosenImgs.length > 0 ? (
-          ProjectStore.chosenImgs.map((item) => (
-            <img src={item.url} key={item.id} />
-          ))
-        ) : (
-          <Box sx={mainStyles.placeholder}>
-            <SvgIcon name="not_upload" />
-            <Typography
-              color="#fff"
-              fontSize={'1.2rem'}
-              width="65%"
-              mt={'20px'}
-            >
-              当前未上传待分析图像，请先在检测区中上传待分析图像
-            </Typography>
-          </Box>
-        )}
-      </Box>
-      <Box sx={mainStyles.function}>
-        <Typography
-          fontSize={20}
-          color={'secondary.main'}
-          fontWeight={500}
-          mt={'5px'}
-        >
-          变化检测
-        </Typography>
-        <Box sx={mainStyles.function_inner}>
-          <Box sx={mainStyles.upper}>
-            <Typography
-              fontSize={'1rem'}
-              color={'secondary.main'}
-              fontWeight={400}
-              mb={'5px'}
-            >
-              待分析图片
-            </Typography>
-            <Box sx={mainStyles.pairItem}></Box>
-            <Box sx={mainStyles.addNext}>
-              <SvgIcon name="add" />
-              <Typography
-                fontSize={'0.8rem'}
-                color={'secondary.main'}
-                fontWeight={600}
-                ml={'5px'}
-              >
-                添加下一组
-              </Typography>
-            </Box>
-          </Box>
-          <Box sx={mainStyles.resultName}>
-            <Typography
-              fontSize={'1rem'}
-              color={'secondary.main'}
-              fontWeight={400}
-              mb={'5px'}
-            >
-              结果名称
-            </Typography>
-            <input
-              type="text"
-              placeholder="请输入结果分析名称，不超过50个字符"
-              style={{
-                outline: 'none',
-                width: '100%',
-                boxSizing: 'border-box',
-                height: '30px',
-                padding: '5px',
-                borderRadius: '10px',
-                border: '1px solid #01555A'
-              }}
-            />
-            <Typography
-              fontSize={'0.75rem'}
-              color={'secondary.main'}
-              fontWeight={400}
-              mt={'5px'}
-            >
-              注：若输出多个分析结果，将会按照结果名称+数字的格式输出
-            </Typography>
-          </Box>
-          <Box sx={mainStyles.btnArea}>
-            <Button variant="contained" color="secondary">
-              开始检测
-            </Button>
-            <Button variant="contained" color="info">
-              取消
-            </Button>
-          </Box>
-        </Box>
-      </Box>
+      <Function />
     </Box>
   )
 }
+
+const Main = observer(_Main)
+
+export default Main
