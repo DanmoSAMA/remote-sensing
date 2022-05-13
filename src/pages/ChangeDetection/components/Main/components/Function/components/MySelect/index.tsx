@@ -33,11 +33,7 @@ function _MySelect(props: Props) {
           <Select
             value={item.oldImg.name}
             onChange={(e) => {
-              ProjectStore.updateWaitingImgs(
-                item.id,
-                0,
-                JSON.parse(e.target.value)
-              )
+              ProjectStore.updateWaitingImgs(item.id, 0, e.target.value)
             }}
             displayEmpty
             sx={mainStyles.select}
@@ -47,7 +43,7 @@ function _MySelect(props: Props) {
             </MenuItem>
             {ProjectStore.imgs.map((item) => (
               <MenuItem
-                value={JSON.stringify(item)}
+                value={item.name}
                 sx={{ color: 'secondary.main' }}
                 key={item.id}
               >
@@ -60,11 +56,7 @@ function _MySelect(props: Props) {
           <Select
             value={item.newImg.name}
             onChange={(e) =>
-              ProjectStore.updateWaitingImgs(
-                item.id,
-                1,
-                JSON.parse(e.target.value)
-              )
+              ProjectStore.updateWaitingImgs(item.id, 1, e.target.value)
             }
             displayEmpty
             sx={mainStyles.select}
@@ -74,7 +66,7 @@ function _MySelect(props: Props) {
             </MenuItem>
             {ProjectStore.imgs.map((item) => (
               <MenuItem
-                value={JSON.stringify(item)}
+                value={item.name}
                 sx={{ color: 'secondary.main' }}
                 key={item.id}
               >

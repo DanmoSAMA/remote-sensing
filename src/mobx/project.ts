@@ -60,13 +60,16 @@ class ProjectState {
     })
   }
   // 修改waitingImgs
-  updateWaitingImgs(id: number, type: 0 | 1, val: Img) {
+  updateWaitingImgs(id: number, type: 0 | 1, val: string) {
     const pair = this.waitingGroups.find((item) => item.id === id)
     if (pair) {
-      if (type === 0) {
-        pair.oldImg = val
-      } else {
-        pair.newImg = val
+      const img = this.imgs.find((item) => item.name === val)
+      if (img) {
+        if (type === 0) {
+          pair.oldImg = img
+        } else {
+          pair.newImg = img
+        }
       }
     }
   }
