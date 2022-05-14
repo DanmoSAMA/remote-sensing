@@ -7,7 +7,7 @@ import List from './components/List'
 import Search from './components/Search'
 import Button from './components/Button'
 import SvgIcon from '../SvgIcon/index'
-import Form from './components/Form'
+// import Form from './components/Form'
 
 export default function Navbar() {
   return (
@@ -31,7 +31,7 @@ export default function Navbar() {
           <Search />
           <Button />
         </Box>
-        <Form />
+        {/* <Form /> */}
       </Toolbar>
     </AppBar>
   )

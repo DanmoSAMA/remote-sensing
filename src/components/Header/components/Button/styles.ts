@@ -1,18 +1,24 @@
 export const buttonStyles = {
   button: {
     '&': {
-      backgroundColor: 'secondary.main',
+      backgroundColor: 'primary.dark',
       marginLeft: '1rem',
       height: '50px',
-      maxWidth: '7.5rem',
-      minWidth: '90px',
+      width: '50px',
       borderRadius: '25px',
-      fontSize: '18px',
-      color: '#fff',
-      fontWeight: '300'
+      fontSize: '16px',
+      color: 'secondary.main',
+      fontWeight: '400',
+      padding: '0',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      outline: '2px solid #01555A',
+      cursor: 'pointer',
+      lineHeight: '50px'
     },
     '&:hover': {
-      backgroundColor: 'secondary.main'
+      backgroundColor: 'primary.dark'
     }
   }
 }
