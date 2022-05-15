@@ -47,11 +47,12 @@ export async function request<T>(config: AxiosRequestConfig) {
     return new Promise<HttpRes<T | null>>((resolve, reject) => {
       instance(config)
         .then((res: AxiosResponse<HttpRes<T>>) => {
-          if (res.data && res.data.status) {
-            if (res.data.status !== 200) {
+          if (res.data) {
+            if (res.status !== 200) {
               alert(res.data.msg)
               resolve({ ...res.data, data: null })
             } else {
+              // 直接取得data
               resolve(res.data)
             }
           } else {

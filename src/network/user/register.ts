@@ -1,14 +1,16 @@
 import { request } from '../request'
-import { RegisterReqData, RegisterResData } from '../../types/user/register'
+import {
+  RegisterReqData,
+  RegisterRes,
+  RegisterResData
+} from '../../types/user/register'
 
-export async function register(
-  data: RegisterReqData
-): Promise<RegisterResData> {
-  const res = await request({
+export async function register(data: RegisterReqData) {
+  const resData = await request({
     method: 'POST',
     data,
     url: '/v1/user'
   })
 
-  return res.data as Promise<RegisterResData>
+  return resData
 }

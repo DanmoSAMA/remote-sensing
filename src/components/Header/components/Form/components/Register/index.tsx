@@ -23,11 +23,15 @@ const formConfig: FormConfig = {
   }
 }
 
+const color = ['#E46A69', '#908F8E']
+
 export default function Register(props: Props) {
   const { showLogin, setShowLogin } = props
   const { form, setForm, formIsValidate, doValidate } = useForm(formConfig)
+
   const [checkPw, setCheckPw] = useState('')
   const [pwNotSame, setPwNotSame] = useState(true)
+  const [hasRegistered, setHasRegistered] = useState(false)
 
   useEffect(() => {
     doValidate()
@@ -40,7 +44,10 @@ export default function Register(props: Props) {
         password
       }
       const resData = await register(reqData)
-      if (resData.code === '0') alert('注册成功')
+
+      // console.log(resData)
+      if (resData.code === 0) alert('注册成功')
+      if (resData.code === 3) setHasRegistered(true)
     } else console.log('账号或密码的格式错误，或两次输入的密码不同')
   }
 
@@ -71,7 +78,7 @@ export default function Register(props: Props) {
         <Typography
           sx={formStyles.hint}
           margin="5px 0"
-          style={{ color: !formIsValidate.account ? '#E46A69' : '#908F8E' }}
+          style={{ color: !formIsValidate.account ? color[0] : color[1] }}
         >
           账号以字母开头，由小写英文字母和数字组成的4-16位字符
         </Typography>
@@ -91,7 +98,7 @@ export default function Register(props: Props) {
         <Typography
           sx={formStyles.hint}
           margin="5px 0"
-          style={{ color: !formIsValidate.password ? '#E46A69' : '#908F8E' }}
+          style={{ color: !formIsValidate.password ? color[0] : color[1] }}
         >
           长度8-20位，仅可包括数字、大写字母、小写字母
         </Typography>
@@ -115,17 +122,17 @@ export default function Register(props: Props) {
         <Typography
           sx={formStyles.hint}
           margin="5px 0"
-          style={{ color: pwNotSame ? '#E46A69' : '#908F8E' }}
+          style={{ color: pwNotSame ? color[0] : color[1] }}
         >
           两次输入的密码不同，请重新确认您的密码
         </Typography>
-        {/* <Typography
+        <Typography
           sx={formStyles.hint}
           margin="5px 0"
-          style={{ color: '#E46A69' }}
+          style={{ color: color[0], display: hasRegistered ? 'block' : 'none' }}
         >
           账号已被注册
-        </Typography> */}
+        </Typography>
       </form>
       <Button
         variant="contained"
@@ -136,7 +143,12 @@ export default function Register(props: Props) {
       >
         注册
       </Button>
-      <Typography display="flex" mt="20px" fontSize=".9rem" color="#B6B5B3">
+      <Typography
+        display="flex"
+        mt="20px"
+        fontSize=".9rem"
+        color={hasRegistered ? color[0] : color[1]}
+      >
         已有账户？
         <Typography
           fontSize=".9rem"
