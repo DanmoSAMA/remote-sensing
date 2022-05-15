@@ -8,3 +8,9 @@ export type RegisterReqData = {
 }
 
 export type RegisterReq = HttpRes<RegisterReqData>
+
+export type RegisterResData = {
+  code: string
+  msg: string
+  data: {}
+}

@@ -25,14 +25,14 @@ export default function Login(props: Props) {
         <input
           type="text"
           placeholder="输入您的账号"
-          style={formStyles.input}
+          style={formStyles.input.login}
           className="form_input"
           autoComplete="true"
         />
         <input
           type="password"
           placeholder="输入您的密码"
-          style={formStyles.input}
+          style={formStyles.input.login}
           className="form_input"
           autoComplete="true"
         />

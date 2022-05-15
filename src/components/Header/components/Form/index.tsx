@@ -20,8 +20,8 @@ export default function Form(props: Props) {
     <>
       <Box
         sx={Object.assign(formStyles.wrapper, {
-          display: showDialogue ? 'flex' : 'none'
-          // display: 'flex'
+          // display: showDialogue ? 'flex' : 'none'
+          display: 'flex'
         })}
       >
         <div
@@ -66,7 +66,8 @@ export default function Form(props: Props) {
           left: '0',
           backgroundColor: 'rgba(0, 0, 0, .3)',
           cursor: 'default',
-          display: showDialogue ? 'block' : 'none'
+          // display: showDialogue ? 'block' : 'none'
+          display: 'flex'
         }}
       ></Box>
     </>

@@ -26,28 +26,36 @@ export const formStyles = {
   form: {
     display: 'flex',
     flexDirection: 'column',
-    width: '70%',
+    width: '75%',
     alignItems: 'center',
     justifyContent: 'space-around',
     marginTop: '20px'
   },
   input: {
-    height: '38px',
-    width: '100%',
-    outline: 'none',
-    border: '1px solid #BFBEBA',
-    borderRadius: '5px',
-    backgroundColor: '#E5E5E5',
-    padding: '0 10px',
-    boxSizing: 'border-box',
-    marginBottom: '25px'
-    // 不生效，写css了...
-    // '&:focus': {
-    //   borderColor: '1px solid #01555A!important'
-    // }
+    login: {
+      height: '38px',
+      width: '100%',
+      outline: 'none',
+      border: '1px solid #BFBEBA',
+      borderRadius: '5px',
+      backgroundColor: '#E5E5E5',
+      padding: '0 10px',
+      boxSizing: 'border-box',
+      marginBottom: '25px'
+    },
+    register: {
+      height: '38px',
+      width: '100%',
+      outline: 'none',
+      border: '1px solid #BFBEBA',
+      borderRadius: '5px',
+      backgroundColor: '#E5E5E5',
+      padding: '0 10px',
+      boxSizing: 'border-box'
+    }
   },
   button: {
-    width: '70%',
+    width: '75%',
     marginTop: '20px',
     height: '38px',
     backgroundColor: 'secondary.main',
@@ -58,5 +66,9 @@ export const formStyles = {
     '&:hover': {
       backgroundColor: 'secondary.main'
     }
+  },
+  hint: {
+    fontSize: '12px',
+    color: '#908F8E'
   }
 }
