@@ -59,7 +59,7 @@ function Project() {
 
   return (
     <Box sx={projectStyles.wrapper}>
-      {recentProjects?.map((item) => (
+      {recentProjects?.slice(0, 8).map((item) => (
         <Box key={item.id} sx={{ position: 'relative' }}>
           <Box sx={projectStyles.item}>
             {/* <img src={item.coverSrc} /> */}

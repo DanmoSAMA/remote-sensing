@@ -7,9 +7,28 @@ import IconButton from '@mui/material/IconButton'
 import { functionsStyles } from './styles'
 import { functionItems } from './consts/functionItems'
 import { useNavigate } from 'react-router-dom'
+import { createProject } from '../../../../network/project/createProject'
 
-function Functions() {
+type Props = {
+  name: string
+  id: number
+}
+
+function Functions(props: Props) {
   const navigate = useNavigate()
+  const { name, id } = props
+
+  function clickFunctionItem(name: string, route: string) {
+    // 在项目创建之前点击，则新建未命名项目
+    if (name === '') {
+      createProject({ name: '未命名项目' }).then((res) => {
+        navigate(`${route}?id=${res.data.projectID}`)
+      })
+      return
+    }
+    // 在项目创建之后点击，需要带上该项目的id
+    navigate(`${route}?id=${id}`)
+  }
 
   return (
     <Box sx={functionsStyles.wrapper}>
@@ -33,7 +52,7 @@ function Functions() {
           </Card>
           <Card
             sx={functionsStyles.hoverItem}
-            onClick={() => navigate(item.route)}
+            onClick={() => clickFunctionItem(name, item.route)}
           >
             <CardContent>
               <Container sx={{ display: 'flex', justifyContent: 'center' }}>

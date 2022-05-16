@@ -12,7 +12,7 @@ function Home() {
       <Grid sx={homeStyles.body}>
         <Create />
         <Picture />
-        <Functions />
+        <Functions name="" />
       </Grid>
     </>
   )

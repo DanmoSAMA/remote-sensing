@@ -8,9 +8,16 @@ import { formStyles } from './styles'
 import { useState } from 'react'
 import { createProject } from '../../../../network/project/createProject'
 
-export default function Form() {
+type Props = {
+  projectName: string
+  setProjectName: (val: string) => void
+  projectId: number
+  setProjectId: (val: number) => void
+}
+
+export default function Form(props: Props) {
+  const { projectName, setProjectName, projectId, setProjectId } = props
   const [isCreated, setIsCreated] = useState(false)
-  const [projectName, setProjectName] = useState('')
 
   async function clickToCreateProject() {
     if (projectName.length === 0 || projectName.length > 50)
@@ -21,8 +28,8 @@ export default function Form() {
     const reqData = {
       name: projectName
     }
-    const resData = await createProject(reqData)
-    console.log(resData)
+    const res = await createProject(reqData)
+    setProjectId(res.data.projectID)
   }
 
   return (
