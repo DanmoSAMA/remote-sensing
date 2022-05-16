@@ -32,27 +32,14 @@ export const formStyles = {
     marginTop: '20px'
   },
   input: {
-    login: {
-      height: '38px',
-      width: '100%',
-      outline: 'none',
-      border: '1px solid #BFBEBA',
-      borderRadius: '5px',
-      backgroundColor: '#E5E5E5',
-      padding: '0 10px',
-      boxSizing: 'border-box',
-      marginBottom: '25px'
-    },
-    register: {
-      height: '38px',
-      width: '100%',
-      outline: 'none',
-      border: '1px solid #BFBEBA',
-      borderRadius: '5px',
-      backgroundColor: '#E5E5E5',
-      padding: '0 10px',
-      boxSizing: 'border-box'
-    }
+    height: '38px',
+    width: '100%',
+    outline: 'none',
+    border: '1px solid #BFBEBA',
+    borderRadius: '5px',
+    backgroundColor: '#E5E5E5',
+    padding: '0 10px',
+    boxSizing: 'border-box'
   },
   button: {
     width: '75%',

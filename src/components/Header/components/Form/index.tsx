@@ -20,8 +20,8 @@ export default function Form(props: Props) {
     <>
       <Box
         sx={Object.assign(formStyles.wrapper, {
-          // display: showDialogue ? 'flex' : 'none'
-          display: 'flex'
+          display: showDialogue ? 'flex' : 'none'
+          // display: 'flex'
         })}
       >
         <div
@@ -39,6 +39,7 @@ export default function Form(props: Props) {
           }}
           onClick={() => {
             setShowDialogue(false)
+            setShowLogin(true)
           }}
         >
           <SvgIcon name="cross" class="form cross" />
@@ -54,8 +55,16 @@ export default function Form(props: Props) {
           <SvgIcon name="logo" />
           欢迎使用AI遥感系统
         </Typography>
-        <Login showLogin={showLogin} setShowLogin={setShowLogin} />
-        <Register showLogin={showLogin} setShowLogin={setShowLogin} />
+        <Login
+          showLogin={showLogin}
+          setShowLogin={setShowLogin}
+          setShowDialogue={setShowDialogue}
+        />
+        <Register
+          showLogin={showLogin}
+          setShowLogin={setShowLogin}
+          setShowDialogue={setShowDialogue}
+        />
       </Box>
       <Box
         sx={{
@@ -66,8 +75,8 @@ export default function Form(props: Props) {
           left: '0',
           backgroundColor: 'rgba(0, 0, 0, .3)',
           cursor: 'default',
-          // display: showDialogue ? 'block' : 'none'
-          display: 'flex'
+          display: showDialogue ? 'block' : 'none'
+          // display: 'flex'
         }}
       ></Box>
     </>

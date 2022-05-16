@@ -8,5 +8,5 @@ export async function login(data: LoginReqData) {
     url: '/v1/session'
   })
 
-  return res.data
+  return res
 }

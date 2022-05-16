@@ -20,5 +20,17 @@ export const buttonStyles = {
     '&:hover': {
       backgroundColor: 'primary.dark'
     }
+  },
+  dropdown: {
+    width: '180px',
+    height: '120px',
+    position: 'absolute',
+    top: '80px',
+    right: '0',
+    backgroundColor: 'primary.dark',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'column'
   }
 }

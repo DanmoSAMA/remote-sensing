@@ -1,4 +1,6 @@
-const TOKEN_KEY = '__remote_sensing__token'
+// 暂存localstorage，以后重构
+
+const TOKEN_KEY = '__remote_sensing_token'
 
 export interface Token {
   value: string

@@ -34,7 +34,7 @@ export async function request<T>(config: AxiosRequestConfig) {
       // 在发送请求之前做些什么
       (config) => {
         const token = getToken()
-        if (token) config.headers.Authorization = token.value
+        if (token) config.headers.Authorization = token
         return config
       },
       // 对请求错误做些什么
@@ -47,38 +47,7 @@ export async function request<T>(config: AxiosRequestConfig) {
     return new Promise<HttpRes<T | null>>((resolve, reject) => {
       instance(config)
         .then((res: AxiosResponse<HttpRes<T>>) => {
-          if (res.data) {
-            if (res.status !== 200) {
-              alert(res.data.msg)
-              resolve({ ...res.data, data: null })
-            } else {
-              // 直接取得data
-              resolve(res.data)
-            }
-          } else {
-            console.log('# request then', { res })
-            throw new Error('出错了')
-          }
-        })
-        .catch((err: (Error & AxiosError) | null) => {
-          // 归一化 err 为 string
-          let errStr = ''
-
-          if (!err) {
-            console.error('# request !err', { err })
-            errStr = '出错了'
-          } else if ((err as AxiosError).response) {
-            // 是出错了的 http 请求
-            console.error('# request AxiosError', { err })
-            errStr = '出错了'
-          } else if ((err as Error) instanceof Error) {
-            errStr = err.message
-          } else {
-            console.error('# _request unknown err', { err })
-            errStr = '出错了'
-          }
-
-          resolve({ data: null, status: 400, msg: errStr })
+          resolve(res.data)
         })
         .finally(() => {
           requestSet.delete(key)

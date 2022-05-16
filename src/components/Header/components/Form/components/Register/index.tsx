@@ -1,8 +1,7 @@
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
-import { useState } from 'react'
-import { useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { formStyles } from '../../styles'
 import { useForm } from '../../hooks/useForm'
 import { FormConfig } from '../../../../../../types/user/ConfigOpts'
@@ -11,6 +10,7 @@ import { register } from '../../../../../../network/user/register'
 type Props = {
   showLogin: boolean
   setShowLogin: (val: boolean) => void
+  setShowDialogue: (val: boolean) => void
 }
 
 const formConfig: FormConfig = {
@@ -26,12 +26,14 @@ const formConfig: FormConfig = {
 const color = ['#E46A69', '#908F8E']
 
 export default function Register(props: Props) {
-  const { showLogin, setShowLogin } = props
+  const { showLogin, setShowLogin, setShowDialogue } = props
   const { form, setForm, formIsValidate, doValidate } = useForm(formConfig)
 
   const [checkPw, setCheckPw] = useState('')
   const [pwNotSame, setPwNotSame] = useState(true)
   const [hasRegistered, setHasRegistered] = useState(false)
+
+  const formRef = useRef()
 
   useEffect(() => {
     doValidate()
@@ -45,9 +47,12 @@ export default function Register(props: Props) {
       }
       const resData = await register(reqData)
 
-      // console.log(resData)
-      if (resData.code === 0) alert('注册成功')
-      if (resData.code === 3) setHasRegistered(true)
+      if (resData.code === 0) {
+        alert('注册成功')
+        setForm({ account: '', password: '' })
+        formRef.current.reset()
+        setShowDialogue(false)
+      } else if (resData.code === 2004) setHasRegistered(true)
     } else console.log('账号或密码的格式错误，或两次输入的密码不同')
   }
 
@@ -61,11 +66,11 @@ export default function Register(props: Props) {
         alignItems: 'center'
       }}
     >
-      <form style={formStyles.form}>
+      <form style={formStyles.form} ref={formRef}>
         <input
           type="text"
           placeholder="输入您的账号"
-          style={formStyles.input.register}
+          style={formStyles.input}
           className="form_input"
           autoComplete="true"
           onChange={(e) => {
@@ -78,6 +83,7 @@ export default function Register(props: Props) {
         <Typography
           sx={formStyles.hint}
           margin="5px 0"
+          width="95%"
           style={{ color: !formIsValidate.account ? color[0] : color[1] }}
         >
           账号以字母开头，由小写英文字母和数字组成的4-16位字符
@@ -85,7 +91,7 @@ export default function Register(props: Props) {
         <input
           type="password"
           placeholder="输入您的密码"
-          style={formStyles.input.register}
+          style={formStyles.input}
           className="form_input"
           autoComplete="true"
           onChange={(e) => {
@@ -98,6 +104,7 @@ export default function Register(props: Props) {
         <Typography
           sx={formStyles.hint}
           margin="5px 0"
+          width="95%"
           style={{ color: !formIsValidate.password ? color[0] : color[1] }}
         >
           长度8-20位，仅可包括数字、大写字母、小写字母
@@ -105,7 +112,7 @@ export default function Register(props: Props) {
         <input
           type="password"
           placeholder="确认您的密码"
-          style={formStyles.input.register}
+          style={formStyles.input}
           className="form_input"
           autoComplete="true"
           onChange={(e) => {
@@ -122,6 +129,7 @@ export default function Register(props: Props) {
         <Typography
           sx={formStyles.hint}
           margin="5px 0"
+          width="95%"
           style={{ color: pwNotSame ? color[0] : color[1] }}
         >
           两次输入的密码不同，请重新确认您的密码
