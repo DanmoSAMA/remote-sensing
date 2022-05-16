@@ -47,7 +47,8 @@ export const projectStyles = {
   middle: {
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    cursor: 'pointer'
   },
   bottom: {
     textAlign: 'center',

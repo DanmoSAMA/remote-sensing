@@ -2,6 +2,7 @@ import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import SvgIcon from '../../../../components/SvgIcon'
 import projectCover from '../../../../assets/imgs/projectCover.png'
+import { useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { projectStyles } from './styles'
 import { getRecentProjects } from '../../../../network/project/getRecentProjects'
@@ -47,6 +48,7 @@ import { getToken } from '../../../../utils/token'
 // ]
 
 function Project() {
+  const navigate = useNavigate()
   const [recentProjects, setRecentProjects] = useState(null)
   let token = getToken()
 
@@ -74,7 +76,14 @@ function Project() {
               {/* {item.editedTime} */}
               2022.5.1
             </Typography>
-            <Box sx={projectStyles.middle} mt={'1rem'} mb={'1rem'}>
+            <Box
+              sx={projectStyles.middle}
+              mt={'1rem'}
+              mb={'1rem'}
+              onClick={() => {
+                navigate(`/change-detection?id=${item.id}`)
+              }}
+            >
               <SvgIcon name="open" />
               <Typography
                 color={'000'}
