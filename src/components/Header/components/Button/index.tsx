@@ -20,10 +20,16 @@ function _Button() {
 
   useEffect(() => {
     token = getToken()
-    getUserData().then((data) => {
-      setUserAccount(data.data.name)
+    getUserData().then((res) => {
+      setUserAccount(res.data.name)
     })
   }, [token])
+
+  function clickToLogout() {
+    setShowDropDown(false)
+    clearToken()
+    location.reload()
+  }
 
   return (
     <>
@@ -85,8 +91,7 @@ function _Button() {
             fontWeight={600}
             sx={{ cursor: 'pointer' }}
             onClick={() => {
-              setShowDropDown(false)
-              clearToken()
+              clickToLogout()
             }}
           >
             <SvgIcon name="exit" />

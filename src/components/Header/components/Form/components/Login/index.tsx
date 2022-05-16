@@ -45,6 +45,7 @@ export default function Login(props: Props) {
       formRef.current.reset()
       setToken(token)
       setShowDialogue(false)
+      location.reload()
     }
   }
 
