@@ -6,10 +6,24 @@ import Typography from '@mui/material/Typography'
 import AddIcon from '@mui/icons-material/Add'
 import { formStyles } from './styles'
 import { useState } from 'react'
+import { createProject } from '../../../../network/project/createProject'
 
 export default function Form() {
   const [isCreated, setIsCreated] = useState(false)
   const [projectName, setProjectName] = useState('')
+
+  async function clickToCreateProject() {
+    if (projectName.length === 0 || projectName.length > 50)
+      return alert('项目名称不合法')
+
+    setIsCreated(true)
+
+    const reqData = {
+      name: projectName
+    }
+    const resData = await createProject(reqData)
+    console.log(resData)
+  }
 
   return (
     <Box sx={formStyles.wrapper}>
@@ -25,9 +39,7 @@ export default function Form() {
           sx={formStyles.button}
           style={{ display: !isCreated ? 'block' : 'none' }}
           onClick={() => {
-            if (projectName.length === 0 || projectName.length > 50)
-              return alert('项目名称不合法')
-            setIsCreated(true)
+            clickToCreateProject()
           }}
         >
           完成创建
