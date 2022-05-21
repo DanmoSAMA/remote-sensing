@@ -5,11 +5,12 @@ import SvgIcon from '../SvgIcon'
 import List from '@mui/material/List'
 import Group from './components/Group'
 import Item from './components/Item'
-import { useState } from 'react'
+import { useEffect } from 'react'
 import { toolBarStyles } from './styles'
 import { observer } from 'mobx-react-lite'
 import { ProjectStore } from '../../mobx/project'
 import { uploadFile } from '../../network/project/uploadFile'
+import { getUpdatedImgs } from '../../network/project/getUpdatedImgs'
 import { generateUUID } from '../../utils/uuid'
 import { useSearchParams } from 'react-router-dom'
 
@@ -68,27 +69,46 @@ import { useSearchParams } from 'react-router-dom'
 
 function _ToolBar() {
   // 一次可选择多张图片，所以是数组
-  const [fileList, setFileList] = useState([])
-  const [searchParams, setSearchParams] = useSearchParams()
+  const [searchParams] = useSearchParams()
   let id = ''
 
-  for (const [key, value] of searchParams) {
-    if (key === 'id') id = value
-  }
+  useEffect(() => {
+    for (const [key, value] of searchParams) {
+      if (key === 'id') id = value
+    }
+  }, [])
 
-  function clickToUploadFile() {
+  useEffect(() => {
+    getUpdatedImgs(id).then((res) => {
+      const data = res.data
+      ProjectStore.updateImgs(data.pictures)
+      ProjectStore.updateImgGroup(data.groups)
+    })
+  }, [])
+
+  function clickToUploadFile(fileList) {
+    console.log(fileList)
+
     const reqData = new FormData()
 
     // 项目id
-    reqData.append('id', id)
+    reqData.append('projectID', id)
     // 上传图片数量
     reqData.append('imgNum', `${fileList.length}`)
 
-    fileList.forEach((item, index) => {
-      reqData.append(`img${index + 1}`, item)
-      const uuid = generateUUID(item)
-      reqData.append(`uuid${index + 1}`, `${uuid}`)
-    })
+    for (const key in fileList) {
+      // 图片
+      reqData.append(`img${parseInt(key) + 1}`, fileList[key])
+      // uuid
+      const uuid = generateUUID(fileList[key])
+      reqData.append(`uuid${parseInt(key) + 1}`, `${uuid}`)
+      // 图片名
+      reqData.append(`name${parseInt(key) + 1}`, fileList[key].name)
+
+      if (parseInt(key) === fileList.length - 1) {
+        break
+      }
+    }
 
     uploadFile(reqData).then((res) => {
       console.log(res)
@@ -106,7 +126,7 @@ function _ToolBar() {
           multiple
           type="file"
           onChange={(e) => {
-            setFileList(e.target.files)
+            clickToUploadFile(e.target.files)
           }}
         />
         <label
@@ -121,9 +141,6 @@ function _ToolBar() {
               color: '#FCFBF4',
               boxShadow: 'none',
               fontWeight: '300'
-            }}
-            onClick={() => {
-              clickToUploadFile()
             }}
           >
             <SvgIcon name="import" />
