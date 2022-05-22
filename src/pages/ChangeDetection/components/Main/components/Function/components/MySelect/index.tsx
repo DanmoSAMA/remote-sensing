@@ -45,9 +45,11 @@ function _MySelect(props: Props) {
               <MenuItem
                 value={item.name}
                 sx={{ color: 'secondary.main' }}
-                key={item.id}
+                key={item.uuid}
               >
-                {item.name}
+                {`${item.name.slice(0, 24)}${
+                  item.name.length > 24 ? '...' : ''
+                }`}
               </MenuItem>
             ))}
           </Select>
@@ -68,9 +70,11 @@ function _MySelect(props: Props) {
               <MenuItem
                 value={item.name}
                 sx={{ color: 'secondary.main' }}
-                key={item.id}
+                key={item.uuid}
               >
-                {item.name}
+                {`${item.name.slice(0, 24)}${
+                  item.name.length > 24 ? '...' : ''
+                }`}
               </MenuItem>
             ))}
           </Select>

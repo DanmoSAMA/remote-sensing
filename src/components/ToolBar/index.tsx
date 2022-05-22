@@ -66,11 +66,11 @@ import { useSearchParams } from 'react-router-dom'
 //     ]
 //   }
 // ])
+let id = ''
 
 function _ToolBar() {
   // 一次可选择多张图片，所以是数组
   const [searchParams] = useSearchParams()
-  let id = ''
 
   useEffect(() => {
     for (const [key, value] of searchParams) {
@@ -81,14 +81,17 @@ function _ToolBar() {
   useEffect(() => {
     getUpdatedImgs(id).then((res) => {
       const data = res.data
+      console.log(data)
       ProjectStore.updateImgs(data.pictures)
       ProjectStore.updateImgGroup(data.groups)
     })
   }, [])
 
-  function clickToUploadFile(fileList) {
-    console.log(fileList)
+  useEffect(() => {
+    ProjectStore.setID(id)
+  }, [])
 
+  function clickToUploadFile(fileList) {
     const reqData = new FormData()
 
     // 项目id
@@ -100,8 +103,7 @@ function _ToolBar() {
       // 图片
       reqData.append(`img${parseInt(key) + 1}`, fileList[key])
       // uuid
-      const uuid = generateUUID(fileList[key])
-      reqData.append(`uuid${parseInt(key) + 1}`, `${uuid}`)
+      reqData.append(`uuid${parseInt(key) + 1}`, generateUUID())
       // 图片名
       reqData.append(`name${parseInt(key) + 1}`, fileList[key].name)
 
@@ -111,7 +113,8 @@ function _ToolBar() {
     }
 
     uploadFile(reqData).then((res) => {
-      console.log(res)
+      if (res.code === 1000) alert('图片已存在')
+      else location.reload()
     })
   }
 
@@ -150,12 +153,13 @@ function _ToolBar() {
       </Box>
       <List>
         {ProjectStore.imgGroups.map((item) => (
-          <Group group={item} key={item.id} />
+          // fix
+          <Group group={item} key={item.groupID} />
         ))}
       </List>
       <List>
         {ProjectStore.imgs.map((item) => (
-          <Item item={item} key={item.id} />
+          <Item item={item} key={item.uuid} />
         ))}
       </List>
     </Box>

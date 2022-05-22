@@ -8,6 +8,14 @@ import { mainStyles } from '../../styles'
 import { observer } from 'mobx-react-lite'
 
 function _Function() {
+  async function clickToDetect() {
+    for (let group of ProjectStore.waitingGroups) {
+      if (group.oldImg.uuid === '' || group.newImg.uuid === '')
+        return alert('请先选择要分析的图片')
+    }
+    await ProjectStore.detect()
+  }
+
   return (
     <Box sx={mainStyles.function}>
       <Typography
@@ -80,7 +88,13 @@ function _Function() {
           </Typography>
         </Box>
         <Box sx={mainStyles.btnArea}>
-          <Button variant="contained" color="secondary">
+          <Button
+            variant="contained"
+            color="secondary"
+            onClick={() => {
+              clickToDetect()
+            }}
+          >
             开始检测
           </Button>
           <Button variant="contained" color="info">

@@ -8,7 +8,8 @@ export const toolBarStyles = {
     backgroundColor: '#313131',
     borderRadius: '20px',
     padding: '10px',
-    boxSizing: 'border-box'
+    boxSizing: 'border-box',
+    overflow: 'auto'
   },
   top: {
     height: '30px',
@@ -44,21 +45,24 @@ export const toolBarStyles = {
     border: '1px solid #fff',
     marginBottom: '20px',
     padding: '0 5px',
-    position: 'relative'
+    position: 'relative',
+    fontSize: '16px'
   },
   listGroup: {
     borderRadius: '10px',
     border: '1px solid #fff',
     padding: '0 0 0 10px',
     marginLeft: '20px',
-    borderTop: 'none'
+    borderTop: 'none',
+    fontSize: '16px'
   },
   listItemInGroup: {
     color: '#fff',
     borderBottom: '1px solid #979693',
     padding: '10px 0',
     height: '40px',
-    position: 'relative'
+    position: 'relative',
+    fontSize: '16px'
   },
   listParent: {
     color: '#fff',
@@ -66,7 +70,8 @@ export const toolBarStyles = {
     border: '1px solid #fff',
     borderRadius: '10px',
     padding: '0 5px',
-    position: 'relative'
+    position: 'relative',
+    fontSize: '16px'
   },
   dropDown: {
     position: 'absolute',

@@ -4,6 +4,7 @@ import SvgIcon from '../../../../../../components/SvgIcon'
 import { ProjectStore } from '../../../../../../mobx/project'
 import { mainStyles } from '../../styles'
 import { observer } from 'mobx-react-lite'
+import { useEffect } from 'react'
 
 // ProjectStore.updateChosenImgs([
 //   {
@@ -19,6 +20,16 @@ import { observer } from 'mobx-react-lite'
 // ])
 
 function _Image() {
+  useEffect(() => {
+    const firstGroup = ProjectStore.waitingGroups[0]
+    if (firstGroup.oldImg.uuid !== '' || firstGroup.newImg.uuid !== '') {
+      ProjectStore.updateChosenImgs([
+        ProjectStore.waitingGroups[0].oldImg,
+        ProjectStore.waitingGroups[0].newImg
+      ])
+    }
+  }, [JSON.stringify(ProjectStore.waitingGroups)])
+
   return (
     <Box sx={mainStyles.image}>
       {ProjectStore.chosenImgs.length > 0 ? (

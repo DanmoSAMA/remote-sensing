@@ -64,7 +64,6 @@ function Project() {
       {recentProjects?.slice(0, 8).map((item) => (
         <Box key={item.id} sx={{ position: 'relative' }}>
           <Box sx={projectStyles.item}>
-            {/* <img src={item.coverSrc} /> */}
             <img src={projectCover} />
             <Typography sx={projectStyles.bottom}>{item.name}</Typography>
           </Box>
@@ -73,8 +72,7 @@ function Project() {
               最近编辑于
             </Typography>
             <Typography color={'secondary.main'} fontSize={'1rem'}>
-              {/* {item.editedTime} */}
-              2022.5.1
+              {item.lastVisit}
             </Typography>
             <Box
               sx={projectStyles.middle}

@@ -24,7 +24,9 @@ function _Group(props: Props) {
       <ListItem sx={toolBarStyles.listParent}>
         <SvgIcon name="eye" class="toolbar" />
         <SvgIcon name="folder" class="toolbar folder" />
-        {group.name}
+        {`${group.groupName.slice(0, 4)}${
+          group.groupName.length > 4 ? '...' : ''
+        }`}
         <div onClick={() => setIsClosed(!isClosed)}>
           <SvgIcon name={isClosed ? 'down' : 'up'} class="toolbar up_down" />
         </div>
@@ -57,7 +59,7 @@ function _Group(props: Props) {
         sx={toolBarStyles.listGroup}
         style={{ display: isClosed ? 'none' : 'block' }}
       >
-        {group.members.map((item: Img) => (
+        {group.pictures.map((item: Img) => (
           // 嵌套li会有warning，暂时不理会
           <Item item={item} key={item.id} />
         ))}
