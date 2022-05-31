@@ -61,7 +61,7 @@ function _Group(props: Props) {
       >
         {group.pictures.map((item: Img) => (
           // 嵌套li会有warning，暂时不理会
-          <Item item={item} key={item.id} />
+          <Item item={item} key={item.uuid} />
         ))}
       </Box>
     </Box>

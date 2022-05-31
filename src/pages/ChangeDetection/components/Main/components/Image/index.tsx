@@ -21,7 +21,7 @@ function _Image() {
     <Box sx={mainStyles.image}>
       {ProjectStore.chosenImgs.length > 0 ? (
         ProjectStore.chosenImgs.map((item) => (
-          <img src={item.url} key={item.id} />
+          <img src={item.url} key={item.uuid} />
         ))
       ) : (
         <Box sx={mainStyles.placeholder}>

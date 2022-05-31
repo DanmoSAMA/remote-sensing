@@ -14,58 +14,6 @@ import { getUpdatedImgs } from '../../network/project/getUpdatedImgs'
 import { generateUUID } from '../../utils/uuid'
 import { useSearchParams } from 'react-router-dom'
 
-// ProjectStore.updateImgs([
-//   {
-//     id: 1,
-//     url: 'https://z3.ax1x.com/2021/08/17/fInXEF.png',
-//     name: '图片1'
-//   },
-//   {
-//     id: 2,
-//     url: 'https://z3.ax1x.com/2021/08/17/fIn4hj.png',
-//     name: '图片2'
-//   },
-//   {
-//     id: 3,
-//     url: 'https://z3.ax1x.com/2021/08/17/fInRHS.png',
-//     name: '图片3'
-//   }
-// ])
-
-// ProjectStore.updateImgGroup([
-//   {
-//     id: 1,
-//     name: '组1',
-//     members: [
-//       {
-//         id: 1,
-//         url: 'https://z3.ax1x.com/2021/08/17/fInXEF.png',
-//         name: '图片1'
-//       },
-//       {
-//         id: 2,
-//         url: 'https://z3.ax1x.com/2021/08/17/fIn4hj.png',
-//         name: '图片2'
-//       }
-//     ]
-//   },
-//   {
-//     id: 2,
-//     name: '组2',
-//     members: [
-//       {
-//         id: 2,
-//         url: 'https://z3.ax1x.com/2021/08/17/fIn4hj.png',
-//         name: '图片2'
-//       },
-//       {
-//         id: 3,
-//         url: 'https://z3.ax1x.com/2021/08/17/fInRHS.png',
-//         name: '图片3'
-//       }
-//     ]
-//   }
-// ])
 let id = ''
 
 function _ToolBar() {
@@ -76,12 +24,14 @@ function _ToolBar() {
     for (const [key, value] of searchParams) {
       if (key === 'id') id = value
     }
+    // 初始化
+    ProjectStore.init(id)
   }, [])
 
   useEffect(() => {
     getUpdatedImgs(id).then((res) => {
       const data = res.data
-      // console.log(data)
+      console.log(data)
       ProjectStore.updateImgs(data.pictures)
       ProjectStore.updateImgGroup(data.groups)
     })

@@ -41,6 +41,31 @@ class ProjectState {
   setID(id: string) {
     this.id = id
   }
+  // id改变，初始化store
+  init(id: string) {
+    if (parseInt(id) !== this.id) {
+      this.setID(id)
+      this.imgs = []
+      this.imgGroups = []
+      this.chosenImgs = []
+      this.waitingGroupId = 0
+      this.waitingGroups = [
+        {
+          id: this.waitingGroupId,
+          oldImg: {
+            uuid: '',
+            name: '',
+            url: ''
+          },
+          newImg: {
+            uuid: '',
+            name: '',
+            url: ''
+          }
+        }
+      ]
+    }
+  }
   // 在上传图片后更新
   updateImgs(val: Img[]) {
     this.imgs = val
@@ -51,7 +76,7 @@ class ProjectState {
   }
   // 设置选中的图片，也是waitingGroups的第一组，用于在左侧显示
   updateChosenImgs(val: Img[]) {
-    console.log(val)
+    // console.log(val)
     this.chosenImgs = val
   }
   // waitingImgs等一系列操作是前端行为
@@ -75,7 +100,15 @@ class ProjectState {
   updateWaitingImgs(id: number, type: 0 | 1, val: string) {
     const pair = this.waitingGroups.find((item) => item.id === id)
     if (pair) {
-      const img = this.imgs.find((item) => item.name === val)
+      // 在img中找
+      let img = this.imgs.find((item) => item.name === val)
+      // 在groups中找
+      if (!img) {
+        for (const group of this.imgGroups) {
+          img = group.pictures.find((item) => item.name === val)
+          if (img) break
+        }
+      }
       if (img) {
         if (type === 0) {
           pair.oldImg = img
@@ -118,6 +151,7 @@ class ProjectState {
     }
 
     return Promise.all(promiseArr).then((res) => {
+      console.log(res)
       getUpdatedImgs(this.id.toString()).then((res) => {
         const data = res.data
         ProjectStore.updateImgs(data.pictures)

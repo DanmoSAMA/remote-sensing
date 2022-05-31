@@ -18,15 +18,20 @@ function _MySelect(props: Props) {
   const [imgsToSelect, setImgsToSelect] = useState([])
 
   useEffect(() => {
-    for (const img of ProjectStore.imgs) {
-      setImgsToSelect((oldArray) => [...oldArray, img])
-    }
-    for (const group of ProjectStore.imgGroups) {
-      setImgsToSelect((oldArray) => [...oldArray, group.pictures[0]])
-      setImgsToSelect((oldArray) => [...oldArray, group.pictures[1]])
-    }
-    console.log(imgsToSelect)
-  }, [ProjectStore.imgs.length])
+    // 待优化
+    setTimeout(() => {
+      for (const img of ProjectStore.imgs) {
+        setImgsToSelect((oldArray) => [...oldArray, img])
+      }
+      for (const group of ProjectStore.imgGroups) {
+        for (const img of group.pictures) {
+          if (img.name !== '变化检测结果') {
+            setImgsToSelect((oldArray) => [...oldArray, img])
+          }
+        }
+      }
+    }, 1000)
+  }, [])
 
   return (
     <Box
@@ -58,11 +63,12 @@ function _MySelect(props: Props) {
             <MenuItem value="">
               <span style={{ color: '#ADADA8' }}>请选择将要分析的图片</span>
             </MenuItem>
-            {imgsToSelect.map((item) => (
+            {imgsToSelect.map((item, index) => (
               <MenuItem
                 value={item.name}
                 sx={{ color: 'secondary.main' }}
-                key={item.uuid}
+                // 这里key用item.uuid会冲突
+                key={index}
               >
                 {`${item.name.slice(0, 24)}${
                   item.name.length > 24 ? '...' : ''
@@ -83,11 +89,11 @@ function _MySelect(props: Props) {
             <MenuItem value="">
               <span style={{ color: '#ADADA8' }}>请选择将要分析的图片</span>
             </MenuItem>
-            {imgsToSelect.map((item) => (
+            {imgsToSelect.map((item, index) => (
               <MenuItem
                 value={item.name}
                 sx={{ color: 'secondary.main' }}
-                key={item.uuid}
+                key={index}
               >
                 {`${item.name.slice(0, 24)}${
                   item.name.length > 24 ? '...' : ''
