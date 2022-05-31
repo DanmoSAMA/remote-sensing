@@ -6,19 +6,6 @@ import { mainStyles } from '../../styles'
 import { observer } from 'mobx-react-lite'
 import { useEffect } from 'react'
 
-// ProjectStore.updateChosenImgs([
-//   {
-//     id: 1,
-//     url: 'https://z3.ax1x.com/2021/08/17/fInXEF.png',
-//     name: '图片1'
-//   },
-//   {
-//     id: 2,
-//     url: 'https://z3.ax1x.com/2021/08/17/fIn4hj.png',
-//     name: '图片2'
-//   }
-// ])
-
 function _Image() {
   useEffect(() => {
     const firstGroup = ProjectStore.waitingGroups[0]

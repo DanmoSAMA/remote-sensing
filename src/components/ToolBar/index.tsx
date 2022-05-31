@@ -81,7 +81,7 @@ function _ToolBar() {
   useEffect(() => {
     getUpdatedImgs(id).then((res) => {
       const data = res.data
-      console.log(data)
+      // console.log(data)
       ProjectStore.updateImgs(data.pictures)
       ProjectStore.updateImgGroup(data.groups)
     })
@@ -113,8 +113,16 @@ function _ToolBar() {
     }
 
     uploadFile(reqData).then((res) => {
+      // uuid随机生成，导致图片可以重复上传
       if (res.code === 1000) alert('图片已存在')
-      else location.reload()
+      else {
+        getUpdatedImgs(id).then((res) => {
+          const data = res.data
+          console.log(data)
+          ProjectStore.updateImgs(data.pictures)
+          ProjectStore.updateImgGroup(data.groups)
+        })
+      }
     })
   }
 

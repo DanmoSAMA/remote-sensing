@@ -2,6 +2,7 @@ import { makeAutoObservable } from 'mobx'
 import { Img, ImgGroup, WaitingGroup } from '../types/project/imgType'
 import { generateUUID } from '../utils/uuid'
 import { postDetectReq } from '../network/changeDetection/postDetectReq'
+import { getUpdatedImgs } from '../network/project/getUpdatedImgs'
 
 // 项目相关信息
 class ProjectState {
@@ -86,7 +87,9 @@ class ProjectState {
   }
   // 删除waitingImgs
   deleteWaitingImgs(id: number) {
-    this.waitingGroups = this.waitingGroups.filter((item) => item.id !== id)
+    if (this.waitingGroups.length > 1) {
+      this.waitingGroups = this.waitingGroups.filter((item) => item.id !== id)
+    }
   }
   // 开始检测
   async detect() {
@@ -105,18 +108,22 @@ class ProjectState {
         reqData.push(t)
       }
     }
-    console.log(reqData)
+    // console.log(reqData)
 
     // 并行发送请求
+    const promiseArr = []
     for (let i = 0; i < reqData.length; i++) {
       const item = reqData[i]
-      // console.log(item)
-      console.log('开始检测')
-      postDetectReq(item).then((res) => {
-        console.log(res)
-        location.reload()
-      })
+      promiseArr.push(postDetectReq(item))
     }
+
+    return Promise.all(promiseArr).then((res) => {
+      getUpdatedImgs(this.id.toString()).then((res) => {
+        const data = res.data
+        ProjectStore.updateImgs(data.pictures)
+        ProjectStore.updateImgGroup(data.groups)
+      })
+    })
   }
 }
 
