@@ -8,6 +8,7 @@ import { ProjectStore } from '../../../../../../../../mobx/project'
 import { mainStyles } from '../../../../styles'
 import { observer } from 'mobx-react-lite'
 import { useEffect, useState } from 'react'
+import { getUpdatedImgs } from '../../../../../../../../network/project/getUpdatedImgs'
 
 type Props = {
   item: WaitingGroup
@@ -18,8 +19,13 @@ function _MySelect(props: Props) {
   const [imgsToSelect, setImgsToSelect] = useState([])
 
   useEffect(() => {
-    // 待优化
-    setTimeout(() => {
+    getUpdatedImgs(ProjectStore.id.toString()).then((res) => {
+      const data = res.data
+      ProjectStore.updateImgs(data.pictures)
+      ProjectStore.updateImgGroup(data.groups)
+
+      setImgsToSelect([])
+
       for (const img of ProjectStore.imgs) {
         setImgsToSelect((oldArray) => [...oldArray, img])
       }
@@ -30,8 +36,8 @@ function _MySelect(props: Props) {
           }
         }
       }
-    }, 1000)
-  }, [])
+    })
+  }, [ProjectStore.imgs.length])
 
   return (
     <Box

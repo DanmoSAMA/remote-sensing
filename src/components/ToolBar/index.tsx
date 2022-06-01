@@ -31,9 +31,10 @@ function _ToolBar() {
   useEffect(() => {
     getUpdatedImgs(id).then((res) => {
       const data = res.data
-      console.log(data)
       ProjectStore.updateImgs(data.pictures)
       ProjectStore.updateImgGroup(data.groups)
+
+      console.log(data)
     })
   }, [])
 
