@@ -45,3 +45,12 @@
 .form.cross {
   zoom: 1.4;
 }
+
+/*perspective*/
+.perspective.detail_close {
+  position: absolute;
+  right: 1px;
+  top: 1px;
+  zoom: 3;
+  cursor: pointer;
+}

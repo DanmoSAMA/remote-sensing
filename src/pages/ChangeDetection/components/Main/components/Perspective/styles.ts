@@ -4,7 +4,8 @@ export const perspectiveStyles = {
     width: '100%',
     display: 'flex',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    position: 'relative'
   },
   cube: {
     transformStyle: 'preserve-3d',
@@ -19,22 +20,68 @@ export const perspectiveStyles = {
 
     '& img': {
       position: 'absolute',
-      top: 0
+      top: '0',
+      height: 'auto',
+      cursor: 'pointer'
     }
   },
-  img1: {
-    width: '60%',
-    height: '60%',
-    transform: 'translateY(-100px) rotateX(65deg) rotateZ(-20deg)'
+  cubeAtConer: {
+    transformStyle: 'preserve-3d',
+    width: '25%',
+    position: 'absolute',
+    left: '2rem',
+    bottom: '20rem',
+
+    '& img': {
+      position: 'absolute',
+      top: '0',
+      height: 'auto',
+      cursor: 'pointer'
+    }
   },
-  img2: {
-    width: '60%',
-    height: '60%',
-    transform: 'translateY(120px) rotateX(65deg) rotateZ(-20deg)'
+  detail: {
+    width: '77%',
+    height: '100%',
+    position: 'absolute',
+    right: '0'
   },
-  img3: {
-    width: '60%',
-    height: '60%',
-    transform: 'translateY(360px) rotateX(65deg) rotateZ(-20deg)'
+  button: {
+    backgroundColor: '#C39984',
+    position: 'absolute',
+    right: 0,
+    bottom: '5rem',
+    height: '6rem',
+    width: '6rem',
+    color: '#E2DECD',
+    fontSize: '1.2rem',
+    padding: 0,
+
+    '&:hover': {
+      backgroundColor: '#C39984'
+    }
+  },
+  sidebar: {
+    position: 'absolute',
+    right: 0,
+    bottom: '12rem',
+    width: '3rem',
+
+    '& .MuiListItem-root': {
+      width: '3rem',
+      height: '3rem',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: 'primary.dark',
+      borderBottom: '2px solid #CFB3A0',
+      padding: '0',
+
+      '& svg': {
+        zoom: '1.3'
+      }
+    },
+    '& .MuiListItem-root:last-child': {
+      border: 'none'
+    }
   }
 }

@@ -6,7 +6,13 @@ import { mainStyles } from '../../styles'
 import { observer } from 'mobx-react-lite'
 import { useEffect } from 'react'
 
-function _Image() {
+type Props = {
+  setShowPerspective: (val: boolean) => void
+}
+
+function _Image(props: Props) {
+  const { setShowPerspective } = props
+
   useEffect(() => {
     const firstGroup = ProjectStore.waitingGroups[0]
     if (firstGroup.oldImg.uuid !== '' || firstGroup.newImg.uuid !== '') {
@@ -20,8 +26,8 @@ function _Image() {
   return (
     <Box sx={mainStyles.image}>
       {ProjectStore.chosenImgs.length > 0 ? (
-        ProjectStore.chosenImgs.map((item) => (
-          <img src={item.url} key={item.uuid} />
+        ProjectStore.chosenImgs.map((item, index) => (
+          <img src={item.url} key={item.uuid + index} />
         ))
       ) : (
         <Box sx={mainStyles.placeholder}>
