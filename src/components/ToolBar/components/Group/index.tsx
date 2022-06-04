@@ -6,9 +6,12 @@ import Divider from '@mui/material/Divider'
 import { toolBarStyles } from '../../styles'
 import { observer } from 'mobx-react-lite'
 import { ProjectStore } from '../../../../mobx/project'
+import { deleteGroup } from '../../../../network/project/deleteGroup'
+import { getUpdatedImgs } from '../../../../network/project/getUpdatedImgs'
 import { ImgGroup, Img } from '../../../../types/project/ImgType'
 import { useState } from 'react'
 import { useShowDropDown } from '../../hooks/useShowDropdown'
+import { useParams } from '../../../../hooks/useParams'
 
 type Props = {
   group: ImgGroup
@@ -18,13 +21,32 @@ function _Group(props: Props) {
   const { group } = props
   const [isClosed, setIsClosed] = useState(true)
   const { showDropDown, setShowDropDown } = useShowDropDown()
+  const projectID = useParams('id') as string
+
+  async function clickToDeleteGroup() {
+    const reqData = {
+      projectID: parseInt(projectID),
+      groupID: group.groupID
+    }
+    console.log(reqData)
+    if (window.confirm('确定要删除该组吗?')) {
+      const res = await deleteGroup(reqData)
+      console.log(res)
+      if (res.code === 0) {
+        getUpdatedImgs(projectID).then((res) => {
+          const data = res.data
+          ProjectStore.updateImgGroup(data.groups)
+        })
+      }
+    }
+  }
 
   return (
     <Box sx={{ marginBottom: '20px', position: 'relative' }}>
       <ListItem
         sx={toolBarStyles.listParent}
         onClick={() => {
-          ProjectStore.updateCurShownGroup(group.groupID)
+          ProjectStore.updateCurShownGroup()
         }}
       >
         <SvgIcon name="eye" class="toolbar" />
@@ -59,7 +81,12 @@ function _Group(props: Props) {
           重命名
         </ListItem>
         <Divider color="secondary" variant="middle" />
-        <ListItem sx={toolBarStyles.dropDownItem}>
+        <ListItem
+          sx={toolBarStyles.dropDownItem}
+          onClick={() => {
+            clickToDeleteGroup(group.groupId)
+          }}
+        >
           <SvgIcon name="tb_bin" class="toolbar dropdown" />
           移除
         </ListItem>

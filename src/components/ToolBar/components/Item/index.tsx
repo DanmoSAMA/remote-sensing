@@ -6,7 +6,6 @@ import { toolBarStyles } from '../../styles'
 import { observer } from 'mobx-react-lite'
 import { ProjectStore } from '../../../../mobx/project'
 import { deleteImg } from '../../../../network/project/deleteImg'
-import { deleteGroup } from '../../../../network/project/deleteGroup'
 import { getUpdatedImgs } from '../../../../network/project/getUpdatedImgs'
 import { Img } from '../../../../types/project/ImgType'
 import { useShowDropDown } from '../../hooks/useShowDropdown'
@@ -33,7 +32,6 @@ function _Item(props: Props) {
         getUpdatedImgs(projectID).then((res) => {
           const data = res.data
           ProjectStore.updateImgs(data.pictures)
-          ProjectStore.updateImgGroup(data.groups)
         })
       }
     }
