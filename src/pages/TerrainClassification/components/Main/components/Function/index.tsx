@@ -23,10 +23,10 @@ function _Function(props: Props) {
         return alert('请先选择要分析的图片')
     }
     setIsChecking(true)
-    ProjectStore.changeDetect().then(() => {
-      setIsChecking(false)
-      setShowPerspective(true)
-    })
+    // ProjectStore.changeDetect().then(() => {
+    //   setIsChecking(false)
+    //   setShowPerspective(true)
+    // })
   }
 
   return (
@@ -37,7 +37,7 @@ function _Function(props: Props) {
         fontWeight={500}
         mt={'5px'}
       >
-        变化检测
+        地物分类
       </Typography>
       <Box sx={mainStyles.function_inner}>
         <Box sx={{ display: !isChecking ? 'block' : 'none' }}>
@@ -50,25 +50,11 @@ function _Function(props: Props) {
             >
               待分析图片
             </Typography>
-            <Box>
-              {ProjectStore.waitingGroups.map((item) => (
-                <MySelect item={item} key={item.id} />
-              ))}
-            </Box>
+            <MySelect />
             <Box
               sx={mainStyles.addNext}
               onClick={() => ProjectStore.addWaitingImgs()}
-            >
-              <SvgIcon name="add" />
-              <Typography
-                fontSize={'0.8rem'}
-                color={'secondary.main'}
-                fontWeight={600}
-                ml={'5px'}
-              >
-                添加下一组
-              </Typography>
-            </Box>
+            ></Box>
           </Box>
           <Box sx={mainStyles.resultName}>
             <Typography

@@ -7,7 +7,7 @@ import { observer } from 'mobx-react-lite'
 import { useState } from 'react'
 
 function _Main() {
-  const [showPerspective, setShowPerspective] = useState(true)
+  const [showPerspective, setShowPerspective] = useState(false)
 
   return (
     <Box sx={mainStyles.wrapper}>

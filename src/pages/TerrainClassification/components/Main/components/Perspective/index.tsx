@@ -2,11 +2,13 @@ import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
+import ListItemIcon from '@mui/material/ListItemIcon'
+import Typography from '@mui/material/Typography'
 import SvgIcon from '../../../../../../components/SvgIcon'
 import { ProjectStore } from '../../../../../../mobx/project'
 import { perspectiveStyles } from './styles'
 import { observer } from 'mobx-react-lite'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 type Props = {
   setShowPerspective: (val: boolean) => void
@@ -17,7 +19,6 @@ function _Perspective(props: Props) {
   const [size, setSize] = useState(54)
   const [angle, setAngle] = useState(0)
   const [showDetail, setShowDetail] = useState(false)
-  const [detailImgUrl, setDetailImgUrl] = useState('')
 
   function zoom() {
     if (size <= 60) {
@@ -31,9 +32,9 @@ function _Perspective(props: Props) {
     }
   }
 
-  function viewDetail(type: 0 | 1 | 2) {
+  // todo
+  function viewDetail() {
     setShowDetail(true)
-    setDetailImgUrl(ProjectStore.currentShownGroup.pictures[type].url)
   }
 
   return (
@@ -50,10 +51,8 @@ function _Perspective(props: Props) {
               !showDetail ? -size / 10 : -size / 20
             }rem) rotateX(65deg) rotateZ(${-20 + angle}deg)`
           }}
-          src={ProjectStore.currentShownGroup.pictures[0].url}
-          onClick={() => {
-            viewDetail(0)
-          }}
+          src="https://s1.ax1x.com/2022/06/03/XUhtG6.png"
+          onClick={viewDetail}
         />
         <img
           style={{
@@ -62,10 +61,8 @@ function _Perspective(props: Props) {
               !showDetail ? (size + 10) / 10 : (size + 10) / 20
             }rem) rotateX(65deg) rotateZ(${-20 + angle}deg)`
           }}
-          src={ProjectStore.currentShownGroup.pictures[1].url}
-          onClick={() => {
-            viewDetail(1)
-          }}
+          src="https://s1.ax1x.com/2022/06/03/XUhtG6.png"
+          onClick={viewDetail}
         />
         <img
           style={{
@@ -74,16 +71,14 @@ function _Perspective(props: Props) {
               !showDetail ? (size + 130) / 10 : (size + 130) / 20
             }rem) rotateX(65deg) rotateZ(${-20 + angle}deg)`
           }}
-          src={ProjectStore.currentShownGroup.pictures[2].url}
-          onClick={() => {
-            viewDetail(2)
-          }}
+          src="https://s1.ax1x.com/2022/06/03/XUhtG6.png"
+          onClick={viewDetail}
         />
       </Box>
       {showDetail && (
         <Box sx={perspectiveStyles.detail}>
           <img
-            src={detailImgUrl}
+            src="https://s1.ax1x.com/2022/06/03/XUhtG6.png"
             style={{
               width: '100%',
               borderRadius: '1rem',

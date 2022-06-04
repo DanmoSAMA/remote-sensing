@@ -19,10 +19,8 @@ function _Image() {
 
   return (
     <Box sx={mainStyles.image}>
-      {ProjectStore.chosenImgs.length > 0 ? (
-        ProjectStore.chosenImgs.map((item, index) => (
-          <img src={item.url} key={item.uuid + index} />
-        ))
+      {ProjectStore.chosenImg.uuid !== '' ? (
+        <img src={ProjectStore.chosenImg.url} />
       ) : (
         <Box sx={mainStyles.placeholder}>
           <SvgIcon name="not_upload" />

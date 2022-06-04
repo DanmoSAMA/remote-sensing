@@ -5,8 +5,12 @@ import Divider from '@mui/material/Divider'
 import { toolBarStyles } from '../../styles'
 import { observer } from 'mobx-react-lite'
 import { ProjectStore } from '../../../../mobx/project'
+import { deleteImg } from '../../../../network/project/deleteImg'
+import { deleteGroup } from '../../../../network/project/deleteGroup'
+import { getUpdatedImgs } from '../../../../network/project/getUpdatedImgs'
 import { Img } from '../../../../types/project/ImgType'
 import { useShowDropDown } from '../../hooks/useShowDropdown'
+import { useParams } from '../../../../hooks/useParams'
 
 type Props = {
   item: Img
@@ -15,6 +19,25 @@ type Props = {
 function _Item(props: Props) {
   const { item } = props
   const { showDropDown, setShowDropDown } = useShowDropDown()
+  const projectID = useParams('id') as string
+
+  async function clickToDeleteImg(uuid: string) {
+    const reqData = {
+      projectID: parseInt(projectID),
+      pictures: [uuid]
+    }
+    if (window.confirm('确定要删除该图片吗?')) {
+      const res = await deleteImg(reqData)
+      console.log(res)
+      if (res.code === 0) {
+        getUpdatedImgs(projectID).then((res) => {
+          const data = res.data
+          ProjectStore.updateImgs(data.pictures)
+          ProjectStore.updateImgGroup(data.groups)
+        })
+      }
+    }
+  }
 
   return (
     <ListItem key={item.id} sx={toolBarStyles.listItem}>
@@ -38,7 +61,12 @@ function _Item(props: Props) {
           重命名
         </ListItem>
         <Divider color="secondary" variant="middle" />
-        <ListItem sx={toolBarStyles.dropDownItem}>
+        <ListItem
+          sx={toolBarStyles.dropDownItem}
+          onClick={() => {
+            clickToDeleteImg(item.uuid)
+          }}
+        >
           <SvgIcon name="tb_bin" class="toolbar dropdown" />
           移除
         </ListItem>

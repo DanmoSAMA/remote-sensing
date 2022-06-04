@@ -19,25 +19,19 @@ function _MySelect(props: Props) {
   const [imgsToSelect, setImgsToSelect] = useState([])
 
   useEffect(() => {
-    getUpdatedImgs(ProjectStore.id.toString()).then((res) => {
-      const data = res.data
-      ProjectStore.updateImgs(data.pictures)
-      ProjectStore.updateImgGroup(data.groups)
+    setImgsToSelect([])
 
-      setImgsToSelect([])
-
-      for (const img of ProjectStore.imgs) {
-        setImgsToSelect((oldArray) => [...oldArray, img])
-      }
-      for (const group of ProjectStore.imgGroups) {
-        for (const img of group.pictures) {
-          if (img.name !== '变化检测结果') {
-            setImgsToSelect((oldArray) => [...oldArray, img])
-          }
+    for (const img of ProjectStore.imgs) {
+      setImgsToSelect((oldArray) => [...oldArray, img])
+    }
+    for (const group of ProjectStore.imgGroups) {
+      for (const img of group.pictures) {
+        if (img.name !== '变化检测结果') {
+          setImgsToSelect((oldArray) => [...oldArray, img])
         }
       }
-    })
-  }, [ProjectStore.imgs.length])
+    }
+  }, [JSON.stringify(ProjectStore.imgs)])
 
   return (
     <Box

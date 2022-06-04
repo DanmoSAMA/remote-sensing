@@ -21,13 +21,23 @@ function _Group(props: Props) {
 
   return (
     <Box sx={{ marginBottom: '20px', position: 'relative' }}>
-      <ListItem sx={toolBarStyles.listParent}>
+      <ListItem
+        sx={toolBarStyles.listParent}
+        onClick={() => {
+          ProjectStore.updateCurShownGroup(group.groupID)
+        }}
+      >
         <SvgIcon name="eye" class="toolbar" />
         <SvgIcon name="folder" class="toolbar folder" />
         {`${group.groupName.slice(0, 4)}${
           group.groupName.length > 4 ? '...' : ''
         }`}
-        <div onClick={() => setIsClosed(!isClosed)}>
+        <div
+          onClick={(e) => {
+            setIsClosed(!isClosed)
+            e.stopPropagation()
+          }}
+        >
           <SvgIcon name={isClosed ? 'down' : 'up'} class="toolbar up_down" />
         </div>
         <div

@@ -71,7 +71,8 @@ export const toolBarStyles = {
     borderRadius: '10px',
     padding: '0 5px',
     position: 'relative',
-    fontSize: '16px'
+    fontSize: '16px',
+    cursor: 'pointer'
   },
   dropDown: {
     position: 'absolute',

@@ -10,10 +10,12 @@ import SvgIcon from '../SvgIcon'
 import { sideBarItems } from './consts/sideBarItems'
 import { sideBarStyles } from './styles'
 import { useNavigate, useLocation } from 'react-router-dom'
+import { useParams } from '../../hooks/useParams'
 
 export default function Navbar() {
   const navigate = useNavigate()
   const { pathname } = useLocation()
+  const id = useParams('id') as string
 
   return (
     <Drawer sx={sideBarStyles.drawer} variant="permanent" anchor="left">
@@ -36,7 +38,7 @@ export default function Navbar() {
             selected={item.route === pathname}
             button
             key={item.id}
-            onClick={() => navigate(item.route)}
+            onClick={() => navigate(`${item.route}?id=${id}`)}
           >
             <ListItemIcon sx={sideBarStyles.icons}>
               <IconButton>{item.icon}</IconButton>

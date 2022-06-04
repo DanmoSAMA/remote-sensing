@@ -6,29 +6,20 @@ import List from '@mui/material/List'
 import Group from './components/Group'
 import Item from './components/Item'
 import { useEffect } from 'react'
+import { useParams } from '../../hooks/useParams'
 import { toolBarStyles } from './styles'
 import { observer } from 'mobx-react-lite'
 import { ProjectStore } from '../../mobx/project'
 import { uploadFile } from '../../network/project/uploadFile'
 import { getUpdatedImgs } from '../../network/project/getUpdatedImgs'
 import { generateUUID } from '../../utils/uuid'
-import { useSearchParams } from 'react-router-dom'
-
-let id = ''
 
 function _ToolBar() {
-  // 一次可选择多张图片，所以是数组
-  const [searchParams] = useSearchParams()
+  const id = useParams('id') as string
 
   useEffect(() => {
-    for (const [key, value] of searchParams) {
-      if (key === 'id') id = value
-    }
-    // 初始化
-    ProjectStore.init(id)
-  }, [])
+    ProjectStore.init(parseInt(id))
 
-  useEffect(() => {
     getUpdatedImgs(id).then((res) => {
       const data = res.data
       ProjectStore.updateImgs(data.pictures)
@@ -36,10 +27,6 @@ function _ToolBar() {
 
       console.log(data)
     })
-  }, [])
-
-  useEffect(() => {
-    ProjectStore.setID(id)
   }, [])
 
   function clickToUploadFile(fileList) {
@@ -64,12 +51,10 @@ function _ToolBar() {
     }
 
     uploadFile(reqData).then((res) => {
-      // uuid随机生成，导致图片可以重复上传
       if (res.code === 1000) alert('图片已存在')
       else {
         getUpdatedImgs(id).then((res) => {
           const data = res.data
-          console.log(data)
           ProjectStore.updateImgs(data.pictures)
           ProjectStore.updateImgGroup(data.groups)
         })
@@ -112,7 +97,6 @@ function _ToolBar() {
       </Box>
       <List>
         {ProjectStore.imgGroups.map((item) => (
-          // fix
           <Group group={item} key={item.groupID} />
         ))}
       </List>
