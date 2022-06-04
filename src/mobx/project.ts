@@ -3,11 +3,14 @@ import { Img, ImgGroup, WaitingGroup } from '../types/project/imgType'
 import { generateUUID } from '../utils/uuid'
 import { postDetectReq } from '../network/changeDetection/postDetectReq'
 import { getUpdatedImgs } from '../network/project/getUpdatedImgs'
+import { getRecentProjects } from '../network/project/getRecentProjects'
 
 // 项目相关信息
 class ProjectState {
   // 项目id
   id = 0
+  // 项目名称
+  name = ''
   // 未分组的图片信息
   imgs = []
   // 分组图片信息
@@ -93,6 +96,19 @@ class ProjectState {
           }
         }
       ]
+      this.setProjectName('')
+    }
+  }
+  // 设置项目名称
+  async setProjectName(name: string) {
+    if (name !== '') this.name = name
+    else if (this.name !== '') return
+    else {
+      const res = await getRecentProjects()
+      const projects = res.data.projects
+      const t = projects.find((item) => (item.id = this.id))
+      this.name = t.name
+      console.log(this.name)
     }
   }
   // 在上传图片后更新
@@ -188,7 +204,9 @@ class ProjectState {
   }
   // 修改目前展示的组
   updateCurShownGroup(groupID: number) {
+    console.log(groupID)
     const t = this.imgGroups.find((item) => item.groupID === groupID)
+    console.log(t)
     this.currentShownGroup = {
       groupID: groupID,
       groupName: t.groupName,

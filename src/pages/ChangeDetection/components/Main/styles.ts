@@ -13,8 +13,9 @@ export const mainStyles = {
   wrapper: {
     width: '100%',
     height: '82vh',
-    margin: '100px 270px 0 230px',
-    display: 'flex'
+    margin: '124px 270px 0 230px',
+    display: 'flex',
+    position: 'relative'
   },
   image: {
     width: '63%',
@@ -143,5 +144,16 @@ export const mainStyles = {
       transformOrigin: 'left top',
       animation: `${spin} 2s infinite linear`
     }
+  },
+  header: {
+    width: '100%',
+    height: '38px',
+    lineHeight: '38px',
+    position: 'absolute',
+    top: '-44px',
+    backgroundColor: '#F4F2E8',
+    color: 'secondary.main',
+    textAlign: 'center',
+    fontSize: '16px'
   }
 }

@@ -46,7 +46,7 @@ function _Group(props: Props) {
       <ListItem
         sx={toolBarStyles.listParent}
         onClick={() => {
-          ProjectStore.updateCurShownGroup()
+          ProjectStore.updateCurShownGroup(group.groupID)
         }}
       >
         <SvgIcon name="eye" class="toolbar" />
@@ -84,7 +84,7 @@ function _Group(props: Props) {
         <ListItem
           sx={toolBarStyles.dropDownItem}
           onClick={() => {
-            clickToDeleteGroup(group.groupId)
+            clickToDeleteGroup()
           }}
         >
           <SvgIcon name="tb_bin" class="toolbar dropdown" />
