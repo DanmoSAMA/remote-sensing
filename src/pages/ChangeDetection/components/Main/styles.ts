@@ -97,15 +97,6 @@ export const mainStyles = {
       boxShadow: '0 3px 2px rgba(0, 0, 0, .3)',
       width: '70%'
     }
-
-    // '& button:nth-of-type(1)': {
-    //   width: '50%',
-    //   marginRight: '12px'
-    // },
-    // '& button:nth-of-type(2)': {
-    //   width: '40%',
-    //   color: 'secondary.main'
-    // }
   },
   loading: {
     '&': {
@@ -155,5 +146,15 @@ export const mainStyles = {
     color: 'secondary.main',
     textAlign: 'center',
     fontSize: '16px'
+  },
+  headerLeft: {
+    position: 'absolute',
+    left: '7.5%',
+    fontSize: '14px',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    cursor: 'pointer',
+    fontWeight: '500'
   }
 }

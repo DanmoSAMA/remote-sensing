@@ -8,12 +8,7 @@ import { perspectiveStyles } from './styles'
 import { observer } from 'mobx-react-lite'
 import { useState } from 'react'
 
-type Props = {
-  setShowPerspective: (val: boolean) => void
-}
-
-function _Perspective(props: Props) {
-  const { setShowPerspective } = props
+function _Perspective() {
   const [size, setSize] = useState(54)
   const [angle, setAngle] = useState(0)
   const [showDetail, setShowDetail] = useState(false)
@@ -121,7 +116,7 @@ function _Perspective(props: Props) {
         variant="contained"
         sx={perspectiveStyles.button}
         onClick={() => {
-          setShowPerspective(false)
+          ProjectStore.setShowPerspective(false)
         }}
       >
         切换视角

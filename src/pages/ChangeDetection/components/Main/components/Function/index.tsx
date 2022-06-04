@@ -9,12 +9,7 @@ import { mainStyles } from '../../styles'
 import { observer } from 'mobx-react-lite'
 import { useState } from 'react'
 
-type Props = {
-  setShowPerspective: (val: boolean) => void
-}
-
-function _Function(props: Props) {
-  const { setShowPerspective } = props
+function _Function() {
   const [isChecking, setIsChecking] = useState(false)
 
   async function clickToDetect() {
@@ -25,7 +20,7 @@ function _Function(props: Props) {
     setIsChecking(true)
     ProjectStore.changeDetect().then(() => {
       setIsChecking(false)
-      setShowPerspective(true)
+      ProjectStore.setShowPerspective(true)
     })
   }
 

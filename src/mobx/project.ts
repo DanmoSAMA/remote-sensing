@@ -17,6 +17,8 @@ class ProjectState {
   imgGroups = []
   // 被选中的图，在页面上呈现
   chosenImgs = []
+  // 当前是否展示视图
+  showPerspective = false
 
   /* 变化检测 */
   // 待分析图片组，用于渲染页面
@@ -97,6 +99,7 @@ class ProjectState {
         }
       ]
       this.setProjectName('')
+      this.showPerspective = false
     }
   }
   // 设置项目名称
@@ -224,6 +227,10 @@ class ProjectState {
       }
     }
     this.chosenImg = img
+  }
+  // 修改展示状态
+  setShowPerspective(val: boolean) {
+    this.showPerspective = val
   }
   // 开始地物分类 todo
   async terrainClassification() {

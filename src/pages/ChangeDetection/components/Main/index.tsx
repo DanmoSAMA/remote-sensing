@@ -5,21 +5,19 @@ import Perspective from './components/Perspective'
 import Header from './components/Header'
 import { mainStyles } from './styles'
 import { observer } from 'mobx-react-lite'
-import { useState } from 'react'
+import { ProjectStore } from '../../../../mobx/project'
 
 function _Main() {
-  const [showPerspective, setShowPerspective] = useState(true)
-
   return (
     <Box sx={mainStyles.wrapper}>
       <Header />
-      {!showPerspective ? (
+      {!ProjectStore.showPerspective ? (
         <>
           <Image />
-          <Function setShowPerspective={setShowPerspective} />
+          <Function />
         </>
       ) : (
-        <Perspective setShowPerspective={setShowPerspective} />
+        <Perspective />
       )}
     </Box>
   )
