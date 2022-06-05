@@ -4,7 +4,7 @@ import { request } from '../request'
 
 export async function moveToBin(id: string) {
   const res = await request({
-    method: 'PATCH',
+    method: 'POST',
     url: `/v1/project/${id}/delete`
   })
 

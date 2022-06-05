@@ -3,7 +3,7 @@ export const homeStyles = {
     '&': {
       display: 'flex',
       position: 'relative',
-      height: '64rem',
+      height: '90vh',
       width: '100%',
       top: '80px'
     }

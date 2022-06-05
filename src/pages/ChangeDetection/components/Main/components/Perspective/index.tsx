@@ -10,7 +10,7 @@ import { useState } from 'react'
 
 function _Perspective() {
   const [size, setSize] = useState(85)
-  const [angle, setAngle] = useState(0)
+  const [angle, setAngle] = useState(-7)
   const [showDetail, setShowDetail] = useState(false)
   const [detailImgUrl, setDetailImgUrl] = useState('')
 

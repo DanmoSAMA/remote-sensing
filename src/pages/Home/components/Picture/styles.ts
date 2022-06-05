@@ -1,7 +1,7 @@
 export const pictureStyles = {
   wrapper: {
     position: 'absolute',
-    top: '11rem',
+    top: '4.5rem',
     right: '0',
     display: 'flex',
     width: '50rem',

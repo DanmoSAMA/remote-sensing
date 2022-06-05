@@ -22,6 +22,18 @@ function Project() {
     })
   }, [token])
 
+  async function clickToMove(id: string) {
+    if (confirm('确定要将该项目移动至回收站吗?')) {
+      const res = await moveToBin(id)
+      console.log(res.code)
+      if (res.code === 0) {
+        getRecentProjects().then((res) => {
+          setRecentProjects(res.data.projects)
+        })
+      }
+    }
+  }
+
   return (
     <Box sx={projectStyles.wrapper}>
       {recentProjects?.slice(0, 8).map((item) => (
@@ -59,9 +71,7 @@ function Project() {
             <Box
               sx={projectStyles.middle}
               onClick={() => {
-                if (confirm('确定要将该项目移动至回收站吗?')) {
-                  moveToBin(item.id)
-                }
+                clickToMove(item.id)
               }}
             >
               <SvgIcon name="delete" />
