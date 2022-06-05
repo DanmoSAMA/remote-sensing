@@ -22,7 +22,7 @@ export const formStyles = {
     alignItems: 'center'
   },
   input: {
-    width: '77%',
+    width: '100%',
     height: '6rem',
     maxHeight: '90px',
     minHeight: '60px',
@@ -35,7 +35,7 @@ export const formStyles = {
     marginBottom: '4rem'
   },
   button: {
-    width: '50%',
+    width: '75%',
     height: '4rem',
     maxHeight: '70px',
     minHeight: '40px',

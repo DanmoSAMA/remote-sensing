@@ -60,7 +60,7 @@ export default function Form(props: Props) {
           创建项目完成，可使用下方功能进行分析
         </Typography>
       </FormControl>
-      <Box sx={formStyles.right}>
+      {/* <Box sx={formStyles.right}>
         <Box sx={formStyles.upload}>
           <input
             accept="image/*"
@@ -93,7 +93,7 @@ export default function Form(props: Props) {
             可在此处上传项目所需分析图片，也可在功能区上传图片
           </Typography>
         </Box>
-      </Box>
+      </Box> */}
     </Box>
   )
 }
