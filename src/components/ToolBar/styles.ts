@@ -1,6 +1,6 @@
 export const toolBarStyles = {
   wrapper: {
-    position: 'absolute',
+    position: 'fixed',
     height: '89vh',
     width: '240px',
     right: '10px',

@@ -31,7 +31,10 @@ function _MySelect(props: Props) {
         }
       }
     }
-  }, [JSON.stringify(ProjectStore.imgs)])
+  }, [
+    JSON.stringify(ProjectStore.imgs),
+    JSON.stringify(ProjectStore.imgGroups)
+  ])
 
   return (
     <Box

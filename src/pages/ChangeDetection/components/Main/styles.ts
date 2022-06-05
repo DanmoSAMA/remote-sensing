@@ -13,6 +13,7 @@ export const mainStyles = {
   wrapper: {
     width: '100%',
     height: '82vh',
+    maxHeight: '150vh',
     margin: '124px 270px 0 230px',
     display: 'flex',
     position: 'relative'

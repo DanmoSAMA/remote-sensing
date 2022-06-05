@@ -111,7 +111,7 @@ class ProjectState {
       const projects = res.data.projects
       const t = projects.find((item) => (item.id = this.id))
       this.name = t.name
-      console.log(this.name)
+      // console.log(this.name)
     }
   }
   // 在上传图片后更新

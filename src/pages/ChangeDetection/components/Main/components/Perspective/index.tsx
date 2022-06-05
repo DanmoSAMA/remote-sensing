@@ -9,13 +9,13 @@ import { observer } from 'mobx-react-lite'
 import { useState } from 'react'
 
 function _Perspective() {
-  const [size, setSize] = useState(54)
+  const [size, setSize] = useState(85)
   const [angle, setAngle] = useState(0)
   const [showDetail, setShowDetail] = useState(false)
   const [detailImgUrl, setDetailImgUrl] = useState('')
 
   function zoom() {
-    if (size <= 60) {
+    if (size <= 100) {
       setSize(size + 2)
     }
   }
@@ -57,7 +57,7 @@ function _Perspective() {
               !showDetail ? (size + 10) / 10 : (size + 10) / 20
             }rem) rotateX(65deg) rotateZ(${-20 + angle}deg)`
           }}
-          src={ProjectStore.currentShownGroup.pictures[1].url}
+          src={ProjectStore.currentShownGroup.pictures[2].url}
           onClick={() => {
             viewDetail(1)
           }}
@@ -69,7 +69,7 @@ function _Perspective() {
               !showDetail ? (size + 130) / 10 : (size + 130) / 20
             }rem) rotateX(65deg) rotateZ(${-20 + angle}deg)`
           }}
-          src={ProjectStore.currentShownGroup.pictures[2].url}
+          src={ProjectStore.currentShownGroup.pictures[1].url}
           onClick={() => {
             viewDetail(2)
           }}
@@ -95,7 +95,6 @@ function _Perspective() {
           </div>
         </Box>
       )}
-
       <List sx={perspectiveStyles.sidebar}>
         <ListItem
           button
