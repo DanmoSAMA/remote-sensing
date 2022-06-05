@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { projectStyles } from './styles'
 import { getRecentProjects } from '../../../../network/project/getRecentProjects'
+import { moveToBin } from '../../../../network/project/moveToBin'
 import { getToken } from '../../../../utils/token'
 import { ProjectStore } from '../../../../mobx/project'
 
@@ -55,7 +56,14 @@ function Project() {
                 打开项目
               </Typography>
             </Box>
-            <Box sx={projectStyles.middle}>
+            <Box
+              sx={projectStyles.middle}
+              onClick={() => {
+                if (confirm('确定要将该项目移动至回收站吗?')) {
+                  moveToBin(item.id)
+                }
+              }}
+            >
               <SvgIcon name="delete" />
               <Typography
                 color={'000'}
@@ -63,7 +71,7 @@ function Project() {
                 fontWeight={600}
                 ml={'0.5rem'}
               >
-                彻底删除
+                删除项目
               </Typography>
             </Box>
             <Typography sx={projectStyles.bottom}>{item.name}</Typography>

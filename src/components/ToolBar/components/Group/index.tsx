@@ -28,7 +28,7 @@ function _Group(props: Props) {
       projectID: parseInt(projectID),
       groupID: group.groupID
     }
-    if (window.confirm('确定要删除该组吗?')) {
+    if (confirm('确定要删除该组吗?')) {
       const res = await deleteGroup(reqData)
       console.log(res)
       if (res.code === 0) {
