@@ -158,15 +158,17 @@ export default function Register(props: Props) {
         color={hasRegistered ? color[0] : color[1]}
       >
         已有账户？
-        <Typography
-          fontSize=".9rem"
-          color="secondary.main"
-          fontWeight={500}
-          sx={{ cursor: 'pointer' }}
+        <span
+          style={{
+            fontSize: '.9rem',
+            color: '#01555A',
+            fontWeight: 500,
+            cursor: 'pointer'
+          }}
           onClick={() => setShowLogin(true)}
         >
-          去登录
-        </Typography>
+          点击注册
+        </span>
       </Typography>
     </Box>
   )

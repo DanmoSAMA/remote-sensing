@@ -103,9 +103,9 @@ class ProjectState {
         }
       ]
       this.setProjectName('')
-      this.showPerspective = !false
+      this.showPerspective = false
       this.showDetail = false
-      this.displayType = 1
+      this.displayType = 0
     }
   }
   // 设置项目名称

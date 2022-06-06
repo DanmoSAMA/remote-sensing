@@ -33,15 +33,15 @@ function _Item(props: Props) {
         onClick={(e) => e.stopPropagation()}
         style={{ display: showDropDown ? 'block' : 'none', top: '40px' }}
       >
-        <ListItem sx={toolBarStyles.dropDownItem}>
+        <Box sx={toolBarStyles.dropDownItem}>
           <SvgIcon name="rename" class="toolbar dropdown" />
           重命名
-        </ListItem>
+        </Box>
         <Divider color="secondary" variant="middle" />
-        <ListItem sx={toolBarStyles.dropDownItem}>
+        <Box sx={toolBarStyles.dropDownItem}>
           <SvgIcon name="tb_bin" class="toolbar dropdown" />
           移除
-        </ListItem>
+        </Box>
       </Box>
     </ListItem>
   )

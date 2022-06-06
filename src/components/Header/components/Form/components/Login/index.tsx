@@ -127,15 +127,17 @@ export default function Login(props: Props) {
       </Button>
       <Typography display="flex" mt="20px" fontSize=".9rem" color="#B6B5B3">
         未使用过该系统？
-        <Typography
-          fontSize=".9rem"
-          color="secondary.main"
-          fontWeight={500}
-          sx={{ cursor: 'pointer' }}
+        <span
+          style={{
+            fontSize: '.9rem',
+            color: '#01555A',
+            fontWeight: 500,
+            cursor: 'pointer'
+          }}
           onClick={() => setShowLogin(false)}
         >
           点击注册
-        </Typography>
+        </span>
       </Typography>
     </Box>
   )

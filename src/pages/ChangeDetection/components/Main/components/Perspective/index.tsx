@@ -2,7 +2,7 @@ import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
-import Slider from '@mui/material/Slider'
+import Slider, { SliderThumb } from '@mui/material/Slider'
 import SvgIcon from '../../../../../../components/SvgIcon'
 import { ProjectStore } from '../../../../../../mobx/project'
 import { perspectiveStyles } from './styles'
@@ -109,27 +109,6 @@ function _Perspective() {
             id="squareImg"
           />
           {ProjectStore.currentShownGroup.pictures[0].url !== '' && (
-            // <Box
-            //   sx={{
-            //     width: '4px',
-            //     height: '100%',
-            //     position: 'absolute',
-            //     backgroundColor: 'primary.light',
-            //     transform: 'translateX(-50%)',
-            //     left: `${slideX}%`
-            //   }}
-            // >
-            //   <div
-            //     style={{
-            //       position: 'absolute',
-            //       top: '50%',
-            //       transform: 'translateX(-45%) translateY(-50%)',
-            //       cursor: 'pointer'
-            //     }}
-            //   >
-            //     <SvgIcon name="slide" class="perspective slide" />
-            //   </div>
-            // </Box>
             <Slider
               defaultValue={50}
               sx={{
