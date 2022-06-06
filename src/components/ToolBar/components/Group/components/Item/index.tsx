@@ -18,7 +18,7 @@ function _Item(props: Props) {
 
   return (
     <ListItem key={item.id} sx={toolBarStyles.listItemInGroup}>
-      <SvgIcon name="eye" class="toolbar" />
+      {ProjectStore.displayType === 1 && <SvgIcon name="eye" class="toolbar" />}
       {`${item.name.slice(0, 14)}${item.name.length > 14 ? '...' : ''}`}
       <div
         onClick={(e) => {

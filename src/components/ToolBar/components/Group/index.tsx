@@ -50,7 +50,10 @@ function _Group(props: Props) {
           ProjectStore.setShowDetail(false)
         }}
       >
-        <SvgIcon name="eye" class="toolbar" />
+        {ProjectStore.displayType === 1 && (
+          <SvgIcon name="eye" class="toolbar" />
+        )}
+
         <SvgIcon name="folder" class="toolbar folder" />
         {`${group.groupName.slice(0, 4)}${
           group.groupName.length > 4 ? '...' : ''
