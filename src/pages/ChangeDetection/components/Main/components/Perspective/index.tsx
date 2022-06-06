@@ -11,7 +11,6 @@ import { useState } from 'react'
 function _Perspective() {
   const [size, setSize] = useState(85)
   const [angle, setAngle] = useState(-7)
-  const [showDetail, setShowDetail] = useState(false)
   const [detailImgUrl, setDetailImgUrl] = useState('')
 
   function zoom() {
@@ -27,7 +26,7 @@ function _Perspective() {
   }
 
   function viewDetail(type: 0 | 1 | 2) {
-    setShowDetail(true)
+    ProjectStore.setShowDetail(true)
     setDetailImgUrl(ProjectStore.currentShownGroup.pictures[type].url)
   }
 
@@ -35,14 +34,16 @@ function _Perspective() {
     <Box sx={perspectiveStyles.wrapper}>
       <Box
         sx={
-          !showDetail ? perspectiveStyles.cube : perspectiveStyles.cubeAtConer
+          !ProjectStore.showDetail
+            ? perspectiveStyles.cube
+            : perspectiveStyles.cubeAtConer
         }
       >
         <img
           style={{
             width: `${size}%`,
             transform: `translateY(${
-              !showDetail ? -size / 10 : -size / 20
+              !ProjectStore.showDetail ? -size / 10 : -size / 20
             }rem) rotateX(65deg) rotateZ(${-20 + angle}deg)`
           }}
           src={ProjectStore.currentShownGroup.pictures[0].url}
@@ -54,7 +55,7 @@ function _Perspective() {
           style={{
             width: `${size}%`,
             transform: `translateY(${
-              !showDetail ? (size + 10) / 10 : (size + 10) / 20
+              !ProjectStore.showDetail ? (size + 10) / 10 : (size + 10) / 20
             }rem) rotateX(65deg) rotateZ(${-20 + angle}deg)`
           }}
           src={ProjectStore.currentShownGroup.pictures[2].url}
@@ -66,7 +67,7 @@ function _Perspective() {
           style={{
             width: `${size}%`,
             transform: `translateY(${
-              !showDetail ? (size + 130) / 10 : (size + 130) / 20
+              !ProjectStore.showDetail ? (size + 130) / 10 : (size + 130) / 20
             }rem) rotateX(65deg) rotateZ(${-20 + angle}deg)`
           }}
           src={ProjectStore.currentShownGroup.pictures[1].url}
@@ -75,7 +76,7 @@ function _Perspective() {
           }}
         />
       </Box>
-      {showDetail && (
+      {ProjectStore.showDetail && (
         <Box sx={perspectiveStyles.detail}>
           <img
             src={detailImgUrl}
@@ -88,7 +89,7 @@ function _Perspective() {
           />
           <div
             onClick={() => {
-              setShowDetail(false)
+              ProjectStore.setShowDetail(false)
             }}
           >
             <SvgIcon name="detail_close" class="perspective detail_close" />
@@ -115,6 +116,7 @@ function _Perspective() {
         variant="contained"
         sx={perspectiveStyles.button}
         onClick={() => {
+          // todo
           ProjectStore.setShowPerspective(false)
         }}
       >

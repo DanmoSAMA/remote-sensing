@@ -19,6 +19,8 @@ class ProjectState {
   chosenImgs = []
   // 当前是否展示视图
   showPerspective = false
+  // 是否显示放大的图片
+  showDetail = false
 
   /* 变化检测 */
   // 待分析图片组，用于渲染页面
@@ -39,6 +41,8 @@ class ProjectState {
       }
     }
   ]
+  // 展示轴测 or 平面
+  displayType: 0 | 1 = 0
 
   /* 其他 */
   // 被选中的图
@@ -231,6 +235,10 @@ class ProjectState {
   // 修改展示状态
   setShowPerspective(val: boolean) {
     this.showPerspective = val
+  }
+  // 展示图片细节
+  setShowDetail(val: boolean) {
+    this.showDetail = val
   }
   // 开始地物分类 todo
   async terrainClassification() {

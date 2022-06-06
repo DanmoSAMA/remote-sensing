@@ -30,7 +30,7 @@ function _Group(props: Props) {
     }
     if (confirm('确定要删除该组吗?')) {
       const res = await deleteGroup(reqData)
-      console.log(res)
+      // console.log(res)
       if (res.code === 0) {
         getUpdatedImgs(projectID).then((res) => {
           const data = res.data
@@ -47,6 +47,7 @@ function _Group(props: Props) {
         onClick={() => {
           ProjectStore.updateCurShownGroup(group.groupID)
           ProjectStore.setShowPerspective(true)
+          ProjectStore.setShowDetail(false)
         }}
       >
         <SvgIcon name="eye" class="toolbar" />
