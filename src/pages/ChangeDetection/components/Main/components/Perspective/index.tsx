@@ -12,6 +12,7 @@ function _Perspective() {
   const [size, setSize] = useState(85)
   const [angle, setAngle] = useState(-7)
   const [detailImgUrl, setDetailImgUrl] = useState('')
+  const [slideX, setSlideX] = useState(50)
 
   function zoom() {
     if (size <= 100) {
@@ -61,7 +62,7 @@ function _Perspective() {
             }}
             src={ProjectStore.currentShownGroup.pictures[2].url}
             onClick={() => {
-              viewDetail(1)
+              viewDetail(2)
             }}
           />
           <img
@@ -73,7 +74,7 @@ function _Perspective() {
             }}
             src={ProjectStore.currentShownGroup.pictures[1].url}
             onClick={() => {
-              viewDetail(2)
+              viewDetail(1)
             }}
           />
         </Box>
@@ -84,12 +85,32 @@ function _Perspective() {
           <img
             src={ProjectStore.currentShownGroup.pictures[0].url}
             style={{
-              clipPath: 'polygon(50% 0%, 50% 100%, 0% 100%, 0% 0%)'
+              clipPath: `polygon(${slideX}% 0%, ${slideX}% 100%, 0% 100%, 0% 0%)`
             }}
           />
+          {ProjectStore.currentShownGroup.pictures[0].url !== '' && (
+            <Box
+              sx={{
+                width: '4px',
+                height: '100%',
+                position: 'absolute',
+                backgroundColor: 'primary.light',
+                transform: 'translateX(-50%)',
+                left: `${slideX}%`
+              }}
+            >
+              <div
+                draggable
+                onDrag={() => {
+                  console.log(1)
+                }}
+              >
+                <SvgIcon name="slide" class="perspective slide" />
+              </div>
+            </Box>
+          )}
         </Box>
       )}
-
       {ProjectStore.showDetail && (
         <Box sx={perspectiveStyles.detail}>
           <img
@@ -128,7 +149,6 @@ function _Perspective() {
           </ListItem>
         </List>
       )}
-
       <Button
         variant="contained"
         sx={perspectiveStyles.button}

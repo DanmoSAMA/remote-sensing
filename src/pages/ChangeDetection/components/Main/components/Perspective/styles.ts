@@ -4,7 +4,11 @@ export const perspectiveStyles = {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    position: 'relative'
+    position: 'relative',
+
+    '& img': {
+      userSelect: 'none'
+    }
   },
   cube: {
     perspective: '5000px',
@@ -86,12 +90,13 @@ export const perspectiveStyles = {
     }
   },
   square: {
-    width: '100%',
-    height: '100%',
+    width: '80%',
+    height: '82vh',
     position: 'relative',
+    overflow: 'hidden',
 
     '& img': {
-      width: '80%',
+      width: '100%',
       position: 'absolute',
       left: '50%',
       top: '50%',

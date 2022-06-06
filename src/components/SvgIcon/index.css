@@ -58,3 +58,11 @@
   zoom: 3;
   cursor: pointer;
 }
+
+.perspective.slide {
+  position: absolute;
+  top: 50%;
+  transform: translateX(-45%) translateY(-50%);
+  zoom: 3;
+  cursor: pointer;
+}
