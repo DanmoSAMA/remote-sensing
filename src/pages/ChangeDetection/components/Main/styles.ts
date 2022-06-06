@@ -146,7 +146,9 @@ export const mainStyles = {
     backgroundColor: '#F4F2E8',
     color: 'secondary.main',
     textAlign: 'center',
-    fontSize: '16px'
+    fontSize: '16px',
+    zIndex: 1,
+    opacity: '.9'
   },
   headerLeft: {
     position: 'absolute',

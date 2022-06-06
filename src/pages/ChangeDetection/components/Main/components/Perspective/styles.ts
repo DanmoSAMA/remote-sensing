@@ -93,14 +93,12 @@ export const perspectiveStyles = {
     width: '80%',
     height: '82vh',
     position: 'relative',
-    overflow: 'hidden',
 
     '& img': {
       width: '100%',
       position: 'absolute',
-      left: '50%',
-      top: '50%',
-      transform: 'translateX(-50%) translateY(-50%)',
+      left: '0',
+      top: 0,
       borderRadius: '.5rem'
     }
   }

@@ -213,7 +213,6 @@ class ProjectState {
   }
   // 修改目前展示的组
   updateCurShownGroup(groupID: number) {
-    console.log(groupID)
     const t = this.imgGroups.find((item) => item.groupID === groupID)
     console.log(t)
     this.currentShownGroup = {

@@ -8,7 +8,7 @@ export const shortHeaderStyles = {
       boxShadow: 'none',
       position: 'fixed',
       top: 0,
-      zIndex: 1
+      zIndex: 2
     },
     '& .MuiToolbar-root': {
       height: '80px',
