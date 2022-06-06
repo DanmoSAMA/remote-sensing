@@ -21,13 +21,15 @@ function _MySelect(props: Props) {
   useEffect(() => {
     setImgsToSelect([])
 
-    for (const img of ProjectStore.imgs) {
-      setImgsToSelect((oldArray) => [...oldArray, img])
-    }
-    for (const group of ProjectStore.imgGroups) {
-      for (const img of group.pictures) {
-        if (img.name !== '变化检测结果') {
-          setImgsToSelect((oldArray) => [...oldArray, img])
+    if (ProjectStore.imgs) {
+      for (const img of ProjectStore.imgs) {
+        setImgsToSelect((oldArray) => [...oldArray, img])
+      }
+      for (const group of ProjectStore.imgGroups) {
+        for (const img of group.pictures) {
+          if (img.name !== '变化检测结果') {
+            setImgsToSelect((oldArray) => [...oldArray, img])
+          }
         }
       }
     }
@@ -52,7 +54,6 @@ function _MySelect(props: Props) {
       >
         <SvgIcon name="close" class="main close" />
       </div>
-
       <Box sx={{ marginLeft: '10px', width: '90%' }}>
         <FormControl required sx={{ marginBottom: '10px', minWidth: '100%' }}>
           <Select

@@ -95,14 +95,14 @@ function _ToolBar() {
         </label>
       </Box>
       <List>
-        {ProjectStore.imgGroups.map((item) => (
-          <Group group={item} key={item.groupID} />
-        ))}
+        {ProjectStore.imgGroups &&
+          ProjectStore.imgGroups.map((item) => (
+            <Group group={item} key={item.groupID} />
+          ))}
       </List>
       <List>
-        {ProjectStore.imgs.map((item) => (
-          <Item item={item} key={item.uuid} />
-        ))}
+        {ProjectStore.imgs &&
+          ProjectStore.imgs.map((item) => <Item item={item} key={item.uuid} />)}
       </List>
     </Box>
   )

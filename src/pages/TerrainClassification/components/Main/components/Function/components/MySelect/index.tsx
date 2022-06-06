@@ -13,13 +13,15 @@ function _MySelect() {
   useEffect(() => {
     setImgsToSelect([])
 
-    for (const img of ProjectStore.imgs) {
-      setImgsToSelect((oldArray) => [...oldArray, img])
-    }
-    for (const group of ProjectStore.imgGroups) {
-      for (const img of group.pictures) {
-        if (img.name !== '变化检测结果') {
-          setImgsToSelect((oldArray) => [...oldArray, img])
+    if (ProjectStore.imgs) {
+      for (const img of ProjectStore.imgs) {
+        setImgsToSelect((oldArray) => [...oldArray, img])
+      }
+      for (const group of ProjectStore.imgGroups) {
+        for (const img of group.pictures) {
+          if (img.name !== '变化检测结果') {
+            setImgsToSelect((oldArray) => [...oldArray, img])
+          }
         }
       }
     }

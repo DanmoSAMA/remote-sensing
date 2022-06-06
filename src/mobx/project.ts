@@ -115,9 +115,10 @@ class ProjectState {
     else {
       const res = await getRecentProjects()
       const projects = res.data.projects
-      const t = projects.find((item) => (item.id = this.id))
-      this.name = t.name
-      // console.log(this.name)
+      if (projects) {
+        const t = projects.find((item) => (item.id = this.id))
+        this.name = t.name
+      }
     }
   }
   // 在上传图片后更新
