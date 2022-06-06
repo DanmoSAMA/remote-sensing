@@ -11,6 +11,7 @@ import { useState } from 'react'
 
 function _Function() {
   const [isChecking, setIsChecking] = useState(false)
+  const [targetName, setTargetName] = useState('')
 
   async function clickToDetect() {
     for (let group of ProjectStore.waitingGroups) {
@@ -18,7 +19,8 @@ function _Function() {
         return alert('请先选择要分析的图片')
     }
     setIsChecking(true)
-    ProjectStore.changeDetect().then(() => {
+    console.log(targetName)
+    ProjectStore.changeDetect(targetName).then(() => {
       setIsChecking(false)
       ProjectStore.setShowPerspective(true)
     })
@@ -85,6 +87,9 @@ function _Function() {
                 padding: '5px',
                 borderRadius: '10px',
                 border: '1px solid #01555A'
+              }}
+              onChange={(e) => {
+                setTargetName(e.target.value)
               }}
             />
             <Typography

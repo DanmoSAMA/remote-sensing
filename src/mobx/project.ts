@@ -179,7 +179,7 @@ class ProjectState {
     }
   }
   // 开始变化检测
-  async changeDetect() {
+  async changeDetect(targetName: string) {
     // 构造请求数据
     const reqData = []
     for (let i = 0; i < this.waitingGroups.length; i++) {
@@ -188,7 +188,8 @@ class ProjectState {
         projectID: parseInt(this.id),
         oldUUID: item.oldImg.uuid,
         newUUID: item.newImg.uuid,
-        targetUUID: generateUUID()
+        targetUUID: generateUUID(),
+        targetName
       }
       if (t.oldUUID !== '' && t.newUUID !== '') {
         reqData.push(t)
