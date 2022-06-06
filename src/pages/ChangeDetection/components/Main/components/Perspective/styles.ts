@@ -84,5 +84,19 @@ export const perspectiveStyles = {
     '& .MuiListItem-root:last-child': {
       border: 'none'
     }
+  },
+  square: {
+    width: '100%',
+    height: '100%',
+    position: 'relative',
+
+    '& img': {
+      width: '80%',
+      position: 'absolute',
+      left: '50%',
+      top: '50%',
+      transform: 'translateX(-50%) translateY(-50%)',
+      borderRadius: '.5rem'
+    }
   }
 }

@@ -103,7 +103,9 @@ class ProjectState {
         }
       ]
       this.setProjectName('')
-      this.showPerspective = false
+      this.showPerspective = !false
+      this.showDetail = false
+      this.displayType = 1
     }
   }
   // 设置项目名称
@@ -240,6 +242,11 @@ class ProjectState {
   setShowDetail(val: boolean) {
     this.showDetail = val
   }
+  // 修改展示的type
+  setDisplayType(val: 0 | 1) {
+    this.displayType = val
+  }
+
   // 开始地物分类 todo
   async terrainClassification() {
     // 构造请求数据

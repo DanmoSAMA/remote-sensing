@@ -32,50 +32,64 @@ function _Perspective() {
 
   return (
     <Box sx={perspectiveStyles.wrapper}>
-      <Box
-        sx={
-          !ProjectStore.showDetail
-            ? perspectiveStyles.cube
-            : perspectiveStyles.cubeAtConer
-        }
-      >
-        <img
-          style={{
-            width: `${size}%`,
-            transform: `translateY(${
-              !ProjectStore.showDetail ? -size / 10 : -size / 20
-            }rem) rotateX(65deg) rotateZ(${-20 + angle}deg)`
-          }}
-          src={ProjectStore.currentShownGroup.pictures[0].url}
-          onClick={() => {
-            viewDetail(0)
-          }}
-        />
-        <img
-          style={{
-            width: `${size}%`,
-            transform: `translateY(${
-              !ProjectStore.showDetail ? (size + 10) / 10 : (size + 10) / 20
-            }rem) rotateX(65deg) rotateZ(${-20 + angle}deg)`
-          }}
-          src={ProjectStore.currentShownGroup.pictures[2].url}
-          onClick={() => {
-            viewDetail(1)
-          }}
-        />
-        <img
-          style={{
-            width: `${size}%`,
-            transform: `translateY(${
-              !ProjectStore.showDetail ? (size + 130) / 10 : (size + 130) / 20
-            }rem) rotateX(65deg) rotateZ(${-20 + angle}deg)`
-          }}
-          src={ProjectStore.currentShownGroup.pictures[1].url}
-          onClick={() => {
-            viewDetail(2)
-          }}
-        />
-      </Box>
+      {ProjectStore.displayType === 0 ? (
+        <Box
+          sx={
+            !ProjectStore.showDetail
+              ? perspectiveStyles.cube
+              : perspectiveStyles.cubeAtConer
+          }
+        >
+          <img
+            style={{
+              width: `${size}%`,
+              transform: `translateY(${
+                !ProjectStore.showDetail ? -size / 10 : -size / 20
+              }rem) rotateX(65deg) rotateZ(${-20 + angle}deg)`
+            }}
+            src={ProjectStore.currentShownGroup.pictures[0].url}
+            onClick={() => {
+              viewDetail(0)
+            }}
+          />
+          <img
+            style={{
+              width: `${size}%`,
+              transform: `translateY(${
+                !ProjectStore.showDetail ? (size + 10) / 10 : (size + 10) / 20
+              }rem) rotateX(65deg) rotateZ(${-20 + angle}deg)`
+            }}
+            src={ProjectStore.currentShownGroup.pictures[2].url}
+            onClick={() => {
+              viewDetail(1)
+            }}
+          />
+          <img
+            style={{
+              width: `${size}%`,
+              transform: `translateY(${
+                !ProjectStore.showDetail ? (size + 130) / 10 : (size + 130) / 20
+              }rem) rotateX(65deg) rotateZ(${-20 + angle}deg)`
+            }}
+            src={ProjectStore.currentShownGroup.pictures[1].url}
+            onClick={() => {
+              viewDetail(2)
+            }}
+          />
+        </Box>
+      ) : (
+        <Box sx={perspectiveStyles.square}>
+          <img src={ProjectStore.currentShownGroup.pictures[1].url} />
+          <img src={ProjectStore.currentShownGroup.pictures[2].url} />
+          <img
+            src={ProjectStore.currentShownGroup.pictures[0].url}
+            style={{
+              clipPath: 'polygon(50% 0%, 50% 100%, 0% 100%, 0% 0%)'
+            }}
+          />
+        </Box>
+      )}
+
       {ProjectStore.showDetail && (
         <Box sx={perspectiveStyles.detail}>
           <img
@@ -96,28 +110,31 @@ function _Perspective() {
           </div>
         </Box>
       )}
-      <List sx={perspectiveStyles.sidebar}>
-        <ListItem
-          button
-          onClick={() => {
-            setAngle(angle + 10)
-          }}
-        >
-          <SvgIcon name="cursor_pointer" />
-        </ListItem>
-        <ListItem button onClick={lessen}>
-          <SvgIcon name="bigger" />
-        </ListItem>
-        <ListItem button onClick={zoom}>
-          <SvgIcon name="smaller" />
-        </ListItem>
-      </List>
+      {ProjectStore.displayType === 0 && (
+        <List sx={perspectiveStyles.sidebar}>
+          <ListItem
+            button
+            onClick={() => {
+              setAngle(angle + 10)
+            }}
+          >
+            <SvgIcon name="cursor_pointer" />
+          </ListItem>
+          <ListItem button onClick={lessen}>
+            <SvgIcon name="bigger" />
+          </ListItem>
+          <ListItem button onClick={zoom}>
+            <SvgIcon name="smaller" />
+          </ListItem>
+        </List>
+      )}
+
       <Button
         variant="contained"
         sx={perspectiveStyles.button}
         onClick={() => {
-          // todo
-          ProjectStore.setShowPerspective(false)
+          ProjectStore.setDisplayType(ProjectStore.displayType === 0 ? 1 : 0)
+          ProjectStore.setShowDetail(false)
         }}
       >
         切换视角
