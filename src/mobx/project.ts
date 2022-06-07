@@ -2,6 +2,7 @@ import { makeAutoObservable } from 'mobx'
 import { Img, ImgGroup, WaitingGroup } from '../types/project/imgType'
 import { generateUUID } from '../utils/uuid'
 import { postDetectReq } from '../network/changeDetection/postDetectReq'
+import { postSortReq } from '../network/TerrainClassification/postSortReq'
 import { getUpdatedImgs } from '../network/project/getUpdatedImgs'
 import { getRecentProjects } from '../network/project/getRecentProjects'
 
@@ -185,7 +186,7 @@ class ProjectState {
     for (let i = 0; i < this.waitingGroups.length; i++) {
       const item = this.waitingGroups[i]
       const t = {
-        projectID: parseInt(this.id),
+        projectID: this.id,
         oldUUID: item.oldImg.uuid,
         newUUID: item.newImg.uuid,
         targetUUID: generateUUID(),
@@ -204,7 +205,6 @@ class ProjectState {
     }
 
     return Promise.all(promiseArr).then((res) => {
-      // console.log(res)
       getUpdatedImgs(this.id.toString()).then((res) => {
         const data = res.data
         ProjectStore.updateImgs(data.pictures)
@@ -225,6 +225,7 @@ class ProjectState {
   }
   // 修改chosenImg
   updateChosenImg(val: string) {
+    if (val === '') return
     let img = this.imgs.find((item) => item.name === val)
 
     if (!img) {
@@ -248,10 +249,21 @@ class ProjectState {
     this.displayType = val
   }
 
-  // 开始地物分类 todo
-  async terrainClassification() {
+  // 开始地物分类
+  async terrainClassification(targetName: string) {
     // 构造请求数据
+    console.log(this.chosenImg)
+    const reqData = {
+      projectID: this.id,
+      originUUID: this.chosenImg.uuid,
+      targetUUID: generateUUID(),
+      targetName
+    }
     // 发送请求
+    postSortReq(reqData).then((res) => {
+      console.log(res)
+      const data = res.data
+    })
   }
 }
 

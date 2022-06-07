@@ -68,7 +68,7 @@ export const mainStyles = {
   },
   upper: {
     padding: '15px',
-    maxHeight: '500px',
+    maxHeight: '47vh',
     overflow: 'auto'
   },
   select: {

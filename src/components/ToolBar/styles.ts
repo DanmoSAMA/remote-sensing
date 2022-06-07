@@ -46,7 +46,7 @@ export const toolBarStyles = {
     marginBottom: '20px',
     padding: '0 5px',
     position: 'relative',
-    fontSize: '16px'
+    fontSize: '15px'
   },
   listGroup: {
     borderRadius: '10px',
@@ -54,7 +54,7 @@ export const toolBarStyles = {
     padding: '0 0 0 10px',
     marginLeft: '20px',
     borderTop: 'none',
-    fontSize: '16px'
+    fontSize: '15px'
   },
   listItemInGroup: {
     color: '#fff',
@@ -62,7 +62,7 @@ export const toolBarStyles = {
     padding: '10px 0',
     height: '40px',
     position: 'relative',
-    fontSize: '16px'
+    fontSize: '15px'
   },
   listParent: {
     color: '#fff',
@@ -71,7 +71,7 @@ export const toolBarStyles = {
     borderRadius: '10px',
     padding: '0 5px',
     position: 'relative',
-    fontSize: '16px',
+    fontSize: '15px',
     cursor: 'pointer'
   },
   dropDown: {

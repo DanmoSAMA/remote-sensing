@@ -64,7 +64,7 @@ function _ToolBar() {
   return (
     <Box sx={toolBarStyles.wrapper}>
       <Box sx={toolBarStyles.top}>
-        <Typography>图层</Typography>
+        <Typography fontSize="16px">图层</Typography>
         <input
           accept="image/*"
           id="contained-button-file"
@@ -86,7 +86,8 @@ function _ToolBar() {
               backgroundColor: '#313131',
               color: '#FCFBF4',
               boxShadow: 'none',
-              fontWeight: '300'
+              fontWeight: '300',
+              fontSize: '16px'
             }}
           >
             <SvgIcon name="import" />

@@ -1,7 +1,6 @@
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
-import SvgIcon from '../../../../../../components/SvgIcon'
 import MySelect from './components/MySelect'
 import Loading from './components/Loading'
 import { ProjectStore } from '../../../../../../mobx/project'
@@ -9,24 +8,20 @@ import { mainStyles } from '../../styles'
 import { observer } from 'mobx-react-lite'
 import { useState } from 'react'
 
-type Props = {
-  setShowPerspective: (val: boolean) => void
-}
-
-function _Function(props: Props) {
-  const { setShowPerspective } = props
+function _Function() {
   const [isChecking, setIsChecking] = useState(false)
+  const [targetName, setTargetName] = useState('')
 
   async function clickToDetect() {
-    for (let group of ProjectStore.waitingGroups) {
-      if (group.oldImg.uuid === '' || group.newImg.uuid === '')
-        return alert('请先选择要分析的图片')
+    if (ProjectStore.chosenImg.name === '') {
+      alert('请先选择要分析的图片')
+      return
     }
     setIsChecking(true)
-    // ProjectStore.changeDetect().then(() => {
-    //   setIsChecking(false)
-    //   setShowPerspective(true)
-    // })
+    ProjectStore.terrainClassification(targetName).then(() => {
+      setIsChecking(false)
+      ProjectStore.setShowPerspective(true)
+    })
   }
 
   return (
@@ -76,6 +71,9 @@ function _Function(props: Props) {
                 padding: '5px',
                 borderRadius: '10px',
                 border: '1px solid #01555A'
+              }}
+              onChange={(e) => {
+                setTargetName(e.target.value)
               }}
             />
             <Typography

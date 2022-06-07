@@ -2,23 +2,15 @@ import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
-import ListItemIcon from '@mui/material/ListItemIcon'
-import Typography from '@mui/material/Typography'
 import SvgIcon from '../../../../../../components/SvgIcon'
 import { ProjectStore } from '../../../../../../mobx/project'
 import { perspectiveStyles } from './styles'
 import { observer } from 'mobx-react-lite'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
-type Props = {
-  setShowPerspective: (val: boolean) => void
-}
-
-function _Perspective(props: Props) {
-  const { setShowPerspective } = props
+function _Perspective() {
   const [size, setSize] = useState(54)
   const [angle, setAngle] = useState(0)
-  const [showDetail, setShowDetail] = useState(false)
 
   function zoom() {
     if (size <= 60) {
@@ -34,21 +26,23 @@ function _Perspective(props: Props) {
 
   // todo
   function viewDetail() {
-    setShowDetail(true)
+    ProjectStore.setShowDetail(true)
   }
 
   return (
     <Box sx={perspectiveStyles.wrapper}>
       <Box
         sx={
-          !showDetail ? perspectiveStyles.cube : perspectiveStyles.cubeAtConer
+          !ProjectStore.showDetail
+            ? perspectiveStyles.cube
+            : perspectiveStyles.cubeAtConer
         }
       >
         <img
           style={{
             width: `${size}%`,
             transform: `translateY(${
-              !showDetail ? -size / 10 : -size / 20
+              !ProjectStore.showDetail ? -size / 10 : -size / 20
             }rem) rotateX(65deg) rotateZ(${-20 + angle}deg)`
           }}
           src="https://s1.ax1x.com/2022/06/03/XUhtG6.png"
@@ -58,7 +52,7 @@ function _Perspective(props: Props) {
           style={{
             width: `${size}%`,
             transform: `translateY(${
-              !showDetail ? (size + 10) / 10 : (size + 10) / 20
+              !ProjectStore.showDetail ? (size + 10) / 10 : (size + 10) / 20
             }rem) rotateX(65deg) rotateZ(${-20 + angle}deg)`
           }}
           src="https://s1.ax1x.com/2022/06/03/XUhtG6.png"
@@ -68,14 +62,14 @@ function _Perspective(props: Props) {
           style={{
             width: `${size}%`,
             transform: `translateY(${
-              !showDetail ? (size + 130) / 10 : (size + 130) / 20
+              !ProjectStore.showDetail ? (size + 130) / 10 : (size + 130) / 20
             }rem) rotateX(65deg) rotateZ(${-20 + angle}deg)`
           }}
           src="https://s1.ax1x.com/2022/06/03/XUhtG6.png"
           onClick={viewDetail}
         />
       </Box>
-      {showDetail && (
+      {ProjectStore.showDetail && (
         <Box sx={perspectiveStyles.detail}>
           <img
             src="https://s1.ax1x.com/2022/06/03/XUhtG6.png"
@@ -88,7 +82,7 @@ function _Perspective(props: Props) {
           />
           <div
             onClick={() => {
-              setShowDetail(false)
+              ProjectStore.setShowDetail(false)
             }}
           >
             <SvgIcon name="detail_close" class="perspective detail_close" />
@@ -116,7 +110,7 @@ function _Perspective(props: Props) {
         variant="contained"
         sx={perspectiveStyles.button}
         onClick={() => {
-          setShowPerspective(false)
+          ProjectStore.setShowPerspective(false)
         }}
       >
         切换视角

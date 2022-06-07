@@ -15,13 +15,13 @@ export const sideBarStyles = {
       marginTop: '1vh'
     },
     '& .Mui-selected': {
-      backgroundColor: '#fff!important'
+      backgroundColor: '#FCFBF4!important'
     },
     '& .Mui-selected span': {
       color: 'secondary.main'
     },
     '& .Mui-selected:hover': {
-      backgroundColor: '#fff'
+      backgroundColor: '#FCFBF4'
     },
     '& .MuiListItem-root': {
       marginLeft: '10%',

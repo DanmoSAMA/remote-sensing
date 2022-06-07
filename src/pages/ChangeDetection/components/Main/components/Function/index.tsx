@@ -19,7 +19,7 @@ function _Function() {
         return alert('请先选择要分析的图片')
     }
     setIsChecking(true)
-    console.log(targetName)
+
     ProjectStore.changeDetect(targetName).then(() => {
       setIsChecking(false)
       ProjectStore.setShowPerspective(true)

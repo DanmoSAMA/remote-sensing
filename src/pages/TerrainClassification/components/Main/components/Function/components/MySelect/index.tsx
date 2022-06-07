@@ -25,7 +25,10 @@ function _MySelect() {
         }
       }
     }
-  }, [JSON.stringify(ProjectStore.imgs)])
+  }, [
+    JSON.stringify(ProjectStore.imgs),
+    JSON.stringify(ProjectStore.imgGroups)
+  ])
 
   return (
     <FormControl required sx={{ marginBottom: '10px', minWidth: '100%' }}>
