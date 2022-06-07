@@ -6,9 +6,13 @@ import Box from '@mui/material/Box'
 import { searchStyles } from './styles'
 import { useShowInput } from './hooks/useShowInput'
 import { searchProjects } from '../../../../network/project/searchProjects'
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 function Search() {
+  const navigate = useNavigate()
   const { showInput, setShowInput } = useShowInput()
+  const [keyword, setKeyword] = useState('')
 
   return (
     <Box sx={searchStyles.wrapper}>
@@ -17,6 +21,14 @@ function Search() {
           sx={searchStyles.input}
           disableUnderline={true}
           style={{ display: showInput ? 'inline-block' : 'none' }}
+          onChange={(e) => {
+            setKeyword(e.target.value)
+          }}
+          onKeyDown={(e) => {
+            if (e.nativeEvent.key === 'Enter') {
+              navigate(`/recent?keyword=${keyword}`)
+            }
+          }}
         />
       </FormControl>
       <IconButton

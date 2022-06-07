@@ -6,21 +6,31 @@ import { useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { projectStyles } from './styles'
 import { getRecentProjects } from '../../../../network/project/getRecentProjects'
+import { searchProjects } from '../../../../network/project/searchProjects'
 import { moveToBin } from '../../../../network/project/moveToBin'
 import { getToken } from '../../../../utils/token'
 import { ProjectStore } from '../../../../mobx/project'
+import { useParams } from '../../../../hooks/useParams'
 
 function Project() {
   const navigate = useNavigate()
   const [recentProjects, setRecentProjects] = useState([])
+  const keyword = useParams('keyword')
   let token = getToken()
 
   useEffect(() => {
     token = getToken()
-    getRecentProjects().then((res) => {
-      setRecentProjects(res.data.projects)
-    })
-  }, [token])
+
+    if (!keyword) {
+      getRecentProjects().then((res) => {
+        setRecentProjects(res.data.projects)
+      })
+    } else {
+      searchProjects(keyword).then((res) => {
+        setRecentProjects(res.data.projects)
+      })
+    }
+  }, [token, keyword])
 
   async function clickToMove(id: string) {
     if (confirm('确定要将该项目移动至回收站吗?')) {

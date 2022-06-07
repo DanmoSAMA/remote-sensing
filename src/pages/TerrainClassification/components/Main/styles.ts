@@ -13,7 +13,7 @@ export const mainStyles = {
   wrapper: {
     width: '100%',
     height: '82vh',
-    margin: '100px 270px 0 230px',
+    margin: '10px 270px 0 230px',
     display: 'flex'
   },
   image: {

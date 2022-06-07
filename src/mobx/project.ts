@@ -104,7 +104,7 @@ class ProjectState {
         }
       ]
       this.setProjectName('')
-      this.showPerspective = false
+      this.showPerspective = !false
       this.showDetail = false
       this.displayType = 0
     }
