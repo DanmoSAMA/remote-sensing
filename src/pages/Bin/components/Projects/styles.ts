@@ -31,7 +31,6 @@ export const binStyles = {
   },
   mask: {
     display: 'none',
-    // display: 'flex',
     width: '18rem',
     height: '18rem',
     backgroundColor: 'rgba(226, 222, 205, .7)',
@@ -47,7 +46,8 @@ export const binStyles = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    width: '10rem'
+    width: '10rem',
+    cursor: 'pointer'
   },
   bottom: {
     textAlign: 'center',

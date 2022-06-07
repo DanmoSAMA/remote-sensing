@@ -12,7 +12,7 @@ import { ProjectStore } from '../../../../mobx/project'
 
 function Project() {
   const navigate = useNavigate()
-  const [recentProjects, setRecentProjects] = useState(null)
+  const [recentProjects, setRecentProjects] = useState([])
   let token = getToken()
 
   useEffect(() => {
@@ -25,7 +25,6 @@ function Project() {
   async function clickToMove(id: string) {
     if (confirm('确定要将该项目移动至回收站吗?')) {
       const res = await moveToBin(id)
-      console.log(res.code)
       if (res.code === 0) {
         getRecentProjects().then((res) => {
           setRecentProjects(res.data.projects)
