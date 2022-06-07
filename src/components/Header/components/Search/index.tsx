@@ -5,6 +5,7 @@ import FormControl from '@mui/material/FormControl'
 import Box from '@mui/material/Box'
 import { searchStyles } from './styles'
 import { useShowInput } from './hooks/useShowInput'
+import { searchProjects } from '../../../../network/project/searchProjects'
 
 function Search() {
   const { showInput, setShowInput } = useShowInput()

@@ -1,18 +1,23 @@
 export const perspectiveStyles = {
   wrapper: {
-    perspective: '5000px',
     width: '100%',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    position: 'relative'
+    position: 'relative',
+
+    '& img': {
+      userSelect: 'none'
+    }
   },
   cube: {
+    perspective: '5000px',
     transformStyle: 'preserve-3d',
     width: '70%',
-    height: '82vh',
+    height: '150vh',
+    maxHeight: '150vh',
     boxSizing: 'border-box',
-    padding: '5rem',
+    padding: '0 5rem',
     position: 'relative',
     display: 'flex',
     justifyContent: 'center',
@@ -20,7 +25,7 @@ export const perspectiveStyles = {
 
     '& img': {
       position: 'absolute',
-      top: '0',
+      top: '20rem',
       height: 'auto',
       cursor: 'pointer'
     }
@@ -30,7 +35,7 @@ export const perspectiveStyles = {
     width: '25%',
     position: 'absolute',
     left: '2rem',
-    bottom: '20rem',
+    bottom: '25rem',
 
     '& img': {
       position: 'absolute',
@@ -40,16 +45,16 @@ export const perspectiveStyles = {
     }
   },
   detail: {
-    width: '77%',
+    width: '68%',
     height: '100%',
     position: 'absolute',
     right: '0'
   },
   button: {
     backgroundColor: '#C39984',
-    position: 'absolute',
-    right: 0,
-    bottom: '5rem',
+    position: 'fixed',
+    right: '270px',
+    bottom: '3rem',
     height: '6rem',
     width: '6rem',
     color: '#E2DECD',
@@ -61,9 +66,9 @@ export const perspectiveStyles = {
     }
   },
   sidebar: {
-    position: 'absolute',
-    right: 0,
-    bottom: '12rem',
+    position: 'fixed',
+    right: '270px',
+    bottom: '10rem',
     width: '3rem',
 
     '& .MuiListItem-root': {
@@ -82,6 +87,19 @@ export const perspectiveStyles = {
     },
     '& .MuiListItem-root:last-child': {
       border: 'none'
+    }
+  },
+  square: {
+    width: '80%',
+    height: '82vh',
+    position: 'relative',
+
+    '& img': {
+      width: '100%',
+      position: 'absolute',
+      left: '0',
+      top: 0,
+      borderRadius: '.5rem'
     }
   }
 }

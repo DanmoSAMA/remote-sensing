@@ -1,18 +1,18 @@
 import Box from '@mui/material/Box'
-import SvgIcon from '../../../../../../components/SvgIcon'
-import { ProjectStore } from '../../../../../../mobx/project'
-import { mainStyles } from '../../styles'
+import SvgIcon from '../SvgIcon'
+import { ProjectStore } from '../../mobx/project'
+import { subHeaderStyles } from './styles'
 import { observer } from 'mobx-react-lite'
 import { useNavigate } from 'react-router-dom'
 
-function _Header() {
+function _SubHeader() {
   const navigate = useNavigate()
 
   return (
-    <Box sx={mainStyles.header}>
+    <Box sx={subHeaderStyles.wrapper}>
       {!ProjectStore.showPerspective ? (
         <Box
-          sx={mainStyles.headerLeft}
+          sx={subHeaderStyles.left}
           onClick={() => {
             navigate('/recent')
           }}
@@ -22,7 +22,7 @@ function _Header() {
         </Box>
       ) : (
         <Box
-          sx={mainStyles.headerLeft}
+          sx={subHeaderStyles.left}
           onClick={() => {
             ProjectStore.setShowPerspective(false)
           }}
@@ -36,6 +36,6 @@ function _Header() {
   )
 }
 
-const Header = observer(_Header)
+const SubHeader = observer(_SubHeader)
 
-export default Header
+export default SubHeader

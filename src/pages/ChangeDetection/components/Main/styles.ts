@@ -14,7 +14,7 @@ export const mainStyles = {
     width: '100%',
     height: '82vh',
     maxHeight: '150vh',
-    margin: '124px 270px 0 230px',
+    margin: '10px 270px 0 230px',
     display: 'flex',
     position: 'relative'
   },
@@ -136,28 +136,5 @@ export const mainStyles = {
       transformOrigin: 'left top',
       animation: `${spin} 2s infinite linear`
     }
-  },
-  header: {
-    width: '100%',
-    height: '38px',
-    lineHeight: '38px',
-    position: 'absolute',
-    top: '-44px',
-    backgroundColor: '#F4F2E8',
-    color: 'secondary.main',
-    textAlign: 'center',
-    fontSize: '16px',
-    zIndex: 1,
-    opacity: '.9'
-  },
-  headerLeft: {
-    position: 'absolute',
-    left: '7.5%',
-    fontSize: '14px',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    cursor: 'pointer',
-    fontWeight: '500'
   }
 }

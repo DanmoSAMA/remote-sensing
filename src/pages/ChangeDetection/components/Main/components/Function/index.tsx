@@ -20,6 +20,7 @@ function _Function() {
     }
     setIsChecking(true)
 
+    console.log(isChecking)
     ProjectStore.changeDetect(targetName).then(() => {
       setIsChecking(false)
       ProjectStore.setShowPerspective(true)

@@ -18,6 +18,7 @@ function _Function() {
       return
     }
     setIsChecking(true)
+
     ProjectStore.terrainClassification(targetName).then(() => {
       setIsChecking(false)
       ProjectStore.setShowPerspective(true)

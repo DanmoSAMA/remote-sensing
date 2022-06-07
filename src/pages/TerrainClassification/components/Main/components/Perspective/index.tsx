@@ -2,18 +2,32 @@ import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
+import Slider, { SliderThumb } from '@mui/material/Slider'
 import SvgIcon from '../../../../../../components/SvgIcon'
 import { ProjectStore } from '../../../../../../mobx/project'
 import { perspectiveStyles } from './styles'
 import { observer } from 'mobx-react-lite'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 function _Perspective() {
-  const [size, setSize] = useState(54)
-  const [angle, setAngle] = useState(0)
+  let squareImg = document.querySelector('#squareImg')
+  const [size, setSize] = useState(85)
+  const [angle, setAngle] = useState(-7)
+  const [detailImgUrl, setDetailImgUrl] = useState('')
+  const [imgHeight, setImgHeight] = useState(
+    squareImg ? squareImg.offsetHeight : 0
+  )
+
+  useEffect(() => {
+    window.addEventListener('resize', handleHeight)
+  }, [])
+
+  useEffect(() => {
+    handleHeight()
+  })
 
   function zoom() {
-    if (size <= 60) {
+    if (size <= 100) {
       setSize(size + 2)
     }
   }
@@ -24,55 +38,104 @@ function _Perspective() {
     }
   }
 
-  // todo
-  function viewDetail() {
+  function viewDetail(type: 0 | 1 | 2) {
     ProjectStore.setShowDetail(true)
+    setDetailImgUrl(ProjectStore.currentShownGroup.pictures[type].url)
+  }
+
+  function handleHeight() {
+    squareImg = document.querySelector('#squareImg')
+    squareImg && setImgHeight(squareImg.offsetHeight)
+    if (imgHeight === 0) {
+      setTimeout(() => {
+        squareImg = document.querySelector('#squareImg')
+        squareImg && setImgHeight(squareImg.offsetHeight)
+      }, 200)
+    }
   }
 
   return (
     <Box sx={perspectiveStyles.wrapper}>
-      <Box
-        sx={
-          !ProjectStore.showDetail
-            ? perspectiveStyles.cube
-            : perspectiveStyles.cubeAtConer
-        }
-      >
-        <img
-          style={{
-            width: `${size}%`,
-            transform: `translateY(${
-              !ProjectStore.showDetail ? -size / 10 : -size / 20
-            }rem) rotateX(65deg) rotateZ(${-20 + angle}deg)`
-          }}
-          src="https://s1.ax1x.com/2022/06/03/XUhtG6.png"
-          onClick={viewDetail}
-        />
-        <img
-          style={{
-            width: `${size}%`,
-            transform: `translateY(${
-              !ProjectStore.showDetail ? (size + 10) / 10 : (size + 10) / 20
-            }rem) rotateX(65deg) rotateZ(${-20 + angle}deg)`
-          }}
-          src="https://s1.ax1x.com/2022/06/03/XUhtG6.png"
-          onClick={viewDetail}
-        />
-        <img
-          style={{
-            width: `${size}%`,
-            transform: `translateY(${
-              !ProjectStore.showDetail ? (size + 130) / 10 : (size + 130) / 20
-            }rem) rotateX(65deg) rotateZ(${-20 + angle}deg)`
-          }}
-          src="https://s1.ax1x.com/2022/06/03/XUhtG6.png"
-          onClick={viewDetail}
-        />
-      </Box>
+      {ProjectStore.displayType === 0 ? (
+        <Box
+          sx={
+            !ProjectStore.showDetail
+              ? perspectiveStyles.cube
+              : perspectiveStyles.cubeAtConer
+          }
+        >
+          <img
+            style={{
+              width: `${size}%`,
+              transform: `translateY(${
+                !ProjectStore.showDetail ? -size / 10 : -size / 20
+              }rem) rotateX(65deg) rotateZ(${-20 + angle}deg)`
+            }}
+            src={ProjectStore.currentShownGroup.pictures[0].url}
+            onClick={() => {
+              viewDetail(0)
+            }}
+          />
+          <img
+            style={{
+              width: `${size}%`,
+              transform: `translateY(${
+                !ProjectStore.showDetail ? (size + 10) / 10 : (size + 10) / 20
+              }rem) rotateX(65deg) rotateZ(${-20 + angle}deg)`
+            }}
+            src={ProjectStore.currentShownGroup.pictures[2].url}
+            onClick={() => {
+              viewDetail(2)
+            }}
+          />
+          <img
+            style={{
+              width: `${size}%`,
+              transform: `translateY(${
+                !ProjectStore.showDetail ? (size + 130) / 10 : (size + 130) / 20
+              }rem) rotateX(65deg) rotateZ(${-20 + angle}deg)`
+            }}
+            src={ProjectStore.currentShownGroup.pictures[1].url}
+            onClick={() => {
+              viewDetail(1)
+            }}
+          />
+        </Box>
+      ) : (
+        <Box sx={perspectiveStyles.square}>
+          <img src={ProjectStore.currentShownGroup.pictures[1].url} />
+          <img
+            src={ProjectStore.currentShownGroup.pictures[2].url}
+            id="squareImg"
+          />
+          {ProjectStore.currentShownGroup.pictures[0].url !== '' && (
+            <Slider
+              defaultValue={50}
+              sx={{
+                height: `${imgHeight}px`,
+                padding: '0',
+
+                '& .MuiSlider-rail': {
+                  backgroundColor: 'transparent'
+                },
+                '& .MuiSlider-track': {
+                  borderTopLeftRadius: '.5rem',
+                  borderBottomLeftRadius: '.5rem',
+                  borderTopRightRadius: '0',
+                  borderBottomRightRadius: '0',
+                  background: `url(${ProjectStore.currentShownGroup.pictures[0].url})`,
+                  backgroundSize: 'cover',
+                  transition: 'none'
+                }
+              }}
+            />
+          )}
+        </Box>
+      )}
       {ProjectStore.showDetail && (
         <Box sx={perspectiveStyles.detail}>
           <img
-            src="https://s1.ax1x.com/2022/06/03/XUhtG6.png"
+            src={detailImgUrl}
             style={{
               width: '100%',
               borderRadius: '1rem',
@@ -89,28 +152,30 @@ function _Perspective() {
           </div>
         </Box>
       )}
-
-      <List sx={perspectiveStyles.sidebar}>
-        <ListItem
-          button
-          onClick={() => {
-            setAngle(angle + 10)
-          }}
-        >
-          <SvgIcon name="cursor_pointer" />
-        </ListItem>
-        <ListItem button onClick={lessen}>
-          <SvgIcon name="bigger" />
-        </ListItem>
-        <ListItem button onClick={zoom}>
-          <SvgIcon name="smaller" />
-        </ListItem>
-      </List>
+      {ProjectStore.displayType === 0 && (
+        <List sx={perspectiveStyles.sidebar}>
+          <ListItem
+            button
+            onClick={() => {
+              setAngle(angle + 10)
+            }}
+          >
+            <SvgIcon name="cursor_pointer" />
+          </ListItem>
+          <ListItem button onClick={lessen}>
+            <SvgIcon name="bigger" />
+          </ListItem>
+          <ListItem button onClick={zoom}>
+            <SvgIcon name="smaller" />
+          </ListItem>
+        </List>
+      )}
       <Button
         variant="contained"
         sx={perspectiveStyles.button}
         onClick={() => {
-          ProjectStore.setShowPerspective(false)
+          ProjectStore.setDisplayType(ProjectStore.displayType === 0 ? 1 : 0)
+          ProjectStore.setShowDetail(false)
         }}
       >
         切换视角

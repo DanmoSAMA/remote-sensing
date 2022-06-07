@@ -1,15 +1,16 @@
 export const toolBarStyles = {
   wrapper: {
     position: 'fixed',
-    height: '89vh',
+    height: '90.5vh',
     width: '240px',
     right: '10px',
-    top: '10vh',
+    top: '8.5vh',
     backgroundColor: '#313131',
     borderRadius: '20px',
     padding: '10px',
     boxSizing: 'border-box',
-    overflow: 'auto'
+    overflow: 'auto',
+    zIndex: 2
   },
   top: {
     height: '30px',

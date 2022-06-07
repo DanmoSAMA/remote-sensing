@@ -251,8 +251,6 @@ class ProjectState {
 
   // 开始地物分类
   async terrainClassification(targetName: string) {
-    // 构造请求数据
-    console.log(this.chosenImg)
     const reqData = {
       projectID: this.id,
       originUUID: this.chosenImg.uuid,
@@ -260,10 +258,12 @@ class ProjectState {
       targetName
     }
     // 发送请求
-    postSortReq(reqData).then((res) => {
-      console.log(res)
-      const data = res.data
-    })
+    await postSortReq(reqData)
+    const res = await getUpdatedImgs(this.id.toString())
+    const data = res.data
+    ProjectStore.updateImgs(data.pictures)
+    ProjectStore.updateImgGroup(data.groups)
+    ProjectStore.updateCurShownGroup(data.groups.at(-1).groupID)
   }
 }
 
