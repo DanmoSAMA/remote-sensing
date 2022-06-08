@@ -3,13 +3,14 @@ import SvgIcon from '../../../SvgIcon'
 import ListItem from '@mui/material/ListItem'
 import Item from './components/Item'
 import Divider from '@mui/material/Divider'
-import { toolBarStyles } from '../../styles'
 import { observer } from 'mobx-react-lite'
+import { useState } from 'react'
+import { useLocation } from 'react-router-dom'
+import { toolBarStyles } from '../../styles'
 import { ProjectStore } from '../../../../mobx/project'
 import { deleteGroup } from '../../../../network/project/deleteGroup'
 import { getUpdatedImgs } from '../../../../network/project/getUpdatedImgs'
 import { ImgGroup, Img } from '../../../../types/project/ImgType'
-import { useState } from 'react'
 import { useShowDropDown } from '../../hooks/useShowDropdown'
 import { useParams } from '../../../../hooks/useParams'
 
@@ -21,7 +22,16 @@ function _Group(props: Props) {
   const { group } = props
   const [isClosed, setIsClosed] = useState(true)
   const { showDropDown, setShowDropDown } = useShowDropDown()
+  const { pathname } = useLocation()
   const projectID = useParams('id') as string
+  // 当前组是否有效
+  const [isValid, setIsValid] = useState(
+    (pathname === '/analysis' && group.groupType === 1) ||
+      (pathname === '/change-detection' && group.groupType === 2) ||
+      (pathname === '/terrain-classification' && group.groupType === 3) ||
+      (pathname === '/object-extract' && group.groupType === 4) ||
+      (pathname === '/object-detection' && group.groupType === 5)
+  )
 
   async function clickToDeleteGroup() {
     const reqData = {
@@ -41,13 +51,33 @@ function _Group(props: Props) {
   }
 
   return (
-    <Box sx={{ marginBottom: '20px', position: 'relative' }}>
+    <Box
+      sx={{
+        marginBottom: '20px',
+        position: 'relative',
+        backgroundColor: isValid ? '#273839' : '#313131'
+      }}
+    >
       <ListItem
         sx={toolBarStyles.listParent}
         onClick={() => {
-          ProjectStore.updateCurShownGroup(group.groupID)
-          ProjectStore.setShowPerspective(true)
-          ProjectStore.setShowDetail(false)
+          if (isValid) {
+            ProjectStore.setShowPerspective(true)
+            ProjectStore.setShowDetail(false)
+
+            switch (pathname) {
+              case '/analysis':
+                break
+              case 'change-detection':
+                ProjectStore.updateCurShownGroup(group.groupID)
+                break
+              case '/terrain-classification':
+                break
+              case '/object-extract':
+                break
+              case '/object-detection':
+            }
+          }
         }}
       >
         {ProjectStore.displayType === 1 && (

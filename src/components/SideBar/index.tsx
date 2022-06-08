@@ -11,6 +11,7 @@ import { sideBarItems } from './consts/sideBarItems'
 import { sideBarStyles } from './styles'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { useParams } from '../../hooks/useParams'
+import { ProjectStore } from '../../mobx/project'
 
 export default function Navbar() {
   const navigate = useNavigate()
@@ -38,7 +39,12 @@ export default function Navbar() {
             selected={item.route === pathname}
             button
             key={item.id}
-            onClick={() => navigate(`${item.route}?id=${id}`)}
+            onClick={() => {
+              ProjectStore.setShowPerspective(false)
+              ProjectStore.setShowDetail(false)
+              ProjectStore.setDisplayType(0)
+              navigate(`${item.route}?id=${id}`)
+            }}
           >
             <ListItemIcon sx={sideBarStyles.icons}>
               <IconButton>{item.icon}</IconButton>

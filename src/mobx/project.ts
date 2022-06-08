@@ -104,7 +104,7 @@ class ProjectState {
         }
       ]
       this.setProjectName('')
-      this.showPerspective = !false
+      this.showPerspective = false
       this.showDetail = false
       this.displayType = 0
     }
@@ -216,7 +216,7 @@ class ProjectState {
   // 修改目前展示的组
   updateCurShownGroup(groupID: number) {
     const t = this.imgGroups.find((item) => item.groupID === groupID)
-    console.log(t)
+    // console.log(t)
     this.currentShownGroup = {
       groupID: groupID,
       groupName: t.groupName,

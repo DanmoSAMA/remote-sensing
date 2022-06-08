@@ -22,6 +22,7 @@ function _ToolBar() {
 
     getUpdatedImgs(id).then((res) => {
       const data = res.data
+
       ProjectStore.updateImgs(data.pictures)
       ProjectStore.updateImgGroup(data.groups)
 
