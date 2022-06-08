@@ -8,6 +8,7 @@ import { functionsStyles } from './styles'
 import { functionItems } from './consts/functionItems'
 import { useNavigate } from 'react-router-dom'
 import { createProject } from '../../../../network/project/createProject'
+import { ProjectStore } from '../../../../mobx/project'
 
 type Props = {
   name: string
@@ -22,6 +23,7 @@ function Functions(props: Props) {
     // 在项目创建之前点击，则新建未命名项目
     if (name === '') {
       createProject({ name: '未命名项目' }).then((res) => {
+        ProjectStore.setProjectName('未命名项目')
         navigate(`${route}?id=${res.data.projectID}`)
       })
       return

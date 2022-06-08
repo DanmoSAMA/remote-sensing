@@ -3,20 +3,19 @@ import Input from '@mui/material/Input'
 import Button from '@mui/material/Button'
 import FormControl from '@mui/material/FormControl'
 import Typography from '@mui/material/Typography'
-import AddIcon from '@mui/icons-material/Add'
 import { formStyles } from './styles'
 import { useState } from 'react'
 import { createProject } from '../../../../network/project/createProject'
+import { ProjectStore } from '../../../../mobx/project'
 
 type Props = {
   projectName: string
   setProjectName: (val: string) => void
-  projectId: number
   setProjectId: (val: number) => void
 }
 
 export default function Form(props: Props) {
-  const { projectName, setProjectName, projectId, setProjectId } = props
+  const { projectName, setProjectName, setProjectId } = props
   const [isCreated, setIsCreated] = useState(false)
 
   async function clickToCreateProject() {
@@ -30,6 +29,7 @@ export default function Form(props: Props) {
     }
     const res = await createProject(reqData)
     setProjectId(res.data.projectID)
+    ProjectStore.setProjectName(projectName)
   }
 
   return (
@@ -60,40 +60,6 @@ export default function Form(props: Props) {
           创建项目完成，可使用下方功能进行分析
         </Typography>
       </FormControl>
-      {/* <Box sx={formStyles.right}>
-        <Box sx={formStyles.upload}>
-          <input
-            accept="image/*"
-            id="contained-button-file"
-            style={{ display: 'none' }}
-            multiple
-            type="file"
-          />
-          <label
-            htmlFor="contained-button-file"
-            style={{ width: '60%', display: 'flex', justifyContent: 'center' }}
-          >
-            <Button
-              variant="contained"
-              sx={formStyles.button}
-              style={{ width: '100%' }}
-              // 这一行必须
-              component="span"
-            >
-              <AddIcon style={{ marginRight: '1rem' }} />
-              上传图片
-            </Button>
-          </label>
-          <Typography
-            width={'60%'}
-            textAlign={'center'}
-            mt={'3rem'}
-            fontSize={'1.1rem'}
-          >
-            可在此处上传项目所需分析图片，也可在功能区上传图片
-          </Typography>
-        </Box>
-      </Box> */}
     </Box>
   )
 }

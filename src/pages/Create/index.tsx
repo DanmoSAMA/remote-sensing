@@ -17,7 +17,6 @@ function Create() {
         <Form
           projectName={projectName}
           setProjectName={setProjectName}
-          projectId={projectId}
           setProjectId={setProjectId}
         />
         <Functions name={projectName} id={projectId} />
