@@ -73,7 +73,22 @@ export const mainStyles = {
   },
   select: {
     backgroundColor: '#fff',
-    color: 'secondary.main'
+    color: 'secondary.main',
+    height: '43px',
+    lineHeight: '43px',
+    padding: '0',
+    borderRadius: '10px',
+
+    '& .MuiSelect-select': {
+      height: '43px',
+      padding: '0 0 0 10px',
+      display: 'flex',
+      alignItems: 'center'
+    },
+    '& input': {
+      height: '43px',
+      border: '1px solid #01555A'
+    }
   },
   addNext: {
     display: 'flex',

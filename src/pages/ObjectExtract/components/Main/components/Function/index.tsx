@@ -13,7 +13,7 @@ function _Function() {
   const [targetName, setTargetName] = useState('')
 
   async function clickToDetect() {
-    if (ProjectStore.chosenImg.name === '') {
+    if (!ProjectStore.singleWaitingGroups.length) {
       alert('请先选择要分析的图片')
       return
     }

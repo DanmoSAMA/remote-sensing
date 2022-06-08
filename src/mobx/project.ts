@@ -45,14 +45,6 @@ class ProjectState {
   // 展示轴测 or 平面
   displayType: 0 | 1 = 0
 
-  /* 其他 */
-  // 被选中的图
-  chosenImg = {
-    uuid: '',
-    name: '',
-    url: ''
-  }
-
   // 目前展示的组
   currentShownGroup = {
     groupID: 0,
@@ -75,6 +67,10 @@ class ProjectState {
       }
     ]
   }
+  // 图片名称数组，用于多选框
+  imgNameArr: string[] = []
+  // 单图片待分析图片组(和变化检测区分)
+  singleWaitingGroups = []
 
   constructor() {
     makeAutoObservable(this)
@@ -84,6 +80,7 @@ class ProjectState {
   init(id: number) {
     if (id !== this.id) {
       this.id = id
+      this.name = ''
       this.imgs = []
       this.imgGroups = []
       this.chosenImgs = []
@@ -103,10 +100,11 @@ class ProjectState {
           }
         }
       ]
-      this.setProjectName('')
       this.showPerspective = false
       this.showDetail = false
       this.displayType = 0
+      this.imgNameArr = []
+      this.singleWaitingGroups = []
     }
   }
   // 设置项目名称
@@ -132,7 +130,6 @@ class ProjectState {
   }
   // 设置选中的图片，即waitingGroups的第一组，用于在左侧显示
   updateChosenImgs(val) {
-    // console.log(val)
     this.chosenImgs = val
   }
   // 插入空waitingImgs
@@ -216,25 +213,11 @@ class ProjectState {
   // 修改目前展示的组
   updateCurShownGroup(groupID: number) {
     const t = this.imgGroups.find((item) => item.groupID === groupID)
-    // console.log(t)
     this.currentShownGroup = {
       groupID: groupID,
       groupName: t.groupName,
       pictures: t.pictures
     }
-  }
-  // 修改chosenImg
-  updateChosenImg(val: string) {
-    if (val === '') return
-    let img = this.imgs.find((item) => item.name === val)
-
-    if (!img) {
-      for (const group of this.imgGroups) {
-        img = group.pictures.find((item) => item.name === val)
-        if (img) break
-      }
-    }
-    this.chosenImg = img
   }
   // 修改展示状态
   setShowPerspective(val: boolean) {
@@ -248,22 +231,53 @@ class ProjectState {
   setDisplayType(val: 0 | 1) {
     this.displayType = val
   }
-
+  // 更新imgNameArr
+  updateImgNameArr(arr: string[]) {
+    this.imgNameArr = arr
+    this.updateSingleWaitingGroups()
+  }
+  // 更新singleWaitingGroups
+  updateSingleWaitingGroups() {
+    this.singleWaitingGroups = []
+    if (this.imgNameArr.length > 0) {
+      this.imgNameArr.forEach((name) => {
+        const t = this.imgs.find((item) => item.name === name)
+        this.singleWaitingGroups.push(t)
+      })
+    }
+  }
   // 开始地物分类
   async terrainClassification(targetName: string) {
-    const reqData = {
-      projectID: this.id,
-      originUUID: this.chosenImg.uuid,
-      targetUUID: generateUUID(),
-      targetName
+    // 构造请求数据
+    const reqData = []
+    for (let i = 0; i < this.singleWaitingGroups.length; i++) {
+      const item = this.singleWaitingGroups[i]
+      const t = {
+        projectID: this.id,
+        originUUID: item.uuid,
+        targetUUID: generateUUID(),
+        targetName
+      }
+      if (t.originUUID !== '') {
+        reqData.push(t)
+      }
     }
-    // 发送请求
-    await postSortReq(reqData)
-    const res = await getUpdatedImgs(this.id.toString())
-    const data = res.data
-    ProjectStore.updateImgs(data.pictures)
-    ProjectStore.updateImgGroup(data.groups)
-    ProjectStore.updateCurShownGroup(data.groups.at(-1).groupID)
+
+    // 并行发送请求
+    const promiseArr = []
+    for (let i = 0; i < reqData.length; i++) {
+      const item = reqData[i]
+      promiseArr.push(postSortReq(item))
+    }
+
+    return Promise.all(promiseArr).then((res) => {
+      getUpdatedImgs(this.id.toString()).then((res) => {
+        const data = res.data
+        ProjectStore.updateImgs(data.pictures)
+        ProjectStore.updateImgGroup(data.groups)
+        ProjectStore.updateCurShownGroup(data.groups.at(-1).groupID)
+      })
+    })
   }
 }
 

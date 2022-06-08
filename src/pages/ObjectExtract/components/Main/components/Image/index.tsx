@@ -19,8 +19,9 @@ function _Image() {
 
   return (
     <Box sx={mainStyles.image}>
-      {ProjectStore.chosenImg.uuid !== '' ? (
-        <img src={ProjectStore.chosenImg.url} />
+      {ProjectStore.singleWaitingGroups.length &&
+      ProjectStore.singleWaitingGroups[0].uuid !== '' ? (
+        <img src={ProjectStore.singleWaitingGroups[0].url} />
       ) : (
         <Box sx={mainStyles.placeholder}>
           <SvgIcon name="not_upload" />
