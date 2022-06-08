@@ -54,8 +54,7 @@ function _Group(props: Props) {
     <Box
       sx={{
         marginBottom: '20px',
-        position: 'relative',
-        backgroundColor: isValid ? '#273839' : '#313131'
+        position: 'relative'
       }}
     >
       <ListItem
@@ -64,20 +63,25 @@ function _Group(props: Props) {
           if (isValid) {
             ProjectStore.setShowPerspective(true)
             ProjectStore.setShowDetail(false)
+            ProjectStore.updateCurShownGroup(group.groupID)
 
-            switch (pathname) {
-              case '/analysis':
-                break
-              case 'change-detection':
-                ProjectStore.updateCurShownGroup(group.groupID)
-                break
-              case '/terrain-classification':
-                break
-              case '/object-extract':
-                break
-              case '/object-detection':
-            }
+            // switch (pathname) {
+            //   case '/analysis':
+            //     break
+            //   case 'change-detection':
+            //     ProjectStore.updateCurShownGroup(group.groupID)
+            //     break
+            //   case '/terrain-classification':
+            //     break
+            //   case '/object-extract':
+            //     break
+            //   case '/object-detection':
+            // }
           }
+        }}
+        style={{
+          cursor: isValid ? 'cursor' : 'default',
+          backgroundColor: isValid ? '#273839' : '#313131'
         }}
       >
         {ProjectStore.displayType === 1 && (

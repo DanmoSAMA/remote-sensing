@@ -10,7 +10,7 @@ export const toolBarStyles = {
     padding: '10px',
     boxSizing: 'border-box',
     overflow: 'auto',
-    zIndex: 2
+    zIndex: 1
   },
   top: {
     height: '30px',

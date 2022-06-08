@@ -16,27 +16,6 @@ type Props = {
 
 function _MySelect(props: Props) {
   const { item } = props
-  const [imgsToSelect, setImgsToSelect] = useState([])
-
-  useEffect(() => {
-    setImgsToSelect([])
-
-    if (ProjectStore.imgs) {
-      for (const img of ProjectStore.imgs) {
-        setImgsToSelect((oldArray) => [...oldArray, img])
-      }
-      for (const group of ProjectStore.imgGroups) {
-        for (const img of group.pictures) {
-          if (img.name !== '变化检测结果') {
-            setImgsToSelect((oldArray) => [...oldArray, img])
-          }
-        }
-      }
-    }
-  }, [
-    JSON.stringify(ProjectStore.imgs),
-    JSON.stringify(ProjectStore.imgGroups)
-  ])
 
   return (
     <Box
@@ -67,13 +46,17 @@ function _MySelect(props: Props) {
             <MenuItem value="">
               <span style={{ color: '#ADADA8' }}>请选择将要分析的图片</span>
             </MenuItem>
-            {imgsToSelect.map((item, index) => (
+            {ProjectStore.imgs.map((item, index) => (
               <MenuItem
                 value={item.name}
                 sx={{ color: 'secondary.main' }}
                 // 这里key用item.uuid会冲突
                 key={index}
               >
+                <img
+                  src={item.url}
+                  style={{ width: '30px', marginRight: '10px' }}
+                />
                 {`${item.name.slice(0, 24)}${
                   item.name.length > 24 ? '...' : ''
                 }`}
@@ -93,12 +76,16 @@ function _MySelect(props: Props) {
             <MenuItem value="">
               <span style={{ color: '#ADADA8' }}>请选择将要分析的图片</span>
             </MenuItem>
-            {imgsToSelect.map((item, index) => (
+            {ProjectStore.imgs.map((item, index) => (
               <MenuItem
                 value={item.name}
                 sx={{ color: 'secondary.main' }}
                 key={index}
               >
+                <img
+                  src={item.url}
+                  style={{ width: '30px', marginRight: '10px' }}
+                />
                 {`${item.name.slice(0, 24)}${
                   item.name.length > 24 ? '...' : ''
                 }`}

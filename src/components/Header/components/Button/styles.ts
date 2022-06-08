@@ -23,8 +23,8 @@ export const buttonStyles = {
   },
   dropdown: {
     width: '180px',
-    height: '120px',
     position: 'absolute',
+    padding: '10px',
     top: '80px',
     right: '0',
     backgroundColor: 'primary.dark',

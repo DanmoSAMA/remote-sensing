@@ -167,7 +167,7 @@ export default function Register(props: Props) {
           }}
           onClick={() => setShowLogin(true)}
         >
-          点击注册
+          点击登录
         </span>
       </Typography>
     </Box>
