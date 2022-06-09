@@ -8,3 +8,12 @@ export async function searchProjects(keyword: string) {
 
   return res
 }
+
+export async function searchProjectsInBin(keyword: string) {
+  const res = await request({
+    method: 'GET',
+    url: `/v1/project/recycle?keyword=${keyword}`
+  })
+
+  return res
+}

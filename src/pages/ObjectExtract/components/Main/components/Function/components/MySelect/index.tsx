@@ -7,7 +7,6 @@ import { mainStyles } from '../../../../styles'
 import { observer } from 'mobx-react-lite'
 
 function _MySelect() {
-  console.log(ProjectStore.imgNameArr.length)
   return (
     <FormControl required sx={{ marginBottom: '10px', minWidth: '100%' }}>
       <Select

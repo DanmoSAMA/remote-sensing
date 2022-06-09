@@ -5,14 +5,14 @@ import FormControl from '@mui/material/FormControl'
 import Box from '@mui/material/Box'
 import { searchStyles } from './styles'
 import { useShowInput } from './hooks/useShowInput'
-import { searchProjects } from '../../../../network/project/searchProjects'
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 
 function Search() {
   const navigate = useNavigate()
   const { showInput, setShowInput } = useShowInput()
   const [keyword, setKeyword] = useState('')
+  const { pathname } = useLocation()
 
   return (
     <Box sx={searchStyles.wrapper}>
@@ -26,7 +26,11 @@ function Search() {
           }}
           onKeyDown={(e) => {
             if (e.nativeEvent.key === 'Enter') {
-              navigate(`/recent?keyword=${keyword}`)
+              if (pathname === '/recent') {
+                navigate(`/recent?keyword=${keyword}`)
+              } else if (pathname === '/bin') {
+                navigate(`/bin?keyword=${keyword}`)
+              }
             }
           }}
         />

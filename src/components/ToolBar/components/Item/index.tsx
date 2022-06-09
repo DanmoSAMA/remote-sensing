@@ -27,7 +27,6 @@ function _Item(props: Props) {
     }
     if (window.confirm('确定要删除该图片吗?')) {
       const res = await deleteImg(reqData)
-      // console.log(res)
       if (res.code === 0) {
         getUpdatedImgs(projectID).then((res) => {
           const data = res.data

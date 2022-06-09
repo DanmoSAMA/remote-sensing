@@ -26,8 +26,6 @@ function _ToolBar() {
       ProjectStore.updateImgs(data.pictures)
       ProjectStore.updateImgGroup(data.groups)
 
-      // console.log(data)
-
       preload()
     })
   }, [])
