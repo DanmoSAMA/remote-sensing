@@ -34,12 +34,12 @@ function _ToolBar() {
 
   // 图片预加载
   function preload() {
-    const preloadImages = []
+    const preloadImages: HTMLImageElement[] = []
     for (let i = 0; i < ProjectStore.imgs.length; i++) {
       const img = new Image()
       // 将img从数组中移除，减少内存占用
       img.onload = function () {
-        const index = preloadImages.indexOf(this)
+        const index = preloadImages.indexOf(this as HTMLImageElement)
         if (index !== 1) {
           preloadImages.splice(index, 1)
         }
@@ -49,7 +49,7 @@ function _ToolBar() {
     }
   }
 
-  function clickToUploadFile(fileList) {
+  function clickToUploadFile(fileList: FileList) {
     // 并行发送请求
     setIsUploading(true)
     const reqData = []
@@ -90,35 +90,35 @@ function _ToolBar() {
     })
 
     // 只发送一个请求
-    const formData = new FormData()
+    // const formData = new FormData()
 
-    // 项目id
-    formData.append('projectID', id)
-    // 上传图片数量
-    formData.append('imgNum', `${fileList.length}`)
+    // // 项目id
+    // formData.append('projectID', id)
+    // // 上传图片数量
+    // formData.append('imgNum', `${fileList.length}`)
 
-    for (const key in fileList) {
-      // 图片
-      formData.append(`img${parseInt(key) + 1}`, fileList[key])
-      // uuid
-      formData.append(`uuid${parseInt(key) + 1}`, generateUUID())
-      // 图片名
-      formData.append(`name${parseInt(key) + 1}`, fileList[key].name)
+    // for (const key in fileList) {
+    //   // 图片
+    //   formData.append(`img${parseInt(key) + 1}`, fileList[key])
+    //   // uuid
+    //   formData.append(`uuid${parseInt(key) + 1}`, generateUUID())
+    //   // 图片名
+    //   formData.append(`name${parseInt(key) + 1}`, fileList[key].name)
 
-      if (parseInt(key) === fileList.length - 1) {
-        break
-      }
-    }
+    //   if (parseInt(key) === fileList.length - 1) {
+    //     break
+    //   }
+    // }
 
-    setIsUploading(true)
+    // setIsUploading(true)
 
-    uploadFile(formData).then((res) => {
-      getUpdatedImgs(id).then((res) => {
-        const data = res.data
-        ProjectStore.updateImgs(data.pictures)
-        setIsUploading(false)
-      })
-    })
+    // uploadFile(formData).then((res) => {
+    //   getUpdatedImgs(id).then((res) => {
+    //     const data = res.data
+    //     ProjectStore.updateImgs(data.pictures)
+    //     setIsUploading(false)
+    //   })
+    // })
   }
 
   return (
@@ -133,7 +133,7 @@ function _ToolBar() {
             multiple
             type="file"
             onChange={(e) => {
-              clickToUploadFile(e.target.files)
+              clickToUploadFile(e.target.files as FileList)
             }}
           />
           <label

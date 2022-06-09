@@ -7,16 +7,10 @@ export type Img = {
 }
 
 export type Group = {
-  groupId: number
+  groupID: number
   groupName: string
   groupType: 1 | 2 | 3 | 4 | 5
   pictures: Img[]
-}
-
-export type WaitingGroup = {
-  id: number
-  oldImg: Img
-  newImg: Img
 }
 
 // 删除图片

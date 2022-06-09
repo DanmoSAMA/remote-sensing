@@ -1,5 +1,6 @@
 import { makeAutoObservable } from 'mobx'
-import { Img, Group, WaitingGroup } from '../types/project/ImgAndGroup'
+import { Project } from '../types/project/Project'
+import { Img, Group } from '../types/project/ImgAndGroup'
 import { generateUUID } from '../utils/uuid'
 import { postDetectReq } from '../network/changeDetection/postDetectReq'
 import { postSortReq } from '../network/terrainClassification/postSortReq'
@@ -13,11 +14,11 @@ class ProjectState {
   // 项目名称
   name = ''
   // 未分组的图片信息
-  imgs = []
+  imgs: Img[] = []
   // 分组图片信息
-  imgGroups = []
+  imgGroups: Group[] = []
   // 被选中的图，在页面上呈现
-  chosenImgs = []
+  chosenImgs: Img[] = []
   // 当前是否展示视图
   showPerspective = false
   // 是否显示放大的图片
@@ -46,9 +47,10 @@ class ProjectState {
   displayType: 0 | 1 = 0
 
   // 目前展示的组
-  currentShownGroup = {
+  currentShownGroup: Group = {
     groupID: 0,
     groupName: '',
+    groupType: 2,
     pictures: [
       {
         uuid: '',
@@ -70,7 +72,7 @@ class ProjectState {
   // 图片名称数组，用于多选框
   imgNameArr: string[] = []
   // 单图片待分析图片组(和变化检测区分)
-  singleWaitingGroups = []
+  singleWaitingGroups: Img[] = []
 
   constructor() {
     makeAutoObservable(this)
@@ -115,21 +117,21 @@ class ProjectState {
       const res = await getRecentProjects()
       const projects = res.data.projects
       if (projects) {
-        const t = projects.find((item) => (item.id = this.id))
+        const t = projects.find((item) => (item.id = this.id)) as Project
         this.name = t.name
       }
     }
   }
   // 在上传图片后更新
-  updateImgs(val) {
+  updateImgs(val: Img[]) {
     this.imgs = val
   }
   // 在检测完成后更新
-  updateImgGroup(val) {
+  updateImgGroup(val: Group[]) {
     this.imgGroups = val
   }
   // 设置选中的图片，即waitingGroups的第一组，用于在左侧显示
-  updateChosenImgs(val) {
+  updateChosenImgs(val: Img[]) {
     this.chosenImgs = val
   }
   // 插入空waitingImgs
@@ -206,15 +208,17 @@ class ProjectState {
         const data = res.data
         ProjectStore.updateImgs(data.pictures)
         ProjectStore.updateImgGroup(data.groups)
-        ProjectStore.updateCurShownGroup(data.groups.at(-1).groupID)
+        ProjectStore.updateCurShownGroup((data.groups.at(-1) as Group).groupID)
       })
     })
   }
   // 修改目前展示的组
   updateCurShownGroup(groupID: number) {
-    const t = this.imgGroups.find((item) => item.groupID === groupID)
+    const t = this.imgGroups.find((item) => item.groupID === groupID) as Group
+
     this.currentShownGroup = {
       groupID: groupID,
+      groupType: t.groupType,
       groupName: t.groupName,
       pictures: t.pictures
     }
@@ -241,7 +245,7 @@ class ProjectState {
     this.singleWaitingGroups = []
     if (this.imgNameArr.length > 0) {
       this.imgNameArr.forEach((name) => {
-        const t = this.imgs.find((item) => item.name === name)
+        const t = this.imgs.find((item) => item.name === name) as Img
         this.singleWaitingGroups.push(t)
       })
     }
@@ -275,7 +279,7 @@ class ProjectState {
         const data = res.data
         ProjectStore.updateImgs(data.pictures)
         ProjectStore.updateImgGroup(data.groups)
-        ProjectStore.updateCurShownGroup(data.groups.at(-1).groupID)
+        ProjectStore.updateCurShownGroup((data.groups.at(-1) as Group).groupID)
       })
     })
   }

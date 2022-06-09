@@ -17,7 +17,7 @@ function _Item(props: Props) {
   const { showDropDown, setShowDropDown } = useShowDropDown()
 
   return (
-    <ListItem key={item.id} sx={toolBarStyles.listItemInGroup}>
+    <ListItem key={item.uuid} sx={toolBarStyles.listItemInGroup}>
       {ProjectStore.displayType === 1 && <SvgIcon name="eye" class="toolbar" />}
       {`${item.name.slice(0, 14)}${item.name.length > 14 ? '...' : ''}`}
       <div
