@@ -1,5 +1,8 @@
 export type HttpRes<T = unknown> = {
-  status: number
+  // 状态码
+  code: number
+  // 信息
   msg: string
+  // 数据
   data: T
 }

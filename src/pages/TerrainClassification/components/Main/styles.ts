@@ -15,6 +15,7 @@ export const mainStyles = {
     borderRadius: '20px',
     position: 'relative',
     backgroundColor: 'secondary.light',
+    userSelect: 'none',
 
     '& img': {
       height: '100%',

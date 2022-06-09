@@ -7,4 +7,8 @@ export type LoginReqData = {
   password: string
 }
 
-export type LoginReq = HttpRes<LoginReqData>
+export type LoginResData = {
+  token: string
+}
+
+export type LoginRes = HttpRes<LoginResData>

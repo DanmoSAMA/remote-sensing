@@ -1,24 +1,20 @@
-// 暂存localstorage，以后重构
-
+// 暂存localstorage
 const TOKEN_KEY = '__remote_sensing_token'
 
-export interface Token {
-  value: string
-}
-
-export function setToken(token: Token) {
-  window.localStorage.setItem(TOKEN_KEY, JSON.stringify(token))
+export function setToken(token: string) {
+  window.localStorage.setItem(TOKEN_KEY, token)
 }
 
 export function clearToken() {
   window.localStorage.removeItem(TOKEN_KEY)
 }
 
-export function getToken(): Token | null {
+export function getToken(): string | null {
   const tokenStr = window.localStorage.getItem(TOKEN_KEY)
   if (!tokenStr) return null
 
-  const token = JSON.parse(tokenStr) as Token
+  // 如果不parse，token会带引号
+  const token = JSON.parse(tokenStr)
 
   return token
 }

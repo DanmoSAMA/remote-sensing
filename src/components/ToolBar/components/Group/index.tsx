@@ -10,7 +10,7 @@ import { toolBarStyles } from '../../styles'
 import { ProjectStore } from '../../../../mobx/project'
 import { deleteGroup } from '../../../../network/project/deleteGroup'
 import { getUpdatedImgs } from '../../../../network/project/getUpdatedImgs'
-import { ImgGroup, Img } from '../../../../types/project/ImgType'
+import { Img, Group as ImgGroup } from '../../../../types/project/ImgAndGroup'
 import { useShowDropDown } from '../../hooks/useShowDropdown'
 import { useParams } from '../../../../hooks/useParams'
 

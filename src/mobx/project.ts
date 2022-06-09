@@ -1,8 +1,8 @@
 import { makeAutoObservable } from 'mobx'
-import { Img, ImgGroup, WaitingGroup } from '../types/project/imgType'
+import { Img, Group, WaitingGroup } from '../types/project/ImgAndGroup'
 import { generateUUID } from '../utils/uuid'
 import { postDetectReq } from '../network/changeDetection/postDetectReq'
-import { postSortReq } from '../network/TerrainClassification/postSortReq'
+import { postSortReq } from '../network/terrainClassification/postSortReq'
 import { getUpdatedImgs } from '../network/project/getUpdatedImgs'
 import { getRecentProjects } from '../network/project/getRecentProjects'
 

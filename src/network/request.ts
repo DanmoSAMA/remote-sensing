@@ -1,5 +1,8 @@
-import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios'
-
+import axios, {
+  AxiosRequestHeaders,
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios'
 import { HttpRes } from '../types/HttpRes'
 import { BE_DOMAIN } from '../consts/domain'
 import { getToken } from '../utils/token'
@@ -13,45 +16,34 @@ export async function request<T>(config: AxiosRequestConfig) {
   const key =
     JSON.stringify(config.data) + config.url! + JSON.stringify(config.params)
 
-  if (requestSet.has(key)) {
-    // 已经有一个一样的请求在路上了, 啥都不做
-    return {
-      status: 400,
-      msg: '请求过于频繁',
-      data: null
+  // 根据指定配置创建一个新的 axios
+  const instance = axios.create({
+    baseURL: BE_DOMAIN,
+    timeout: 60000
+  })
+
+  // 添加请求拦截器
+  instance.interceptors.request.use(
+    // 在发送请求之前做些什么
+    (config) => {
+      const token = getToken()
+      if (token) (config.headers as AxiosRequestHeaders).Authorization = token
+      return config
+    },
+    // 对请求错误做些什么
+    (err) => {
+      console.error(err)
+      return err
     }
-  } else {
-    requestSet.add(key)
+  )
 
-    // 根据指定配置创建一个新的 axios
-    const instance = axios.create({
-      baseURL: BE_DOMAIN,
-      timeout: 60000
-    })
-
-    // 添加请求拦截器
-    instance.interceptors.request.use(
-      // 在发送请求之前做些什么
-      (config) => {
-        const token = getToken()
-        if (token) config.headers.Authorization = token
-        return config
-      },
-      // 对请求错误做些什么
-      (err) => {
-        console.error(err)
-        return err
-      }
-    )
-
-    return new Promise<HttpRes<T | null>>((resolve, reject) => {
-      instance(config)
-        .then((res: AxiosResponse<HttpRes<T>>) => {
-          resolve(res.data)
-        })
-        .finally(() => {
-          requestSet.delete(key)
-        })
-    })
-  }
+  return new Promise<HttpRes<T>>((resolve, reject) => {
+    instance(config)
+      .then((res: AxiosResponse<HttpRes<T>>) => {
+        resolve(res.data)
+      })
+      .finally(() => {
+        requestSet.delete(key)
+      })
+  })
 }

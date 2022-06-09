@@ -7,10 +7,6 @@ export type RegisterReqData = {
   password: string
 }
 
-export type RegisterResData = {
-  code: string
-  msg: string
-  data: null | object
-}
+export type RegisterResData = {}
 
 export type RegisterRes = HttpRes<RegisterResData>

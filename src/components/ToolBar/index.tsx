@@ -51,43 +51,43 @@ function _ToolBar() {
 
   function clickToUploadFile(fileList) {
     // 并行发送请求
-    // setIsUploading(true)
-    // const reqData = []
+    setIsUploading(true)
+    const reqData = []
 
-    // for (const key in fileList) {
-    //   const formData = new FormData()
-    //   // 项目id
-    //   formData.append('projectID', id)
-    //   // 上传图片数量
-    //   formData.append('imgNum', '1')
-    //   // 图片
-    //   formData.append('img1', fileList[key])
-    //   // uuid
-    //   formData.append('uuid1', generateUUID())
-    //   // 图片名
-    //   formData.append('name1', fileList[key].name)
+    for (const key in fileList) {
+      const formData = new FormData()
+      // 项目id
+      formData.append('projectID', id)
+      // 上传图片数量
+      formData.append('imgNum', '1')
+      // 图片
+      formData.append('img1', fileList[key])
+      // uuid
+      formData.append('uuid1', generateUUID())
+      // 图片名
+      formData.append('name1', fileList[key].name)
 
-    //   reqData.push(formData)
+      reqData.push(formData)
 
-    //   if (parseInt(key) === fileList.length - 1) {
-    //     break
-    //   }
-    // }
+      if (parseInt(key) === fileList.length - 1) {
+        break
+      }
+    }
 
-    // const promiseArr = []
-    // for (let i = 0; i < reqData.length; i++) {
-    //   const item = reqData[i]
-    //   promiseArr.push(uploadFile(item))
-    // }
-    // console.log(promiseArr)
+    const promiseArr = []
+    for (let i = 0; i < reqData.length; i++) {
+      const item = reqData[i]
+      promiseArr.push(uploadFile(item))
+    }
+    console.log(promiseArr)
 
-    // return Promise.all(promiseArr).then((res) => {
-    //   getUpdatedImgs(id).then((res) => {
-    //     const data = res.data
-    //     ProjectStore.updateImgs(data.pictures)
-    //     setIsUploading(false)
-    //   })
-    // })
+    return Promise.all(promiseArr).then((res) => {
+      getUpdatedImgs(id).then((res) => {
+        const data = res.data
+        ProjectStore.updateImgs(data.pictures)
+        setIsUploading(false)
+      })
+    })
 
     // 只发送一个请求
     const formData = new FormData()

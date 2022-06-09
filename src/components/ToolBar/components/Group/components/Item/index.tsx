@@ -5,7 +5,7 @@ import Divider from '@mui/material/Divider'
 import { toolBarStyles } from '../../../../styles'
 import { observer } from 'mobx-react-lite'
 import { ProjectStore } from '../../../../../../mobx/project'
-import { Img } from '../../../../../../types/project/ImgType'
+import { Img } from '../../../../../../types/project/ImgAndGroup'
 import { useShowDropDown } from '../../../../hooks/useShowDropdown'
 
 type Props = {

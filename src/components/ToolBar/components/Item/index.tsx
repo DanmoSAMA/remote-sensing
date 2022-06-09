@@ -7,7 +7,7 @@ import { observer } from 'mobx-react-lite'
 import { ProjectStore } from '../../../../mobx/project'
 import { deleteImg } from '../../../../network/project/deleteImg'
 import { getUpdatedImgs } from '../../../../network/project/getUpdatedImgs'
-import { Img } from '../../../../types/project/ImgType'
+import { Img } from '../../../../types/project/ImgAndGroup'
 import { useShowDropDown } from '../../hooks/useShowDropdown'
 import { useParams } from '../../../../hooks/useParams'
 

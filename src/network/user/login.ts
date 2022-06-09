@@ -1,8 +1,8 @@
 import { request } from '../request'
-import { LoginReqData } from '../../types/user/login'
+import { LoginReqData, LoginResData, LoginRes } from '../../types/user/login'
 
-export async function login(data: LoginReqData) {
-  const res = await request({
+export async function login(data: LoginReqData): Promise<LoginRes> {
+  const res = await request<LoginResData>({
     method: 'POST',
     data,
     url: '/v1/session'
