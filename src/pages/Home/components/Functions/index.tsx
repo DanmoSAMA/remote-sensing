@@ -12,7 +12,7 @@ import { ProjectStore } from '../../../../mobx/project'
 
 type Props = {
   name: string
-  id: number
+  id?: number
 }
 
 function Functions(props: Props) {

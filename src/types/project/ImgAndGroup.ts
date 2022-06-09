@@ -13,6 +13,12 @@ export type Group = {
   pictures: Img[]
 }
 
+export type WaitingGroup = {
+  id: number
+  oldImg: Img
+  newImg: Img
+}
+
 // 删除图片
 export type DeleteImgReqData = {
   projectID: number

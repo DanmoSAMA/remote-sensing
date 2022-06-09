@@ -2,17 +2,18 @@ import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import SvgIcon from '../../../../components/SvgIcon'
 import projectCover from '../../../../assets/imgs/projectCover.png'
+import { useState, useEffect } from 'react'
 import { binStyles } from './styles'
 import { getToken } from '../../../../utils/token'
-import { useState, useEffect } from 'react'
 import { getBinProjects } from '../../../../network/project/getBinProjects'
 import { deleteFromBin } from '../../../../network/project/deleteFromBin'
 import { searchProjectsInBin } from '../../../../network/project/searchProjects'
 import { moveToRecent } from '../../../../network/project/moveToRecent'
 import { useParams } from '../../../../hooks/useParams'
+import { Project } from '../../../../types/project/Project'
 
 function Project() {
-  const [binProjects, setBinProjects] = useState([])
+  const [binProjects, setBinProjects] = useState<Project[]>([])
   const keyword = useParams('keyword')
   let token = getToken()
 
@@ -25,7 +26,6 @@ function Project() {
       })
     } else {
       searchProjectsInBin(keyword).then((res) => {
-        console.log(res)
         setBinProjects(res.data.projects)
       })
     }
@@ -64,7 +64,7 @@ function Project() {
               sx={binStyles.middle}
               mb={'1rem'}
               onClick={() => {
-                clickToRecover(item.id)
+                clickToRecover(item.id.toString())
               }}
             >
               <SvgIcon name="recover" />
@@ -76,7 +76,7 @@ function Project() {
               sx={binStyles.middle}
               mb={'1rem'}
               onClick={() => {
-                clickToDelete(item.id)
+                clickToDelete(item.id.toString())
               }}
             >
               <SvgIcon name="delete" />

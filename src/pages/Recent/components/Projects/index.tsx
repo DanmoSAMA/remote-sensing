@@ -11,10 +11,11 @@ import { moveToBin } from '../../../../network/project/moveToBin'
 import { getToken } from '../../../../utils/token'
 import { ProjectStore } from '../../../../mobx/project'
 import { useParams } from '../../../../hooks/useParams'
+import { Project } from '../../../../types/project/Project'
 
 function Project() {
   const navigate = useNavigate()
-  const [recentProjects, setRecentProjects] = useState([])
+  const [recentProjects, setRecentProjects] = useState<Project[]>([])
   const keyword = useParams('keyword')
   let token = getToken()
 
@@ -51,7 +52,7 @@ function Project() {
             <img src={projectCover} />
             <Typography sx={projectStyles.bottom}>{item.name}</Typography>
           </Box>
-          <div className="mask" style={projectStyles.mask}>
+          <Box className="mask" sx={projectStyles.mask}>
             <Typography color={'secondary.main'} fontSize={'1rem'}>
               最近编辑于
             </Typography>
@@ -80,7 +81,7 @@ function Project() {
             <Box
               sx={projectStyles.middle}
               onClick={() => {
-                clickToMove(item.id)
+                clickToMove(item.id.toString())
               }}
             >
               <SvgIcon name="delete" />
@@ -94,7 +95,7 @@ function Project() {
               </Typography>
             </Box>
             <Typography sx={projectStyles.bottom}>{item.name}</Typography>
-          </div>
+          </Box>
         </Box>
       ))}
     </Box>

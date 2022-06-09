@@ -13,7 +13,7 @@ function _MySelect() {
         multiple
         value={ProjectStore.imgNameArr}
         onChange={(e) => {
-          ProjectStore.updateImgNameArr(e.target.value)
+          ProjectStore.updateImgNameArr(e.target.value as string[])
         }}
         sx={mainStyles.select}
         displayEmpty
