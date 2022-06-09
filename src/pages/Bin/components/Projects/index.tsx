@@ -10,10 +10,10 @@ import { deleteFromBin } from '../../../../network/project/deleteFromBin'
 import { searchProjectsInBin } from '../../../../network/project/searchProjects'
 import { moveToRecent } from '../../../../network/project/moveToRecent'
 import { useParams } from '../../../../hooks/useParams'
-import { Project } from '../../../../types/project/Project'
+import { Project as ProjectType } from '../../../../types/project/Project'
 
 function Project() {
-  const [binProjects, setBinProjects] = useState<Project[]>([])
+  const [binProjects, setBinProjects] = useState<ProjectType[]>([])
   const keyword = useParams('keyword')
   let token = getToken()
 

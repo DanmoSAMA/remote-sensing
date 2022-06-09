@@ -11,11 +11,11 @@ import { moveToBin } from '../../../../network/project/moveToBin'
 import { getToken } from '../../../../utils/token'
 import { ProjectStore } from '../../../../mobx/project'
 import { useParams } from '../../../../hooks/useParams'
-import { Project } from '../../../../types/project/Project'
+import { Project as ProjectType } from '../../../../types/project/Project'
 
 function Project() {
   const navigate = useNavigate()
-  const [recentProjects, setRecentProjects] = useState<Project[]>([])
+  const [recentProjects, setRecentProjects] = useState<ProjectType[]>([])
   const keyword = useParams('keyword')
   let token = getToken()
 
