@@ -5,7 +5,8 @@ import SvgIcon from '../SvgIcon'
 import List from '@mui/material/List'
 import Group from './components/Group'
 import Item from './components/Item'
-import { useEffect } from 'react'
+import Loading from './components/Loading'
+import { useEffect, useState } from 'react'
 import { useParams } from '../../hooks/useParams'
 import { toolBarStyles } from './styles'
 import { observer } from 'mobx-react-lite'
@@ -16,6 +17,7 @@ import { generateUUID } from '../../utils/uuid'
 
 function _ToolBar() {
   const id = useParams('id') as string
+  const [isUploading, setIsUploading] = useState(false)
 
   useEffect(() => {
     ProjectStore.init(parseInt(id))
@@ -67,12 +69,15 @@ function _ToolBar() {
       }
     }
 
+    setIsUploading(true)
+
     uploadFile(reqData).then((res) => {
       if (res.code === 1000) alert('图片已存在')
       else {
         getUpdatedImgs(id).then((res) => {
           const data = res.data
           ProjectStore.updateImgs(data.pictures)
+          setIsUploading(false)
         })
       }
     })
@@ -80,48 +85,57 @@ function _ToolBar() {
 
   return (
     <Box sx={toolBarStyles.wrapper}>
-      <Box sx={toolBarStyles.top}>
-        <Typography fontSize="16px">图层</Typography>
-        <input
-          accept="image/*"
-          id="contained-button-file"
-          style={{ display: 'none' }}
-          multiple
-          type="file"
-          onChange={(e) => {
-            clickToUploadFile(e.target.files)
-          }}
-        />
-        <label
-          htmlFor="contained-button-file"
-          style={{ width: '60%', display: 'flex', justifyContent: 'center' }}
-        >
-          <Button
-            variant="contained"
-            component="span"
-            style={{
-              backgroundColor: '#313131',
-              color: '#FCFBF4',
-              boxShadow: 'none',
-              fontWeight: '300',
-              fontSize: '16px'
+      <Box>
+        <Box sx={toolBarStyles.top}>
+          <Typography fontSize="16px">图层</Typography>
+          <input
+            accept="image/*"
+            id="contained-button-file"
+            style={{ display: 'none' }}
+            multiple
+            type="file"
+            onChange={(e) => {
+              clickToUploadFile(e.target.files)
             }}
+          />
+          <label
+            htmlFor="contained-button-file"
+            style={{ width: '60%', display: 'flex', justifyContent: 'center' }}
           >
-            <SvgIcon name="import" />
-            导入图片
-          </Button>
-        </label>
+            <Button
+              variant="contained"
+              component="span"
+              style={{
+                backgroundColor: '#313131',
+                color: '#FCFBF4',
+                boxShadow: 'none',
+                fontWeight: '300',
+                fontSize: '16px'
+              }}
+            >
+              <SvgIcon name="import" />
+              导入图片
+            </Button>
+          </label>
+        </Box>
+        <List>
+          {ProjectStore.imgGroups &&
+            ProjectStore.imgGroups.map((item) => (
+              <Group group={item} key={item.groupID} />
+            ))}
+        </List>
+        <List>
+          {ProjectStore.imgs &&
+            ProjectStore.imgs.map((item) => (
+              <Item item={item} key={item.uuid} />
+            ))}
+        </List>
       </Box>
-      <List>
-        {ProjectStore.imgGroups &&
-          ProjectStore.imgGroups.map((item) => (
-            <Group group={item} key={item.groupID} />
-          ))}
-      </List>
-      <List>
-        {ProjectStore.imgs &&
-          ProjectStore.imgs.map((item) => <Item item={item} key={item.uuid} />)}
-      </List>
+      {isUploading && (
+        <Box sx={toolBarStyles.mask}>
+          <Loading />
+        </Box>
+      )}
     </Box>
   )
 }

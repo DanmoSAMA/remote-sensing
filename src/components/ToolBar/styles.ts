@@ -91,5 +91,14 @@ export const toolBarStyles = {
     lineHeight: '43px',
     padding: '0px',
     cursor: 'pointer'
+  },
+  mask: {
+    position: 'absolute',
+    top: '0',
+    left: '0',
+    width: '100%',
+    height: '100%',
+    backgroundColor: '#313131',
+    opacity: '.9'
   }
 }
