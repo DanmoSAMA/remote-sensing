@@ -27,8 +27,26 @@ function _ToolBar() {
       ProjectStore.updateImgGroup(data.groups)
 
       // console.log(data)
+
+      preload()
     })
   }, [])
+
+  // 图片预加载
+  function preload() {
+    const preloadImages = []
+    for (let i = 0; i < ProjectStore.imgs.length; i++) {
+      const img = new Image()
+      img.onload = function () {
+        const index = preloadImages.indexOf(this)
+        if (index !== 1) {
+          preloadImages.splice(index, 1)
+        }
+      }
+      img.src = ProjectStore.imgs[i].url
+      preloadImages.push(img)
+    }
+  }
 
   function clickToUploadFile(fileList) {
     const reqData = new FormData()

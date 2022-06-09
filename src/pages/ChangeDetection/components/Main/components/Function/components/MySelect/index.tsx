@@ -51,11 +51,12 @@ function _MySelect(props: Props) {
                 value={item.name}
                 sx={{ color: 'secondary.main' }}
                 // 这里key用item.uuid会冲突
-                key={index}
+                key={item.uuid}
               >
                 <img
                   src={item.url}
                   style={{ width: '30px', marginRight: '10px' }}
+                  key={item.uuid}
                 />
                 {`${item.name.slice(0, 24)}${
                   item.name.length > 24 ? '...' : ''
@@ -80,11 +81,12 @@ function _MySelect(props: Props) {
               <MenuItem
                 value={item.name}
                 sx={{ color: 'secondary.main' }}
-                key={index}
+                key={item.uuid}
               >
                 <img
                   src={item.url}
                   style={{ width: '30px', marginRight: '10px' }}
+                  key={item.uuid}
                 />
                 {`${item.name.slice(0, 24)}${
                   item.name.length > 24 ? '...' : ''
