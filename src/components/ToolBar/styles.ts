@@ -10,7 +10,8 @@ export const toolBarStyles = {
     padding: '10px',
     boxSizing: 'border-box',
     overflow: 'auto',
-    zIndex: 1
+    zIndex: 1,
+    userSelect: 'none'
   },
   top: {
     height: '30px',
@@ -45,7 +46,7 @@ export const toolBarStyles = {
     borderRadius: '10px',
     border: '1px solid #fff',
     marginBottom: '20px',
-    padding: '0 5px',
+    padding: '0 10px',
     position: 'relative',
     fontSize: '15px'
   },
@@ -70,7 +71,7 @@ export const toolBarStyles = {
     height: '50px',
     border: '1px solid #fff',
     borderRadius: '10px',
-    padding: '0 5px',
+    padding: '0 10px',
     position: 'relative',
     fontSize: '15px',
     cursor: 'pointer'

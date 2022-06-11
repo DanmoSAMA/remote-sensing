@@ -10,6 +10,7 @@
   cursor: pointer;
   zoom: 1.4;
   margin: 0 5px 0 0;
+  /* width: 25px; */
 }
 
 .toolbar.folder {

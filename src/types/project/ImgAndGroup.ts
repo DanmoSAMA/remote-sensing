@@ -49,3 +49,12 @@ export type GetUpdatedRes = HttpRes<GetUpdatedResData>
 export type UploadImgReqData = FormData
 export type UploadImgResData = {}
 export type UploadImgRes = HttpRes<UploadImgResData>
+
+// 修改图片名称
+export type UpdateImgNameReqData = {
+  projectID: number
+  uuid: string
+  name: string
+}
+export type UpdateImgNameResData = {}
+export type UpdateImgNameRes = HttpRes<UpdateImgNameResData>

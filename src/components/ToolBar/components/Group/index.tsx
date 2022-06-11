@@ -86,6 +86,9 @@ function _Group(props: Props) {
           backgroundColor: isValid ? '#273839' : '#313131'
         }}
       >
+        {ProjectStore.displayType === 1 && (
+          <SvgIcon name="eye_hidden" class="toolbar" />
+        )}
         <SvgIcon name="folder" class="toolbar folder" />
         {`${group.groupName.slice(0, 4)}${
           group.groupName.length > 4 ? '...' : ''

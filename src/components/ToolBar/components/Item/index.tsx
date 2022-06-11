@@ -7,9 +7,11 @@ import { observer } from 'mobx-react-lite'
 import { ProjectStore } from '../../../../mobx/project'
 import { deleteImg } from '../../../../network/project/deleteImg'
 import { getUpdatedImgs } from '../../../../network/project/getUpdatedImgs'
+import { updateImgName } from '../../../../network/project/updateImgName'
 import { Img } from '../../../../types/project/ImgAndGroup'
 import { useShowDropDown } from '../../hooks/useShowDropdown'
 import { useParams } from '../../../../hooks/useParams'
+import { useState } from 'react'
 
 type Props = {
   item: Img
@@ -19,6 +21,8 @@ function _Item(props: Props) {
   const { item } = props
   const { showDropDown, setShowDropDown } = useShowDropDown()
   const projectID = useParams('id') as string
+  const [isEdited, setIsEdited] = useState(false)
+  const [imgName, setImgName] = useState('')
 
   async function clickToDeleteImg(uuid: string) {
     const reqData = {
@@ -38,7 +42,47 @@ function _Item(props: Props) {
 
   return (
     <ListItem key={item.uuid} sx={toolBarStyles.listItem}>
-      {`${item.name.slice(0, 14)}${item.name.length > 14 ? '...' : ''}`}
+      {ProjectStore.displayType === 1 && (
+        <SvgIcon name="eye_hidden" class="toolbar" />
+      )}
+      {!isEdited &&
+        `${item.name.slice(0, 14)}${item.name.length > 14 ? '...' : ''}`}
+      {isEdited && (
+        <input
+          type="text"
+          style={{
+            width: '70%',
+            height: '100%',
+            padding: '0 35px 0 0',
+            outline: 'none',
+            border: 'none',
+            backgroundColor: '#313131',
+            color: '#fcfbf4',
+            fontSize: '15px'
+          }}
+          maxLength={18}
+          onChange={(e) => {
+            setImgName(e.target.value)
+          }}
+          onKeyDown={(e) => {
+            if (e.nativeEvent.key === 'Enter') {
+              const reqData = {
+                projectID: parseInt(projectID),
+                uuid: item.uuid,
+                name: imgName
+              }
+              updateImgName(reqData).then((res) => {
+                getUpdatedImgs(projectID).then((res) => {
+                  ProjectStore.updateImgs(res.data.pictures)
+                  setIsEdited(false)
+                  setShowDropDown(false)
+                })
+              })
+            }
+          }}
+        />
+      )}
+
       <div
         onClick={(e) => {
           setShowDropDown(!showDropDown)
@@ -52,7 +96,12 @@ function _Item(props: Props) {
         onClick={(e) => e.stopPropagation()}
         style={{ display: showDropDown ? 'block' : 'none' }}
       >
-        <ListItem sx={toolBarStyles.dropDownItem}>
+        <ListItem
+          sx={toolBarStyles.dropDownItem}
+          onClick={() => {
+            setIsEdited(true)
+          }}
+        >
           <SvgIcon name="rename" class="toolbar dropdown" />
           重命名
         </ListItem>
