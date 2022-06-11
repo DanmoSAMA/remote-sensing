@@ -32,6 +32,8 @@ function _Group(props: Props) {
       (pathname === '/object-extract' && group.groupType === 4) ||
       (pathname === '/object-detection' && group.groupType === 5)
   )
+  // 当前组是否被选中
+  // const isSelected = ProjectStore.currentShownGroup.groupID === group.groupID
 
   async function clickToDeleteGroup() {
     const reqData = {
@@ -84,10 +86,6 @@ function _Group(props: Props) {
           backgroundColor: isValid ? '#273839' : '#313131'
         }}
       >
-        {ProjectStore.displayType === 1 && (
-          <SvgIcon name="eye" class="toolbar" />
-        )}
-
         <SvgIcon name="folder" class="toolbar folder" />
         {`${group.groupName.slice(0, 4)}${
           group.groupName.length > 4 ? '...' : ''

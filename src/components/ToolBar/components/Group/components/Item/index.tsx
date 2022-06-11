@@ -18,7 +18,22 @@ function _Item(props: Props) {
 
   return (
     <ListItem key={item.uuid} sx={toolBarStyles.listItemInGroup}>
-      {ProjectStore.displayType === 1 && <SvgIcon name="eye" class="toolbar" />}
+      <Box
+        onClick={() => {
+          ProjectStore.setLayerStatus(item.uuid)
+        }}
+      >
+        {ProjectStore.displayType === 1 ? (
+          item.isShown ? (
+            <SvgIcon name="eye" class="toolbar" />
+          ) : (
+            <SvgIcon name="eye_hidden" class="toolbar" />
+          )
+        ) : (
+          ''
+        )}
+      </Box>
+
       {`${item.name.slice(0, 14)}${item.name.length > 14 ? '...' : ''}`}
       <div
         onClick={(e) => {

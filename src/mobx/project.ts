@@ -47,7 +47,7 @@ class ProjectState {
   displayType: 0 | 1 = 0
 
   // 目前展示的组
-  currentShownGroup: Group = {
+  currentShownGroup = {
     groupID: 0,
     groupName: '',
     groupType: 2,
@@ -55,17 +55,20 @@ class ProjectState {
       {
         uuid: '',
         name: '',
-        url: ''
+        url: '',
+        isShown: true
       },
       {
         uuid: '',
         name: '',
-        url: ''
+        url: '',
+        isShown: true
       },
       {
         uuid: '',
         name: '',
-        url: ''
+        url: '',
+        isShown: true
       }
     ]
   }
@@ -112,17 +115,20 @@ class ProjectState {
           {
             uuid: '',
             name: '',
-            url: ''
+            url: '',
+            isShown: true
           },
           {
             uuid: '',
             name: '',
-            url: ''
+            url: '',
+            isShown: true
           },
           {
             uuid: '',
             name: '',
-            url: ''
+            url: '',
+            isShown: true
           }
         ]
       }
@@ -237,12 +243,29 @@ class ProjectState {
   // 修改目前展示的组
   updateCurShownGroup(groupID: number) {
     const t = this.imgGroups.find((item) => item.groupID === groupID) as Group
+    t.pictures.forEach((item) => {
+      item.isShown = true
+    })
 
     this.currentShownGroup = {
       groupID: groupID,
       groupType: t.groupType,
       groupName: t.groupName,
-      pictures: t.pictures
+      pictures: t.pictures as {
+        uuid: string
+        name: string
+        url: string
+        isShown: boolean
+      }[]
+    }
+  }
+  // 控制图层的隐藏与显示
+  setLayerStatus(uuid: string) {
+    const img = this.currentShownGroup.pictures.find(
+      (item) => item.uuid === uuid
+    )
+    if (img) {
+      img.isShown = !img.isShown as boolean
     }
   }
   // 修改展示状态

@@ -2,7 +2,7 @@ import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
-import Slider, { SliderThumb } from '@mui/material/Slider'
+import Slider from '@mui/material/Slider'
 import SvgIcon from '../../../../../../components/SvgIcon'
 import { ProjectStore } from '../../../../../../mobx/project'
 import { perspectiveStyles } from './styles'
@@ -10,7 +10,7 @@ import { observer } from 'mobx-react-lite'
 import { useState, useEffect } from 'react'
 
 function _Perspective() {
-  let squareImg = document.querySelector('#squareImg')
+  let squareImg = document.querySelector('#squareImg') as HTMLElement
   const [size, setSize] = useState(85)
   const [angle, setAngle] = useState(-7)
   const [detailImgUrl, setDetailImgUrl] = useState('')
@@ -44,11 +44,11 @@ function _Perspective() {
   }
 
   function handleHeight() {
-    squareImg = document.querySelector('#squareImg')
+    squareImg = document.querySelector('#squareImg') as HTMLElement
     squareImg && setImgHeight(squareImg.offsetHeight)
     if (imgHeight === 0) {
       setTimeout(() => {
-        squareImg = document.querySelector('#squareImg')
+        squareImg = document.querySelector('#squareImg') as HTMLElement
         squareImg && setImgHeight(squareImg.offsetHeight)
       }, 200)
     }
@@ -91,32 +91,35 @@ function _Perspective() {
         </Box>
       ) : (
         <Box sx={perspectiveStyles.square}>
-          <img
-            src={ProjectStore.currentShownGroup.pictures[1].url}
-            id="squareImg"
-          />
-          {ProjectStore.currentShownGroup.pictures[0].url !== '' && (
-            <Slider
-              defaultValue={50}
-              sx={{
-                height: `${imgHeight}px`,
-                padding: '0',
-
-                '& .MuiSlider-rail': {
-                  backgroundColor: 'transparent'
-                },
-                '& .MuiSlider-track': {
-                  borderTopLeftRadius: '.5rem',
-                  borderBottomLeftRadius: '.5rem',
-                  borderTopRightRadius: '0',
-                  borderBottomRightRadius: '0',
-                  background: `url(${ProjectStore.currentShownGroup.pictures[0].url})`,
-                  backgroundSize: 'cover',
-                  transition: 'none'
-                }
-              }}
+          {ProjectStore.currentShownGroup.pictures[1].isShown && (
+            <img
+              src={ProjectStore.currentShownGroup.pictures[1].url}
+              id="squareImg"
             />
           )}
+          {ProjectStore.currentShownGroup.pictures[0].url !== '' &&
+            ProjectStore.currentShownGroup.pictures[0].isShown && (
+              <Slider
+                defaultValue={50}
+                sx={{
+                  height: `${imgHeight}px`,
+                  padding: '0',
+
+                  '& .MuiSlider-rail': {
+                    backgroundColor: 'transparent'
+                  },
+                  '& .MuiSlider-track': {
+                    borderTopLeftRadius: '.5rem',
+                    borderBottomLeftRadius: '.5rem',
+                    borderTopRightRadius: '0',
+                    borderBottomRightRadius: '0',
+                    background: `url(${ProjectStore.currentShownGroup.pictures[0].url})`,
+                    backgroundSize: 'cover',
+                    transition: 'none'
+                  }
+                }}
+              />
+            )}
         </Box>
       )}
       {ProjectStore.showDetail && (

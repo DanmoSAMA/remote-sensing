@@ -4,6 +4,8 @@ export type Img = {
   uuid: string
   url: string
   name: string
+  // 控制图层的显示与隐藏
+  isShown?: boolean
 }
 
 export type Group = {

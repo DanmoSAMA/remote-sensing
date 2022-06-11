@@ -52,7 +52,7 @@ export const toolBarStyles = {
   listGroup: {
     borderRadius: '10px',
     border: '1px solid #fff',
-    padding: '0 0 0 10px',
+    padding: '0 0 0 8px',
     marginLeft: '20px',
     borderTop: 'none',
     fontSize: '15px'
@@ -79,6 +79,7 @@ export const toolBarStyles = {
     position: 'absolute',
     width: '88px',
     height: '87px',
+    paddingLeft: '10px',
     backgroundColor: '#fff',
     right: 0,
     top: '49px',
