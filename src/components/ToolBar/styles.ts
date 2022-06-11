@@ -4,7 +4,7 @@ export const toolBarStyles = {
     height: '90.5vh',
     width: '240px',
     right: '10px',
-    top: '8.5vh',
+    top: '9vh',
     backgroundColor: '#313131',
     borderRadius: '20px',
     padding: '10px',

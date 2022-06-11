@@ -2,9 +2,9 @@ export const shortHeaderStyles = {
   appBar: {
     '&': {
       paddingLeft: '250px',
-      height: '80px',
+      height: '70px',
       backgroundColor: 'primary.light',
-      lineHeight: '80px',
+      lineHeight: '60px',
       boxShadow: 'none',
       position: 'fixed',
       top: 0,

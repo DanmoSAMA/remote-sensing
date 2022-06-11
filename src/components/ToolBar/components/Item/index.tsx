@@ -2,8 +2,9 @@ import Box from '@mui/material/Box'
 import SvgIcon from '../../../SvgIcon'
 import ListItem from '@mui/material/ListItem'
 import Divider from '@mui/material/Divider'
-import { toolBarStyles } from '../../styles'
 import { observer } from 'mobx-react-lite'
+import { useState } from 'react'
+import { toolBarStyles } from '../../styles'
 import { ProjectStore } from '../../../../mobx/project'
 import { deleteImg } from '../../../../network/project/deleteImg'
 import { getUpdatedImgs } from '../../../../network/project/getUpdatedImgs'
@@ -11,7 +12,6 @@ import { updateImgName } from '../../../../network/project/updateImgName'
 import { Img } from '../../../../types/project/ImgAndGroup'
 import { useShowDropDown } from '../../hooks/useShowDropdown'
 import { useParams } from '../../../../hooks/useParams'
-import { useState } from 'react'
 
 type Props = {
   item: Img
@@ -42,30 +42,31 @@ function _Item(props: Props) {
 
   return (
     <ListItem key={item.uuid} sx={toolBarStyles.listItem}>
-      {ProjectStore.displayType === 1 && (
-        <SvgIcon name="eye_hidden" class="toolbar" />
-      )}
       {!isEdited &&
         `${item.name.slice(0, 14)}${item.name.length > 14 ? '...' : ''}`}
       {isEdited && (
         <input
           type="text"
           style={{
-            width: '70%',
+            width: '160px',
             height: '100%',
-            padding: '0 35px 0 0',
+            padding: '0',
             outline: 'none',
             border: 'none',
             backgroundColor: '#313131',
             color: '#fcfbf4',
             fontSize: '15px'
           }}
-          maxLength={18}
+          maxLength={20}
           onChange={(e) => {
             setImgName(e.target.value)
           }}
+          onBlur={() => {
+            setIsEdited(false)
+          }}
           onKeyDown={(e) => {
             if (e.nativeEvent.key === 'Enter') {
+              setShowDropDown(false)
               const reqData = {
                 projectID: parseInt(projectID),
                 uuid: item.uuid,
@@ -75,7 +76,6 @@ function _Item(props: Props) {
                 getUpdatedImgs(projectID).then((res) => {
                   ProjectStore.updateImgs(res.data.pictures)
                   setIsEdited(false)
-                  setShowDropDown(false)
                 })
               })
             }

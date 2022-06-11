@@ -29,10 +29,9 @@ export const mainStyles = {
   placeholder: {
     backgroundColor: 'secondary.main',
     height: '100%',
-    width: '80%',
+    width: '100%',
     borderRadius: '20px',
     position: 'absolute',
-    left: '20%',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',

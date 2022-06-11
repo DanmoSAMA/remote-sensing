@@ -3,7 +3,7 @@ export const subHeaderStyles = {
     width: '100%',
     height: '40px',
     lineHeight: '40px',
-    margin: '90px 240px 0 210px',
+    margin: '9vh 240px 0 210px',
     backgroundColor: '#F4F2E8',
     color: 'secondary.main',
     textAlign: 'center',

@@ -58,3 +58,12 @@ export type UpdateImgNameReqData = {
 }
 export type UpdateImgNameResData = {}
 export type UpdateImgNameRes = HttpRes<UpdateImgNameResData>
+
+// 修改组名称
+export type UpdateGroupNameReqData = {
+  projectID: number
+  groupID: number
+  name: string
+}
+export type UpdateGroupNameResData = {}
+export type UpdateGroupNameRes = HttpRes<UpdateGroupNameResData>
