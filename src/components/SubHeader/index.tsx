@@ -31,7 +31,7 @@ function _SubHeader() {
           更换检测条件
         </Box>
       )}
-      <div>{ProjectStore.name}</div>
+      <Box>{ProjectStore.name}</Box>
     </Box>
   )
 }

@@ -82,7 +82,6 @@ class ProjectState {
   init(id: number) {
     if (id !== this.id) {
       this.id = id
-      this.name = ''
       this.imgs = []
       this.imgGroups = []
       this.chosenImgs = []
@@ -105,6 +104,28 @@ class ProjectState {
       this.showPerspective = false
       this.showDetail = false
       this.displayType = 0
+      this.currentShownGroup = {
+        groupID: 0,
+        groupName: '',
+        groupType: 2,
+        pictures: [
+          {
+            uuid: '',
+            name: '',
+            url: ''
+          },
+          {
+            uuid: '',
+            name: '',
+            url: ''
+          },
+          {
+            uuid: '',
+            name: '',
+            url: ''
+          }
+        ]
+      }
       this.imgNameArr = []
       this.singleWaitingGroups = []
     }
@@ -206,9 +227,10 @@ class ProjectState {
     return Promise.all(promiseArr).then((res) => {
       getUpdatedImgs(this.id.toString()).then((res) => {
         const data = res.data
+        console.log(data)
         ProjectStore.updateImgs(data.pictures)
         ProjectStore.updateImgGroup(data.groups)
-        ProjectStore.updateCurShownGroup((data.groups.at(-1) as Group).groupID)
+        ProjectStore.updateCurShownGroup(data.groups[0].groupID)
       })
     })
   }
@@ -279,7 +301,7 @@ class ProjectState {
         const data = res.data
         ProjectStore.updateImgs(data.pictures)
         ProjectStore.updateImgGroup(data.groups)
-        ProjectStore.updateCurShownGroup((data.groups.at(-1) as Group).groupID)
+        ProjectStore.updateCurShownGroup(data.groups[0].groupID)
       })
     })
   }
