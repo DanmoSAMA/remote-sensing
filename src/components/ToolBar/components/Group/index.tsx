@@ -69,6 +69,7 @@ function _Group(props: Props) {
           if (isValid && ProjectStore.displayType === 0) {
             ProjectStore.setShowPerspective(true)
             ProjectStore.setShowDetail(false)
+
             ProjectStore.updateCurShownGroup(group.groupID)
             ProjectStore.setCoverImg(ProjectStore.currentShownGroup.pictures[0])
             ProjectStore.hideAllGroups()

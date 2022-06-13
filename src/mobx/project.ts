@@ -244,45 +244,6 @@ class ProjectState {
       this.waitingGroups = this.waitingGroups.filter((item) => item.id !== id)
     }
   }
-  // 开始变化检测
-  async changeDetect(targetName: string) {
-    // 构造请求数据
-    const reqData = []
-    for (let i = 0; i < this.waitingGroups.length; i++) {
-      const item = this.waitingGroups[i]
-      const t = {
-        projectID: this.id,
-        oldUUID: item.oldImg.uuid,
-        newUUID: item.newImg.uuid,
-        targetUUID: generateUUID(),
-        targetName
-      }
-      if (t.oldUUID !== '' && t.newUUID !== '') {
-        reqData.push(t)
-      }
-    }
-
-    // 并行发送请求
-    const promiseArr = []
-    for (let i = 0; i < reqData.length; i++) {
-      const item = reqData[i]
-      promiseArr.push(postDetectReq(item))
-    }
-
-    return Promise.all(promiseArr).then((res) => {
-      getUpdatedImgs(this.id.toString()).then((res) => {
-        const data = res.data
-        this.updateImgs(data.pictures)
-        this.updateImgGroup(data.groups)
-        const t = data.groups.find((item) => item.groupType === 2) as Group
-        // this.updateCurShownGroup(data.groups[0].groupID)
-        this.updateCurShownGroup(t.groupID)
-        this.updateCurShownGroups(2)
-        this.updateCurShownImgs()
-        this.setGroupDisplayStatus(data.groups[0].groupID)
-      })
-    })
-  }
   // 修改目前展示的组
   updateCurShownGroup(groupID: number) {
     const t = this.imgGroups.find((item) => item.groupID === groupID) as Group
@@ -406,6 +367,46 @@ class ProjectState {
       })
     }
   }
+  // 开始变化检测
+  async changeDetect(targetName: string) {
+    // 构造请求数据
+    const reqData = []
+    for (let i = 0; i < this.waitingGroups.length; i++) {
+      const item = this.waitingGroups[i]
+      const t = {
+        projectID: this.id,
+        oldUUID: item.oldImg.uuid,
+        newUUID: item.newImg.uuid,
+        targetUUID: generateUUID(),
+        targetName
+      }
+      if (t.oldUUID !== '' && t.newUUID !== '') {
+        reqData.push(t)
+      }
+    }
+
+    // 并行发送请求
+    const promiseArr = []
+    for (let i = 0; i < reqData.length; i++) {
+      const item = reqData[i]
+      promiseArr.push(postDetectReq(item))
+    }
+
+    return Promise.all(promiseArr).then((res) => {
+      getUpdatedImgs(this.id.toString()).then((res) => {
+        const data = res.data
+        this.updateImgs(data.pictures)
+        this.updateImgGroup(data.groups)
+
+        const t = data.groups.find((item) => item.groupType === 2) as Group
+        this.updateCurShownGroup(t.groupID)
+        this.updateCurShownGroups(2)
+        this.updateCurShownImgs()
+        this.hideAllGroups()
+        this.setGroupDisplayStatus(t.groupID)
+      })
+    })
+  }
   // 开始地物分类
   async terrainClassification(targetName: string) {
     // 构造请求数据
@@ -435,12 +436,13 @@ class ProjectState {
         const data = res.data
         this.updateImgs(data.pictures)
         this.updateImgGroup(data.groups)
+
         const t = data.groups.find((item) => item.groupType === 3) as Group
-        // this.updateCurShownGroup(data.groups[0].groupID)
         this.updateCurShownGroup(t.groupID)
-        this.updateCurShownGroups(2)
+        this.updateCurShownGroups(3)
         this.updateCurShownImgs()
-        this.setGroupDisplayStatus(data.groups[0].groupID)
+        this.hideAllGroups()
+        this.setGroupDisplayStatus(t.groupID)
       })
     })
   }
@@ -474,11 +476,11 @@ class ProjectState {
         this.updateImgs(data.pictures)
         this.updateImgGroup(data.groups)
         const t = data.groups.find((item) => item.groupType === 4) as Group
-        // this.updateCurShownGroup(data.groups[0].groupID)
         this.updateCurShownGroup(t.groupID)
-        this.updateCurShownGroups(2)
+        this.updateCurShownGroups(4)
         this.updateCurShownImgs()
-        this.setGroupDisplayStatus(data.groups[0].groupID)
+        this.hideAllGroups()
+        this.setGroupDisplayStatus(t.groupID)
       })
     })
   }
@@ -496,8 +498,6 @@ class ProjectState {
         targetName
       } as PostDetectReqData
 
-      console.log(t)
-
       if (t.originUUID !== '') {
         reqData.push(t)
       }
@@ -511,16 +511,16 @@ class ProjectState {
     }
 
     return Promise.all(promiseArr).then((res) => {
-      console.log(res)
       getUpdatedImgs(this.id.toString()).then((res) => {
         const data = res.data
         this.updateImgs(data.pictures)
         this.updateImgGroup(data.groups)
         const t = data.groups.find((item) => item.groupType === 5) as Group
         this.updateCurShownGroup(t.groupID)
-        this.updateCurShownGroups(2)
+        this.updateCurShownGroups(5)
         this.updateCurShownImgs()
-        this.setGroupDisplayStatus(data.groups[0].groupID)
+        this.hideAllGroups()
+        this.setGroupDisplayStatus(t.groupID)
       })
     })
   }
