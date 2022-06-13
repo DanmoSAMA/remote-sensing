@@ -47,7 +47,7 @@ class ProjectState {
   displayType: 0 | 1 = 0
 
   // 目前展示的组
-  currentShownGroup = {
+  currentShownGroup: Group = {
     groupID: 0,
     groupName: '',
     groupType: 2,
@@ -70,7 +70,21 @@ class ProjectState {
         url: '',
         isShown: true
       }
-    ]
+    ],
+    isShown: true
+  }
+  // 用于平面视角
+  currentShownGroups: Group[] = []
+  // 展成图片数组
+  currentShownImgs: Img[] = []
+  // 当前检测图合集，即currentShownGroups里每个组的第一张图
+  generatedImgs: Img[] = []
+  // 选择用于遮罩的图片
+  coverImg: Img = {
+    url: '',
+    name: '',
+    uuid: '',
+    isShown: true
   }
   // 图片名称数组，用于多选框
   imgNameArr: string[] = []
@@ -130,8 +144,18 @@ class ProjectState {
             url: '',
             isShown: true
           }
-        ]
+        ],
+        isShown: true
       }
+      this.generatedImgs = []
+      this.coverImg = {
+        url: '',
+        name: '',
+        uuid: '',
+        isShown: true
+      }
+      this.currentShownGroups = []
+      this.currentShownImgs = []
       this.imgNameArr = []
       this.singleWaitingGroups = []
     }
@@ -156,6 +180,8 @@ class ProjectState {
   // 在检测完成后更新
   updateImgGroup(val: Group[]) {
     this.imgGroups = val
+    // 设置所有组状态为不可见
+    this.hideAllGroups()
   }
   // 设置选中的图片，即waitingGroups的第一组，用于在左侧显示
   updateChosenImgs(val: Img[]) {
@@ -233,16 +259,19 @@ class ProjectState {
     return Promise.all(promiseArr).then((res) => {
       getUpdatedImgs(this.id.toString()).then((res) => {
         const data = res.data
-        console.log(data)
-        ProjectStore.updateImgs(data.pictures)
-        ProjectStore.updateImgGroup(data.groups)
-        ProjectStore.updateCurShownGroup(data.groups[0].groupID)
+        this.updateImgs(data.pictures)
+        this.updateImgGroup(data.groups)
+        this.updateCurShownGroup(data.groups[0].groupID)
+        this.updateCurShownGroups(2)
+        this.updateCurShownImgs()
+        this.setGroupDisplayStatus(data.groups[0].groupID)
       })
     })
   }
   // 修改目前展示的组
   updateCurShownGroup(groupID: number) {
     const t = this.imgGroups.find((item) => item.groupID === groupID) as Group
+
     t.pictures.forEach((item) => {
       item.isShown = true
     })
@@ -256,17 +285,87 @@ class ProjectState {
         name: string
         url: string
         isShown: boolean
-      }[]
+      }[],
+      isShown: true
     }
   }
-  // 控制图层的隐藏与显示
-  setLayerStatus(uuid: string) {
-    const img = this.currentShownGroup.pictures.find(
-      (item) => item.uuid === uuid
+  // 用于平面视角
+  updateCurShownGroups(type: 1 | 2 | 3 | 4 | 5) {
+    this.currentShownGroups = []
+    // 从 this.imgGroups 产生
+    this.imgGroups.forEach((item) => {
+      if (item.groupType === type) {
+        item.isShown = false
+        item.pictures.forEach((item) => (item.isShown = true))
+        this.currentShownGroups.push(item)
+      }
+    })
+    this.setGeneratedImgs()
+    this.coverImg = this.currentShownGroup.pictures[0]
+  }
+  // 将currentShownGroups展平成图片数组
+  updateCurShownImgs() {
+    this.currentShownImgs = []
+    this.currentShownGroups.forEach((item) => {
+      item.pictures.forEach((_item) => {
+        _item.groupID = item.groupID
+        _item.groupShown = item.isShown
+        this.currentShownImgs.push(_item)
+      })
+    })
+  }
+  // 设置检测图合集
+  setGeneratedImgs() {
+    this.generatedImgs = []
+    // 从 this.currentShownGroups 产生
+    this.currentShownGroups.forEach((item) =>
+      this.generatedImgs.push(item.pictures[0])
     )
-    if (img) {
-      img.isShown = !img.isShown as boolean
+  }
+  // 设置遮罩图
+  setCoverImg(val: Img) {
+    this.coverImg = val
+  }
+  setCoverImgByName(name: string) {
+    const t = this.generatedImgs.find((item) => item.name === name) as Img
+    this.coverImg = t
+  }
+  // 控制组的隐藏与显示
+  setGroupDisplayStatus(groupID: number, val?: boolean) {
+    // 修改 this.currentShownGroups 中的组
+    const t = this.currentShownGroups.find(
+      (item) => item.groupID === groupID
+    ) as Group
+    if (val !== undefined) {
+      t.isShown = val
+    } else {
+      t.isShown = !t.isShown
     }
+    // 修改 this.currentShownImgs
+    this.currentShownImgs.forEach((item) => {
+      if (item.groupID === groupID) {
+        if (val !== undefined) {
+          item.groupShown = val
+        } else {
+          item.groupShown = !item.groupShown
+        }
+      }
+    })
+  }
+  // 将所有组都隐藏
+  hideAllGroups() {
+    this.imgGroups.forEach((item) => {
+      item.isShown = false
+    })
+  }
+  // 控制图层的隐藏与显示
+  setLayerDisplayStatus(groupID: number, uuid: string) {
+    const group = this.imgGroups.find(
+      (item) => item.groupID === groupID
+    ) as Group
+    const img = group.pictures.find((item) => item.uuid === uuid) as Img
+
+    img.isShown = !img.isShown as boolean
   }
   // 修改展示状态
   setShowPerspective(val: boolean) {

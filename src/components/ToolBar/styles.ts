@@ -53,15 +53,15 @@ export const toolBarStyles = {
   listGroup: {
     borderRadius: '10px',
     border: '1px solid #fff',
-    padding: '0 0 0 8px',
     marginLeft: '20px',
     borderTop: 'none',
-    fontSize: '15px'
+    fontSize: '15px',
+    overflow: 'hidden'
   },
   listItemInGroup: {
     color: '#fff',
     borderBottom: '1px solid #979693',
-    padding: '10px 0',
+    padding: '10px 0 10px 8px',
     height: '40px',
     position: 'relative',
     fontSize: '15px'

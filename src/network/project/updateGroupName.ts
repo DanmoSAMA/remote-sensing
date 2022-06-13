@@ -11,7 +11,7 @@ export async function updateGroupName(
   const res = await request<UpdateGroupNameResData>({
     method: 'POST',
     data,
-    url: `/v1/project/picture/name`
+    url: `/v1/project/group/name`
   })
   return res
 }

@@ -10,17 +10,29 @@ import { useShowDropDown } from '../../../../hooks/useShowDropdown'
 
 type Props = {
   item: Img
+  groupID: number
 }
 
 function _Item(props: Props) {
-  const { item } = props
+  const { item, groupID } = props
   const { showDropDown, setShowDropDown } = useShowDropDown()
 
   return (
-    <ListItem key={item.uuid} sx={toolBarStyles.listItemInGroup}>
+    <ListItem
+      key={item.uuid}
+      style={{
+        backgroundColor:
+          item.groupID === ProjectStore.coverImg.groupID &&
+          item.uuid === ProjectStore.coverImg.uuid &&
+          ProjectStore.displayType === 1
+            ? '#0F4A4E'
+            : '#313131'
+      }}
+      sx={toolBarStyles.listItemInGroup}
+    >
       <Box
         onClick={() => {
-          ProjectStore.setLayerStatus(item.uuid)
+          ProjectStore.setLayerDisplayStatus(groupID, item.uuid)
         }}
       >
         {ProjectStore.displayType === 1 ? (

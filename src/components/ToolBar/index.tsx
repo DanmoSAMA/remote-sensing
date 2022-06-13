@@ -7,6 +7,7 @@ import Group from './components/Group'
 import Item from './components/Item'
 import Loading from './components/Loading'
 import { useEffect, useState } from 'react'
+import { useLocation } from 'react-router-dom'
 import { useParams } from '../../hooks/useParams'
 import { toolBarStyles } from './styles'
 import { observer } from 'mobx-react-lite'
@@ -18,16 +19,28 @@ import { generateUUID } from '../../utils/uuid'
 function _ToolBar() {
   const id = useParams('id') as string
   const [isUploading, setIsUploading] = useState(false)
+  const { pathname } = useLocation()
 
   useEffect(() => {
     ProjectStore.init(parseInt(id))
 
     getUpdatedImgs(id).then((res) => {
       const data = res.data
+      const type =
+        pathname === '/analysis'
+          ? 1
+          : pathname === '/change-detection'
+          ? 2
+          : pathname === '/terrain-classification'
+          ? 3
+          : pathname === '/object-extract'
+          ? 4
+          : 5
 
       ProjectStore.updateImgs(data.pictures)
       ProjectStore.updateImgGroup(data.groups)
-
+      ProjectStore.updateCurShownGroups(type)
+      ProjectStore.updateCurShownImgs()
       preload()
     })
   }, [])
@@ -79,7 +92,6 @@ function _ToolBar() {
       const item = reqData[i]
       promiseArr.push(uploadFile(item))
     }
-    console.log(promiseArr)
 
     return Promise.all(promiseArr).then((res) => {
       getUpdatedImgs(id).then((res) => {

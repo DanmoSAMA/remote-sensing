@@ -6,6 +6,9 @@ export type Img = {
   name: string
   // 控制图层的显示与隐藏
   isShown?: boolean
+  // 用于平面视角
+  groupID?: number
+  groupShown?: boolean
 }
 
 export type Group = {
@@ -13,6 +16,8 @@ export type Group = {
   groupName: string
   groupType: 1 | 2 | 3 | 4 | 5
   pictures: Img[]
+  // 控制图层的显示与隐藏
+  isShown?: boolean
 }
 
 export type WaitingGroup = {

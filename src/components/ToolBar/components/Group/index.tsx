@@ -33,8 +33,6 @@ function _Group(props: Props) {
       (pathname === '/object-extract' && group.groupType === 4) ||
       (pathname === '/object-detection' && group.groupType === 5)
   )
-  // 当前组是否被选中
-  // const isSelected = ProjectStore.currentShownGroup.groupID === group.groupID
   const [isEdited, setIsEdited] = useState(false)
   const [groupName, setGroupName] = useState('')
 
@@ -58,16 +56,20 @@ function _Group(props: Props) {
     <Box
       sx={{
         marginBottom: '20px',
-        position: 'relative'
+        position: 'relative',
+        display: isValid ? 'block' : 'none'
       }}
     >
       <ListItem
         sx={toolBarStyles.listParent}
         onClick={() => {
-          if (isValid) {
+          if (isValid && ProjectStore.displayType === 0) {
             ProjectStore.setShowPerspective(true)
             ProjectStore.setShowDetail(false)
             ProjectStore.updateCurShownGroup(group.groupID)
+            ProjectStore.setCoverImg(ProjectStore.currentShownGroup.pictures[0])
+            ProjectStore.hideAllGroups()
+            ProjectStore.setGroupDisplayStatus(group.groupID, true)
 
             // switch (pathname) {
             //   case '/analysis':
@@ -84,12 +86,25 @@ function _Group(props: Props) {
           }
         }}
         style={{
-          cursor: isValid ? 'cursor' : 'default',
-          backgroundColor: isValid ? '#1E3F41' : '#313131'
+          cursor: ProjectStore.displayType === 0 ? 'cursor' : 'default',
+          backgroundColor:
+            ProjectStore.displayType === 0 ? '#0F4A4E' : '#313131'
         }}
       >
-        {ProjectStore.displayType === 1 && (
-          <SvgIcon name="eye_hidden" class="toolbar" />
+        {ProjectStore.displayType === 1 ? (
+          <div
+            onClick={() => {
+              ProjectStore.setGroupDisplayStatus(group.groupID)
+            }}
+          >
+            {!group.isShown ? (
+              <SvgIcon name="eye_hidden" class="toolbar" />
+            ) : (
+              <SvgIcon name="eye" class="toolbar" />
+            )}
+          </div>
+        ) : (
+          ''
         )}
         <SvgIcon name="folder" class="toolbar folder" />
         {!isEdited &&
@@ -105,7 +120,7 @@ function _Group(props: Props) {
               padding: '0',
               outline: 'none',
               border: 'none',
-              backgroundColor: isValid ? '#1E3F41' : '#313131',
+              backgroundColor: '#313131',
               color: '#fcfbf4',
               fontSize: '15px'
             }}
@@ -185,7 +200,7 @@ function _Group(props: Props) {
       >
         {group.pictures.map((item: Img) => (
           // 嵌套li会有warning，暂时不理会
-          <Item item={item} key={item.uuid} />
+          <Item item={item} key={item.uuid} groupID={group.groupID} />
         ))}
       </Box>
     </Box>
