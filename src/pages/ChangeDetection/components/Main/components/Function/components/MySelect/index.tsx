@@ -41,14 +41,13 @@ function _MySelect(props: Props) {
             displayEmpty
             sx={mainStyles.select}
           >
-            <MenuItem value="">
+            <MenuItem value="" disabled>
               <span style={{ color: '#ADADA8' }}>请选择将要分析的图片</span>
             </MenuItem>
             {ProjectStore.imgs.map((item, index) => (
               <MenuItem
                 value={item.name}
                 sx={{ color: 'secondary.main' }}
-                // 这里key用item.uuid会冲突
                 key={item.uuid}
               >
                 <img
@@ -72,7 +71,7 @@ function _MySelect(props: Props) {
             displayEmpty
             sx={mainStyles.select}
           >
-            <MenuItem value="">
+            <MenuItem value="" disabled>
               <span style={{ color: '#ADADA8' }}>请选择将要分析的图片</span>
             </MenuItem>
             {ProjectStore.imgs.map((item, index) => (

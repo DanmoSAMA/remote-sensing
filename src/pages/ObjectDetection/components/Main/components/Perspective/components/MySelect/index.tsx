@@ -6,46 +6,38 @@ import { ProjectStore } from '../../../../../../../../mobx/project'
 import { mainStyles } from '../../../../styles'
 import { observer } from 'mobx-react-lite'
 
-function _MySelect() {
+export default function _MySelect() {
   return (
     <FormControl required sx={{ marginBottom: '10px', minWidth: '100%' }}>
       <Select
-        multiple
-        value={ProjectStore.imgNameArr}
+        value={ProjectStore.coverImg.name}
         onChange={(e) => {
-          ProjectStore.updateImgNameArr(e.target.value as string[])
+          ProjectStore.setCoverImgByName(e.target.value)
         }}
         sx={mainStyles.select}
         displayEmpty
         renderValue={(value) => (
           <Box>
-            {ProjectStore.imgNameArr.length === 0 && (
-              <span style={{ color: '#ADADA8' }}>请选择将要分析的图片</span>
-            )}
-            {ProjectStore.singleWaitingGroups.map((item) => (
-              <Box
-                sx={{ display: 'flex', alignItems: 'center' }}
-                key={item.uuid}
-              >
-                <img
-                  src={item.url}
-                  style={{ width: '30px', marginRight: '10px' }}
-                />
-                {item.name}
-              </Box>
-            ))}
+            <Box sx={{ display: 'flex', alignItems: 'center' }}>
+              <img
+                src={ProjectStore.coverImg.url}
+                style={{ width: '30px', marginRight: '10px' }}
+              />
+              {ProjectStore.coverImg.name}
+            </Box>
           </Box>
         )}
       >
-        {ProjectStore.imgs.map((item, index) => (
+        {ProjectStore.generatedImgs.map((item, index) => (
           <MenuItem
             value={item.name}
-            sx={mainStyles.selectItem}
+            sx={{ color: 'secondary.main' }}
             key={item.uuid}
           >
             <img
               src={item.url}
               style={{ width: '30px', marginRight: '10px' }}
+              key={item.uuid}
             />
             {`${item.name.slice(0, 24)}${item.name.length > 24 ? '...' : ''}`}
           </MenuItem>
@@ -56,5 +48,3 @@ function _MySelect() {
 }
 
 const MySelect = observer(_MySelect)
-
-export default MySelect

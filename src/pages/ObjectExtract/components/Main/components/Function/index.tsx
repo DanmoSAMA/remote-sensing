@@ -47,10 +47,6 @@ function _Function() {
               待分析图片
             </Typography>
             <MySelect />
-            <Box
-              sx={mainStyles.addNext}
-              onClick={() => ProjectStore.addWaitingImgs()}
-            ></Box>
           </Box>
           <Box sx={mainStyles.resultName}>
             <Typography

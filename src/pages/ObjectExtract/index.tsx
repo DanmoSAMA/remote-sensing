@@ -4,7 +4,7 @@ import SubHeader from '../../components/SubHeader'
 import ToolBar from '../../components/ToolBar'
 import Main from './components/Main'
 
-export default function TerrainClassification() {
+export default function ObjectExtract() {
   return (
     <>
       <Sidebar />

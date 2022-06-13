@@ -2,6 +2,7 @@ import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import MySelect from './components/MySelect'
+import TypeSelect from './components/TypeSelect'
 import Loading from '../../../../../../components/Loading'
 import { ProjectStore } from '../../../../../../mobx/project'
 import { mainStyles } from '../../styles'
@@ -12,14 +13,14 @@ function _Function() {
   const [isChecking, setIsChecking] = useState(false)
   const [targetName, setTargetName] = useState('')
 
-  async function clickToSort() {
+  async function clickToDetect() {
     if (!ProjectStore.singleWaitingGroups.length) {
       alert('请先选择要分析的图片')
       return
     }
     setIsChecking(true)
 
-    ProjectStore.terrainClassification(targetName).then(() => {
+    ProjectStore.objectExtract(targetName).then(() => {
       setIsChecking(false)
       ProjectStore.setShowPerspective(true)
     })
@@ -47,6 +48,17 @@ function _Function() {
               待分析图片
             </Typography>
             <MySelect />
+          </Box>
+          <Box sx={mainStyles.upper}>
+            <Typography
+              fontSize={'1rem'}
+              color={'secondary.main'}
+              fontWeight={400}
+              mb={'5px'}
+            >
+              检测对象类型
+            </Typography>
+            <TypeSelect />
           </Box>
           <Box sx={mainStyles.resultName}>
             <Typography
@@ -87,7 +99,7 @@ function _Function() {
               variant="contained"
               color="secondary"
               onClick={() => {
-                clickToSort()
+                clickToDetect()
               }}
             >
               开始检测

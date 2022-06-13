@@ -67,3 +67,9 @@
   zoom: 3;
   /* cursor: pointer; */
 }
+
+/*typeSelect*/
+.typeSelect {
+  zoom: 2;
+  margin-right: 5px;
+}

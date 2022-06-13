@@ -41,8 +41,7 @@ function _MySelect() {
           <MenuItem
             value={item.name}
             sx={mainStyles.selectItem}
-            // 这里key用item.uuid会冲突
-            key={index}
+            key={item.uuid}
           >
             <img
               src={item.url}
