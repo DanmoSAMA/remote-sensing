@@ -89,6 +89,18 @@ export const perspectiveStyles = {
       border: 'none'
     }
   },
+  sidebarDropdown: {
+    position: 'absolute',
+    top: '0',
+    right: '3rem',
+    width: '230px',
+    padding: '10px',
+    backgroundColor: '#C39984',
+    borderTopLeftRadius: '.5rem',
+    borderBottomLeftRadius: '.5rem',
+    borderBottomRightRadius: '.5rem',
+    cursor: 'default'
+  },
   square: {
     width: '80%',
     height: '82vh',

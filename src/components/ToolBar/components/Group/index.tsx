@@ -42,6 +42,7 @@ function _Group(props: Props) {
       groupID: group.groupID
     }
     if (confirm('确定要删除该组吗?')) {
+      setShowDropDown(false)
       const res = await deleteGroup(reqData)
       if (res.code === 0) {
         getUpdatedImgs(projectID).then((res) => {

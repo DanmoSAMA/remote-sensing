@@ -12,7 +12,7 @@ function _Function() {
   const [isChecking, setIsChecking] = useState(false)
   const [targetName, setTargetName] = useState('')
 
-  async function clickToDetect() {
+  async function clickToSort() {
     if (!ProjectStore.singleWaitingGroups.length) {
       alert('请先选择要分析的图片')
       return
@@ -91,7 +91,7 @@ function _Function() {
               variant="contained"
               color="secondary"
               onClick={() => {
-                clickToDetect()
+                clickToSort()
               }}
             >
               开始检测

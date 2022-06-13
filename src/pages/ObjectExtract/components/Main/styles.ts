@@ -5,7 +5,8 @@ export const mainStyles = {
     maxHeight: '150vh',
     margin: '10px 270px 0 230px',
     display: 'flex',
-    position: 'relative'
+    position: 'relative',
+    userSelect: 'none'
   },
   image: {
     width: '63%',
@@ -63,13 +64,11 @@ export const mainStyles = {
   select: {
     backgroundColor: '#fff',
     color: 'secondary.main',
-    // height: '43px',
     lineHeight: '40px',
     padding: '0',
     borderRadius: '10px',
 
     '& .MuiSelect-select': {
-      // height: '43px',
       padding: '0 0 0 10px',
       display: 'flex',
       alignItems: 'center'

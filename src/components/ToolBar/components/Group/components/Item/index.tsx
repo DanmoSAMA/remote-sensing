@@ -31,6 +31,7 @@ function _Item(props: Props) {
       pictures: [uuid]
     }
     if (window.confirm('确定要删除该图片吗?')) {
+      setShowDropDown(false)
       const res = await deleteImg(reqData)
       if (res.code === 0) {
         getUpdatedImgs(projectID).then((res) => {

@@ -4,6 +4,7 @@ import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
 import Slider from '@mui/material/Slider'
 import SvgIcon from '../../../../../../components/SvgIcon'
+import MySelect from './components/MySelect'
 import { ProjectStore } from '../../../../../../mobx/project'
 import { perspectiveStyles } from './styles'
 import { observer } from 'mobx-react-lite'
@@ -17,6 +18,7 @@ function _Perspective() {
   const [imgHeight, setImgHeight] = useState(
     squareImg ? squareImg.offsetHeight : 0
   )
+  const [showDropDown, setShowDropDown] = useState(false)
 
   useEffect(() => {
     window.addEventListener('resize', handleHeight)
@@ -91,35 +93,41 @@ function _Perspective() {
         </Box>
       ) : (
         <Box sx={perspectiveStyles.square}>
-          {ProjectStore.currentShownGroup.pictures[1].isShown && (
+          <img
+            src={ProjectStore.imgGroups[0].pictures[0].url}
+            id="squareImg"
+            style={{ opacity: 0 }}
+          />
+          {ProjectStore.currentShownImgs.map((item, index) => (
             <img
-              src={ProjectStore.currentShownGroup.pictures[1].url}
-              id="squareImg"
+              src={item.url}
+              style={{
+                display: item.isShown && item.groupShown ? 'block' : 'none'
+              }}
+              key={item.uuid + index}
             />
-          )}
-          {ProjectStore.currentShownGroup.pictures[0].url !== '' &&
-            ProjectStore.currentShownGroup.pictures[0].isShown && (
-              <Slider
-                defaultValue={50}
-                sx={{
-                  height: `${imgHeight}px`,
-                  padding: '0',
+          ))}
 
-                  '& .MuiSlider-rail': {
-                    backgroundColor: 'transparent'
-                  },
-                  '& .MuiSlider-track': {
-                    borderTopLeftRadius: '.5rem',
-                    borderBottomLeftRadius: '.5rem',
-                    borderTopRightRadius: '0',
-                    borderBottomRightRadius: '0',
-                    background: `url(${ProjectStore.currentShownGroup.pictures[0].url})`,
-                    backgroundSize: 'cover',
-                    transition: 'none'
-                  }
-                }}
-              />
-            )}
+          <Slider
+            defaultValue={50}
+            sx={{
+              height: `${imgHeight}px`,
+              padding: '0',
+
+              '& .MuiSlider-rail': {
+                backgroundColor: 'transparent'
+              },
+              '& .MuiSlider-track': {
+                borderTopLeftRadius: '.5rem',
+                borderBottomLeftRadius: '.5rem',
+                borderTopRightRadius: '0',
+                borderBottomRightRadius: '0',
+                background: `url(${ProjectStore.coverImg.url})`,
+                backgroundSize: 'cover',
+                transition: 'none'
+              }
+            }}
+          />
         </Box>
       )}
       {ProjectStore.showDetail && (
@@ -142,24 +150,50 @@ function _Perspective() {
           </div>
         </Box>
       )}
-      {ProjectStore.displayType === 0 && (
-        <List sx={perspectiveStyles.sidebar}>
-          <ListItem
-            button
-            onClick={() => {
-              setAngle(angle + 10)
-            }}
-          >
-            <SvgIcon name="cursor_pointer" />
-          </ListItem>
-          <ListItem button onClick={lessen}>
-            <SvgIcon name="bigger" />
-          </ListItem>
-          <ListItem button onClick={zoom}>
-            <SvgIcon name="smaller" />
-          </ListItem>
-        </List>
-      )}
+
+      <List
+        sx={perspectiveStyles.sidebar}
+        style={{ top: ProjectStore.displayType === 0 ? 'auto' : '10rem' }}
+      >
+        {ProjectStore.displayType === 0 ? (
+          <>
+            <ListItem
+              button
+              onClick={() => {
+                setAngle(angle + 10)
+              }}
+            >
+              <SvgIcon name="cursor_pointer" />
+            </ListItem>
+            <ListItem button onClick={lessen}>
+              <SvgIcon name="bigger" />
+            </ListItem>
+            <ListItem button onClick={zoom}>
+              <SvgIcon name="smaller" />
+            </ListItem>
+          </>
+        ) : (
+          <Box sx={{ position: 'relative' }}>
+            {showDropDown && (
+              <Box sx={perspectiveStyles.sidebarDropdown}>
+                <div style={{ color: '#01555A', marginBottom: '10px' }}>
+                  请选择应用遮罩的图层：
+                </div>
+                <MySelect />
+              </Box>
+            )}
+            <ListItem
+              button
+              onClick={(e) => {
+                setShowDropDown(!showDropDown)
+              }}
+            >
+              <SvgIcon name="move" />
+            </ListItem>
+          </Box>
+        )}
+      </List>
+
       <Button
         variant="contained"
         sx={perspectiveStyles.button}

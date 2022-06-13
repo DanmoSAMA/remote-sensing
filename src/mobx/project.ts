@@ -4,6 +4,7 @@ import { Img, Group } from '../types/project/ImgAndGroup'
 import { generateUUID } from '../utils/uuid'
 import { postDetectReq } from '../network/changeDetection/postDetectReq'
 import { postSortReq } from '../network/terrainClassification/postSortReq'
+import { postExtractReq } from '../network/objectExtract/postExtractReq'
 import { getUpdatedImgs } from '../network/project/getUpdatedImgs'
 import { getRecentProjects } from '../network/project/getRecentProjects'
 
@@ -270,7 +271,9 @@ class ProjectState {
         const data = res.data
         this.updateImgs(data.pictures)
         this.updateImgGroup(data.groups)
-        this.updateCurShownGroup(data.groups[0].groupID)
+        const t = data.groups.find((item) => item.groupType === 2) as Group
+        // this.updateCurShownGroup(data.groups[0].groupID)
+        this.updateCurShownGroup(t.groupID)
         this.updateCurShownGroups(2)
         this.updateCurShownImgs()
         this.setGroupDisplayStatus(data.groups[0].groupID)
@@ -429,7 +432,47 @@ class ProjectState {
         const data = res.data
         this.updateImgs(data.pictures)
         this.updateImgGroup(data.groups)
-        this.updateCurShownGroup(data.groups[0].groupID)
+        const t = data.groups.find((item) => item.groupType === 3) as Group
+        // this.updateCurShownGroup(data.groups[0].groupID)
+        this.updateCurShownGroup(t.groupID)
+        this.updateCurShownGroups(2)
+        this.updateCurShownImgs()
+        this.setGroupDisplayStatus(data.groups[0].groupID)
+      })
+    })
+  }
+  // 开始目标提取
+  async objectExtract(targetName: string) {
+    // 构造请求数据
+    const reqData = []
+    for (let i = 0; i < this.singleWaitingGroups.length; i++) {
+      const item = this.singleWaitingGroups[i]
+      const t = {
+        projectID: this.id,
+        originUUID: item.uuid,
+        targetUUID: generateUUID(),
+        targetName
+      }
+      if (t.originUUID !== '') {
+        reqData.push(t)
+      }
+    }
+
+    // 并行发送请求
+    const promiseArr = []
+    for (let i = 0; i < reqData.length; i++) {
+      const item = reqData[i]
+      promiseArr.push(postExtractReq(item))
+    }
+
+    return Promise.all(promiseArr).then((res) => {
+      getUpdatedImgs(this.id.toString()).then((res) => {
+        const data = res.data
+        this.updateImgs(data.pictures)
+        this.updateImgGroup(data.groups)
+        const t = data.groups.find((item) => item.groupType === 4) as Group
+        // this.updateCurShownGroup(data.groups[0].groupID)
+        this.updateCurShownGroup(t.groupID)
         this.updateCurShownGroups(2)
         this.updateCurShownImgs()
         this.setGroupDisplayStatus(data.groups[0].groupID)
