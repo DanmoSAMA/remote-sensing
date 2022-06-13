@@ -5,7 +5,8 @@ export const mainStyles = {
     maxHeight: '150vh',
     margin: '10px 270px 0 230px',
     display: 'flex',
-    position: 'relative'
+    position: 'relative',
+    userSelect: 'none'
   },
   image: {
     width: '63%',

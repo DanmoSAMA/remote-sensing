@@ -10,7 +10,8 @@ export const subHeaderStyles = {
     fontSize: '16px',
     zIndex: 1,
     opacity: '.9',
-    position: 'relative'
+    position: 'relative',
+    userSelect: 'none'
   },
   left: {
     position: 'absolute',

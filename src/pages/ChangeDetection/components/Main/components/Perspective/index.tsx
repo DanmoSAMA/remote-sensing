@@ -18,7 +18,7 @@ function _Perspective() {
   const [imgHeight, setImgHeight] = useState(
     squareImg ? squareImg.offsetHeight : 0
   )
-  const [showDropDown, setShowDropDown] = useState(!false)
+  const [showDropDown, setShowDropDown] = useState(false)
 
   useEffect(() => {
     window.addEventListener('resize', handleHeight)
@@ -110,12 +110,13 @@ function _Perspective() {
             id="squareImg"
             style={{ opacity: 0 }}
           />
-          {ProjectStore.currentShownImgs.map((item) => (
+          {ProjectStore.currentShownImgs.map((item, index) => (
             <img
               src={item.url}
               style={{
                 display: item.isShown && item.groupShown ? 'block' : 'none'
               }}
+              key={item.uuid + index}
             />
           ))}
 

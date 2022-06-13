@@ -23,7 +23,10 @@ function _MySelect() {
               <span style={{ color: '#ADADA8' }}>请选择将要分析的图片</span>
             )}
             {ProjectStore.singleWaitingGroups.map((item) => (
-              <Box sx={{ display: 'flex', alignItems: 'center' }}>
+              <Box
+                sx={{ display: 'flex', alignItems: 'center' }}
+                key={item.uuid}
+              >
                 <img
                   src={item.url}
                   style={{ width: '30px', marginRight: '10px' }}

@@ -5,7 +5,8 @@ export const homeStyles = {
       position: 'relative',
       height: '90vh',
       width: '100%',
-      top: '80px'
+      top: '80px',
+      userSelect: 'none'
     }
   }
 }
