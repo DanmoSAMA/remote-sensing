@@ -8,19 +8,25 @@ import { ProjectStore } from '../../../../../../mobx/project'
 import { mainStyles } from '../../styles'
 import { observer } from 'mobx-react-lite'
 import { useState } from 'react'
+import { ObjectType } from '../../../../../../types/objectDetection/objectType'
 
 function _Function() {
   const [isChecking, setIsChecking] = useState(false)
   const [targetName, setTargetName] = useState('')
+  const [objectType, setObjectType] = useState<ObjectType>('')
 
   async function clickToDetect() {
     if (!ProjectStore.singleWaitingGroups.length) {
       alert('请先选择要分析的图片')
       return
     }
+    if (objectType === '') {
+      alert('请先选择要检测的对象类型')
+      return
+    }
     setIsChecking(true)
 
-    ProjectStore.objectExtract(targetName).then(() => {
+    ProjectStore.objectDetect(targetName, objectType).then(() => {
       setIsChecking(false)
       ProjectStore.setShowPerspective(true)
     })
@@ -58,7 +64,7 @@ function _Function() {
             >
               检测对象类型
             </Typography>
-            <TypeSelect />
+            <TypeSelect objectType={objectType} setObjectType={setObjectType} />
           </Box>
           <Box sx={mainStyles.resultName}>
             <Typography

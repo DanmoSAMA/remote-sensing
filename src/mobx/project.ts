@@ -1,8 +1,11 @@
 import { makeAutoObservable } from 'mobx'
 import { Project } from '../types/project/Project'
 import { Img, Group } from '../types/project/ImgAndGroup'
+import { ObjectType } from '../types/objectDetection/objectType'
+import { PostDetectReqData } from '../types/objectDetection/ObjectDetection'
 import { generateUUID } from '../utils/uuid'
 import { postDetectReq } from '../network/changeDetection/postDetectReq'
+import { postDetectReq as postObjDetectReq } from '../network/objectDetection/postObjDetectReq'
 import { postSortReq } from '../network/terrainClassification/postSortReq'
 import { postExtractReq } from '../network/objectExtract/postExtractReq'
 import { getUpdatedImgs } from '../network/project/getUpdatedImgs'
@@ -472,6 +475,48 @@ class ProjectState {
         this.updateImgGroup(data.groups)
         const t = data.groups.find((item) => item.groupType === 4) as Group
         // this.updateCurShownGroup(data.groups[0].groupID)
+        this.updateCurShownGroup(t.groupID)
+        this.updateCurShownGroups(2)
+        this.updateCurShownImgs()
+        this.setGroupDisplayStatus(data.groups[0].groupID)
+      })
+    })
+  }
+  // 开始目标检测
+  async objectDetect(targetName: string, type: ObjectType) {
+    // 构造请求数据
+    const reqData = []
+    for (let i = 0; i < this.singleWaitingGroups.length; i++) {
+      const item = this.singleWaitingGroups[i]
+      const t = {
+        projectID: this.id,
+        type,
+        originUUID: item.uuid,
+        targetUUID: generateUUID(),
+        targetName
+      } as PostDetectReqData
+
+      console.log(t)
+
+      if (t.originUUID !== '') {
+        reqData.push(t)
+      }
+    }
+
+    // 并行发送请求
+    const promiseArr = []
+    for (let i = 0; i < reqData.length; i++) {
+      const item = reqData[i]
+      promiseArr.push(postObjDetectReq(item))
+    }
+
+    return Promise.all(promiseArr).then((res) => {
+      console.log(res)
+      getUpdatedImgs(this.id.toString()).then((res) => {
+        const data = res.data
+        this.updateImgs(data.pictures)
+        this.updateImgGroup(data.groups)
+        const t = data.groups.find((item) => item.groupType === 5) as Group
         this.updateCurShownGroup(t.groupID)
         this.updateCurShownGroups(2)
         this.updateCurShownImgs()
