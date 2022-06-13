@@ -66,7 +66,7 @@ export const toolBarStyles = {
     position: 'relative',
     fontSize: '15px',
 
-    '&:first-child': {
+    '&:first-of-type': {
       borderTopLeftRadius: '10px',
       borderTopRightRadius: '10px'
     },

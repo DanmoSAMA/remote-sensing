@@ -1,7 +1,7 @@
 import Box from '@mui/material/Box'
-import SvgIcon from '../../../SvgIcon'
 import ListItem from '@mui/material/ListItem'
 import Divider from '@mui/material/Divider'
+import SvgIcon from '../../../SvgIcon'
 import { observer } from 'mobx-react-lite'
 import { useState } from 'react'
 import { toolBarStyles } from '../../styles'
@@ -35,6 +35,8 @@ function _Item(props: Props) {
         getUpdatedImgs(projectID).then((res) => {
           const data = res.data
           ProjectStore.updateImgs(data.pictures)
+          ProjectStore.setShowPerspective(false)
+          ProjectStore.setDisplayType(0)
         })
       }
     }
@@ -86,6 +88,10 @@ function _Item(props: Props) {
               updateImgName(reqData).then((res) => {
                 getUpdatedImgs(projectID).then((res) => {
                   ProjectStore.updateImgs(res.data.pictures)
+                  ProjectStore.updateImgGroup(res.data.groups)
+
+                  ProjectStore.setShowPerspective(false)
+                  ProjectStore.setDisplayType(0)
                   setIsEdited(false)
                 })
               })
@@ -107,7 +113,7 @@ function _Item(props: Props) {
         onClick={(e) => e.stopPropagation()}
         style={{ display: showDropDown ? 'block' : 'none' }}
       >
-        <ListItem
+        <Box
           sx={toolBarStyles.dropDownItem}
           onClick={() => {
             setIsEdited(true)
@@ -115,9 +121,9 @@ function _Item(props: Props) {
         >
           <SvgIcon name="rename" class="toolbar dropdown" />
           重命名
-        </ListItem>
+        </Box>
         <Divider color="secondary" variant="middle" />
-        <ListItem
+        <Box
           sx={toolBarStyles.dropDownItem}
           onClick={() => {
             clickToDeleteImg(item.uuid)
@@ -125,7 +131,7 @@ function _Item(props: Props) {
         >
           <SvgIcon name="tb_bin" class="toolbar dropdown" />
           移除
-        </ListItem>
+        </Box>
       </Box>
     </ListItem>
   )

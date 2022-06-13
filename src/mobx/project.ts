@@ -176,6 +176,15 @@ class ProjectState {
   // 在上传图片后更新
   updateImgs(val: Img[]) {
     this.imgs = val
+    this.showAllImgs()
+  }
+  // 设置所有图片的相关属性
+  showAllImgs() {
+    this.chosenImgs.forEach((item) => {
+      item.isShown = true
+      item.groupID = 0
+      item.groupShown = false
+    })
   }
   // 在检测完成后更新
   updateImgGroup(val: Group[]) {
@@ -332,10 +341,7 @@ class ProjectState {
   }
   // 控制组的隐藏与显示
   setGroupDisplayStatus(groupID: number, val?: boolean) {
-    // 修改 this.currentShownGroups 中的组
-    const t = this.currentShownGroups.find(
-      (item) => item.groupID === groupID
-    ) as Group
+    const t = this.imgGroups.find((item) => item.groupID === groupID) as Group
     if (val !== undefined) {
       t.isShown = val
     } else {

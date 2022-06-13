@@ -21,6 +21,9 @@ function _ToolBar() {
   const [isUploading, setIsUploading] = useState(false)
   const { pathname } = useLocation()
 
+  // console.log(ProjectStore.currentShownGroups)
+  console.log(ProjectStore.imgGroups)
+
   useEffect(() => {
     ProjectStore.init(parseInt(id))
 

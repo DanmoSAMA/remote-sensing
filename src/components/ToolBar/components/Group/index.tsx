@@ -47,6 +47,8 @@ function _Group(props: Props) {
         getUpdatedImgs(projectID).then((res) => {
           const data = res.data
           ProjectStore.updateImgGroup(data.groups)
+          ProjectStore.setShowPerspective(false)
+          ProjectStore.setDisplayType(0)
         })
       }
     }
@@ -152,6 +154,9 @@ function _Group(props: Props) {
                 updateGroupName(reqData).then((res) => {
                   getUpdatedImgs(projectID).then((res) => {
                     ProjectStore.updateImgGroup(res.data.groups)
+
+                    ProjectStore.setShowPerspective(false)
+                    ProjectStore.setDisplayType(0)
                     setIsEdited(false)
                   })
                 })
