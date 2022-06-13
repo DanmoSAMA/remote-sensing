@@ -42,8 +42,19 @@ function _Item(props: Props) {
 
   return (
     <ListItem key={item.uuid} sx={toolBarStyles.listItem}>
-      {!isEdited &&
-        `${item.name.slice(0, 14)}${item.name.length > 14 ? '...' : ''}`}
+      <div
+        style={{
+          width: '170px',
+          height: '40px',
+          lineHeight: '40px',
+          overflow: 'hidden',
+          textOverflow: 'ellipsis',
+          whiteSpace: 'nowrap',
+          display: isEdited ? 'none' : 'block'
+        }}
+      >
+        {!isEdited && item.name}
+      </div>
       {isEdited && (
         <input
           type="text"

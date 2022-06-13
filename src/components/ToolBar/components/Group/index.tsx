@@ -86,9 +86,9 @@ function _Group(props: Props) {
           }
         }}
         style={{
-          cursor: ProjectStore.displayType === 0 ? 'cursor' : 'default',
-          backgroundColor:
-            ProjectStore.displayType === 0 ? '#0F4A4E' : '#313131'
+          cursor: ProjectStore.displayType === 0 ? 'cursor' : 'default'
+          // backgroundColor:
+          //   ProjectStore.displayType === 0 ? '#0F4A4E' : '#313131'
         }}
       >
         {ProjectStore.displayType === 1 ? (
@@ -107,10 +107,20 @@ function _Group(props: Props) {
           ''
         )}
         <SvgIcon name="folder" class="toolbar folder" />
-        {!isEdited &&
-          `${group.groupName.slice(0, 4)}${
-            group.groupName.length > 4 ? '...' : ''
-          }`}
+        <div
+          style={{
+            width: ProjectStore.displayType === 0 ? '120px' : '85px',
+            height: '40px',
+            lineHeight: '40px',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+            whiteSpace: 'nowrap',
+            display: isEdited ? 'none' : 'block'
+          }}
+        >
+          {group.groupName}
+        </div>
+
         {isEdited && (
           <input
             type="text"
@@ -150,7 +160,6 @@ function _Group(props: Props) {
             onClick={(e) => e.stopPropagation()}
           />
         )}
-
         <div
           onClick={(e) => {
             setIsClosed(!isClosed)

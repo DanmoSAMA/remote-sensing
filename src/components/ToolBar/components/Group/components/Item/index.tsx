@@ -45,8 +45,18 @@ function _Item(props: Props) {
           ''
         )}
       </Box>
-
-      {`${item.name.slice(0, 14)}${item.name.length > 14 ? '...' : ''}`}
+      <div
+        style={{
+          width: ProjectStore.displayType === 0 ? '150px' : '120px',
+          height: '40px',
+          lineHeight: '40px',
+          overflow: 'hidden',
+          textOverflow: 'ellipsis',
+          whiteSpace: 'nowrap'
+        }}
+      >
+        {item.name}
+      </div>
       <div
         onClick={(e) => {
           setShowDropDown(!showDropDown)
