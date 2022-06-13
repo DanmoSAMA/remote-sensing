@@ -421,9 +421,12 @@ class ProjectState {
     return Promise.all(promiseArr).then((res) => {
       getUpdatedImgs(this.id.toString()).then((res) => {
         const data = res.data
-        ProjectStore.updateImgs(data.pictures)
-        ProjectStore.updateImgGroup(data.groups)
-        ProjectStore.updateCurShownGroup(data.groups[0].groupID)
+        this.updateImgs(data.pictures)
+        this.updateImgGroup(data.groups)
+        this.updateCurShownGroup(data.groups[0].groupID)
+        this.updateCurShownGroups(2)
+        this.updateCurShownImgs()
+        this.setGroupDisplayStatus(data.groups[0].groupID)
       })
     })
   }

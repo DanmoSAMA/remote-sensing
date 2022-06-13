@@ -20,8 +20,6 @@ function _Perspective() {
   )
   const [showDropDown, setShowDropDown] = useState(!false)
 
-  console.log(ProjectStore.coverImg)
-
   useEffect(() => {
     window.addEventListener('resize', handleHeight)
   }, [])
