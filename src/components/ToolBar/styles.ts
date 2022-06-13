@@ -55,8 +55,8 @@ export const toolBarStyles = {
     border: '1px solid #fff',
     marginLeft: '20px',
     borderTop: 'none',
-    fontSize: '15px',
-    overflow: 'hidden'
+    fontSize: '15px'
+    // overflow: 'hidden'
   },
   listItemInGroup: {
     color: '#fff',
@@ -64,7 +64,15 @@ export const toolBarStyles = {
     padding: '10px 0 10px 8px',
     height: '40px',
     position: 'relative',
-    fontSize: '15px'
+    fontSize: '15px',
+
+    '&:first-child': {
+      borderTopLeftRadius: '10px',
+      borderTopRightRadius: '10px'
+    },
+    '&:last-child': {
+      borderRadius: '10px'
+    }
   },
   listParent: {
     color: '#fff',
