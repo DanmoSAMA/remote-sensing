@@ -107,7 +107,6 @@ function _Perspective() {
               key={item.uuid + index}
             />
           ))}
-
           <Slider
             defaultValue={50}
             sx={{
@@ -150,7 +149,14 @@ function _Perspective() {
           </div>
         </Box>
       )}
-
+      <Box
+        sx={perspectiveStyles.result}
+        onClick={() => {
+          ProjectStore.setShowResultAnalysis()
+        }}
+      >
+        结果分析
+      </Box>
       <List
         sx={perspectiveStyles.sidebar}
         style={{ top: ProjectStore.displayType === 0 ? 'auto' : '10rem' }}
@@ -193,9 +199,7 @@ function _Perspective() {
           </Box>
         )}
       </List>
-
-      <Button
-        variant="contained"
+      <Box
         sx={perspectiveStyles.button}
         onClick={() => {
           ProjectStore.setDisplayType(ProjectStore.displayType === 0 ? 1 : 0)
@@ -203,7 +207,7 @@ function _Perspective() {
         }}
       >
         切换视角
-      </Button>
+      </Box>
     </Box>
   )
 }

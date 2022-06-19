@@ -1,7 +1,8 @@
+// todo: 考虑用设计模式重构
 import { makeAutoObservable } from 'mobx'
 import { Project } from '../types/project/Project'
 import { Img, Group } from '../types/project/ImgAndGroup'
-import { ObjectType } from '../types/objectDetection/objectType'
+import { ObjectType } from '../types/objectDetection/ObjectType'
 import { PostDetectReqData } from '../types/objectDetection/ObjectDetection'
 import { generateUUID } from '../utils/uuid'
 import { postDetectReq } from '../network/changeDetection/postDetectReq'
@@ -55,6 +56,7 @@ class ProjectState {
     groupID: 0,
     groupName: '',
     groupType: 2,
+    info: {} as any,
     pictures: [
       {
         uuid: '',
@@ -94,6 +96,8 @@ class ProjectState {
   imgNameArr: string[] = []
   // 单图片待分析图片组(和变化检测区分)
   singleWaitingGroups: Img[] = []
+  // 是否显示结果分析
+  showResultAnalysis = false
 
   constructor() {
     makeAutoObservable(this)
@@ -129,6 +133,7 @@ class ProjectState {
         groupID: 0,
         groupName: '',
         groupType: 2,
+        info: {} as any,
         pictures: [
           {
             uuid: '',
@@ -162,6 +167,7 @@ class ProjectState {
       this.currentShownImgs = []
       this.imgNameArr = []
       this.singleWaitingGroups = []
+      this.showResultAnalysis = false
     }
   }
   // 设置项目名称
@@ -256,6 +262,7 @@ class ProjectState {
       groupID: groupID,
       groupType: t.groupType,
       groupName: t.groupName,
+      info: t.info,
       pictures: t.pictures as {
         uuid: string
         name: string
@@ -398,9 +405,9 @@ class ProjectState {
         this.updateImgs(data.pictures)
         this.updateImgGroup(data.groups)
 
-        const t = data.groups.find((item) => item.groupType === 2) as Group
+        const t = data.groups.find((item) => item.groupType === 5) as Group
         this.updateCurShownGroup(t.groupID)
-        this.updateCurShownGroups(2)
+        this.updateCurShownGroups(5)
         this.updateCurShownImgs()
         this.hideAllGroups()
         this.setGroupDisplayStatus(t.groupID)
@@ -475,9 +482,9 @@ class ProjectState {
         const data = res.data
         this.updateImgs(data.pictures)
         this.updateImgGroup(data.groups)
-        const t = data.groups.find((item) => item.groupType === 4) as Group
+        const t = data.groups.find((item) => item.groupType === 2) as Group
         this.updateCurShownGroup(t.groupID)
-        this.updateCurShownGroups(4)
+        this.updateCurShownGroups(2)
         this.updateCurShownImgs()
         this.hideAllGroups()
         this.setGroupDisplayStatus(t.groupID)
@@ -515,14 +522,22 @@ class ProjectState {
         const data = res.data
         this.updateImgs(data.pictures)
         this.updateImgGroup(data.groups)
-        const t = data.groups.find((item) => item.groupType === 5) as Group
+        const t = data.groups.find((item) => item.groupType === 4) as Group
         this.updateCurShownGroup(t.groupID)
-        this.updateCurShownGroups(5)
+        this.updateCurShownGroups(4)
         this.updateCurShownImgs()
         this.hideAllGroups()
         this.setGroupDisplayStatus(t.groupID)
       })
     })
+  }
+  // 设置showResultAnalysis
+  setShowResultAnalysis(val?: boolean) {
+    if (val === undefined) {
+      this.showResultAnalysis = !this.showResultAnalysis
+    } else {
+      this.showResultAnalysis = val
+    }
   }
 }
 

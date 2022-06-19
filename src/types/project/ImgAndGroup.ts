@@ -1,4 +1,6 @@
 import { HttpRes } from '../HttpRes'
+import { ObjectType } from '../objectDetection/ObjectType'
+import { BoxType } from '../objectDetection/BoxType'
 
 export type Img = {
   uuid: string
@@ -11,10 +13,30 @@ export type Img = {
   groupShown?: boolean
 }
 
+export type Info = {
+  // 目标提取
+  colors: number[]
+} & {
+  // 地物分类
+  colors: number[]
+  nums: number[]
+} & {
+  // 变化检测
+  num: number
+  colors: number[]
+} & {
+  // 目标检测
+  type: ObjectType
+  w: number
+  h: number
+  boxs: BoxType
+}
+
 export type Group = {
   groupID: number
   groupName: string
   groupType: 1 | 2 | 3 | 4 | 5
+  info: Info
   pictures: Img[]
   // 控制图层的显示与隐藏
   isShown?: boolean

@@ -119,27 +119,14 @@ function _Perspective() {
               key={item.uuid + index}
             />
           ))}
-
           <Slider
             defaultValue={50}
             sx={{
               height: `${imgHeight}px`,
               padding: '0',
-              // display:
-              //   ProjectStore.coverImg.isShown &&
-              //   ProjectStore.coverImg.groupShown &&
-              //   ProjectStore.coverImg.url !== ''
-              //     ? 'block'
-              //     : 'none',
 
               '& .MuiSlider-rail': {
                 backgroundColor: 'transparent'
-                // display:
-                //   ProjectStore.coverImg.isShown &&
-                //   ProjectStore.coverImg.groupShown &&
-                //   ProjectStore.coverImg.url !== ''
-                //     ? 'block'
-                //     : 'none'
               },
               '& .MuiSlider-track': {
                 borderTopLeftRadius: '.5rem',
@@ -149,12 +136,6 @@ function _Perspective() {
                 background: `url(${ProjectStore.coverImg.url})`,
                 backgroundSize: 'cover',
                 transition: 'none'
-                // display:
-                //   ProjectStore.coverImg.isShown &&
-                //   ProjectStore.coverImg.groupShown &&
-                //   ProjectStore.coverImg.url !== ''
-                //     ? 'block'
-                //     : 'none'
               }
             }}
           />
@@ -180,7 +161,14 @@ function _Perspective() {
           </div>
         </Box>
       )}
-
+      <Box
+        sx={perspectiveStyles.result}
+        onClick={() => {
+          ProjectStore.setShowResultAnalysis()
+        }}
+      >
+        结果分析
+      </Box>
       <List
         sx={perspectiveStyles.sidebar}
         style={{ top: ProjectStore.displayType === 0 ? 'auto' : '10rem' }}
@@ -223,9 +211,7 @@ function _Perspective() {
           </Box>
         )}
       </List>
-
-      <Button
-        variant="contained"
+      <Box
         sx={perspectiveStyles.button}
         onClick={() => {
           ProjectStore.setDisplayType(ProjectStore.displayType === 0 ? 1 : 0)
@@ -233,7 +219,7 @@ function _Perspective() {
         }}
       >
         切换视角
-      </Button>
+      </Box>
     </Box>
   )
 }

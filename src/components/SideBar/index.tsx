@@ -43,6 +43,7 @@ export default function Navbar() {
               ProjectStore.setShowPerspective(false)
               ProjectStore.setShowDetail(false)
               ProjectStore.setDisplayType(0)
+              ProjectStore.setShowResultAnalysis(false)
               navigate(`${item.route}?id=${id}`)
             }}
           >

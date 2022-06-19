@@ -56,19 +56,37 @@ export const perspectiveStyles = {
     right: '270px',
     bottom: '3rem',
     height: '6rem',
-    width: '6rem',
+    width: '3rem',
     color: '#E2DECD',
     fontSize: '1.2rem',
     padding: 0,
-
-    '&:hover': {
-      backgroundColor: '#C39984'
-    }
+    display: 'flex',
+    alignItems: 'center',
+    borderRadius: '.3rem',
+    textAlign: 'center',
+    cursor: 'pointer'
+  },
+  result: {
+    backgroundColor: 'primary.dark',
+    position: 'fixed',
+    right: '270px',
+    bottom: '19.7rem',
+    height: '6rem',
+    width: '3rem',
+    color: 'secondary.main',
+    fontSize: '1.2rem',
+    padding: 0,
+    display: 'flex',
+    alignItems: 'center',
+    borderRadius: '.3rem',
+    textAlign: 'center',
+    cursor: 'pointer',
+    zIndex: 9999
   },
   sidebar: {
     position: 'fixed',
     right: '270px',
-    bottom: '10rem',
+    bottom: '9.3rem',
     width: '3rem',
 
     '& .MuiListItem-root': {

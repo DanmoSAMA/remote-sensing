@@ -28,10 +28,10 @@ function _Group(props: Props) {
   // 当前组是否有效
   const [isValid, setIsValid] = useState(
     (pathname === '/analysis' && group.groupType === 1) ||
-      (pathname === '/change-detection' && group.groupType === 2) ||
+      (pathname === '/change-detection' && group.groupType === 5) ||
       (pathname === '/terrain-classification' && group.groupType === 3) ||
-      (pathname === '/object-extract' && group.groupType === 4) ||
-      (pathname === '/object-detection' && group.groupType === 5)
+      (pathname === '/object-extract' && group.groupType === 2) ||
+      (pathname === '/object-detection' && group.groupType === 4)
   )
   const [isEdited, setIsEdited] = useState(false)
   const [groupName, setGroupName] = useState('')
@@ -75,6 +75,8 @@ function _Group(props: Props) {
             ProjectStore.hideAllGroups()
             ProjectStore.setGroupDisplayStatus(group.groupID, true)
 
+            console.log(ProjectStore.currentShownGroup.info)
+
             // switch (pathname) {
             //   case '/analysis':
             //     break
@@ -91,8 +93,6 @@ function _Group(props: Props) {
         }}
         style={{
           cursor: ProjectStore.displayType === 0 ? 'cursor' : 'default'
-          // backgroundColor:
-          //   ProjectStore.displayType === 0 ? '#0F4A4E' : '#313131'
         }}
       >
         {ProjectStore.displayType === 1 ? (

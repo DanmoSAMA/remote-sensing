@@ -56,7 +56,6 @@ export const toolBarStyles = {
     marginLeft: '20px',
     borderTop: 'none',
     fontSize: '15px'
-    // overflow: 'hidden'
   },
   listItemInGroup: {
     color: '#fff',
