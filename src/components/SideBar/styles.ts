@@ -63,7 +63,7 @@ export const sideBarStyles = {
     },
     '& .svg-icon': {
       zoom: '1.6',
-      marginRight: '5px'
+      marginRight: '8px'
     }
   }
 }

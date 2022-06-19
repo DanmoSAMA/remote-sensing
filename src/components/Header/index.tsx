@@ -13,17 +13,8 @@ export default function Navbar() {
     <AppBar position="static" sx={headerStyles.appBar}>
       <Toolbar variant="dense">
         <Box sx={headerStyles.logo}>
-          <SvgIcon name="logo" />
-          <Typography
-            variant="h1"
-            color="primary"
-            fontWeight={300}
-            fontSize={'28px'}
-            fontFamily={'Comfortaa'}
-            width={'160px'}
-          >
-            AI System
-          </Typography>
+          <SvgIcon name="logo" class="header logo" />
+          <SvgIcon name="font" class="header font" />
         </Box>
         <List />
         <Box sx={headerStyles.search}>

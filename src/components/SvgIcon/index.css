@@ -5,6 +5,22 @@
   vertical-align: middle;
 }
 
+/* header */
+.header.logo {
+  zoom: 1.8;
+}
+.header.font {
+  zoom: 3.2;
+}
+
+/* sidebar */
+.sidebar.logo {
+  zoom: 1.8;
+}
+.sidebar.font {
+  zoom: 3.2;
+}
+
 /* toolbar */
 .toolbar {
   cursor: pointer;

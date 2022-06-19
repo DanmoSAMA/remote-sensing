@@ -21,17 +21,8 @@ export default function Navbar() {
   return (
     <Drawer sx={sideBarStyles.drawer} variant="permanent" anchor="left">
       <Box sx={sideBarStyles.logo}>
-        <SvgIcon name="logo" />
-        <Typography
-          variant="h1"
-          color="primary"
-          fontWeight={300}
-          fontSize={'28px'}
-          fontFamily={'Comfortaa'}
-          width={'160px'}
-        >
-          AI System
-        </Typography>
+        <SvgIcon name="logo" class="sidebar logo" />
+        <SvgIcon name="font" class="sidebar font" />
       </Box>
       <List>
         {sideBarItems.map((item) => (
