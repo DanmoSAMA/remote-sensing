@@ -220,6 +220,17 @@ function _ToolBar() {
               图块数量：{ProjectStore.currentShownGroup.info.num} 个
             </Box>
           )}
+          {type === 4 && (
+            <Box
+              sx={{
+                color: 'primary.light',
+                fontSize: '15px',
+                margin: '20px 0 30px 10px'
+              }}
+            >
+              目标数量：{ProjectStore.currentShownGroup.info.boxs.length} 个
+            </Box>
+          )}
           {type === 3 && (
             <Box
               sx={{
@@ -251,35 +262,37 @@ function _ToolBar() {
               </Box>
             </Box>
           )}
-          <Box
-            sx={{
-              color: 'primary.light',
-              fontSize: '15px',
-              margin: '20px 0 10px 0px'
-            }}
-          >
-            <Typography
-              fontSize="15px"
-              color="primary.light"
-              mb="10px"
-              ml="10px"
-              mt="10px"
-            >
-              图块面积占比统计
-            </Typography>
+          {type !== 4 && (
             <Box
               sx={{
-                padding: '10px',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                fontSize: '14px'
+                color: 'primary.light',
+                fontSize: '15px',
+                margin: '20px 0 10px 0px'
               }}
             >
-              <MyPieChart detectType={type} displayType={1} />
-              <ChartList detectType={type} displayType={1} />
+              <Typography
+                fontSize="15px"
+                color="primary.light"
+                mb="10px"
+                ml="10px"
+                mt="10px"
+              >
+                图块面积占比统计
+              </Typography>
+              <Box
+                sx={{
+                  padding: '10px',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  fontSize: '14px'
+                }}
+              >
+                <MyPieChart detectType={type} displayType={1} />
+                <ChartList detectType={type} displayType={1} />
+              </Box>
             </Box>
-          </Box>
+          )}
         </Box>
       )}
     </Box>

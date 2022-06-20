@@ -13,7 +13,7 @@ export const perspectiveStyles = {
   cube: {
     perspective: '5000px',
     transformStyle: 'preserve-3d',
-    width: '70%',
+    width: '100%',
     height: '150vh',
     maxHeight: '150vh',
     boxSizing: 'border-box',

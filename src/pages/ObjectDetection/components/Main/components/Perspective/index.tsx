@@ -12,7 +12,7 @@ import { useState, useEffect } from 'react'
 
 function _Perspective() {
   let squareImg = document.querySelector('#squareImg') as HTMLElement
-  const [size, setSize] = useState(85)
+  const [size, setSize] = useState(550)
   const [angle, setAngle] = useState(-7)
   const [detailImgUrl, setDetailImgUrl] = useState('')
   const [imgHeight, setImgHeight] = useState(
@@ -26,17 +26,80 @@ function _Perspective() {
 
   useEffect(() => {
     handleHeight()
-  })
+  }, [])
+
+  useEffect(() => {
+    const c = document.getElementById('canvas') as HTMLCanvasElement
+    const ctx = c.getContext('2d') as CanvasRenderingContext2D
+    const img = document.getElementById('cubeImg') as HTMLElement
+    // 得到dpr
+    const dpr = window.devicePixelRatio
+    // 画布大小
+    // const logicalWidth = c.width
+    // const logicalHeight = c.height
+    // // 将canvas画布大小转换成物理像素大小
+    // c.width = logicalWidth * dpr
+    // c.height = logicalHeight * dpr
+    // // 将canvas元素大小设置成逻辑像素大小
+    // c.style.width = logicalWidth + 'px'
+    // c.style.height = logicalHeight + 'px'
+    // // 此时画布内容是缩小的，因此使用scale放大
+    // ctx.scale(dpr, dpr)
+
+    c.width = !ProjectStore.showDetail ? size : size / 2.5
+    c.height = !ProjectStore.showDetail ? size : size / 2.5
+    c.style.width = c.width + 'px'
+    c.style.height = c.height + 'px'
+
+    // 绘制图片
+    img.onload = () => {
+      ctx.drawImage(
+        img as CanvasImageSource,
+        0,
+        0,
+        img.offsetWidth,
+        img.offsetHeight,
+        0,
+        0,
+        size,
+        size
+      )
+
+      // 绘制方框
+      const sw = ProjectStore.currentShownGroup.info.w
+      const ratio = sw / size
+
+      // 线宽
+      ctx.lineWidth = 3
+      // 虚线
+      ctx.setLineDash([5, 5])
+      // 颜色
+      ctx.strokeStyle = '#C29985'
+
+      ProjectStore.currentShownGroup.info.boxs.forEach((item) => {
+        // 实际绘制的位置
+        const sx = item[0] / ratio
+        const sy = (item[1] + item[3]) / ratio
+        // 实际绘制的宽高
+        const dw = item[2] / ratio
+        const dh = item[3] / ratio
+
+        // console.log(ratio, sx, sy, dw, dh)
+
+        ctx.strokeRect(sx, sy, dw, dh)
+      })
+    }
+  }, [])
 
   function zoom() {
-    if (size <= 100) {
-      setSize(size + 2)
+    if (size <= 620) {
+      setSize(size + 10)
     }
   }
 
   function lessen() {
-    if (size >= 50) {
-      setSize(size - 2)
+    if (size >= 400) {
+      setSize(size - 10)
     }
   }
 
@@ -68,28 +131,48 @@ function _Perspective() {
         >
           <img
             style={{
-              width: `${size}%`,
+              width: !ProjectStore.showDetail ? `${size}px` : `${size / 2.5}px`,
+              height: !ProjectStore.showDetail
+                ? `${size}px`
+                : `${size / 2.5}px`,
               transform: `translateY(${
-                !ProjectStore.showDetail ? -size / 10 : -size / 20
-              }rem) rotateX(65deg) rotateZ(${-20 + angle}deg)`
+                !ProjectStore.showDetail ? -5 : 5
+              }rem) rotateX(65deg) rotateZ(${-20 + angle}deg)`,
+              cursor: 'default'
             }}
             src={ProjectStore.currentShownGroup.pictures[0].url}
-            onClick={() => {
-              viewDetail(0)
-            }}
+            // onClick={() => {
+            //   viewDetail(0)
+            // }}
           />
           <img
             style={{
-              width: `${size}%`,
-              transform: `translateY(${
-                !ProjectStore.showDetail ? (size + 10) / 10 : (size + 10) / 20
-              }rem) rotateX(65deg) rotateZ(${-20 + angle}deg)`
+              width: 'auto',
+              height: 'auto',
+              visibility: 'hidden',
+              position: 'absolute'
             }}
+            id="cubeImg"
             src={ProjectStore.currentShownGroup.pictures[1].url}
+          />
+          <canvas
+            id="canvas"
+            style={{
+              width: !ProjectStore.showDetail ? `${size}px` : `${size / 2.5}px`,
+              height: !ProjectStore.showDetail
+                ? `${size}px`
+                : `${size / 2.5}px`,
+              transform: `translateY(${
+                !ProjectStore.showDetail ? (size - 380) / 10 : (size - 200) / 20
+              }rem) rotateX(65deg) rotateZ(${-20 + angle}deg)`,
+              cursor: 'pointer'
+            }}
+            // width={!ProjectStore.showDetail ? size : size / 2.5}
+            // height={!ProjectStore.showDetail ? size : size / 2.5}
             onClick={() => {
               viewDetail(1)
             }}
-          />
+          ></canvas>
         </Box>
       ) : (
         <Box sx={perspectiveStyles.square}>
@@ -204,6 +287,7 @@ function _Perspective() {
         onClick={() => {
           ProjectStore.setDisplayType(ProjectStore.displayType === 0 ? 1 : 0)
           ProjectStore.setShowDetail(false)
+          ProjectStore.setShowResultAnalysis(false)
         }}
       >
         切换视角

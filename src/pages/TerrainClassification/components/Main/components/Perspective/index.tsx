@@ -205,6 +205,7 @@ function _Perspective() {
         onClick={() => {
           ProjectStore.setDisplayType(ProjectStore.displayType === 0 ? 1 : 0)
           ProjectStore.setShowDetail(false)
+          ProjectStore.setShowResultAnalysis(false)
         }}
       >
         切换视角
