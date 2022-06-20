@@ -114,8 +114,6 @@ function _ChartList(props: Props) {
               }
           }
         })
-
-  console.log(data)
   return (
     <Box
       sx={{
@@ -132,7 +130,7 @@ function _ChartList(props: Props) {
             display: 'flex',
             alignItems: 'center'
           }}
-          key={index}
+          key={item}
         >
           <Box
             sx={{

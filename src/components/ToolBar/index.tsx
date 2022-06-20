@@ -17,6 +17,7 @@ import { ProjectStore } from '../../mobx/project'
 import { uploadFile } from '../../network/project/uploadFile'
 import { getUpdatedImgs } from '../../network/project/getUpdatedImgs'
 import { generateUUID } from '../../utils/uuid'
+import { objectDetectionColors } from '../../consts/color'
 
 function _ToolBar() {
   const id = useParams('id') as string
@@ -291,6 +292,39 @@ function _ToolBar() {
                 <MyPieChart detectType={type} displayType={1} />
                 <ChartList detectType={type} displayType={1} />
               </Box>
+            </Box>
+          )}
+          {type === 4 && (
+            <Box
+              sx={{
+                width: '100px',
+                marginLeft: '10px'
+              }}
+            >
+              {objectDetectionColors.map((item) => (
+                <Box
+                  sx={{
+                    width: '120px',
+                    height: '30px',
+                    lineHeight: '30px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    color: 'primary.light'
+                  }}
+                  key={item.id}
+                >
+                  <Box
+                    sx={{
+                      width: '16px',
+                      height: '16px',
+                      borderRadius: '50%',
+                      backgroundColor: item.color,
+                      marginRight: '12px'
+                    }}
+                  ></Box>
+                  {item.name}
+                </Box>
+              ))}
             </Box>
           )}
         </Box>

@@ -1,24 +1,43 @@
 import Box from '@mui/material/Box'
-import Button from '@mui/material/Button'
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
 import Slider from '@mui/material/Slider'
 import SvgIcon from '../../../../../../components/SvgIcon'
 import MySelect from './components/MySelect'
 import { ProjectStore } from '../../../../../../mobx/project'
-import { perspectiveStyles } from './styles'
 import { observer } from 'mobx-react-lite'
 import { useState, useEffect } from 'react'
+import { perspectiveStyles } from './styles'
+import { objectDetectionColors } from '../../../../../../consts/color'
 
 function _Perspective() {
   let squareImg = document.querySelector('#squareImg') as HTMLElement
-  const [size, setSize] = useState(550)
+  const [size, setSize] = useState(500)
   const [angle, setAngle] = useState(-7)
-  const [detailImgUrl, setDetailImgUrl] = useState('')
   const [imgHeight, setImgHeight] = useState(
     squareImg ? squareImg.offsetHeight : 0
   )
   const [showDropDown, setShowDropDown] = useState(false)
+  // 得到dpr
+  const dpr = window.devicePixelRatio
+
+  let imageData: ImageData
+  let color: string
+
+  switch (ProjectStore.currentShownGroup.info.type) {
+    case 'playground':
+      color = objectDetectionColors[0].color
+      break
+    case 'aircraft':
+      color = objectDetectionColors[1].color
+      break
+    case 'overpass':
+      color = objectDetectionColors[2].color
+      break
+    case 'oiltank':
+      color = objectDetectionColors[3].color
+      break
+  }
 
   useEffect(() => {
     window.addEventListener('resize', handleHeight)
@@ -28,12 +47,13 @@ function _Perspective() {
     handleHeight()
   }, [])
 
+  // cube canvas
   useEffect(() => {
     const c = document.getElementById('canvas') as HTMLCanvasElement
     const ctx = c.getContext('2d') as CanvasRenderingContext2D
     const img = document.getElementById('cubeImg') as HTMLElement
-    // 得到dpr
-    const dpr = window.devicePixelRatio
+
+    // 解决模糊问题
     // 画布大小
     // const logicalWidth = c.width
     // const logicalHeight = c.height
@@ -74,7 +94,7 @@ function _Perspective() {
       // 虚线
       ctx.setLineDash([5, 5])
       // 颜色
-      ctx.strokeStyle = '#C29985'
+      ctx.strokeStyle = color
 
       ProjectStore.currentShownGroup.info.boxs.forEach((item) => {
         // 实际绘制的位置
@@ -83,8 +103,6 @@ function _Perspective() {
         // 实际绘制的宽高
         const dw = item[2] / ratio
         const dh = item[3] / ratio
-
-        // console.log(ratio, sx, sy, dw, dh)
 
         ctx.strokeRect(sx, sy, dw, dh)
       })
@@ -103,9 +121,55 @@ function _Perspective() {
     }
   }
 
-  function viewDetail(type: 0 | 1 | 2) {
+  function viewDetail() {
     ProjectStore.setShowDetail(true)
-    setDetailImgUrl(ProjectStore.currentShownGroup.pictures[type].url)
+
+    const c = document.getElementById('detail_canvas') as HTMLCanvasElement
+    const ctx = c.getContext('2d') as CanvasRenderingContext2D
+    const img = document.getElementById('cubeImg') as HTMLElement
+
+    c.width = 500 * dpr
+    c.height = 500 * dpr
+    c.style.width = '500px'
+    c.style.height = '500px'
+    ctx.scale(dpr, dpr)
+
+    // 绘制图片
+    ctx.drawImage(
+      img as CanvasImageSource,
+      0,
+      0,
+      img.offsetWidth,
+      img.offsetHeight,
+      0,
+      0,
+      500,
+      500
+    )
+
+    // 绘制方框
+    const sw = ProjectStore.currentShownGroup.info.w
+    const ratio = sw / size
+
+    // 线宽
+    ctx.lineWidth = 3
+    // 颜色
+    ctx.fillStyle = color
+    ctx.strokeStyle = color
+    // 透明
+    ctx.globalAlpha = 0.5
+
+    ProjectStore.currentShownGroup.info.boxs.forEach((item) => {
+      // 实际绘制的位置
+      const sx = item[0] / ratio
+      const sy = (item[1] + item[3]) / ratio
+      // 实际绘制的宽高
+      const dw = item[2] / ratio
+      const dh = item[3] / ratio
+
+      ctx.fillRect(sx, sy, dw, dh)
+      ctx.strokeRect(sx, sy, dw, dh)
+    })
   }
 
   function handleHeight() {
@@ -141,9 +205,6 @@ function _Perspective() {
               cursor: 'default'
             }}
             src={ProjectStore.currentShownGroup.pictures[0].url}
-            // onClick={() => {
-            //   viewDetail(0)
-            // }}
           />
           <img
             style={{
@@ -167,10 +228,8 @@ function _Perspective() {
               }rem) rotateX(65deg) rotateZ(${-20 + angle}deg)`,
               cursor: 'pointer'
             }}
-            // width={!ProjectStore.showDetail ? size : size / 2.5}
-            // height={!ProjectStore.showDetail ? size : size / 2.5}
             onClick={() => {
-              viewDetail(1)
+              viewDetail()
             }}
           ></canvas>
         </Box>
@@ -212,26 +271,34 @@ function _Perspective() {
           />
         </Box>
       )}
-      {ProjectStore.showDetail && (
-        <Box sx={perspectiveStyles.detail}>
-          <img
-            src={detailImgUrl}
-            style={{
-              width: '100%',
-              borderRadius: '1rem',
-              position: 'absolute',
-              top: '0'
-            }}
-          />
-          <div
-            onClick={() => {
-              ProjectStore.setShowDetail(false)
-            }}
-          >
-            <SvgIcon name="detail_close" class="perspective detail_close" />
-          </div>
-        </Box>
-      )}
+      <Box
+        sx={perspectiveStyles.detail}
+        style={{
+          visibility: ProjectStore.showDetail ? 'visible' : 'hidden'
+        }}
+      >
+        <canvas
+          id="detail_canvas"
+          style={{
+            width: '500px',
+            borderRadius: '1rem',
+            position: 'absolute',
+            top: 0,
+            right: 0,
+            zoom: 1.2
+          }}
+          width="500"
+          height="500"
+        ></canvas>
+        <div
+          onClick={() => {
+            ProjectStore.setShowDetail(false)
+          }}
+        >
+          <SvgIcon name="detail_close" class="perspective detail_close" />
+        </div>
+      </Box>
+
       <Box
         sx={perspectiveStyles.result}
         onClick={() => {
