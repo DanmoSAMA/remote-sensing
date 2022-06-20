@@ -1,7 +1,6 @@
 import Box from '@mui/material/Box'
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
-import Slider from '@mui/material/Slider'
 import SvgIcon from '../../../../../../components/SvgIcon'
 import MySelect from './components/MySelect'
 import { ProjectStore } from '../../../../../../mobx/project'
@@ -11,7 +10,7 @@ import { perspectiveStyles } from './styles'
 import { objectDetectionColors } from '../../../../../../consts/color'
 
 function _Perspective() {
-  let squareImg = document.querySelector('#squareImg') as HTMLElement
+  let squareImg = document.querySelector('#squareImg') as HTMLImageElement
   const [size, setSize] = useState(500)
   const [angle, setAngle] = useState(-7)
   const [imgHeight, setImgHeight] = useState(
@@ -21,7 +20,8 @@ function _Perspective() {
   // 得到dpr
   const dpr = window.devicePixelRatio
 
-  let imageData: ImageData
+  let cubeCanvas: HTMLCanvasElement
+  let ctx: CanvasRenderingContext2D
   let color: string
 
   switch (ProjectStore.currentShownGroup.info.type) {
@@ -49,10 +49,27 @@ function _Perspective() {
 
   // cube canvas
   useEffect(() => {
-    const c = document.getElementById('canvas') as HTMLCanvasElement
-    const ctx = c.getContext('2d') as CanvasRenderingContext2D
-    const img = document.getElementById('cubeImg') as HTMLElement
+    setTimeout(() => {
+      cubeCanvas = document.getElementById('canvas') as HTMLCanvasElement
+      ctx = cubeCanvas.getContext('2d') as CanvasRenderingContext2D
+      drawCubeCanvas(cubeCanvas, ctx)
+    }, 0)
+  }, [])
 
+  function zoom() {
+    if (size <= 620) {
+      setSize(size + 10)
+    }
+  }
+
+  function lessen() {
+    if (size >= 400) {
+      setSize(size - 10)
+    }
+  }
+
+  function drawCubeCanvas(c: HTMLCanvasElement, ctx: CanvasRenderingContext2D) {
+    const img = document.getElementById('cubeImg') as HTMLImageElement
     // 解决模糊问题
     // 画布大小
     // const logicalWidth = c.width
@@ -72,7 +89,10 @@ function _Perspective() {
     c.style.height = c.height + 'px'
 
     // 绘制图片
-    img.onload = () => {
+    img.onload = draw
+    if (img.complete) draw()
+
+    function draw() {
       ctx.drawImage(
         img as CanvasImageSource,
         0,
@@ -107,26 +127,12 @@ function _Perspective() {
         ctx.strokeRect(sx, sy, dw, dh)
       })
     }
-  }, [])
-
-  function zoom() {
-    if (size <= 620) {
-      setSize(size + 10)
-    }
   }
 
-  function lessen() {
-    if (size >= 400) {
-      setSize(size - 10)
-    }
-  }
-
-  function viewDetail() {
-    ProjectStore.setShowDetail(true)
-
+  function drawDetailCanvas() {
     const c = document.getElementById('detail_canvas') as HTMLCanvasElement
     const ctx = c.getContext('2d') as CanvasRenderingContext2D
-    const img = document.getElementById('cubeImg') as HTMLElement
+    const img = document.getElementById('cubeImg') as HTMLImageElement
 
     c.width = 500 * dpr
     c.height = 500 * dpr
@@ -149,7 +155,7 @@ function _Perspective() {
 
     // 绘制方框
     const sw = ProjectStore.currentShownGroup.info.w
-    const ratio = sw / size
+    const ratio = sw / 500
 
     // 线宽
     ctx.lineWidth = 3
@@ -172,12 +178,17 @@ function _Perspective() {
     })
   }
 
+  function viewDetail() {
+    ProjectStore.setShowDetail(true)
+    drawDetailCanvas()
+  }
+
   function handleHeight() {
-    squareImg = document.querySelector('#squareImg') as HTMLElement
+    squareImg = document.querySelector('#squareImg') as HTMLImageElement
     squareImg && setImgHeight(squareImg.offsetHeight)
     if (imgHeight === 0) {
       setTimeout(() => {
-        squareImg = document.querySelector('#squareImg') as HTMLElement
+        squareImg = document.querySelector('#squareImg') as HTMLImageElement
         squareImg && setImgHeight(squareImg.offsetHeight)
       }, 200)
     }
@@ -185,92 +196,49 @@ function _Perspective() {
 
   return (
     <Box sx={perspectiveStyles.wrapper}>
-      {ProjectStore.displayType === 0 ? (
-        <Box
-          sx={
-            !ProjectStore.showDetail
-              ? perspectiveStyles.cube
-              : perspectiveStyles.cubeAtConer
-          }
-        >
-          <img
-            style={{
-              width: !ProjectStore.showDetail ? `${size}px` : `${size / 2.5}px`,
-              height: !ProjectStore.showDetail
-                ? `${size}px`
-                : `${size / 2.5}px`,
-              transform: `translateY(${
-                !ProjectStore.showDetail ? -5 : 5
-              }rem) rotateX(65deg) rotateZ(${-20 + angle}deg)`,
-              cursor: 'default'
-            }}
-            src={ProjectStore.currentShownGroup.pictures[0].url}
-          />
-          <img
-            style={{
-              width: 'auto',
-              height: 'auto',
-              visibility: 'hidden',
-              position: 'absolute'
-            }}
-            id="cubeImg"
-            src={ProjectStore.currentShownGroup.pictures[1].url}
-          />
-          <canvas
-            id="canvas"
-            style={{
-              width: !ProjectStore.showDetail ? `${size}px` : `${size / 2.5}px`,
-              height: !ProjectStore.showDetail
-                ? `${size}px`
-                : `${size / 2.5}px`,
-              transform: `translateY(${
-                !ProjectStore.showDetail ? (size - 380) / 10 : (size - 200) / 20
-              }rem) rotateX(65deg) rotateZ(${-20 + angle}deg)`,
-              cursor: 'pointer'
-            }}
-            onClick={() => {
-              viewDetail()
-            }}
-          ></canvas>
-        </Box>
-      ) : (
-        <Box sx={perspectiveStyles.square}>
-          <img
-            src={ProjectStore.imgGroups[0].pictures[0].url}
-            id="squareImg"
-            style={{ opacity: 0 }}
-          />
-          {ProjectStore.currentShownImgs.map((item, index) => (
-            <img
-              src={item.url}
-              style={{
-                display: item.isShown && item.groupShown ? 'block' : 'none'
-              }}
-              key={item.uuid + index}
-            />
-          ))}
-          <Slider
-            defaultValue={50}
-            sx={{
-              height: `${imgHeight}px`,
-              padding: '0',
-
-              '& .MuiSlider-rail': {
-                backgroundColor: 'transparent'
-              },
-              '& .MuiSlider-track': {
-                borderTopLeftRadius: '.5rem',
-                borderBottomLeftRadius: '.5rem',
-                borderTopRightRadius: '0',
-                borderBottomRightRadius: '0',
-                background: `url(${ProjectStore.coverImg.url})`,
-                backgroundSize: 'cover',
-                transition: 'none'
-              }
-            }}
-          />
-        </Box>
-      )}
+      <Box
+        sx={
+          !ProjectStore.showDetail
+            ? perspectiveStyles.cube
+            : perspectiveStyles.cubeAtConer
+        }
+      >
+        <img
+          style={{
+            width: !ProjectStore.showDetail ? `${size}px` : `${size / 2.5}px`,
+            height: !ProjectStore.showDetail ? `${size}px` : `${size / 2.5}px`,
+            transform: `translateY(${
+              !ProjectStore.showDetail ? -5 : 5
+            }rem) rotateX(65deg) rotateZ(${-20 + angle}deg)`,
+            cursor: 'default'
+          }}
+          src={ProjectStore.currentShownGroup.pictures[0].url}
+        />
+        <img
+          style={{
+            width: 'auto',
+            height: 'auto',
+            visibility: 'hidden',
+            position: 'absolute'
+          }}
+          id="cubeImg"
+          src={ProjectStore.currentShownGroup.pictures[1].url}
+        />
+        <canvas
+          id="canvas"
+          style={{
+            width: !ProjectStore.showDetail ? `${size}px` : `${size / 2.5}px`,
+            height: !ProjectStore.showDetail ? `${size}px` : `${size / 2.5}px`,
+            transform: `translateY(${
+              !ProjectStore.showDetail ? (size - 380) / 10 : (size - 200) / 20
+            }rem) rotateX(65deg) rotateZ(${-20 + angle}deg)`,
+            cursor: 'pointer'
+          }}
+          onClick={() => {
+            viewDetail()
+          }}
+        ></canvas>
+      </Box>
       <Box
         sx={perspectiveStyles.detail}
         style={{
@@ -298,7 +266,6 @@ function _Perspective() {
           <SvgIcon name="detail_close" class="perspective detail_close" />
         </div>
       </Box>
-
       <Box
         sx={perspectiveStyles.result}
         onClick={() => {
@@ -349,16 +316,6 @@ function _Perspective() {
           </Box>
         )}
       </List>
-      <Box
-        sx={perspectiveStyles.button}
-        onClick={() => {
-          ProjectStore.setDisplayType(ProjectStore.displayType === 0 ? 1 : 0)
-          ProjectStore.setShowDetail(false)
-          ProjectStore.setShowResultAnalysis(false)
-        }}
-      >
-        切换视角
-      </Box>
     </Box>
   )
 }

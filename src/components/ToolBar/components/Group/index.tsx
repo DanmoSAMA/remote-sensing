@@ -75,8 +75,6 @@ function _Group(props: Props) {
             ProjectStore.hideAllGroups()
             ProjectStore.setGroupDisplayStatus(group.groupID, true)
 
-            console.log(ProjectStore.currentShownGroup.info)
-
             // switch (pathname) {
             //   case '/analysis':
             //     break
