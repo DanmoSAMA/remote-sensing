@@ -9,6 +9,7 @@ import { postDetectReq } from '../network/changeDetection/postDetectReq'
 import { postDetectReq as postObjDetectReq } from '../network/objectDetection/postObjDetectReq'
 import { postSortReq } from '../network/terrainClassification/postSortReq'
 import { postExtractReq } from '../network/objectExtract/postExtractReq'
+import { postAnalyseReq } from '../network/analyse/postAnalyseReq'
 import { getUpdatedImgs } from '../network/project/getUpdatedImgs'
 import { getRecentProjects } from '../network/project/getRecentProjects'
 
@@ -525,6 +526,46 @@ class ProjectState {
         const t = data.groups.find((item) => item.groupType === 4) as Group
         this.updateCurShownGroup(t.groupID)
         this.updateCurShownGroups(4)
+        this.updateCurShownImgs()
+        this.hideAllGroups()
+        this.setGroupDisplayStatus(t.groupID)
+      })
+    })
+  }
+  // 开始综合分析
+  async analyse(targetName: string) {
+    // 构造请求数据
+    const reqData = []
+    for (let i = 0; i < this.singleWaitingGroups.length; i++) {
+      const item = this.singleWaitingGroups[i]
+      const t = {
+        projectID: this.id,
+        originUUID: item.uuid
+        // targetName
+      }
+      if (t.originUUID !== '') {
+        reqData.push(t)
+      }
+    }
+
+    // 并行发送请求
+    const promiseArr = []
+    for (let i = 0; i < reqData.length; i++) {
+      const item = reqData[i]
+      console.log(item)
+      promiseArr.push(postAnalyseReq(item))
+    }
+
+    return Promise.all(promiseArr).then((res) => {
+      console.log(res)
+      getUpdatedImgs(this.id.toString()).then((res) => {
+        const data = res.data
+        this.updateImgs(data.pictures)
+        this.updateImgGroup(data.groups)
+
+        const t = data.groups.find((item) => item.groupType === 1) as Group
+        this.updateCurShownGroup(t.groupID)
+        this.updateCurShownGroups(1)
         this.updateCurShownImgs()
         this.hideAllGroups()
         this.setGroupDisplayStatus(t.groupID)
