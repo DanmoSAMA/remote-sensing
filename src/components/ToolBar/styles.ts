@@ -7,9 +7,7 @@ export const toolBarStyles = {
     top: '9vh',
     backgroundColor: '#313131',
     borderRadius: '20px',
-    padding: '10px',
     boxSizing: 'border-box',
-    overflow: 'auto',
     zIndex: 1,
     userSelect: 'none'
   },
@@ -18,6 +16,7 @@ export const toolBarStyles = {
     lineHeight: '30px',
     display: 'flex',
     justifyContent: 'space-between',
+    padding: '10px',
 
     '& p': {
       lineHeight: '30px',
@@ -39,6 +38,14 @@ export const toolBarStyles = {
       marginRight: '6px'
     }
   },
+  listWrapper: {
+    height: '83vh',
+    overflow: 'auto',
+    padding: '0px 10px'
+  },
+  list: {
+    padding: 0
+  },
   listItem: {
     color: '#fff',
     height: '50px',
@@ -48,7 +55,11 @@ export const toolBarStyles = {
     marginBottom: '20px',
     padding: '0 10px',
     position: 'relative',
-    fontSize: '15px'
+    fontSize: '15px',
+
+    '&:last-of-type': {
+      marginBottom: '0px'
+    }
   },
   listGroup: {
     borderRadius: '10px',

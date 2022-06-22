@@ -177,18 +177,20 @@ function _ToolBar() {
                 </Button>
               </label>
             </Box>
-            <List>
-              {ProjectStore.imgGroups &&
-                ProjectStore.imgGroups.map((item) => (
-                  <Group group={item} key={item.groupID} />
-                ))}
-            </List>
-            <List>
-              {ProjectStore.imgs &&
-                ProjectStore.imgs.map((item) => (
-                  <Item item={item} key={item.uuid} />
-                ))}
-            </List>
+            <Box sx={toolBarStyles.listWrapper}>
+              <List sx={toolBarStyles.list}>
+                {ProjectStore.imgGroups &&
+                  ProjectStore.imgGroups.map((item) => (
+                    <Group group={item} key={item.groupID} />
+                  ))}
+              </List>
+              <List sx={toolBarStyles.list}>
+                {ProjectStore.imgs &&
+                  ProjectStore.imgs.map((item) => (
+                    <Item item={item} key={item.uuid} />
+                  ))}
+              </List>
+            </Box>
           </Box>
           {isUploading && (
             <Box sx={toolBarStyles.mask}>
@@ -202,9 +204,9 @@ function _ToolBar() {
             <Typography
               fontSize="17px"
               color="primary.light"
-              mb="10px"
-              ml="10px"
-              mt="10px"
+              mb="15px"
+              ml="15px"
+              mt="15px"
             >
               结果分析
             </Typography>
@@ -215,7 +217,7 @@ function _ToolBar() {
               sx={{
                 color: 'primary.light',
                 fontSize: '15px',
-                margin: '20px 0 30px 10px'
+                margin: '15px 0 30px 15px'
               }}
             >
               图块数量：{ProjectStore.currentShownGroup.info.num} 个
@@ -226,7 +228,7 @@ function _ToolBar() {
               sx={{
                 color: 'primary.light',
                 fontSize: '15px',
-                margin: '20px 0 30px 10px'
+                margin: '20px 0 30px 15px'
               }}
             >
               目标数量：{ProjectStore.currentShownGroup.info.boxs.length} 个
@@ -244,7 +246,7 @@ function _ToolBar() {
                 fontSize="15px"
                 color="primary.light"
                 mb="10px"
-                ml="10px"
+                ml="15px"
                 mt="10px"
               >
                 图块数量统计（单位：个）
@@ -275,7 +277,7 @@ function _ToolBar() {
                 fontSize="15px"
                 color="primary.light"
                 mb="10px"
-                ml="10px"
+                ml="15px"
                 mt="10px"
               >
                 图块面积占比统计
@@ -298,7 +300,7 @@ function _ToolBar() {
             <Box
               sx={{
                 width: '100px',
-                marginLeft: '10px'
+                marginLeft: '15px'
               }}
             >
               {objectDetectionColors.map((item) => (
