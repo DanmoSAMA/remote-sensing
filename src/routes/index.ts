@@ -1,4 +1,6 @@
+/*@ts-ignore*/
 import loadable from '@loadable/component'
+/*@ts-ignore*/
 import { RouteConfig } from 'react-router-config'
 
 const routesConfig: RouteConfig[] = [

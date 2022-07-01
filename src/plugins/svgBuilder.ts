@@ -1,4 +1,5 @@
 import { Plugin } from 'vite'
+/*@ts-ignore*/
 import { readFileSync, readdirSync } from 'fs'
 let idPerfix = ''
 const svgTitle = /<svg([^>+].*?)>/
@@ -8,7 +9,7 @@ const hasViewBox = /(viewBox="[^>+].*?")/g
 
 const clearReturn = /(\r)|(\n)/g
 
-function findSvgFile(dir): string[] {
+function findSvgFile(dir: any): string[] {
   const svgRes = []
   const dirents = readdirSync(dir, {
     withFileTypes: true
@@ -20,17 +21,20 @@ function findSvgFile(dir): string[] {
       const svg = readFileSync(dir + dirent.name)
         .toString()
         .replace(clearReturn, '')
-        .replace(svgTitle, ($1, $2) => {
+        .replace(svgTitle, ($1: any, $2: any) => {
           let width = 0
           let height = 0
-          let content = $2.replace(clearHeightWidth, (s1, s2, s3) => {
-            if (s2 === 'width') {
-              width = s3
-            } else if (s2 === 'height') {
-              height = s3
+          let content = $2.replace(
+            clearHeightWidth,
+            (s1: any, s2: any, s3: any) => {
+              if (s2 === 'width') {
+                width = s3
+              } else if (s2 === 'height') {
+                height = s3
+              }
+              return ''
             }
-            return ''
-          })
+          )
           if (!hasViewBox.test($2)) {
             content += `viewBox="0 0 ${width} ${height}"`
           }
@@ -47,6 +51,7 @@ function findSvgFile(dir): string[] {
 }
 
 export const svgBuilder = (path: string, perfix = 'icon'): Plugin => {
+  /*@ts-ignore*/
   if (path === '') return
   idPerfix = perfix
   const res = findSvgFile(path)

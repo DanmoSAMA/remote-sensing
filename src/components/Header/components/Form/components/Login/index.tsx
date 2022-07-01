@@ -30,7 +30,7 @@ export default function Login(props: Props) {
   const { form, setForm, formIsValidate, doValidate } = useForm(formConfig)
   const [isCorrect, setIsCorrect] = useState(true)
 
-  const formRef = useRef()
+  const formRef: any = useRef()
 
   async function clickToLogin(account: string, password: string) {
     const reqData = {
@@ -59,10 +59,12 @@ export default function Login(props: Props) {
         alignItems: 'center'
       }}
     >
+      {/*@ts-ignore*/}
       <form style={formStyles.form} ref={formRef}>
         <input
           type="text"
           placeholder="输入您的账号"
+          /*@ts-ignore*/
           style={formStyles.input}
           className="form_input"
           autoComplete="true"
@@ -87,6 +89,7 @@ export default function Login(props: Props) {
         <input
           type="password"
           placeholder="输入您的密码"
+          /*@ts-ignore*/
           style={formStyles.input}
           className="form_input"
           autoComplete="true"

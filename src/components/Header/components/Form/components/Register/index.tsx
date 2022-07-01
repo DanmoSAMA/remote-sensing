@@ -50,6 +50,7 @@ export default function Register(props: Props) {
       if (resData.code === 0) {
         alert('注册成功')
         setForm({ account: '', password: '' })
+        /*@ts-ignore*/
         formRef.current.reset()
         setShowDialogue(false)
       } else if (resData.code === 2004) setHasRegistered(true)
@@ -66,10 +67,12 @@ export default function Register(props: Props) {
         alignItems: 'center'
       }}
     >
+      {/*@ts-ignore*/}
       <form style={formStyles.form} ref={formRef}>
         <input
           type="text"
           placeholder="输入您的账号"
+          /*@ts-ignore*/
           style={formStyles.input}
           className="form_input"
           autoComplete="true"
@@ -91,6 +94,7 @@ export default function Register(props: Props) {
         <input
           type="password"
           placeholder="输入您的密码"
+          /*@ts-ignore*/
           style={formStyles.input}
           className="form_input"
           autoComplete="true"
@@ -112,6 +116,7 @@ export default function Register(props: Props) {
         <input
           type="password"
           placeholder="确认您的密码"
+          /*@ts-ignore*/
           style={formStyles.input}
           className="form_input"
           autoComplete="true"

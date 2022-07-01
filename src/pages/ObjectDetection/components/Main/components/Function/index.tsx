@@ -8,7 +8,7 @@ import { ProjectStore } from '../../../../../../mobx/project'
 import { mainStyles } from '../../styles'
 import { observer } from 'mobx-react-lite'
 import { useState } from 'react'
-import { ObjectType } from '../../../../../../types/objectDetection/objectType'
+import { ObjectType } from '../../../../../../types/objectDetection/ObjectType'
 
 function _Function() {
   const [isChecking, setIsChecking] = useState(false)

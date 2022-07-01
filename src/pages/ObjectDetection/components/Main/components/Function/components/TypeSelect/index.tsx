@@ -5,7 +5,7 @@ import { observer } from 'mobx-react-lite'
 import { useState } from 'react'
 import { mainStyles } from '../../../../styles'
 import { selectItems } from './consts/selectItems'
-import { ObjectType } from '../../../../../../../../types/objectDetection/objectType'
+import { ObjectType } from '../../../../../../../../types/objectDetection/ObjectType'
 
 type Props = {
   objectType: ObjectType
