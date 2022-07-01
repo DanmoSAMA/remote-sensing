@@ -14,5 +14,6 @@ export async function postAnalyseReq(
     url: '/v1/project/picture/overall'
   })
 
+  /*@ts-ignore*/
   return res
 }

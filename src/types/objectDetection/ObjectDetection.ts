@@ -1,5 +1,5 @@
 import { HttpRes } from '../HttpRes'
-import { ObjectType as _ObjectType } from './objectType'
+import { ObjectType as _ObjectType } from './ObjectType'
 import { BoxType } from './BoxType'
 
 type ObjectType = Exclude<_ObjectType, ''>
