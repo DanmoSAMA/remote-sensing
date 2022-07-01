@@ -557,7 +557,6 @@ class ProjectState {
     }
 
     return Promise.all(promiseArr).then((res) => {
-      console.log(res)
       getUpdatedImgs(this.id.toString()).then((res) => {
         const data = res.data
         this.updateImgs(data.pictures)

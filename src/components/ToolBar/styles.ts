@@ -39,7 +39,7 @@ export const toolBarStyles = {
     }
   },
   listWrapper: {
-    height: '83vh',
+    height: '82.5vh',
     overflow: 'auto',
     padding: '0px 10px'
   },

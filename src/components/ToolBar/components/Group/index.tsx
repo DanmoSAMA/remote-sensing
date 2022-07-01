@@ -74,19 +74,6 @@ function _Group(props: Props) {
             ProjectStore.setCoverImg(ProjectStore.currentShownGroup.pictures[0])
             ProjectStore.hideAllGroups()
             ProjectStore.setGroupDisplayStatus(group.groupID, true)
-
-            // switch (pathname) {
-            //   case '/analysis':
-            //     break
-            //   case 'change-detection':
-            //     ProjectStore.updateCurShownGroup(group.groupID)
-            //     break
-            //   case '/terrain-classification':
-            //     break
-            //   case '/object-extract':
-            //     break
-            //   case '/object-detection':
-            // }
           }
         }}
         style={{
@@ -212,9 +199,9 @@ function _Group(props: Props) {
         sx={toolBarStyles.listGroup}
         style={{ display: isClosed ? 'none' : 'block' }}
       >
-        {group.pictures.map((item: Img) => (
+        {group.pictures.map((item: Img, index) => (
           // 嵌套li会有warning，暂时不理会
-          <Item item={item} key={item.uuid} groupID={group.groupID} />
+          <Item item={item} key={item.uuid + index} groupID={group.groupID} />
         ))}
       </Box>
     </Box>

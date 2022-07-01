@@ -39,7 +39,7 @@ function _ToolBar() {
 
     getUpdatedImgs(id).then((res) => {
       const data = res.data
-
+      console.log(data)
       ProjectStore.updateImgs(data.pictures)
       ProjectStore.updateImgGroup(data.groups)
       ProjectStore.updateCurShownGroups(type)
