@@ -4,6 +4,7 @@ import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import Typography from '@mui/material/Typography'
 import IconButton from '@mui/material/IconButton'
+import { checkLogin } from '../../../../utils/checkLogin'
 import { functionsStyles } from './styles'
 import { functionItems } from './consts/functionItems'
 import { useNavigate } from 'react-router-dom'
@@ -19,7 +20,11 @@ function Functions(props: Props) {
   const navigate = useNavigate()
   const { name, id } = props
 
-  function clickFunctionItem(name: string, route: string) {
+  async function clickFunctionItem(name: string, route: string) {
+    const res = await checkLogin()
+    if (!res) {
+      return alert('请先登录')
+    }
     // 在项目创建之前点击，则新建未命名项目
     if (name === '') {
       createProject({ name: '未命名项目' }).then((res) => {

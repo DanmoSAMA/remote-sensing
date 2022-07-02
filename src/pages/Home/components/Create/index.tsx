@@ -2,11 +2,20 @@ import Container from '@mui/material/Container'
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 import AddIcon from '@mui/icons-material/Add'
+import { checkLogin } from '../../../../utils/checkLogin'
 import { createStyles } from './styles'
 import { useNavigate } from 'react-router-dom'
 
 function Create() {
   const navigate = useNavigate()
+
+  async function createProject() {
+    const res = await checkLogin()
+    if (!res) {
+      return alert('请先登录')
+    }
+    navigate('/home/create')
+  }
 
   return (
     <Container sx={createStyles.create}>
@@ -26,7 +35,7 @@ function Create() {
         variant="contained"
         color="secondary"
         sx={createStyles.button}
-        onClick={() => navigate('/home/create')}
+        onClick={() => createProject()}
       >
         <AddIcon sx={createStyles.icon} />
         新建项目
