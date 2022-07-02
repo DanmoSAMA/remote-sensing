@@ -76,7 +76,7 @@ function Functions(props: Props) {
               </Typography>
             </CardContent>
           </Card>
-          <div className="mask"></div>
+          {/* <div className="mask"></div> */}
         </Box>
       ))}
     </Box>

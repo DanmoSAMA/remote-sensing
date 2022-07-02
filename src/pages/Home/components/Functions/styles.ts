@@ -19,16 +19,10 @@ export const functionsStyles = {
     borderTopRightRadius: '1rem',
     backgroundColor: 'primary.dark',
     boxShadow: '0 2px 8px rgba(0, 0, 0, .5)',
-    // position: 'absolute',
-    // bottom: '0',
-    // zIndex: 1,
 
     '&:hover + .MuiPaper-root': {
       display: 'flex'
     }
-    // '&:hover ~ .mask': {
-    //   display: 'block'
-    // }
   },
   icon: {
     backgroundColor: '#fff',
@@ -47,7 +41,6 @@ export const functionsStyles = {
   hoverItem: {
     width: '13rem',
     height: '14rem',
-    // display: 'flex',
     display: 'none',
     flexDirection: 'column',
     alignItems: 'center',
@@ -58,24 +51,24 @@ export const functionsStyles = {
     position: 'absolute',
     bottom: '1rem',
     zIndex: 11,
-    cursor: 'pointer',
+    cursor: 'pointer'
 
-    '& + .mask': {
-      width: '100vw',
-      height: '100vh',
-      position: 'fixed',
-      backgroundColor: 'rgba(0, 0, 0, .5)',
-      top: 0,
-      left: 0,
-      // zIndex: 0,
-      zIndex: 10,
-      display: 'none'
-    },
-    '&:hover': {
-      display: 'flex'
-    },
-    '&:hover + .mask': {
-      display: 'block'
-    }
+    // 因为mask有闪烁问题，所以去掉
+    // '& + .mask': {
+    //   width: '100vw',
+    //   height: '100vh',
+    //   position: 'fixed',
+    //   backgroundColor: 'rgba(0, 0, 0, .5)',
+    //   top: 0,
+    //   left: 0,
+    //   zIndex: 10,
+    //   display: 'none'
+    // },
+    // '&:hover': {
+    //   display: 'flex'
+    // },
+    // '&:hover + .mask': {
+    //   display: 'block'
+    // }
   }
 }
