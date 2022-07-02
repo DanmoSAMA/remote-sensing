@@ -1,7 +1,7 @@
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
-import { useState, useEffect, useRef } from 'react'
+import { useState, useRef } from 'react'
 import { formStyles } from '../../styles'
 import { useForm } from '../../hooks/useForm'
 import { FormConfig } from '../../../../../../types/user/ConfigOpts'
@@ -30,14 +30,10 @@ export default function Register(props: Props) {
   const { form, setForm, formIsValidate, doValidate } = useForm(formConfig)
 
   const [checkPw, setCheckPw] = useState('')
-  const [pwNotSame, setPwNotSame] = useState(true)
+  const [pwNotSame, setPwNotSame] = useState(false)
   const [hasRegistered, setHasRegistered] = useState(false)
 
   const formRef = useRef()
-
-  useEffect(() => {
-    doValidate()
-  }, [])
 
   async function clickToRegister(account: string, password: string) {
     if (formIsValidate.account && formIsValidate.password && !pwNotSame) {
@@ -88,7 +84,9 @@ export default function Register(props: Props) {
           sx={formStyles.hint}
           margin="5px 0"
           width="95%"
-          style={{ color: !formIsValidate.account ? color[0] : color[1] }}
+          style={{
+            color: formIsValidate.account === false ? color[0] : color[1]
+          }}
         >
           账号以字母开头，由小写英文字母和数字组成的4-16位字符
         </Typography>
@@ -110,7 +108,9 @@ export default function Register(props: Props) {
           sx={formStyles.hint}
           margin="5px 0"
           width="95%"
-          style={{ color: !formIsValidate.password ? color[0] : color[1] }}
+          style={{
+            color: formIsValidate.password === false ? color[0] : color[1]
+          }}
         >
           长度8-20位，仅可包括数字、大写字母、小写字母
         </Typography>

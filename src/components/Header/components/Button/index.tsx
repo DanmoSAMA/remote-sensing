@@ -4,6 +4,7 @@ import Form from '../Form'
 import SvgIcon from '../../../SvgIcon'
 import avatar from '../../../../assets/imgs/avatar.png'
 import { useState, useEffect } from 'react'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { buttonStyles } from './styles'
 import { useShowDialgue } from '../../hooks/useShowDialogue'
 import { getToken, clearToken } from '../../../../utils/token'
@@ -14,6 +15,8 @@ import { useShowDropDown } from './hooks/useShowDropdown'
 function _Button() {
   const { showDialogue, setShowDialogue } = useShowDialgue()
   const { showDropDown, setShowDropDown } = useShowDropDown()
+  const navigate = useNavigate()
+  const { pathname } = useLocation()
   const [userAccount, setUserAccount] = useState('')
 
   let token = getToken()
@@ -28,7 +31,12 @@ function _Button() {
   function clickToLogout() {
     setShowDropDown(false)
     clearToken()
-    location.reload()
+
+    if (pathname === '/home' || pathname === '/recent' || pathname === 'bin') {
+      location.reload()
+    } else {
+      navigate('/home')
+    }
   }
 
   return (

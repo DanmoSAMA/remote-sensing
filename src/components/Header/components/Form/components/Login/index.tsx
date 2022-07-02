@@ -81,7 +81,7 @@ export default function Login(props: Props) {
           width="95%"
           style={{
             color: color[0],
-            visibility: !formIsValidate.account ? 'visible' : 'hidden'
+            visibility: formIsValidate.account === false ? 'visible' : 'hidden'
           }}
         >
           账号不能为空
@@ -106,7 +106,7 @@ export default function Login(props: Props) {
           width="95%"
           style={{
             color: color[0],
-            visibility: !formIsValidate.password ? 'visible' : 'hidden'
+            visibility: formIsValidate.password === false ? 'visible' : 'hidden'
           }}
         >
           密码不能为空
