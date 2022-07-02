@@ -52,6 +52,7 @@ export default function Register(props: Props) {
         setForm({ account: '', password: '' })
         /*@ts-ignore*/
         formRef.current.reset()
+        setShowLogin(true)
         setShowDialogue(false)
       } else if (resData.code === 2004) setHasRegistered(true)
     } else console.log('账号或密码的格式错误，或两次输入的密码不同')

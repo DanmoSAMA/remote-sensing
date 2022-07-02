@@ -14,7 +14,8 @@ export function getToken(): string | null {
   if (!tokenStr) return null
 
   // 如果不parse，token会带引号
-  const token = JSON.parse(tokenStr)
+  // const token = JSON.parse(tokenStr)
 
-  return token
+  // return token
+  return tokenStr
 }
