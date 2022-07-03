@@ -7,6 +7,7 @@ import { formStyles } from './styles'
 import { useState } from 'react'
 import { createProject } from '../../../../network/project/createProject'
 import { ProjectStore } from '../../../../mobx/project'
+import useMediaQuery from '@mui/material/useMediaQuery'
 
 type Props = {
   projectName: string
@@ -16,6 +17,7 @@ type Props = {
 
 export default function Form(props: Props) {
   const { projectName, setProjectName, setProjectId } = props
+  const breakPoint = useMediaQuery('(min-width:1000px)')
   const [isCreated, setIsCreated] = useState(false)
 
   async function clickToCreateProject() {
@@ -33,12 +35,32 @@ export default function Form(props: Props) {
   }
 
   return (
-    <Box sx={formStyles.wrapper}>
-      <FormControl variant="standard" sx={formStyles.left}>
+    <Box
+      sx={formStyles.wrapper}
+      style={{
+        top: breakPoint ? '10rem' : '155px',
+        left: breakPoint ? '8rem' : '80px',
+        height: breakPoint ? '32rem' : '200px',
+        width: breakPoint ? '50rem' : '500px'
+      }}
+    >
+      <FormControl
+        variant="standard"
+        sx={formStyles.left}
+        style={{ paddingLeft: breakPoint ? '1rem' : '10px' }}
+      >
         <Input
           disableUnderline={true}
           placeholder="请输入项目名称（不多于50个字符）"
           sx={formStyles.input}
+          style={{
+            // width: breakPoint ? '100%' : '300px',
+            height: breakPoint ? '6rem' : '60px',
+            borderRadius: breakPoint ? '1rem' : '15px',
+            fontSize: breakPoint ? '1.5rem' : '16px',
+            padding: breakPoint ? '0 1rem' : '0 15px',
+            marginBottom: breakPoint ? '4rem' : '40px'
+          }}
           onChange={(e) => setProjectName(e.target.value)}
         />
         <Button

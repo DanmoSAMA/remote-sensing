@@ -1,7 +1,7 @@
-import Grid from '@mui/material/Grid'
+import Box from '@mui/material/Box'
 import Header from '../../components/Header'
 import Form from './components/Form'
-import Picture from './components/Picture'
+import Picture from '../../pages/Home/components/Picture'
 import Functions from '../../pages/Home/components/Functions'
 import { useState } from 'react'
 import { createStyles } from './styles'
@@ -13,7 +13,7 @@ function Create() {
   return (
     <>
       <Header />
-      <Grid sx={createStyles.body}>
+      <Box sx={createStyles.body}>
         <Form
           projectName={projectName}
           setProjectName={setProjectName}
@@ -21,7 +21,7 @@ function Create() {
         />
         <Functions name={projectName} id={projectId} />
         <Picture />
-      </Grid>
+      </Box>
     </>
   )
 }

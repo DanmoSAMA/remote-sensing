@@ -3,26 +3,20 @@ export const formStyles = {
     display: 'flex',
     position: 'absolute',
     top: '10rem',
-    width: '70vw',
-    height: '32rem'
+    width: '50rem',
+    height: '32rem',
+    left: '8rem'
   },
   left: {
-    width: '50%',
+    width: '100%',
     display: 'flex',
     boxSizing: 'border-box',
     paddingLeft: '1rem',
     flexDirection: 'column',
     justifyContent: 'center'
   },
-  right: {
-    width: '50%',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
   input: {
-    width: '100%',
+    width: '80%',
     height: '6rem',
     maxHeight: '90px',
     minHeight: '60px',
@@ -35,10 +29,10 @@ export const formStyles = {
     marginBottom: '4rem'
   },
   button: {
-    width: '75%',
+    width: '60%',
     height: '4rem',
     maxHeight: '70px',
-    minHeight: '40px',
+    minHeight: '50px',
     backgroundColor: 'secondary.main',
     borderRadius: '1rem',
     fontSize: '1.2rem',

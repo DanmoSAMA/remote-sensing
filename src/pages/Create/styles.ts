@@ -1,12 +1,13 @@
 export const createStyles = {
   body: {
     '&': {
-      display: 'flex',
       justifyContent: 'center',
       height: '100vh',
+      minHeight: '500px',
       width: '100%',
-      paddingTop: '80px',
-      position: 'relative'
+      minWidth: '1000px',
+      position: 'relative',
+      top: '60px'
     }
   }
 }
