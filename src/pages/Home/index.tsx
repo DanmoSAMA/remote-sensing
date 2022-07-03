@@ -1,4 +1,4 @@
-import Grid from '@mui/material/Grid'
+import Box from '@mui/material/Box'
 import Create from './components/Create'
 import Picture from './components/Picture'
 import Functions from './components/Functions'
@@ -9,11 +9,11 @@ function Home() {
   return (
     <>
       <Header />
-      <Grid sx={homeStyles.body}>
+      <Box sx={homeStyles.body}>
         <Create />
         <Picture />
         <Functions name="" />
-      </Grid>
+      </Box>
     </>
   )
 }

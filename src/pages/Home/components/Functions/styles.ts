@@ -51,7 +51,7 @@ export const functionsStyles = {
     position: 'absolute',
     bottom: '1rem',
     zIndex: 11,
-    cursor: 'pointer'
+    cursor: 'pointer',
 
     // 因为mask有闪烁问题，所以去掉
     // '& + .mask': {
@@ -64,11 +64,11 @@ export const functionsStyles = {
     //   zIndex: 10,
     //   display: 'none'
     // },
-    // '&:hover': {
-    //   display: 'flex'
-    // },
-    // '&:hover + .mask': {
-    //   display: 'block'
-    // }
+    '&:hover': {
+      display: 'flex'
+    },
+    '&:hover + .mask': {
+      display: 'block'
+    }
   }
 }

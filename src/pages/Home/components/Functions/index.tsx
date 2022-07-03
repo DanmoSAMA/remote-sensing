@@ -4,6 +4,7 @@ import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import Typography from '@mui/material/Typography'
 import IconButton from '@mui/material/IconButton'
+import useMediaQuery from '@mui/material/useMediaQuery'
 import { checkLogin } from '../../../../utils/checkLogin'
 import { functionsStyles } from './styles'
 import { functionItems } from './consts/functionItems'
@@ -18,6 +19,7 @@ type Props = {
 
 function Functions(props: Props) {
   const navigate = useNavigate()
+  const breakPoint = useMediaQuery('(min-width:1000px)')
   const { name, id } = props
 
   async function clickFunctionItem(name: string, route: string) {
@@ -38,18 +40,36 @@ function Functions(props: Props) {
   }
 
   return (
-    <Box sx={functionsStyles.wrapper}>
+    <Box
+      sx={functionsStyles.wrapper}
+      style={{
+        padding: breakPoint ? '0 6rem 0 9rem' : '0 60px 0 90px'
+      }}
+    >
       {functionItems.map((item) => (
         <Box key={item.label}>
-          <Card sx={functionsStyles.item}>
+          <Card
+            sx={functionsStyles.item}
+            style={{
+              width: breakPoint ? '13rem' : '130px',
+              height: breakPoint ? '6rem' : '65px'
+            }}
+          >
             <CardContent>
               <Container sx={{ display: 'flex', justifyContent: 'center' }}>
-                <IconButton aria-label="search" sx={functionsStyles.icon}>
+                <IconButton
+                  aria-label="search"
+                  sx={functionsStyles.icon}
+                  style={{
+                    width: breakPoint ? '2.5rem' : '30px',
+                    height: breakPoint ? '2.5rem' : '30px'
+                  }}
+                >
                   {item.icon}
                 </IconButton>
               </Container>
               <Typography
-                fontSize={'1.2rem'}
+                fontSize={breakPoint ? '1.2rem' : '13px'}
                 color={'secondary'}
                 fontWeight={300}
               >
@@ -59,11 +79,24 @@ function Functions(props: Props) {
           </Card>
           <Card
             sx={functionsStyles.hoverItem}
+            style={{
+              width: breakPoint ? '13rem' : '130px',
+              height: breakPoint ? '14rem' : '140px',
+              borderRadius: breakPoint ? '1rem' : '12px',
+              bottom: breakPoint ? '1rem' : '12px'
+            }}
             onClick={() => clickFunctionItem(name, item.route)}
           >
             <CardContent>
               <Container sx={{ display: 'flex', justifyContent: 'center' }}>
-                <IconButton aria-label="search" sx={functionsStyles.icon}>
+                <IconButton
+                  aria-label="search"
+                  sx={functionsStyles.icon}
+                  style={{
+                    width: breakPoint ? '2.5rem' : '30px',
+                    height: breakPoint ? '2.5rem' : '30px'
+                  }}
+                >
                   {item.icon}
                 </IconButton>
               </Container>

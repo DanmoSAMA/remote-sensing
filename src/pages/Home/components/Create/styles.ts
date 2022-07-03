@@ -2,6 +2,7 @@ export const createStyles = {
   create: {
     '&': {
       width: '37.25rem',
+      minWidth: '400px',
       position: 'absolute',
       top: '6.5rem',
       left: '15rem'
@@ -32,12 +33,6 @@ export const createStyles = {
       fontSize: '1.5rem',
       borderRadius: '1.25rem',
       fontFamily: 'Microsoft YaHei UI'
-    }
-  },
-  icon: {
-    '&': {
-      fontSize: '2.375rem',
-      marginRight: '1rem'
     }
   }
 }
