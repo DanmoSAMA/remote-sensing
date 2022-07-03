@@ -10,29 +10,8 @@ export const projectStyles = {
     marginTop: '5rem',
     justifyItems: 'center'
   },
-  item: {
-    width: '18rem',
-    height: '18rem',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    position: 'relative',
-
-    '&:hover + .mask': {
-      display: 'flex!important'
-    },
-    '& + .mask:hover': {
-      display: 'flex!important'
-    },
-    '& img': {
-      width: '11rem',
-      borderRadius: '1rem'
-    }
-  },
   mask: {
     display: 'none',
-    // display: 'flex',
     width: '18rem',
     height: '18rem',
     backgroundColor: 'rgba(226, 222, 205, .7)',

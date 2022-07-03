@@ -2,6 +2,7 @@ import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import SvgIcon from '../../../../components/SvgIcon'
 import projectCover from '../../../../assets/imgs/projectCover.png'
+import useMediaQuery from '@mui/material/useMediaQuery'
 import { useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { projectStyles } from './styles'
@@ -17,6 +18,7 @@ function Project() {
   const navigate = useNavigate()
   const [recentProjects, setRecentProjects] = useState<ProjectType[]>([])
   const keyword = useParams('keyword')
+  const breakPoint = useMediaQuery('(min-width:1000px)')
   let token = getToken()
 
   useEffect(() => {
@@ -45,14 +47,48 @@ function Project() {
   }
 
   return (
-    <Box sx={projectStyles.wrapper}>
+    <Box
+      sx={projectStyles.wrapper}
+      style={{
+        marginTop: breakPoint ? '5rem' : '50px'
+      }}
+    >
       {recentProjects?.slice(0, 8).map((item) => (
         <Box key={item.id} sx={{ position: 'relative' }}>
-          <Box sx={projectStyles.item}>
+          <Box
+            sx={{
+              width: breakPoint ? '18rem' : '180px',
+              height: breakPoint ? '18rem' : '180px',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center',
+              position: 'relative',
+
+              '&:hover + .mask': {
+                display: 'flex!important'
+              },
+              '& + .mask:hover': {
+                display: 'flex!important'
+              },
+              '& img': {
+                width: breakPoint ? '11rem' : '110px',
+                borderRadius: '1rem'
+              }
+            }}
+          >
             <img src={projectCover} />
             <Typography sx={projectStyles.bottom}>{item.name}</Typography>
           </Box>
-          <Box className="mask" sx={projectStyles.mask}>
+          <Box
+            className="mask"
+            sx={projectStyles.mask}
+            style={{
+              width: breakPoint ? '18rem' : '180px',
+              height: breakPoint ? '18rem' : '180px',
+              borderRadius: breakPoint ? '1rem' : '10px'
+            }}
+          >
             <Typography color={'secondary.main'} fontSize={'1rem'}>
               最近编辑于
             </Typography>
