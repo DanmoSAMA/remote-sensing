@@ -2,7 +2,7 @@ export const shortHeaderStyles = {
   appBar: {
     '&': {
       paddingLeft: '250px',
-      height: '70px',
+      height: '60px',
       backgroundColor: 'primary.light',
       lineHeight: '60px',
       boxShadow: 'none',
@@ -11,7 +11,7 @@ export const shortHeaderStyles = {
       zIndex: 2
     },
     '& .MuiToolbar-root': {
-      height: '80px',
+      height: '60px',
       display: 'flex',
       justifyContent: 'space-between',
       padding: '0 53px 0 36px'

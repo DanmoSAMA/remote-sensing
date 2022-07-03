@@ -53,8 +53,8 @@ function _Button() {
           alt="default avatar"
           src={avatar}
           sx={{
-            height: '50px',
-            width: '50px',
+            height: '40px',
+            width: '40px',
             display: token !== null ? 'block' : 'none',
             marginLeft: '1rem',
             cursor: 'pointer'
@@ -85,8 +85,8 @@ function _Button() {
               alt="default avatar"
               src={avatar}
               sx={{
-                height: '50px',
-                width: '50px',
+                height: '40px',
+                width: '40px',
                 display: token !== null ? 'block' : 'none',
                 marginLeft: '1rem',
                 cursor: 'pointer'

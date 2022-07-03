@@ -19,8 +19,6 @@ export function useForm<T extends { [name: string]: ConfigOpts }>(config: T) {
   // 调用 react hook 得到响应式的表单检验情况数据, 默认为都通过
   const [formIsValidate, setFormValidate] = useState<FormHint>({})
 
-  console.log(formIsValidate)
-
   /**
    * 修改表单的部分字段
    * @param partOfNewForm {字段: 值}, 只改变传入参数中包含的字段

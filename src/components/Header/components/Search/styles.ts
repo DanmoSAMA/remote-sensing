@@ -18,8 +18,8 @@ export const searchStyles = {
       left: '46px'
     },
     '& .MuiInput-input': {
-      height: '50px',
-      lineHeight: '50px',
+      height: '40px',
+      lineHeight: '40px',
       padding: '0 55px 0 10px',
       boxSizing: 'border-box'
     },
@@ -30,8 +30,8 @@ export const searchStyles = {
   search: {
     '&': {
       backgroundColor: 'primary.main',
-      height: '50px',
-      width: '50px'
+      height: '40px',
+      width: '40px'
     },
     '&:hover': {
       backgroundColor: 'primary.main'

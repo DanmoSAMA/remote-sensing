@@ -29,6 +29,7 @@ export default function Login(props: Props) {
   const { showLogin, setShowLogin, setShowDialogue } = props
   const { form, setForm, formIsValidate, doValidate } = useForm(formConfig)
   const [isCorrect, setIsCorrect] = useState(true)
+  const [loginFail, setLoginFail] = useState(false)
 
   const formRef: any = useRef()
 
@@ -38,7 +39,11 @@ export default function Login(props: Props) {
       password
     }
     const resData = await login(reqData)
-    const token = resData.data?.token
+    if (resData.code === 2003 || resData.code === 2006) {
+      return setLoginFail(true)
+    }
+    setLoginFail(false)
+    const token = resData.data.token
 
     if (token) {
       setForm({ account: '', password: '' })
@@ -119,6 +124,15 @@ export default function Login(props: Props) {
           账号或密码错误，请重新输入
         </Typography>
       </form>
+      <Typography
+        sx={formStyles.hint}
+        style={{
+          color: color[0],
+          display: loginFail ? 'block' : 'none'
+        }}
+      >
+        账号或密码错误，请重新输入
+      </Typography>
       <Button
         variant="contained"
         sx={formStyles.button}

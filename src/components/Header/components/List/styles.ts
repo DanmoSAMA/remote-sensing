@@ -17,7 +17,7 @@ export const listStyles = {
       borderRadius: '10px'
     },
     '& .MuiTypography-root': {
-      fontSize: '18px',
+      fontSize: '16px',
       fontWeight: '300'
     },
     '&.Mui-selected': {

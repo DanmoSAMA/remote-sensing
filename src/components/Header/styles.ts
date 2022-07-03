@@ -1,7 +1,7 @@
 export const headerStyles = {
   appBar: {
     '&': {
-      height: '80px',
+      height: '60px',
       backgroundColor: '#313131',
       lineHeight: '80px',
       color: '#000',
@@ -11,7 +11,7 @@ export const headerStyles = {
       zIndex: 1
     },
     '& .MuiToolbar-root': {
-      height: '80px',
+      height: '60px',
       display: 'flex',
       justifyContent: 'space-between',
       padding: '0 53px 0 36px'

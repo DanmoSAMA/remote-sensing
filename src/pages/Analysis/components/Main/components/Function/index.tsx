@@ -44,7 +44,7 @@ function _Function() {
               fontWeight={400}
               mb={'5px'}
             >
-              待分析图片
+              待整合图片
             </Typography>
             <MySelect />
           </Box>
