@@ -57,6 +57,8 @@ export const perspectiveStyles = {
     bottom: '3rem',
     height: '6rem',
     width: '3rem',
+    minWidth: '30px',
+    minHeight: '60px',
     color: '#E2DECD',
     fontSize: '1.2rem',
     padding: 0,
@@ -73,6 +75,8 @@ export const perspectiveStyles = {
     bottom: '19.7rem',
     height: '6rem',
     width: '3rem',
+    minWidth: '30px',
+    minHeight: '60px',
     color: 'secondary.main',
     fontSize: '1.2rem',
     padding: 0,
@@ -90,6 +94,8 @@ export const perspectiveStyles = {
     width: '3rem',
 
     '& .MuiListItem-root': {
+      minWidth: '30px',
+      minHeight: '30px',
       width: '3rem',
       height: '3rem',
       display: 'flex',

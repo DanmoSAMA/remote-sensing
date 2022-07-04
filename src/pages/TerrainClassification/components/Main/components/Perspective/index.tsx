@@ -12,8 +12,8 @@ import { useState, useEffect } from 'react'
 
 function _Perspective() {
   let squareImg = document.querySelector('#squareImg') as HTMLElement
-  const [size, setSize] = useState(85)
-  const [angle, setAngle] = useState(-7)
+  const [size, setSize] = useState(60)
+  const [angle, setAngle] = useState(-15)
   const [detailImgUrl, setDetailImgUrl] = useState('')
   const [imgHeight, setImgHeight] = useState(
     squareImg ? squareImg.offsetHeight : 0
@@ -29,13 +29,13 @@ function _Perspective() {
   })
 
   function zoom() {
-    if (size <= 100) {
+    if (size <= 75) {
       setSize(size + 2)
     }
   }
 
   function lessen() {
-    if (size >= 50) {
+    if (size >= 45) {
       setSize(size - 2)
     }
   }
@@ -70,8 +70,8 @@ function _Perspective() {
             style={{
               width: `${size}%`,
               transform: `translateY(${
-                !ProjectStore.showDetail ? -size / 10 : -size / 20
-              }rem) rotateX(65deg) rotateZ(${-20 + angle}deg)`
+                !ProjectStore.showDetail ? (size - 50) / 10 : -size / 20
+              }rem) rotateX(57deg) rotateZ(${-20 + angle}deg)`
             }}
             src={ProjectStore.currentShownGroup.pictures[0].url}
             onClick={() => {
@@ -82,8 +82,8 @@ function _Perspective() {
             style={{
               width: `${size}%`,
               transform: `translateY(${
-                !ProjectStore.showDetail ? (size + 10) / 10 : (size + 10) / 20
-              }rem) rotateX(65deg) rotateZ(${-20 + angle}deg)`
+                !ProjectStore.showDetail ? (size + 100) / 10 : (size + 10) / 20
+              }rem) rotateX(57deg) rotateZ(${-20 + angle}deg)`
             }}
             src={ProjectStore.currentShownGroup.pictures[1].url}
             onClick={() => {
@@ -180,7 +180,7 @@ function _Perspective() {
             </ListItem>
           </>
         ) : (
-          <Box sx={{ position: 'relative' }}>
+          <Box sx={{ position: 'relative', top: '448px' }}>
             {showDropDown && (
               <Box sx={perspectiveStyles.sidebarDropdown}>
                 <div style={{ color: '#01555A', marginBottom: '10px' }}>

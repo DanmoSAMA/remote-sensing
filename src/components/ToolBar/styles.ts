@@ -1,6 +1,6 @@
 export const toolBarStyles = {
   wrapper: {
-    position: 'absolute',
+    position: 'fixed',
     marginTop: '60px',
     boxSizing: 'border-box',
     width: '240px',
@@ -8,7 +8,8 @@ export const toolBarStyles = {
     backgroundColor: '#313131',
     borderRadius: '20px',
     zIndex: 1,
-    userSelect: 'none'
+    userSelect: 'none',
+    overflow: 'hidden'
   },
   top: {
     height: '30px',

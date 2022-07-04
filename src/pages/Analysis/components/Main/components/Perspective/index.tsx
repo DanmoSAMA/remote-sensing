@@ -180,7 +180,7 @@ function _Perspective() {
             </ListItem>
           </>
         ) : (
-          <Box sx={{ position: 'relative' }}>
+          <Box sx={{ position: 'relative', top: '448px' }}>
             {showDropDown && (
               <Box sx={perspectiveStyles.sidebarDropdown}>
                 <div style={{ color: '#01555A', marginBottom: '10px' }}>

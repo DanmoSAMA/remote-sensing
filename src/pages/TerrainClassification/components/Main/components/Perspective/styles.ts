@@ -5,6 +5,7 @@ export const perspectiveStyles = {
     justifyContent: 'center',
     alignItems: 'center',
     position: 'relative',
+    top: '100px',
 
     '& img': {
       userSelect: 'none'
@@ -48,7 +49,7 @@ export const perspectiveStyles = {
     width: '68%',
     height: '100%',
     position: 'absolute',
-    right: '0'
+    right: '60px'
   },
   button: {
     backgroundColor: '#C39984',
@@ -56,6 +57,8 @@ export const perspectiveStyles = {
     right: '270px',
     bottom: '3rem',
     height: '6rem',
+    minWidth: '30px',
+    minHeight: '60px',
     width: '3rem',
     color: '#E2DECD',
     fontSize: '1.2rem',
@@ -73,6 +76,8 @@ export const perspectiveStyles = {
     bottom: '19.7rem',
     height: '6rem',
     width: '3rem',
+    minWidth: '30px',
+    minHeight: '60px',
     color: 'secondary.main',
     fontSize: '1.2rem',
     padding: 0,
@@ -90,6 +95,8 @@ export const perspectiveStyles = {
     width: '3rem',
 
     '& .MuiListItem-root': {
+      minWidth: '30px',
+      minHeight: '30px',
       width: '3rem',
       height: '3rem',
       display: 'flex',

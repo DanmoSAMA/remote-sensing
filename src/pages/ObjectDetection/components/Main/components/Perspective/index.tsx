@@ -2,7 +2,6 @@ import Box from '@mui/material/Box'
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
 import SvgIcon from '../../../../../../components/SvgIcon'
-import MySelect from './components/MySelect'
 import { ProjectStore } from '../../../../../../mobx/project'
 import { observer } from 'mobx-react-lite'
 import { useState, useEffect } from 'react'
@@ -12,11 +11,10 @@ import { objectDetectionColors } from '../../../../../../consts/color'
 function _Perspective() {
   let squareImg = document.querySelector('#squareImg') as HTMLImageElement
   const [size, setSize] = useState(500)
-  const [angle, setAngle] = useState(-7)
+  const [angle, setAngle] = useState(-15)
   const [imgHeight, setImgHeight] = useState(
     squareImg ? squareImg.offsetHeight : 0
   )
-  const [showDropDown, setShowDropDown] = useState(false)
   // 得到dpr
   const dpr = window.devicePixelRatio
 
@@ -209,7 +207,7 @@ function _Perspective() {
             height: !ProjectStore.showDetail ? `${size}px` : `${size / 2.5}px`,
             transform: `translateY(${
               !ProjectStore.showDetail ? -5 : 5
-            }rem) rotateX(65deg) rotateZ(${-20 + angle}deg)`,
+            }rem) rotateX(57deg) rotateZ(${-20 + angle}deg)`,
             cursor: 'default'
           }}
           src={ProjectStore.currentShownGroup.pictures[0].url}
@@ -231,7 +229,7 @@ function _Perspective() {
             height: !ProjectStore.showDetail ? `${size}px` : `${size / 2.5}px`,
             transform: `translateY(${
               !ProjectStore.showDetail ? (size - 380) / 10 : (size - 200) / 20
-            }rem) rotateX(65deg) rotateZ(${-20 + angle}deg)`,
+            }rem) rotateX(57deg) rotateZ(${-20 + angle}deg)`,
             cursor: 'pointer'
           }}
           onClick={() => {
@@ -278,43 +276,20 @@ function _Perspective() {
         sx={perspectiveStyles.sidebar}
         style={{ top: ProjectStore.displayType === 0 ? 'auto' : '10rem' }}
       >
-        {ProjectStore.displayType === 0 ? (
-          <>
-            <ListItem
-              button
-              onClick={() => {
-                setAngle(angle + 10)
-              }}
-            >
-              <SvgIcon name="cursor_pointer" />
-            </ListItem>
-            <ListItem button onClick={lessen}>
-              <SvgIcon name="bigger" />
-            </ListItem>
-            <ListItem button onClick={zoom}>
-              <SvgIcon name="smaller" />
-            </ListItem>
-          </>
-        ) : (
-          <Box sx={{ position: 'relative' }}>
-            {showDropDown && (
-              <Box sx={perspectiveStyles.sidebarDropdown}>
-                <div style={{ color: '#01555A', marginBottom: '10px' }}>
-                  请选择应用遮罩的图层：
-                </div>
-                <MySelect />
-              </Box>
-            )}
-            <ListItem
-              button
-              onClick={(e) => {
-                setShowDropDown(!showDropDown)
-              }}
-            >
-              <SvgIcon name="move" />
-            </ListItem>
-          </Box>
-        )}
+        <ListItem
+          button
+          onClick={() => {
+            setAngle(angle + 10)
+          }}
+        >
+          <SvgIcon name="cursor_pointer" />
+        </ListItem>
+        <ListItem button onClick={lessen}>
+          <SvgIcon name="bigger" />
+        </ListItem>
+        <ListItem button onClick={zoom}>
+          <SvgIcon name="smaller" />
+        </ListItem>
       </List>
     </Box>
   )
