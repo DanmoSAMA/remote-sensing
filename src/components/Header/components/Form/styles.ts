@@ -2,6 +2,8 @@ export const formStyles = {
   wrapper: {
     width: '28rem',
     height: '34rem',
+    minWidth: '330px',
+    minHeight: '420px',
     maxHeight: '550px',
     maxWidth: '450px',
     backgroundColor: 'primary.light',

@@ -1,16 +1,17 @@
 export const subHeaderStyles = {
   wrapper: {
     width: '100%',
+    minWidth: '800px',
     height: '40px',
     lineHeight: '40px',
-    margin: '9vh 240px 0 210px',
     backgroundColor: '#F4F2E8',
     color: 'secondary.main',
     textAlign: 'center',
     fontSize: '16px',
     zIndex: 1,
     opacity: '.9',
-    position: 'relative',
+    position: 'fixed',
+    top: '60px',
     userSelect: 'none'
   },
   left: {

@@ -4,7 +4,7 @@ export const homeStyles = {
       display: 'flex',
       position: 'relative',
       height: '90vh',
-      minHeight: '500px',
+      minHeight: '600px',
       width: '100%',
       minWidth: '1000px',
       top: '60px',

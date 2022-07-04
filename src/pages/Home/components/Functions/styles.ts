@@ -1,9 +1,10 @@
 export const functionsStyles = {
   wrapper: {
-    position: 'absolute',
+    position: 'fixed',
     bottom: 0,
     display: 'flex',
-    width: '100%',
+    width: '100vw',
+    minWidth: '1000px',
     justifyContent: 'space-evenly',
     padding: '0 6rem 0 9rem',
     boxSizing: 'border-box'

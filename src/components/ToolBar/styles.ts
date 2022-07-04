@@ -1,13 +1,12 @@
 export const toolBarStyles = {
   wrapper: {
-    position: 'fixed',
-    height: '90.5vh',
+    position: 'absolute',
+    marginTop: '60px',
+    boxSizing: 'border-box',
     width: '240px',
     right: '10px',
-    top: '9vh',
     backgroundColor: '#313131',
     borderRadius: '20px',
-    boxSizing: 'border-box',
     zIndex: 1,
     userSelect: 'none'
   },

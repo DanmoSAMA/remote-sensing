@@ -8,6 +8,6 @@ export const pictureStyles = {
     height: '35rem',
     minWidth: '300px',
     overflow: 'hidden',
-    zIndex: 0
+    zIndex: -1
   }
 }

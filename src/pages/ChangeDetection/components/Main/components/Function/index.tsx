@@ -5,6 +5,7 @@ import SvgIcon from '../../../../../../components/SvgIcon'
 import MySelect from './components/MySelect'
 import Loading from '../../../../../../components/Loading'
 import { ProjectStore } from '../../../../../../mobx/project'
+import { HeightStore } from '../../../../../../mobx/height'
 import { mainStyles } from '../../styles'
 import { observer } from 'mobx-react-lite'
 import { useState } from 'react'
@@ -27,7 +28,10 @@ function _Function() {
   }
 
   return (
-    <Box sx={mainStyles.function}>
+    <Box
+      sx={mainStyles.function}
+      style={{ height: HeightStore.bodyHeight - 115 + 'px' }}
+    >
       <Typography
         fontSize={20}
         color={'secondary.main'}

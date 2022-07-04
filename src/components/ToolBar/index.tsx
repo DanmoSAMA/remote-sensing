@@ -14,6 +14,7 @@ import { observer } from 'mobx-react-lite'
 import { useParams } from '../../hooks/useParams'
 import { toolBarStyles } from './styles'
 import { ProjectStore } from '../../mobx/project'
+import { HeightStore } from '../../mobx/height'
 import { uploadFile } from '../../network/project/uploadFile'
 import { getUpdatedImgs } from '../../network/project/getUpdatedImgs'
 import { generateUUID } from '../../utils/uuid'
@@ -21,8 +22,10 @@ import { objectDetectionColors } from '../../consts/color'
 
 function _ToolBar() {
   const id = useParams('id') as string
+  const body = document.body
   const [isUploading, setIsUploading] = useState(false)
   const { pathname } = useLocation()
+
   const type =
     pathname === '/analysis'
       ? 1
@@ -39,13 +42,19 @@ function _ToolBar() {
 
     getUpdatedImgs(id).then((res) => {
       const data = res.data
-      console.log(data)
+      // console.log(data)
       ProjectStore.updateImgs(data.pictures)
       ProjectStore.updateImgGroup(data.groups)
       ProjectStore.updateCurShownGroups(type)
       ProjectStore.updateCurShownImgs()
       preload()
     })
+  }, [])
+
+  useEffect(() => {
+    window.onresize = () => {
+      HeightStore.updateHeight(body.offsetHeight)
+    }
   }, [])
 
   // 图片预加载
@@ -137,7 +146,10 @@ function _ToolBar() {
   }
 
   return (
-    <Box sx={toolBarStyles.wrapper}>
+    <Box
+      sx={toolBarStyles.wrapper}
+      style={{ height: HeightStore.bodyHeight - 65 + 'px' }}
+    >
       {!ProjectStore.showResultAnalysis ? (
         <Box>
           <Box>

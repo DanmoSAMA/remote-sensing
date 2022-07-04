@@ -2,6 +2,7 @@ import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import SvgIcon from '../../../../components/SvgIcon'
 import projectCover from '../../../../assets/imgs/projectCover.png'
+import useMediaQuery from '@mui/material/useMediaQuery'
 import { useState, useEffect } from 'react'
 import { binStyles } from './styles'
 import { getToken } from '../../../../utils/token'
@@ -14,6 +15,7 @@ import { Project as ProjectType } from '../../../../types/project/Project'
 
 function Project() {
   const [binProjects, setBinProjects] = useState<ProjectType[]>([])
+  const breakPoint = useMediaQuery('(min-width:1000px)')
   const keyword = useParams('keyword')
   let token = getToken()
 
@@ -55,11 +57,40 @@ function Project() {
     <Box sx={binStyles.wrapper}>
       {binProjects?.slice(0, 8).map((item) => (
         <Box key={item.id} sx={{ position: 'relative' }}>
-          <Box sx={binStyles.item}>
+          <Box
+            sx={{
+              width: breakPoint ? '18rem' : '180px',
+              height: breakPoint ? '18rem' : '180px',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center',
+              position: 'relative',
+
+              '&:hover + .mask': {
+                display: 'flex!important'
+              },
+              '& + .mask:hover': {
+                display: 'flex!important'
+              },
+              '& img': {
+                width: breakPoint ? '11rem' : '110px',
+                borderRadius: '1rem'
+              }
+            }}
+          >
             <img src={projectCover} />
             <Typography sx={binStyles.bottom}>{item.name}</Typography>
           </Box>
-          <Box className="mask" sx={binStyles.mask}>
+          <Box
+            className="mask"
+            sx={binStyles.mask}
+            style={{
+              width: breakPoint ? '18rem' : '180px',
+              height: breakPoint ? '18rem' : '180px',
+              borderRadius: breakPoint ? '1rem' : '10px'
+            }}
+          >
             <Box
               sx={binStyles.middle}
               mb={'1rem'}

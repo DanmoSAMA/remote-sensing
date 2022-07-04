@@ -9,6 +9,9 @@ export const mainStyles = {
     userSelect: 'none'
   },
   image: {
+    marginTop: '100px',
+    minHeight: '550px',
+    minWidth: '400px',
     width: '63%',
     marginRight: '20px',
     boxSizing: 'border-box',
@@ -44,8 +47,11 @@ export const mainStyles = {
     }
   },
   function: {
+    marginTop: '100px',
     width: '37%',
-    position: 'relative'
+    position: 'relative',
+    minHeight: '550px',
+    minWidth: '300px'
   },
   function_inner: {
     position: 'absolute',

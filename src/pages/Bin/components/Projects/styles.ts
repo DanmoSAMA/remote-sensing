@@ -10,25 +10,6 @@ export const binStyles = {
     marginTop: '5rem',
     justifyItems: 'center'
   },
-  item: {
-    width: '18rem',
-    height: '18rem',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-
-    '&:hover + .mask': {
-      display: 'flex!important'
-    },
-    '& + .mask:hover': {
-      display: 'flex!important'
-    },
-    '& img': {
-      width: '11rem',
-      borderRadius: '1rem'
-    }
-  },
   mask: {
     display: 'none',
     width: '18rem',

@@ -3,7 +3,7 @@ export const createStyles = {
     '&': {
       justifyContent: 'center',
       height: '100vh',
-      minHeight: '500px',
+      minHeight: '600px',
       width: '100%',
       minWidth: '1000px',
       position: 'relative',
