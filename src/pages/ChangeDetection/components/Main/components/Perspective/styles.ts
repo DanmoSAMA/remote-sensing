@@ -69,6 +69,25 @@ export const perspectiveStyles = {
     textAlign: 'center',
     cursor: 'pointer'
   },
+  mock: {
+    backgroundColor: 'primary.dark',
+    position: 'fixed',
+    right: '270px',
+    bottom: '26.6rem',
+    height: '6rem',
+    width: '3rem',
+    minWidth: '30px',
+    minHeight: '60px',
+    color: 'secondary.main',
+    fontSize: '1.2rem',
+    padding: 0,
+    display: 'flex',
+    alignItems: 'center',
+    borderRadius: '.3rem',
+    textAlign: 'center',
+    cursor: 'pointer',
+    zIndex: 9999
+  },
   result: {
     backgroundColor: 'primary.dark',
     position: 'fixed',
@@ -93,6 +112,7 @@ export const perspectiveStyles = {
     right: '270px',
     bottom: '9.3rem',
     width: '3rem',
+    minWidth: '30px',
 
     '& .MuiListItem-root': {
       minWidth: '30px',

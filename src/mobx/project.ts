@@ -29,6 +29,8 @@ class ProjectState {
   showPerspective = false
   // 是否显示放大的图片
   showDetail = false
+  // 显示模拟图层
+  showMock = false
 
   /* 变化检测 */
   // 待分析图片组，用于渲染页面
@@ -129,6 +131,7 @@ class ProjectState {
       ]
       this.showPerspective = false
       this.showDetail = false
+      this.showMock = true
       this.displayType = 0
       this.currentShownGroup = {
         groupID: 0,
@@ -355,6 +358,10 @@ class ProjectState {
   // 展示图片细节
   setShowDetail(val: boolean) {
     this.showDetail = val
+  }
+  // 展示模拟图层
+  setShowMock(val: boolean) {
+    this.showMock = val
   }
   // 修改展示的type
   setDisplayType(val: 0 | 1) {

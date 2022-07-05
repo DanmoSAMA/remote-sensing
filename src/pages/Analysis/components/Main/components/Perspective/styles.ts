@@ -92,6 +92,7 @@ export const perspectiveStyles = {
     right: '270px',
     bottom: '9.3rem',
     width: '3rem',
+    minWidth: '30px',
 
     '& .MuiListItem-root': {
       minWidth: '30px',

@@ -181,6 +181,14 @@ function _Perspective() {
           </div>
         </Box>
       )}
+      {/* <Box
+        sx={perspectiveStyles.mock}
+        onClick={() => {
+          ProjectStore.setShowResultAnalysis()
+        }}
+      >
+        输出模拟
+      </Box> */}
       <Box
         sx={perspectiveStyles.result}
         onClick={() => {
@@ -211,7 +219,7 @@ function _Perspective() {
             </ListItem>
           </>
         ) : (
-          <Box sx={{ position: 'relative', top: '448px' }}>
+          <Box sx={{ position: 'absolute', bottom: '3.5rem' }}>
             {showDropDown && (
               <Box sx={perspectiveStyles.sidebarDropdown}>
                 <div style={{ color: '#01555A', marginBottom: '10px' }}>
