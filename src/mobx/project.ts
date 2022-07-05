@@ -131,7 +131,7 @@ class ProjectState {
       ]
       this.showPerspective = false
       this.showDetail = false
-      this.showMock = true
+      this.showMock = false
       this.displayType = 0
       this.currentShownGroup = {
         groupID: 0,

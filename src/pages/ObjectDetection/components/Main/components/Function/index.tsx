@@ -47,7 +47,7 @@ function _Function() {
         fontWeight={500}
         mt={'5px'}
       >
-        地物分类
+        目标检测
       </Typography>
       <Box sx={mainStyles.function_inner}>
         <Box sx={{ display: !isChecking ? 'block' : 'none' }}>

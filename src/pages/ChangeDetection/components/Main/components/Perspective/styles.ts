@@ -28,7 +28,8 @@ export const perspectiveStyles = {
       position: 'absolute',
       top: '20rem',
       height: 'auto',
-      cursor: 'pointer'
+      cursor: 'pointer',
+      border: '3px solid #01555A'
     }
   },
   cubeAtConer: {
@@ -42,7 +43,8 @@ export const perspectiveStyles = {
       position: 'absolute',
       top: '0',
       height: 'auto',
-      cursor: 'pointer'
+      cursor: 'pointer',
+      border: '3px solid #01555A'
     }
   },
   detail: {

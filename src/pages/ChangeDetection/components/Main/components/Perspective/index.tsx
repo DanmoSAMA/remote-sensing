@@ -78,16 +78,18 @@ function _Perspective() {
               viewDetail(0)
             }}
           />
-          <img
-            style={{
-              width: `${size}%`,
-              transform: `translateY(${
-                !ProjectStore.showDetail ? (size + 99) / 10 : -size / 20
-              }rem) rotateX(57deg) rotateZ(${-20 + angle}deg)`,
-              opacity: 0.25
-            }}
-            src={ProjectStore.currentShownGroup.pictures[0].url}
-          />
+          {ProjectStore.showMock && (
+            <img
+              style={{
+                width: `${size}%`,
+                transform: `translateY(${
+                  !ProjectStore.showDetail ? (size + 99) / 10 : -size / 20
+                }rem) rotateX(57deg) rotateZ(${-20 + angle}deg)`,
+                opacity: 0.25
+              }}
+              src={ProjectStore.currentShownGroup.pictures[0].url}
+            />
+          )}
           <img
             style={{
               width: `${size}%`,
@@ -100,16 +102,18 @@ function _Perspective() {
               viewDetail(2)
             }}
           />
-          <img
-            style={{
-              width: `${size}%`,
-              transform: `translateY(${
-                !ProjectStore.showDetail ? (size + 249) / 10 : -size / 20
-              }rem) rotateX(57deg) rotateZ(${-20 + angle}deg)`,
-              opacity: 0.25
-            }}
-            src={ProjectStore.currentShownGroup.pictures[0].url}
-          />
+          {ProjectStore.showMock && (
+            <img
+              style={{
+                width: `${size}%`,
+                transform: `translateY(${
+                  !ProjectStore.showDetail ? (size + 249) / 10 : -size / 20
+                }rem) rotateX(57deg) rotateZ(${-20 + angle}deg)`,
+                opacity: 0.25
+              }}
+              src={ProjectStore.currentShownGroup.pictures[0].url}
+            />
+          )}
           <img
             style={{
               width: `${size}%`,
@@ -181,14 +185,16 @@ function _Perspective() {
           </div>
         </Box>
       )}
-      {/* <Box
-        sx={perspectiveStyles.mock}
-        onClick={() => {
-          ProjectStore.setShowResultAnalysis()
-        }}
-      >
-        输出模拟
-      </Box> */}
+      {!ProjectStore.showDetail && (
+        <Box
+          sx={perspectiveStyles.mock}
+          onClick={() => {
+            ProjectStore.setShowMock(!ProjectStore.showMock)
+          }}
+        >
+          输出模拟{ProjectStore.showMock ? '开' : '关'}
+        </Box>
+      )}
       <Box
         sx={perspectiveStyles.result}
         onClick={() => {

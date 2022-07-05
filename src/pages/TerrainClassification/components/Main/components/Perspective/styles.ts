@@ -28,7 +28,8 @@ export const perspectiveStyles = {
       position: 'absolute',
       top: '20rem',
       height: 'auto',
-      cursor: 'pointer'
+      cursor: 'pointer',
+      border: '3px solid #01555A'
     }
   },
   cubeAtConer: {
@@ -42,7 +43,8 @@ export const perspectiveStyles = {
       position: 'absolute',
       top: '0',
       height: 'auto',
-      cursor: 'pointer'
+      cursor: 'pointer',
+      border: '3px solid #01555A'
     }
   },
   detail: {
@@ -68,6 +70,25 @@ export const perspectiveStyles = {
     borderRadius: '.3rem',
     textAlign: 'center',
     cursor: 'pointer'
+  },
+  mock: {
+    backgroundColor: 'primary.dark',
+    position: 'fixed',
+    right: '270px',
+    bottom: '26.6rem',
+    height: '6rem',
+    width: '3rem',
+    minWidth: '30px',
+    minHeight: '60px',
+    color: 'secondary.main',
+    fontSize: '1.2rem',
+    padding: 0,
+    display: 'flex',
+    alignItems: 'center',
+    borderRadius: '.3rem',
+    textAlign: 'center',
+    cursor: 'pointer',
+    zIndex: 9999
   },
   result: {
     backgroundColor: 'primary.dark',

@@ -78,11 +78,23 @@ function _Perspective() {
               viewDetail(0)
             }}
           />
+          {ProjectStore.showMock && (
+            <img
+              style={{
+                width: `${size}%`,
+                transform: `translateY(${
+                  !ProjectStore.showDetail ? (size + 149) / 10 : -size / 20
+                }rem) rotateX(57deg) rotateZ(${-20 + angle}deg)`,
+                opacity: 0.25
+              }}
+              src={ProjectStore.currentShownGroup.pictures[0].url}
+            />
+          )}
           <img
             style={{
               width: `${size}%`,
               transform: `translateY(${
-                !ProjectStore.showDetail ? (size + 100) / 10 : (size + 10) / 20
+                !ProjectStore.showDetail ? (size + 150) / 10 : (size + 50) / 20
               }rem) rotateX(57deg) rotateZ(${-20 + angle}deg)`
             }}
             src={ProjectStore.currentShownGroup.pictures[1].url}
@@ -148,6 +160,16 @@ function _Perspective() {
           >
             <SvgIcon name="detail_close" class="perspective detail_close" />
           </div>
+        </Box>
+      )}
+      {!ProjectStore.showDetail && (
+        <Box
+          sx={perspectiveStyles.mock}
+          onClick={() => {
+            ProjectStore.setShowMock(!ProjectStore.showMock)
+          }}
+        >
+          输出模拟{ProjectStore.showMock ? '开' : '关'}
         </Box>
       )}
       <Box
