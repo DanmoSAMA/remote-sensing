@@ -82,6 +82,16 @@ function _Perspective() {
             style={{
               width: `${size}%`,
               transform: `translateY(${
+                !ProjectStore.showDetail ? (size + 99) / 10 : -size / 20
+              }rem) rotateX(57deg) rotateZ(${-20 + angle}deg)`,
+              opacity: 0.25
+            }}
+            src={ProjectStore.currentShownGroup.pictures[0].url}
+          />
+          <img
+            style={{
+              width: `${size}%`,
+              transform: `translateY(${
                 !ProjectStore.showDetail ? (size + 100) / 10 : (size + 10) / 20
               }rem) rotateX(57deg) rotateZ(${-20 + angle}deg)`
             }}
@@ -89,6 +99,16 @@ function _Perspective() {
             onClick={() => {
               viewDetail(2)
             }}
+          />
+          <img
+            style={{
+              width: `${size}%`,
+              transform: `translateY(${
+                !ProjectStore.showDetail ? (size + 249) / 10 : -size / 20
+              }rem) rotateX(57deg) rotateZ(${-20 + angle}deg)`,
+              opacity: 0.25
+            }}
+            src={ProjectStore.currentShownGroup.pictures[0].url}
           />
           <img
             style={{

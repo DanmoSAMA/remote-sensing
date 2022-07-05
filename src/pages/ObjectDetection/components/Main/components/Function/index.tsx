@@ -27,7 +27,10 @@ function _Function() {
     }
     setIsChecking(true)
 
-    ProjectStore.objectDetect(targetName, objectType).then(() => {
+    ProjectStore.objectDetect(
+      targetName === '' ? '未命名' : targetName,
+      objectType
+    ).then(() => {
       setIsChecking(false)
       ProjectStore.setShowPerspective(true)
     })

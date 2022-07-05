@@ -20,7 +20,7 @@ function _Function() {
     }
     setIsChecking(true)
 
-    ProjectStore.analyse(targetName).then(() => {
+    ProjectStore.analyse(targetName === '' ? '未命名' : targetName).then(() => {
       setIsChecking(false)
       ProjectStore.setShowPerspective(true)
     })

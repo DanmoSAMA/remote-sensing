@@ -21,10 +21,12 @@ function _Function() {
     }
     setIsChecking(true)
 
-    ProjectStore.changeDetect(targetName).then(() => {
-      setIsChecking(false)
-      ProjectStore.setShowPerspective(true)
-    })
+    ProjectStore.changeDetect(targetName === '' ? '未命名' : targetName).then(
+      () => {
+        setIsChecking(false)
+        ProjectStore.setShowPerspective(true)
+      }
+    )
   }
 
   return (

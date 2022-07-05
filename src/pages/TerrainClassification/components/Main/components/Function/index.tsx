@@ -20,7 +20,9 @@ function _Function() {
     }
     setIsChecking(true)
 
-    ProjectStore.terrainClassification(targetName).then(() => {
+    ProjectStore.terrainClassification(
+      targetName === '' ? '未命名' : targetName
+    ).then(() => {
       setIsChecking(false)
       ProjectStore.setShowPerspective(true)
     })

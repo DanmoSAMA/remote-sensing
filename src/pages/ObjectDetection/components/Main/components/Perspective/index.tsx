@@ -117,7 +117,7 @@ function _Perspective() {
       ProjectStore.currentShownGroup.info.boxs.forEach((item) => {
         // 实际绘制的位置
         const sx = item[0] / ratio
-        const sy = (item[1] + item[3]) / ratio
+        const sy = item[1] / ratio
         // 实际绘制的宽高
         const dw = item[2] / ratio
         const dh = item[3] / ratio
@@ -166,7 +166,7 @@ function _Perspective() {
     ProjectStore.currentShownGroup.info.boxs.forEach((item) => {
       // 实际绘制的位置
       const sx = item[0] / ratio
-      const sy = (item[1] + item[3]) / ratio
+      const sy = item[1] / ratio
       // 实际绘制的宽高
       const dw = item[2] / ratio
       const dh = item[3] / ratio

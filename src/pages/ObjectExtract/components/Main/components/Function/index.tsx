@@ -20,10 +20,12 @@ function _Function() {
     }
     setIsChecking(true)
 
-    ProjectStore.objectExtract(targetName).then(() => {
-      setIsChecking(false)
-      ProjectStore.setShowPerspective(true)
-    })
+    ProjectStore.objectExtract(targetName === '' ? '未命名' : targetName).then(
+      () => {
+        setIsChecking(false)
+        ProjectStore.setShowPerspective(true)
+      }
+    )
   }
 
   return (
