@@ -58,7 +58,7 @@ function _ChartList(props: Props) {
                   }
                 case 1:
                   return {
-                    name: '房屋',
+                    name: '道路',
                     value: item
                   }
               }
@@ -93,7 +93,7 @@ function _ChartList(props: Props) {
                   }
                 case 4:
                   return {
-                    name: '不考虑',
+                    name: '未知',
                     value: item
                   }
               }
@@ -108,7 +108,7 @@ function _ChartList(props: Props) {
                   }
                 case 1:
                   return {
-                    name: '房屋',
+                    name: '道路',
                     value: item
                   }
               }

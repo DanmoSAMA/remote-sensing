@@ -162,7 +162,7 @@ function _Perspective() {
           </div>
         </Box>
       )}
-      {!ProjectStore.showDetail && (
+      {!ProjectStore.showDetail && ProjectStore.displayType === 0 && (
         <Box
           sx={perspectiveStyles.mock}
           onClick={() => {
