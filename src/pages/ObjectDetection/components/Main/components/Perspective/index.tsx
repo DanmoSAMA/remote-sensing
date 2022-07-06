@@ -105,7 +105,9 @@ function _Perspective() {
 
       // 绘制方框
       const sw = ProjectStore.currentShownGroup.info.w
-      const ratio = sw / size
+      const sh = ProjectStore.currentShownGroup.info.h
+      const ratioX = sw / size
+      const ratioY = sh / size
 
       // 线宽
       ctx.lineWidth = 3
@@ -116,11 +118,11 @@ function _Perspective() {
 
       ProjectStore.currentShownGroup.info.boxs.forEach((item) => {
         // 实际绘制的位置
-        const sx = item[0] / ratio
-        const sy = item[1] / ratio
+        const sx = item[0] / ratioX
+        const sy = item[1] / ratioY
         // 实际绘制的宽高
-        const dw = item[2] / ratio
-        const dh = item[3] / ratio
+        const dw = item[2] / ratioX
+        const dh = item[3] / ratioY
 
         ctx.strokeRect(sx, sy, dw, dh)
       })
@@ -153,7 +155,9 @@ function _Perspective() {
 
     // 绘制方框
     const sw = ProjectStore.currentShownGroup.info.w
-    const ratio = sw / 500
+    const sh = ProjectStore.currentShownGroup.info.h
+    const ratioX = sw / size
+    const ratioY = sh / size
 
     // 线宽
     ctx.lineWidth = 3
@@ -165,11 +169,11 @@ function _Perspective() {
 
     ProjectStore.currentShownGroup.info.boxs.forEach((item) => {
       // 实际绘制的位置
-      const sx = item[0] / ratio
-      const sy = item[1] / ratio
+      const sx = item[0] / ratioX
+      const sy = item[1] / ratioY
       // 实际绘制的宽高
-      const dw = item[2] / ratio
-      const dh = item[3] / ratio
+      const dw = item[2] / ratioX
+      const dh = item[3] / ratioY
 
       ctx.fillRect(sx, sy, dw, dh)
       ctx.strokeRect(sx, sy, dw, dh)
