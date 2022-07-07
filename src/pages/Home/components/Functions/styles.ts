@@ -1,6 +1,6 @@
 export const functionsStyles = {
   wrapper: {
-    position: 'fixed',
+    position: 'absolute',
     bottom: 0,
     display: 'flex',
     width: '100vw',
