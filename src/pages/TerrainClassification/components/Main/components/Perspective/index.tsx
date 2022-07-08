@@ -114,7 +114,9 @@ function _Perspective() {
             <img
               src={item.url}
               style={{
-                display: item.isShown && item.groupShown ? 'block' : 'none'
+                display: item.isShown && item.groupShown ? 'block' : 'none',
+                // 防止平面视角bug
+                height: `${imgHeight}px`
               }}
               key={item.uuid + index}
             />
