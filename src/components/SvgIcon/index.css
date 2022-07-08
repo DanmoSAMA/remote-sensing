@@ -7,18 +7,19 @@
 
 /* header */
 .header.logo {
-  zoom: 1.8;
+  /* 防止线上icon大小不放大 */
+  zoom: 1.8!important;
 }
 .header.font {
-  zoom: 3.2;
+  zoom: 2.98!important;
 }
 
 /* sidebar */
 .sidebar.logo {
-  zoom: 1.8;
+  zoom: 1.88!important;
 }
 .sidebar.font {
-  zoom: 2.9;
+  zoom: 2.98!important;
 }
 
 /* toolbar */
