@@ -1,6 +1,7 @@
 export const subHeaderStyles = {
   wrapper: {
-    width: '70%',
+    marginLeft: '210px',
+    width: '80%',
     minWidth: '800px',
     height: '40px',
     lineHeight: '40px',
@@ -13,7 +14,6 @@ export const subHeaderStyles = {
     position: 'fixed',
     top: '60px',
     userSelect: 'none',
-    marginLeft: '210px',
     marginRight: '240px'
   },
   left: {

@@ -1,13 +1,9 @@
-import SideBar from './components/SideBar'
-import ToolBar from './components/ToolBar'
-import { Route, Routes, Navigate, useLocation } from 'react-router-dom'
+import { Route, Routes, Navigate} from 'react-router-dom'
 import routes from './routes'
 import { Grid } from '@mui/material'
 import './styles/index.css'
 
 function App() {
-  const { pathname } = useLocation()
-
   return (
     <Grid container>
       <Routes>
