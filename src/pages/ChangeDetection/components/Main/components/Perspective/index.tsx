@@ -97,7 +97,7 @@ function _Perspective() {
                 !ProjectStore.showDetail ? (size + 100) / 10 : (size + 10) / 20
               }rem) rotateX(57deg) rotateZ(${-20 + angle}deg)`
             }}
-            src={ProjectStore.currentShownGroup.pictures[2].url}
+            src={ProjectStore.currentShownGroup.pictures[1].url}
             onClick={() => {
               viewDetail(2)
             }}
@@ -121,7 +121,7 @@ function _Perspective() {
                 !ProjectStore.showDetail ? (size + 250) / 10 : (size + 130) / 20
               }rem) rotateX(57deg) rotateZ(${-20 + angle}deg)`
             }}
-            src={ProjectStore.currentShownGroup.pictures[1].url}
+            src={ProjectStore.currentShownGroup.pictures[2].url}
             onClick={() => {
               viewDetail(1)
             }}
