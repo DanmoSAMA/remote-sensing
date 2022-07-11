@@ -212,7 +212,7 @@ function _Perspective() {
             transform: `translateY(${
               !ProjectStore.showDetail ? -5 : 5
             }rem) rotateX(57deg) rotateZ(${-20 + angle}deg)`,
-            cursor: 'default'
+            cursor: 'default',
           }}
           src={ProjectStore.currentShownGroup.pictures[0].url}
         />
@@ -221,7 +221,7 @@ function _Perspective() {
             width: 'auto',
             height: 'auto',
             visibility: 'hidden',
-            position: 'absolute'
+            position: 'absolute',
           }}
           id="cubeImg"
           src={ProjectStore.currentShownGroup.pictures[1].url}
@@ -234,7 +234,7 @@ function _Perspective() {
             transform: `translateY(${
               !ProjectStore.showDetail ? (size - 380) / 10 : (size - 200) / 20
             }rem) rotateX(57deg) rotateZ(${-20 + angle}deg)`,
-            cursor: 'pointer'
+            cursor: 'pointer',
           }}
           onClick={() => {
             viewDetail()
@@ -244,7 +244,7 @@ function _Perspective() {
       <Box
         sx={perspectiveStyles.detail}
         style={{
-          visibility: ProjectStore.showDetail ? 'visible' : 'hidden'
+          visibility: ProjectStore.showDetail ? 'visible' : 'hidden',
         }}
       >
         <canvas
@@ -255,7 +255,7 @@ function _Perspective() {
             position: 'absolute',
             top: 0,
             right: 0,
-            zoom: 1.2
+            zoom: 1.2,
           }}
           width="500"
           height="500"

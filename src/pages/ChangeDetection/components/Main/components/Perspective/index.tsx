@@ -99,7 +99,7 @@ function _Perspective() {
             }}
             src={ProjectStore.currentShownGroup.pictures[1].url}
             onClick={() => {
-              viewDetail(2)
+              viewDetail(1)
             }}
           />
           {ProjectStore.showMock && (
@@ -123,7 +123,7 @@ function _Perspective() {
             }}
             src={ProjectStore.currentShownGroup.pictures[2].url}
             onClick={() => {
-              viewDetail(1)
+              viewDetail(2)
             }}
           />
         </Box>

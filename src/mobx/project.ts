@@ -547,8 +547,8 @@ class ProjectState {
       const item = this.singleWaitingGroups[i]
       const t = {
         projectID: this.id,
-        originUUID: item.uuid
-        // targetName
+        originUUID: item.uuid,
+        groupName: targetName
       }
       if (t.originUUID !== '') {
         reqData.push(t)

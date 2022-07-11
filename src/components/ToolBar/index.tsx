@@ -42,7 +42,7 @@ function _ToolBar() {
 
     getUpdatedImgs(id).then((res) => {
       const data = res.data
-      // console.log(data)
+      console.log(data)
       ProjectStore.updateImgs(data.pictures)
       ProjectStore.updateImgGroup(data.groups)
       ProjectStore.updateCurShownGroups(type)
@@ -170,7 +170,7 @@ function _ToolBar() {
                 style={{
                   width: '60%',
                   display: 'flex',
-                  justifyContent: 'center'
+                  justifyContent: 'center',
                 }}
               >
                 <Button
@@ -181,7 +181,7 @@ function _ToolBar() {
                     color: '#FCFBF4',
                     boxShadow: 'none',
                     fontWeight: '300',
-                    fontSize: '16px'
+                    fontSize: '16px',
                   }}
                 >
                   <SvgIcon name="import" />
@@ -229,7 +229,7 @@ function _ToolBar() {
               sx={{
                 color: 'primary.light',
                 fontSize: '15px',
-                margin: '15px 0 30px 15px'
+                margin: '15px 0 30px 15px',
               }}
             >
               图块数量：{ProjectStore.currentShownGroup.info.num} 个
@@ -240,7 +240,7 @@ function _ToolBar() {
               sx={{
                 color: 'primary.light',
                 fontSize: '15px',
-                margin: '20px 0 30px 15px'
+                margin: '20px 0 30px 15px',
               }}
             >
               目标数量：{ProjectStore.currentShownGroup.info.boxs.length} 个
@@ -251,7 +251,7 @@ function _ToolBar() {
               sx={{
                 color: 'primary.light',
                 fontSize: '15px',
-                margin: '20px 0 10px 0px'
+                margin: '20px 0 10px 0px',
               }}
             >
               <Typography
@@ -269,7 +269,7 @@ function _ToolBar() {
                   display: 'flex',
                   justifyContent: 'center',
                   alignItems: 'center',
-                  fontSize: '14px'
+                  fontSize: '14px',
                 }}
               >
                 <MyPieChart detectType={type} displayType={2} />
@@ -282,7 +282,7 @@ function _ToolBar() {
               sx={{
                 color: 'primary.light',
                 fontSize: '15px',
-                margin: '20px 0 10px 0px'
+                margin: '20px 0 10px 0px',
               }}
             >
               <Typography
@@ -300,7 +300,7 @@ function _ToolBar() {
                   display: 'flex',
                   justifyContent: 'center',
                   alignItems: 'center',
-                  fontSize: '14px'
+                  fontSize: '14px',
                 }}
               >
                 <MyPieChart detectType={type} displayType={1} />
@@ -312,7 +312,7 @@ function _ToolBar() {
             <Box
               sx={{
                 width: '100px',
-                marginLeft: '15px'
+                marginLeft: '15px',
               }}
             >
               {objectDetectionColors.map((item) => (
@@ -323,7 +323,7 @@ function _ToolBar() {
                     lineHeight: '30px',
                     display: 'flex',
                     alignItems: 'center',
-                    color: 'primary.light'
+                    color: 'primary.light',
                   }}
                   key={item.id}
                 >
@@ -333,7 +333,7 @@ function _ToolBar() {
                       height: '16px',
                       borderRadius: '50%',
                       backgroundColor: item.color,
-                      marginRight: '12px'
+                      marginRight: '12px',
                     }}
                   ></Box>
                   {item.name}
