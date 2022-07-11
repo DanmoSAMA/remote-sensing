@@ -252,7 +252,7 @@ function _Perspective() {
                 transform: `translateY(${
                   !ProjectStore.showDetail
                     ? (size + 699) / 10
-                    : (size + 370) / 20
+                    : (size + 599) / 20
                 }rem) rotateX(57deg) rotateZ(${-20 + angle}deg)`,
                 opacity: 0.25,
               }}
@@ -278,7 +278,7 @@ function _Perspective() {
                 transform: `translateY(${
                   !ProjectStore.showDetail
                     ? (size + 899) / 10
-                    : (size + 370) / 20
+                    : (size + 749) / 20
                 }rem) rotateX(57deg) rotateZ(${-20 + angle}deg)`,
                 opacity: 0.25,
               }}
@@ -319,7 +319,7 @@ function _Perspective() {
           </div>
         </Box>
       )}
-      {!ProjectStore.showDetail && ProjectStore.displayType === 0 && (
+      {ProjectStore.displayType === 0 && (
         <Box
           sx={perspectiveStyles.mock}
           onClick={() => {
@@ -379,16 +379,6 @@ function _Perspective() {
           </Box>
         )}
       </List>
-      <Box
-        sx={perspectiveStyles.button}
-        onClick={() => {
-          ProjectStore.setDisplayType(ProjectStore.displayType === 0 ? 1 : 0)
-          ProjectStore.setShowDetail(false)
-          ProjectStore.setShowResultAnalysis(false)
-        }}
-      >
-        切换视角
-      </Box>
     </Box>
   )
 }

@@ -1,6 +1,7 @@
 export const perspectiveStyles = {
   wrapper: {
     width: '100%',
+    height: '135vh',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
@@ -8,15 +9,27 @@ export const perspectiveStyles = {
     top: '100px',
 
     '& img': {
-      userSelect: 'none'
-    }
+      userSelect: 'none',
+    },
+  },
+  wrapperInDetailMode: {
+    width: '100%',
+    height: '90vh',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'relative',
+    top: '100px',
+
+    '& img': {
+      userSelect: 'none',
+    },
   },
   cube: {
-    perspective: '5000px',
+    perspective: '100000px',
     transformStyle: 'preserve-3d',
     width: '70%',
-    height: '150vh',
-    maxHeight: '150vh',
+    height: '100%',
     boxSizing: 'border-box',
     padding: '0 5rem',
     position: 'relative',
@@ -29,29 +42,45 @@ export const perspectiveStyles = {
       top: '20rem',
       height: 'auto',
       cursor: 'pointer',
-      border: '3px solid #01555A'
-    }
+      border: '3px solid #01555A',
+    },
+    '& canvas': {
+      position: 'absolute',
+      top: '20rem',
+      height: 'auto',
+      cursor: 'pointer',
+      border: '3px solid #01555A',
+    },
   },
   cubeAtConer: {
+    perspective: '100000px',
     transformStyle: 'preserve-3d',
     width: '25%',
     position: 'absolute',
+    top: '30vh',
     left: '2rem',
-    bottom: '25rem',
+    height: '100vh',
 
     '& img': {
       position: 'absolute',
       top: '0',
       height: 'auto',
       cursor: 'pointer',
-      border: '3px solid #01555A'
-    }
+      border: '3px solid #01555A',
+    },
+    '& canvas': {
+      position: 'absolute',
+      top: '0',
+      height: 'auto',
+      cursor: 'pointer',
+      border: '3px solid #01555A',
+    },
   },
   detail: {
     width: '68%',
     height: '100%',
     position: 'absolute',
-    right: '60px'
+    right: '60px',
   },
   button: {
     backgroundColor: '#C39984',
@@ -69,7 +98,7 @@ export const perspectiveStyles = {
     alignItems: 'center',
     borderRadius: '.3rem',
     textAlign: 'center',
-    cursor: 'pointer'
+    cursor: 'pointer',
   },
   mock: {
     backgroundColor: 'primary.dark',
@@ -88,7 +117,7 @@ export const perspectiveStyles = {
     borderRadius: '.3rem',
     textAlign: 'center',
     cursor: 'pointer',
-    zIndex: 9999
+    zIndex: 9999,
   },
   result: {
     backgroundColor: 'primary.dark',
@@ -107,7 +136,7 @@ export const perspectiveStyles = {
     borderRadius: '.3rem',
     textAlign: 'center',
     cursor: 'pointer',
-    zIndex: 9999
+    zIndex: 9999,
   },
   sidebar: {
     position: 'fixed',
@@ -129,12 +158,12 @@ export const perspectiveStyles = {
       padding: '0',
 
       '& svg': {
-        zoom: '1.3'
-      }
+        zoom: '1.3',
+      },
     },
     '& .MuiListItem-root:last-child': {
-      border: 'none'
-    }
+      border: 'none',
+    },
   },
   sidebarDropdown: {
     position: 'absolute',
@@ -146,7 +175,7 @@ export const perspectiveStyles = {
     borderTopLeftRadius: '.5rem',
     borderBottomLeftRadius: '.5rem',
     borderBottomRightRadius: '.5rem',
-    cursor: 'default'
+    cursor: 'default',
   },
   square: {
     width: '80%',
@@ -158,7 +187,7 @@ export const perspectiveStyles = {
       position: 'absolute',
       left: '0',
       top: 0,
-      borderRadius: '.5rem'
-    }
-  }
+      borderRadius: '.5rem',
+    },
+  },
 }

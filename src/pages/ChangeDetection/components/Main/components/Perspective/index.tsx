@@ -70,8 +70,8 @@ function _Perspective() {
             style={{
               width: `${size}%`,
               transform: `translateY(${
-                !ProjectStore.showDetail ? (size - 50) / 10 : -size / 20
-              }rem) rotateX(57deg) rotateZ(${-20 + angle}deg)`
+                !ProjectStore.showDetail ? (size - 250) / 10 : (size - 100) / 20
+              }rem) rotateX(57deg) rotateZ(${-20 + angle}deg)`,
             }}
             src={ProjectStore.currentShownGroup.pictures[0].url}
             onClick={() => {
@@ -83,9 +83,9 @@ function _Perspective() {
               style={{
                 width: `${size}%`,
                 transform: `translateY(${
-                  !ProjectStore.showDetail ? (size + 99) / 10 : -size / 20
+                  !ProjectStore.showDetail ? (size - 51) / 10 : (size + 49) / 20
                 }rem) rotateX(57deg) rotateZ(${-20 + angle}deg)`,
-                opacity: 0.25
+                opacity: 0.25,
               }}
               src={ProjectStore.currentShownGroup.pictures[0].url}
             />
@@ -94,8 +94,8 @@ function _Perspective() {
             style={{
               width: `${size}%`,
               transform: `translateY(${
-                !ProjectStore.showDetail ? (size + 100) / 10 : (size + 10) / 20
-              }rem) rotateX(57deg) rotateZ(${-20 + angle}deg)`
+                !ProjectStore.showDetail ? (size - 50) / 10 : (size + 50) / 20
+              }rem) rotateX(57deg) rotateZ(${-20 + angle}deg)`,
             }}
             src={ProjectStore.currentShownGroup.pictures[1].url}
             onClick={() => {
@@ -107,9 +107,11 @@ function _Perspective() {
               style={{
                 width: `${size}%`,
                 transform: `translateY(${
-                  !ProjectStore.showDetail ? (size + 249) / 10 : -size / 20
+                  !ProjectStore.showDetail
+                    ? (size + 149) / 10
+                    : (size + 199) / 20
                 }rem) rotateX(57deg) rotateZ(${-20 + angle}deg)`,
-                opacity: 0.25
+                opacity: 0.25,
               }}
               src={ProjectStore.currentShownGroup.pictures[0].url}
             />
@@ -118,8 +120,8 @@ function _Perspective() {
             style={{
               width: `${size}%`,
               transform: `translateY(${
-                !ProjectStore.showDetail ? (size + 250) / 10 : (size + 130) / 20
-              }rem) rotateX(57deg) rotateZ(${-20 + angle}deg)`
+                !ProjectStore.showDetail ? (size + 150) / 10 : (size + 200) / 20
+              }rem) rotateX(57deg) rotateZ(${-20 + angle}deg)`,
             }}
             src={ProjectStore.currentShownGroup.pictures[2].url}
             onClick={() => {
@@ -140,7 +142,7 @@ function _Perspective() {
               style={{
                 display: item.isShown && item.groupShown ? 'block' : 'none',
                 // 防止平面视角bug
-                height: `${imgHeight}px`
+                height: `${imgHeight}px`,
               }}
               key={item.uuid + index}
             />
@@ -152,7 +154,7 @@ function _Perspective() {
               padding: '0',
 
               '& .MuiSlider-rail': {
-                backgroundColor: 'transparent'
+                backgroundColor: 'transparent',
               },
               '& .MuiSlider-track': {
                 borderTopLeftRadius: '.5rem',
@@ -161,8 +163,8 @@ function _Perspective() {
                 borderBottomRightRadius: '0',
                 background: `url(${ProjectStore.coverImg.url})`,
                 backgroundSize: 'cover',
-                transition: 'none'
-              }
+                transition: 'none',
+              },
             }}
           />
         </Box>
@@ -175,7 +177,7 @@ function _Perspective() {
               width: '100%',
               borderRadius: '1rem',
               position: 'absolute',
-              top: '0'
+              top: '0',
             }}
           />
           <div
@@ -187,7 +189,7 @@ function _Perspective() {
           </div>
         </Box>
       )}
-      {!ProjectStore.showDetail && ProjectStore.displayType === 0 && (
+      {ProjectStore.displayType === 0 && (
         <Box
           sx={perspectiveStyles.mock}
           onClick={() => {
