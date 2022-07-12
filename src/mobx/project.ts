@@ -42,14 +42,14 @@ class ProjectState {
       oldImg: {
         uuid: '',
         name: '',
-        url: ''
+        url: '',
       },
       newImg: {
         uuid: '',
         name: '',
-        url: ''
-      }
-    }
+        url: '',
+      },
+    },
   ]
   // 展示轴测 or 平面
   displayType: 0 | 1 = 0
@@ -65,22 +65,22 @@ class ProjectState {
         uuid: '',
         name: '',
         url: '',
-        isShown: true
+        isShown: true,
       },
       {
         uuid: '',
         name: '',
         url: '',
-        isShown: true
+        isShown: true,
       },
       {
         uuid: '',
         name: '',
         url: '',
-        isShown: true
-      }
+        isShown: true,
+      },
     ],
-    isShown: true
+    isShown: true,
   }
   // 用于平面视角
   currentShownGroups: Group[] = []
@@ -93,7 +93,7 @@ class ProjectState {
     url: '',
     name: '',
     uuid: '',
-    isShown: true
+    isShown: true,
   }
   // 图片名称数组，用于多选框
   imgNameArr: string[] = []
@@ -120,14 +120,14 @@ class ProjectState {
           oldImg: {
             uuid: '',
             name: '',
-            url: ''
+            url: '',
           },
           newImg: {
             uuid: '',
             name: '',
-            url: ''
-          }
-        }
+            url: '',
+          },
+        },
       ]
       this.showPerspective = false
       this.showDetail = false
@@ -143,29 +143,29 @@ class ProjectState {
             uuid: '',
             name: '',
             url: '',
-            isShown: true
+            isShown: true,
           },
           {
             uuid: '',
             name: '',
             url: '',
-            isShown: true
+            isShown: true,
           },
           {
             uuid: '',
             name: '',
             url: '',
-            isShown: true
-          }
+            isShown: true,
+          },
         ],
-        isShown: true
+        isShown: true,
       }
       this.generatedImgs = []
       this.coverImg = {
         url: '',
         name: '',
         uuid: '',
-        isShown: true
+        isShown: true,
       }
       this.currentShownGroups = []
       this.currentShownImgs = []
@@ -217,13 +217,13 @@ class ProjectState {
       oldImg: {
         uuid: '',
         name: '',
-        url: ''
+        url: '',
       },
       newImg: {
         uuid: '',
         name: '',
-        url: ''
-      }
+        url: '',
+      },
     })
   }
   // 修改waitingImgs
@@ -273,8 +273,10 @@ class ProjectState {
         url: string
         isShown: boolean
       }[],
-      isShown: true
+      isShown: true,
     }
+
+    console.log(this.currentShownGroup)
   }
   // 用于平面视角
   updateCurShownGroups(type: 1 | 2 | 3 | 4 | 5) {
@@ -393,7 +395,7 @@ class ProjectState {
         oldUUID: item.oldImg.uuid,
         newUUID: item.newImg.uuid,
         targetUUID: generateUUID(),
-        targetName
+        targetName,
       }
       if (t.oldUUID !== '' && t.newUUID !== '') {
         reqData.push(t)
@@ -432,7 +434,7 @@ class ProjectState {
         projectID: this.id,
         originUUID: item.uuid,
         targetUUID: generateUUID(),
-        targetName
+        targetName,
       }
       if (t.originUUID !== '') {
         reqData.push(t)
@@ -471,7 +473,7 @@ class ProjectState {
         projectID: this.id,
         originUUID: item.uuid,
         targetUUID: generateUUID(),
-        targetName
+        targetName,
       }
       if (t.originUUID !== '') {
         reqData.push(t)
@@ -510,7 +512,7 @@ class ProjectState {
         type,
         originUUID: item.uuid,
         targetUUID: generateUUID(),
-        targetName
+        targetName,
       } as PostDetectReqData
 
       if (t.originUUID !== '') {
@@ -548,7 +550,7 @@ class ProjectState {
       const t = {
         projectID: this.id,
         originUUID: item.uuid,
-        groupName: targetName
+        groupName: targetName,
       }
       if (t.originUUID !== '') {
         reqData.push(t)
@@ -559,7 +561,6 @@ class ProjectState {
     const promiseArr = []
     for (let i = 0; i < reqData.length; i++) {
       const item = reqData[i]
-      console.log(item)
       promiseArr.push(postAnalyseReq(item))
     }
 
@@ -569,6 +570,7 @@ class ProjectState {
         this.updateImgs(data.pictures)
         this.updateImgGroup(data.groups)
 
+        // fix
         const t = data.groups.find((item) => item.groupType === 1) as Group
         this.updateCurShownGroup(t.groupID)
         this.updateCurShownGroups(1)

@@ -22,8 +22,11 @@ function _Function() {
 
     ProjectStore.objectExtract(targetName === '' ? '未命名' : targetName).then(
       () => {
-        setIsChecking(false)
-        ProjectStore.setShowPerspective(true)
+        // 此处加定时器，是为了避免ProjectStore.currentGroup还没来得及更新，导致在Perspective组件中报错
+        setTimeout(() => {
+          setIsChecking(false)
+          ProjectStore.setShowPerspective(true)
+        }, 1000)
       }
     )
   }
@@ -73,7 +76,7 @@ function _Function() {
                 height: '40px',
                 padding: '5px',
                 borderRadius: '10px',
-                border: '1px solid #01555A'
+                border: '1px solid #01555A',
               }}
               onChange={(e) => {
                 setTargetName(e.target.value)
@@ -106,7 +109,7 @@ function _Function() {
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center',
-            height: '100%'
+            height: '100%',
           }}
         >
           <Box
@@ -115,7 +118,7 @@ function _Function() {
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
-              justifyContent: 'center'
+              justifyContent: 'center',
             }}
           >
             <Loading />

@@ -17,11 +17,54 @@ function _Perspective() {
   const [angle, setAngle] = useState(-15)
   const [detailImgUrl, setDetailImgUrl] = useState('')
   const [showDropDown, setShowDropDown] = useState(false)
+
+  // 判断逻辑
   // const layerNum = ProjectStore.currentShownGroup.info.mark.reduce(
   //   (pre: number, cur: number) => pre + cur
-  // );
+  // )
+
+  // 是否存在目标提取分组
+  const hasOEGroup = ProjectStore.currentShownGroup.info.mark[0] > 0
+  // 是否存在地物分类分组
+  const hasTCGroup = ProjectStore.currentShownGroup.info.mark[1] > 0
+  // 是否存在目标检测分组
+  const hasODGroup = ProjectStore.currentShownGroup.info.mark[2] > 0
+  // 是否存在变化检测分组
   const hasCDGroup = ProjectStore.currentShownGroup.info.mark[3] > 0
 
+  // 目标提取如果存在，一定是第一张图
+  const OEIndex = 0
+  // 地物分类可能是第一张、第二张图
+  const TCIndex = hasOEGroup ? 1 : 0
+  // 目标检测可能是第一、二、三张图
+  const ODIndex = hasOEGroup ? (hasTCGroup ? 2 : 1) : hasTCGroup ? 1 : 0
+
+  // 变化检测最为复杂，对应有三张图，此处计算第一张图的index，并暂时不考虑多组变化检测分组
+  let CDIndex = 0
+  if (hasOEGroup && hasTCGroup && hasODGroup) CDIndex = 3
+  else if (
+    (!hasOEGroup && hasTCGroup && hasODGroup) ||
+    (hasOEGroup && !hasTCGroup && hasODGroup) ||
+    (hasOEGroup && hasTCGroup && !hasODGroup)
+  )
+    CDIndex = 2
+  else if (
+    (!hasOEGroup && !hasTCGroup && hasODGroup) ||
+    (hasOEGroup && !hasTCGroup && !hasODGroup) ||
+    (!hasOEGroup && hasTCGroup && !hasODGroup)
+  )
+    CDIndex = 1
+  else CDIndex = 0
+
+  console.log(
+    hasOEGroup,
+    hasTCGroup,
+    hasODGroup,
+    OEIndex,
+    TCIndex,
+    ODIndex,
+    CDIndex
+  )
   let cubeCanvas: HTMLCanvasElement
   let ctx: CanvasRenderingContext2D
   let color: string
@@ -47,7 +90,7 @@ function _Perspective() {
 
   useEffect(() => {
     TheDrawMethod()
-  }, [size, ProjectStore.showDetail])
+  }, [size, ProjectStore.showDetail, ProjectStore.currentShownGroup])
 
   function zoom() {
     if (size <= 75) {
@@ -68,14 +111,25 @@ function _Perspective() {
 
   function handleHeight(): Promise<number> {
     odImg = document.querySelector('#od') as HTMLElement
+    const cubeWrapper = document.querySelector('#cubeWrapper') as HTMLElement
+    let imgHeight = 0
+
+    if (odImg) imgHeight = odImg.offsetHeight
+    // 一个莫名其妙的bug，获取的offsetHeight值为6，因此需要这样写以避免bug产生
+    if (imgHeight === 6) {
+      imgHeight = (cubeWrapper.clientWidth * size) / 100
+    }
+
     return new Promise((resolve) => {
       if (odImg) {
-        return resolve(odImg.offsetHeight)
+        return resolve(imgHeight)
       }
       odImg = document.querySelector('#od') as HTMLElement
-      odImg.onload = () => {
-        resolve(odImg.offsetHeight)
-      }
+      if (odImg) {
+        odImg.onload = () => {
+          resolve(imgHeight)
+        }
+      } else resolve(0)
     })
   }
 
@@ -85,8 +139,6 @@ function _Perspective() {
     ctx: CanvasRenderingContext2D
   ) {
     const img = document.getElementById('cubeImg') as HTMLImageElement
-
-    console.log(imgHeight)
 
     c.width = imgHeight
     c.height = imgHeight
@@ -106,8 +158,8 @@ function _Perspective() {
         img.offsetHeight,
         0,
         0,
-        imgHeight + 2,
-        imgHeight + 2
+        imgHeight + 5,
+        imgHeight + 5
       )
 
       // 绘制方框
@@ -123,16 +175,17 @@ function _Perspective() {
       // 颜色
       ctx.strokeStyle = color
 
-      ProjectStore.currentShownGroup.info.boxs.forEach((item) => {
-        // 实际绘制的位置
-        const sx = item[0] / ratioX
-        const sy = item[1] / ratioY
-        // 实际绘制的宽高
-        const dw = item[2] / ratioX
-        const dh = item[3] / ratioY
+      ProjectStore.currentShownGroup.info.boxs &&
+        ProjectStore.currentShownGroup.info.boxs.forEach((item) => {
+          // 实际绘制的位置
+          const sx = item[0] / ratioX
+          const sy = item[1] / ratioY
+          // 实际绘制的宽高
+          const dw = item[2] / ratioX
+          const dh = item[3] / ratioY
 
-        ctx.strokeRect(sx, sy, dw, dh)
-      })
+          ctx.strokeRect(sx, sy, dw, dh)
+        })
     }
   }
 
@@ -141,8 +194,8 @@ function _Perspective() {
     handleHeight().then((imgHeight: number) => {
       // cube canvas
       cubeCanvas = document.getElementById('canvas') as HTMLCanvasElement
-      ctx = cubeCanvas.getContext('2d') as CanvasRenderingContext2D
-      drawCubeCanvas(imgHeight, cubeCanvas, ctx)
+      ctx = cubeCanvas?.getContext('2d') as CanvasRenderingContext2D
+      ctx && drawCubeCanvas(imgHeight, cubeCanvas, ctx)
     })
   }
 
@@ -160,144 +213,171 @@ function _Perspective() {
             ? perspectiveStyles.cube
             : perspectiveStyles.cubeAtConer
         }
+        id="cubeWrapper"
       >
-        {/* 目标提取 */}
-        <img
-          style={{
-            width: `${size}%`,
-            transform: `translateY(${
-              !ProjectStore.showDetail ? (size - 300) / 10 : size / 20
-            }rem) rotateX(57deg) rotateZ(${-20 + angle}deg)`,
-          }}
-          src={ProjectStore.currentShownGroup.pictures[0].url}
-          onClick={() => {
-            viewDetail(0)
-          }}
-        />
-        {/* 地物分类 */}
-        <img
-          style={{
-            width: `${size}%`,
-            transform: `translateY(${
-              !ProjectStore.showDetail ? (size - 100) / 10 : (size + 150) / 20
-            }rem) rotateX(57deg) rotateZ(${-20 + angle}deg)`,
-          }}
-          src={ProjectStore.currentShownGroup.pictures[1].url}
-          onClick={() => {
-            viewDetail(1)
-          }}
-        />
-        {/* 目标检测 */}
-        <>
-          <img
-            id="od"
-            style={{
-              width: `${size}%`,
-              transform: `translateY(${
-                !ProjectStore.showDetail ? (size + 100) / 10 : (size + 300) / 20
-              }rem) rotateX(57deg) rotateZ(${-20 + angle}deg)`,
-              // border: 'none',
-              cursor: 'default',
-            }}
-            src={ProjectStore.currentShownGroup.pictures[2].url}
-          />
-          <img
-            style={{
-              width: 'auto',
-              height: 'auto',
-              visibility: 'hidden',
-              position: 'absolute',
-            }}
-            id="cubeImg"
-            src={
-              hasCDGroup
-                ? ProjectStore.currentShownGroup.pictures[
-                    ProjectStore.currentShownGroup.pictures.length - 2
-                  ].url
-                : ProjectStore.currentShownGroup.pictures[
-                    ProjectStore.currentShownGroup.pictures.length - 1
-                  ].url
-            }
-          />
-          <canvas
-            id="canvas"
-            style={{
-              transform: `translateY(${
-                !ProjectStore.showDetail ? (size + 300) / 10 : (size + 450) / 20
-              }rem) rotateX(57deg) rotateZ(${-20 + angle}deg)`,
-              cursor: 'pointer',
-            }}
-          ></canvas>
-        </>
-        {/* 变化检测 */}
-        <>
-          <img
-            style={{
-              width: `${size}%`,
-              transform: `translateY(${
-                !ProjectStore.showDetail
-                  ? (size + 500) / 10
-                  : (size - 1200) / 20
-              }rem) rotateX(57deg) rotateZ(${-20 + angle}deg)`,
-            }}
-            src={ProjectStore.currentShownGroup.pictures[3].url}
-            onClick={() => {
-              viewDetail(1)
-            }}
-          />
-          {ProjectStore.showMock && (
+        {
+          /* 目标提取 */
+          hasOEGroup && (
+            <img
+              style={{
+                width: `${size}%`,
+                transform: `translateY(${
+                  !ProjectStore.showDetail ? (size - 300) / 10 : size / 20
+                }rem) rotateX(57deg) rotateZ(${-20 + angle}deg)`,
+              }}
+              src={ProjectStore.currentShownGroup.pictures[OEIndex].url}
+              onClick={() => {
+                viewDetail(0)
+              }}
+            />
+          )
+        }
+        {
+          /* 地物分类 */
+          hasTCGroup && (
             <img
               style={{
                 width: `${size}%`,
                 transform: `translateY(${
                   !ProjectStore.showDetail
-                    ? (size + 699) / 10
-                    : (size + 599) / 20
+                    ? (size - 100) / 10
+                    : (size + 150) / 20
                 }rem) rotateX(57deg) rotateZ(${-20 + angle}deg)`,
-                opacity: 0.25,
               }}
-              src={ProjectStore.currentShownGroup.pictures[3].url}
-            />
-          )}
-          <img
-            style={{
-              width: `${size}%`,
-              transform: `translateY(${
-                !ProjectStore.showDetail ? (size + 700) / 10 : (size + 600) / 20
-              }rem) rotateX(57deg) rotateZ(${-20 + angle}deg)`,
-            }}
-            src={ProjectStore.currentShownGroup.pictures[4].url}
-            onClick={() => {
-              viewDetail(1)
-            }}
-          />
-          {ProjectStore.showMock && (
-            <img
-              style={{
-                width: `${size}%`,
-                transform: `translateY(${
-                  !ProjectStore.showDetail
-                    ? (size + 899) / 10
-                    : (size + 749) / 20
-                }rem) rotateX(57deg) rotateZ(${-20 + angle}deg)`,
-                opacity: 0.25,
+              src={ProjectStore.currentShownGroup.pictures[TCIndex].url}
+              onClick={() => {
+                viewDetail(1)
               }}
-              src={ProjectStore.currentShownGroup.pictures[3].url}
             />
-          )}
-          <img
-            style={{
-              width: `${size}%`,
-              transform: `translateY(${
-                !ProjectStore.showDetail ? (size + 900) / 10 : (size + 750) / 20
-              }rem) rotateX(57deg) rotateZ(${-20 + angle}deg)`,
-            }}
-            src={ProjectStore.currentShownGroup.pictures[5].url}
-            onClick={() => {
-              viewDetail(1)
-            }}
-          />
-        </>
+          )
+        }
+        {
+          /* 目标检测 */
+          hasODGroup && (
+            <>
+              <img
+                id="od"
+                style={{
+                  width: `${size}%`,
+                  transform: `translateY(${
+                    !ProjectStore.showDetail
+                      ? (size + 100) / 10
+                      : (size + 300) / 20
+                  }rem) rotateX(57deg) rotateZ(${-20 + angle}deg)`,
+                  // border: 'none',
+                  cursor: 'default',
+                }}
+                src={ProjectStore.currentShownGroup.pictures[ODIndex].url}
+              />
+              <img
+                style={{
+                  width: 'auto',
+                  height: 'auto',
+                  visibility: 'hidden',
+                  position: 'absolute',
+                }}
+                id="cubeImg"
+                src={
+                  hasCDGroup
+                    ? ProjectStore.currentShownGroup.pictures[
+                        ProjectStore.currentShownGroup.pictures.length - 2
+                      ].url
+                    : ProjectStore.currentShownGroup.pictures[
+                        ProjectStore.currentShownGroup.pictures.length - 1
+                      ].url
+                }
+              />
+              <canvas
+                id="canvas"
+                style={{
+                  transform: `translateY(${
+                    !ProjectStore.showDetail
+                      ? (size + 300) / 10
+                      : (size + 450) / 20
+                  }rem) rotateX(57deg) rotateZ(${-20 + angle}deg)`,
+                  cursor: 'pointer',
+                }}
+              ></canvas>
+            </>
+          )
+        }
+        {
+          /* 变化检测 */
+          hasCDGroup && (
+            <>
+              <img
+                style={{
+                  width: `${size}%`,
+                  transform: `translateY(${
+                    !ProjectStore.showDetail
+                      ? (size + 500) / 10
+                      : (size - 1200) / 20
+                  }rem) rotateX(57deg) rotateZ(${-20 + angle}deg)`,
+                }}
+                src={ProjectStore.currentShownGroup.pictures[CDIndex].url}
+                onClick={() => {
+                  viewDetail(1)
+                }}
+              />
+              {ProjectStore.showMock && (
+                <img
+                  style={{
+                    width: `${size}%`,
+                    transform: `translateY(${
+                      !ProjectStore.showDetail
+                        ? (size + 699) / 10
+                        : (size + 599) / 20
+                    }rem) rotateX(57deg) rotateZ(${-20 + angle}deg)`,
+                    opacity: 0.25,
+                  }}
+                  src={ProjectStore.currentShownGroup.pictures[CDIndex].url}
+                />
+              )}
+              <img
+                style={{
+                  width: `${size}%`,
+                  transform: `translateY(${
+                    !ProjectStore.showDetail
+                      ? (size + 700) / 10
+                      : (size + 600) / 20
+                  }rem) rotateX(57deg) rotateZ(${-20 + angle}deg)`,
+                }}
+                src={ProjectStore.currentShownGroup.pictures[CDIndex + 1].url}
+                onClick={() => {
+                  viewDetail(1)
+                }}
+              />
+              {ProjectStore.showMock && (
+                <img
+                  style={{
+                    width: `${size}%`,
+                    transform: `translateY(${
+                      !ProjectStore.showDetail
+                        ? (size + 899) / 10
+                        : (size + 749) / 20
+                    }rem) rotateX(57deg) rotateZ(${-20 + angle}deg)`,
+                    opacity: 0.25,
+                  }}
+                  src={ProjectStore.currentShownGroup.pictures[CDIndex].url}
+                />
+              )}
+              <img
+                style={{
+                  width: `${size}%`,
+                  transform: `translateY(${
+                    !ProjectStore.showDetail
+                      ? (size + 900) / 10
+                      : (size + 750) / 20
+                  }rem) rotateX(57deg) rotateZ(${-20 + angle}deg)`,
+                }}
+                src={ProjectStore.currentShownGroup.pictures[CDIndex + 2].url}
+                onClick={() => {
+                  viewDetail(1)
+                }}
+              />
+            </>
+          )
+        }
       </Box>
       {ProjectStore.showDetail && (
         <Box sx={perspectiveStyles.detail}>

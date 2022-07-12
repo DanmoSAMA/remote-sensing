@@ -20,6 +20,9 @@ function _Perspective() {
   )
   const [showDropDown, setShowDropDown] = useState(false)
 
+  // 变化检测后可能有bug
+  console.log(ProjectStore.currentShownGroup)
+
   useEffect(() => {
     window.addEventListener('resize', handleHeight)
   }, [])

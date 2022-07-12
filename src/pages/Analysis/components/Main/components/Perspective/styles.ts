@@ -6,7 +6,7 @@ export const perspectiveStyles = {
     justifyContent: 'center',
     alignItems: 'center',
     position: 'relative',
-    top: '100px',
+    top: '150px',
 
     '& img': {
       userSelect: 'none',
@@ -40,14 +40,12 @@ export const perspectiveStyles = {
     '& img': {
       position: 'absolute',
       top: '20rem',
-      height: 'auto',
       cursor: 'pointer',
       border: '3px solid #01555A',
     },
     '& canvas': {
       position: 'absolute',
       top: '20rem',
-      height: 'auto',
       cursor: 'pointer',
       border: '3px solid #01555A',
     },
