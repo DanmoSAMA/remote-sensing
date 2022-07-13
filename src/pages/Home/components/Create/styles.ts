@@ -4,9 +4,7 @@ export const createStyles = {
       width: '37.25rem',
       minWidth: '400px',
       position: 'absolute',
-      top: '6.5rem',
-      left: '15rem'
-    }
+    },
   },
   title: {
     '&': {
@@ -14,16 +12,16 @@ export const createStyles = {
       fontWeight: '400',
       fontSize: '4rem',
       fontFamily: 'Microsoft JhengHei UI',
-      marginBottom: '2.375rem'
-    }
+      marginBottom: '2.375rem',
+    },
   },
   text: {
     '&': {
       fontFamily: 'Microsoft YaHei',
       fontWeight: '400',
       lineHeight: '2.5rem',
-      fontSize: '1.5rem'
-    }
+      fontSize: '1.5rem',
+    },
   },
   button: {
     '&': {
@@ -32,7 +30,7 @@ export const createStyles = {
       width: '23.5625rem',
       fontSize: '1.5rem',
       borderRadius: '1.25rem',
-      fontFamily: 'Microsoft YaHei UI'
-    }
-  }
+      fontFamily: 'Microsoft YaHei UI',
+    },
+  },
 }

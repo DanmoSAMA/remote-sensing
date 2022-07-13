@@ -26,7 +26,7 @@ export default function Picture() {
     <ImageList
       sx={pictureStyles.wrapper}
       style={{
-        top: breakPoint ? '4.5rem' : '55px',
+        top: breakPoint ? '8rem' : '80px',
         width: breakPoint ? '50rem' : '500px',
         height: breakPoint ? '35rem' : '350px'
       }}

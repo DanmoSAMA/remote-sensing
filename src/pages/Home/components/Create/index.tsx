@@ -23,8 +23,8 @@ function Create() {
     <Container
       sx={createStyles.create}
       style={{
-        top: breakPoint ? '6.5rem' : '65px',
-        left: breakPoint ? '15rem' : '130px'
+        top: breakPoint ? '10rem' : '100px',
+        left: breakPoint ? '14.5rem' : '145px'
       }}
     >
       <Typography

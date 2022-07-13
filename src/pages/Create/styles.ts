@@ -7,7 +7,7 @@ export const createStyles = {
       width: '100%',
       minWidth: '1000px',
       position: 'relative',
-      top: '60px'
-    }
-  }
+      // top: '60px'
+    },
+  },
 }
