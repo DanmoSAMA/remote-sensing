@@ -43,6 +43,7 @@ function _ToolBar() {
       ? ProjectStore.currentShownGroup.info
       // @ts-ignore
       : ProjectStore.currentShownGroup.info.infos ? 
+        // @ts-ignore
         ProjectStore.currentShownGroup.info.infos[1]
         : ProjectStore.currentShownGroup.info
   
