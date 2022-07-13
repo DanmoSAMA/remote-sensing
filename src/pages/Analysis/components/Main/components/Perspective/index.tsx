@@ -24,12 +24,16 @@ function _Perspective() {
   // )
 
   // 是否存在目标提取分组
+  // @ts-ignore
   const hasOEGroup = ProjectStore.currentShownGroup.info.mark[0] > 0
   // 是否存在地物分类分组
+  // @ts-ignore
   const hasTCGroup = ProjectStore.currentShownGroup.info.mark[1] > 0
   // 是否存在目标检测分组
+  // @ts-ignore
   const hasODGroup = ProjectStore.currentShownGroup.info.mark[2] > 0
   // 是否存在变化检测分组
+  // @ts-ignore
   const hasCDGroup = ProjectStore.currentShownGroup.info.mark[3] > 0
 
   // 目标提取如果存在，一定是第一张图
@@ -69,7 +73,8 @@ function _Perspective() {
   let ctx: CanvasRenderingContext2D
   let color: string
 
-  switch (ProjectStore.currentShownGroup.info.type) {
+  // @ts-ignore
+  switch (ProjectStore.currentShownGroup.info.infos[1].type) {
     case 'playground':
       color = objectDetectionColors[0].color
       break
@@ -115,8 +120,8 @@ function _Perspective() {
     let imgHeight = 0
 
     if (odImg) imgHeight = odImg.offsetHeight
-    // 一个莫名其妙的bug，获取的offsetHeight值为6，因此需要这样写以避免bug产生
-    if (imgHeight === 6) {
+    // 一个莫名其妙的bug，因此需要这样写以避免bug产生
+    if (imgHeight < 100) {
       imgHeight = (cubeWrapper.clientWidth * size) / 100
     }
 
@@ -163,10 +168,12 @@ function _Perspective() {
       )
 
       // 绘制方框
-      const sw = ProjectStore.currentShownGroup.info.w
-      const sh = ProjectStore.currentShownGroup.info.h
-      const ratioX = sw / size
-      const ratioY = sh / size
+      // @ts-ignore
+      const sw = ProjectStore.currentShownGroup.info.infos[1].w
+      // @ts-ignore
+      const sh = ProjectStore.currentShownGroup.info.infos[1].h
+      const ratioX = sw / (imgHeight + 5)
+      const ratioY = sh / (imgHeight + 5)
 
       // 线宽
       ctx.lineWidth = 3
@@ -175,8 +182,10 @@ function _Perspective() {
       // 颜色
       ctx.strokeStyle = color
 
-      ProjectStore.currentShownGroup.info.boxs &&
-        ProjectStore.currentShownGroup.info.boxs.forEach((item) => {
+      // @ts-ignore
+      ProjectStore.currentShownGroup.info.infos[1].boxs &&
+        // @ts-ignore
+        ProjectStore.currentShownGroup.info.infos[1].boxs.forEach((item) => {
           // 实际绘制的位置
           const sx = item[0] / ratioX
           const sy = item[1] / ratioY
@@ -264,7 +273,7 @@ function _Perspective() {
                       ? (size + 100) / 10
                       : (size + 300) / 20
                   }rem) rotateX(57deg) rotateZ(${-20 + angle}deg)`,
-                  // border: 'none',
+                  border: 'none',
                   cursor: 'default',
                 }}
                 src={ProjectStore.currentShownGroup.pictures[ODIndex].url}
