@@ -12,15 +12,23 @@ type Props = {
 function _MyPieChart(props: Props) {
   const { detectType, displayType } = props
 
+  const currentInfo =
+  detectType !== 1
+    ? ProjectStore.currentShownGroup.info
+    // @ts-ignore
+    : ProjectStore.currentShownGroup.info.infos[1]
+
   const data =
     displayType === 1
-      ? ProjectStore.currentShownGroup.info.colors.map((item, index) => {
+      // @ts-ignore
+      ? currentInfo.colors.map((item, index) => {
           return {
             name: '',
             value: item
           }
-        })
-      : ProjectStore.currentShownGroup.info.nums.map((item, index) => {
+      })
+      // @ts-ignore
+      : currentInfo.nums.map((item, index) => {
           return {
             name: '',
             value: item
@@ -37,6 +45,7 @@ function _MyPieChart(props: Props) {
         outerRadius={50}
         dataKey="value"
       >
+        {/*@ts-ignore*/}
         {data.map((entry, index) => (
           <Cell
             key={`cell-${index}`}

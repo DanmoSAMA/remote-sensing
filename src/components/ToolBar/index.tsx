@@ -36,6 +36,17 @@ function _ToolBar() {
       : pathname === '/object-extract'
       ? 2
       : 4
+  
+  // to fix
+  const currentInfo =
+    type !== 1
+      ? ProjectStore.currentShownGroup.info
+      // @ts-ignore
+      : ProjectStore.currentShownGroup.info.infos ? 
+        ProjectStore.currentShownGroup.info.infos[1]
+        : ProjectStore.currentShownGroup.info
+  
+  console.log(currentInfo)
 
   useEffect(() => {
     ProjectStore.init(parseInt(id))
@@ -139,7 +150,7 @@ function _ToolBar() {
                 style={{
                   width: '60%',
                   display: 'flex',
-                  justifyContent: 'center'
+                  justifyContent: 'center',
                 }}
               >
                 <Button
@@ -150,7 +161,7 @@ function _ToolBar() {
                     color: '#FCFBF4',
                     boxShadow: 'none',
                     fontWeight: '300',
-                    fontSize: '16px'
+                    fontSize: '16px',
                   }}
                 >
                   <SvgIcon name="import" />
@@ -193,34 +204,34 @@ function _ToolBar() {
             </Typography>
             <hr />
           </Box>
-          {type === 5 && (
+          {(type === 5 || (type === 1 && currentInfo.num !== undefined))  && (
             <Box
               sx={{
                 color: 'primary.light',
                 fontSize: '15px',
-                margin: '15px 0 30px 15px'
+                margin: '15px 0 30px 15px',
               }}
             >
-              图块数量：{ProjectStore.currentShownGroup.info.num} 个
+              图块数量：{currentInfo.num} 个
             </Box>
           )}
-          {type === 4 && (
+          {(type === 4 || (type === 1 && currentInfo.boxs !== undefined)) && (
             <Box
               sx={{
                 color: 'primary.light',
                 fontSize: '15px',
-                margin: '20px 0 30px 15px'
+                margin: '20px 0 30px 15px',
               }}
             >
-              目标数量：{ProjectStore.currentShownGroup.info.boxs.length} 个
+              目标数量：{currentInfo.boxs.length} 个
             </Box>
           )}
-          {type === 3 && (
+          {(type === 3 || (type === 1 && currentInfo.nums !== undefined)) && (
             <Box
               sx={{
                 color: 'primary.light',
                 fontSize: '15px',
-                margin: '20px 0 10px 0px'
+                margin: '20px 0 10px 0px',
               }}
             >
               <Typography
@@ -238,7 +249,7 @@ function _ToolBar() {
                   display: 'flex',
                   justifyContent: 'center',
                   alignItems: 'center',
-                  fontSize: '14px'
+                  fontSize: '14px',
                 }}
               >
                 <MyPieChart detectType={type} displayType={2} />
@@ -251,7 +262,7 @@ function _ToolBar() {
               sx={{
                 color: 'primary.light',
                 fontSize: '15px',
-                margin: '20px 0 10px 0px'
+                margin: '20px 0 10px 0px',
               }}
             >
               <Typography
@@ -269,7 +280,7 @@ function _ToolBar() {
                   display: 'flex',
                   justifyContent: 'center',
                   alignItems: 'center',
-                  fontSize: '14px'
+                  fontSize: '14px',
                 }}
               >
                 <MyPieChart detectType={type} displayType={1} />
@@ -277,11 +288,11 @@ function _ToolBar() {
               </Box>
             </Box>
           )}
-          {type === 4 && (
+          {(type === 4 || type === 1) && (
             <Box
               sx={{
                 width: '100px',
-                marginLeft: '15px'
+                marginLeft: '15px',
               }}
             >
               {objectDetectionColors.map((item) => (
@@ -292,7 +303,7 @@ function _ToolBar() {
                     lineHeight: '30px',
                     display: 'flex',
                     alignItems: 'center',
-                    color: 'primary.light'
+                    color: 'primary.light',
                   }}
                   key={item.id}
                 >
@@ -302,7 +313,7 @@ function _ToolBar() {
                       height: '16px',
                       borderRadius: '50%',
                       backgroundColor: item.color,
-                      marginRight: '12px'
+                      marginRight: '12px',
                     }}
                   ></Box>
                   {item.name}

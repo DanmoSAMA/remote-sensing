@@ -60,15 +60,15 @@ function _Perspective() {
     CDIndex = 1
   else CDIndex = 0
 
-  console.log(
-    hasOEGroup,
-    hasTCGroup,
-    hasODGroup,
-    OEIndex,
-    TCIndex,
-    ODIndex,
-    CDIndex
-  )
+  // console.log(
+  //   hasOEGroup,
+  //   hasTCGroup,
+  //   hasODGroup,
+  //   OEIndex,
+  //   TCIndex,
+  //   ODIndex,
+  //   CDIndex
+  // )
   let cubeCanvas: HTMLCanvasElement
   let ctx: CanvasRenderingContext2D
   let color: string
@@ -109,7 +109,7 @@ function _Perspective() {
     }
   }
 
-  function viewDetail(type: 0 | 1 | 2) {
+  function viewDetail(type: 0 | 1 | 2 | 3 | 4 | 5) {
     ProjectStore.setShowDetail(true)
     setDetailImgUrl(ProjectStore.currentShownGroup.pictures[type].url)
   }
@@ -325,7 +325,7 @@ function _Perspective() {
                 }}
                 src={ProjectStore.currentShownGroup.pictures[CDIndex].url}
                 onClick={() => {
-                  viewDetail(1)
+                  viewDetail(3)
                 }}
               />
               {ProjectStore.showMock && (
@@ -353,7 +353,7 @@ function _Perspective() {
                 }}
                 src={ProjectStore.currentShownGroup.pictures[CDIndex + 1].url}
                 onClick={() => {
-                  viewDetail(1)
+                  viewDetail(4)
                 }}
               />
               {ProjectStore.showMock && (
@@ -381,7 +381,7 @@ function _Perspective() {
                 }}
                 src={ProjectStore.currentShownGroup.pictures[CDIndex + 2].url}
                 onClick={() => {
-                  viewDetail(1)
+                  viewDetail(5)
                 }}
               />
             </>

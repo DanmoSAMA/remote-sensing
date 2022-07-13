@@ -59,7 +59,9 @@ class ProjectState {
     groupID: 0,
     groupName: '',
     groupType: 2,
-    info: {} as any,
+    info: {
+      infos: [{}, {}],
+    } as any,
     pictures: [
       {
         uuid: '',
@@ -137,7 +139,9 @@ class ProjectState {
         groupID: 0,
         groupName: '',
         groupType: 2,
-        info: {} as any,
+        info: {
+          infos: [{}, {}],
+        } as any,
         pictures: [
           {
             uuid: '',

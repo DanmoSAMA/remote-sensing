@@ -12,12 +12,18 @@ type Props = {
 function _ChartList(props: Props) {
   const { detectType, displayType } = props
 
+  const currentInfo =
+  detectType !== 1
+    ? ProjectStore.currentShownGroup.info
+    // @ts-ignore
+    : ProjectStore.currentShownGroup.info.infos[1]
+
   const data =
     displayType === 1
-      ? ProjectStore.currentShownGroup.info.colors.map((item, index) => {
+      // @ts-ignore
+      ? currentInfo.colors.map((item, index) => {
           switch (detectType) {
             case 1:
-              break
             case 3:
               switch (index) {
                 case 0:
@@ -63,8 +69,9 @@ function _ChartList(props: Props) {
                   }
               }
           }
-        })
-      : ProjectStore.currentShownGroup.info.nums.map((item, index) => {
+      })
+      // @ts-ignore
+      : currentInfo.nums.map((item, index) => {
           switch (detectType) {
             case 1:
               break
@@ -113,7 +120,8 @@ function _ChartList(props: Props) {
                   }
               }
           }
-        })
+      })
+  
   return (
     <Box
       sx={{
@@ -121,6 +129,7 @@ function _ChartList(props: Props) {
         marginLeft: '10px'
       }}
     >
+      {/*@ts-ignore*/}
       {data.map((item: any, index) => (
         <Box
           sx={{
@@ -141,8 +150,8 @@ function _ChartList(props: Props) {
               marginRight: '5px'
             }}
           ></Box>
-          {item.name}(
-          {displayType === 1 ? (item.value * 100).toFixed(2) + '%' : item.value}
+          {item ? item.name : ''}(
+          {displayType === 1 && item ? (item.value * 100).toFixed(2) + '%' : item ? item.value : '0%'}
           )
         </Box>
       ))}
