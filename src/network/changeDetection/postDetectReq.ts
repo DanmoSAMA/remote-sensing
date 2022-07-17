@@ -2,8 +2,8 @@ import { request } from '../request'
 import {
   PostDetectReqData,
   PostDetectRes,
-  PostDetectResData
-} from '../../types/changeDetection/ChangeDetection'
+  PostDetectResData,
+} from '@/types/changeDetection/ChangeDetection'
 
 export async function postDetectReq(
   data: PostDetectReqData
@@ -11,7 +11,7 @@ export async function postDetectReq(
   const res = await request<PostDetectResData>({
     method: 'POST',
     data,
-    url: '/v1/project/picture/cd'
+    url: '/v1/project/picture/cd',
   })
 
   return res

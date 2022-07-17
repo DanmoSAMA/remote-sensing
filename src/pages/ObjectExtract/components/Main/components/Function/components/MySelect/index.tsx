@@ -2,7 +2,7 @@ import Box from '@mui/material/Box'
 import FormControl from '@mui/material/FormControl'
 import Select from '@mui/material/Select'
 import MenuItem from '@mui/material/MenuItem'
-import { ProjectStore } from '../../../../../../../../mobx/project'
+import { ProjectStore } from '@/mobx/project'
 import { mainStyles } from '../../../../styles'
 import { observer } from 'mobx-react-lite'
 

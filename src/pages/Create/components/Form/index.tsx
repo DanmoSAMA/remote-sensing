@@ -5,8 +5,8 @@ import FormControl from '@mui/material/FormControl'
 import Typography from '@mui/material/Typography'
 import { formStyles } from './styles'
 import { useState } from 'react'
-import { createProject } from '../../../../network/project/createProject'
-import { ProjectStore } from '../../../../mobx/project'
+import { createProject } from '@/network/project/createProject'
+import { ProjectStore } from '@/mobx/project'
 import useMediaQuery from '@mui/material/useMediaQuery'
 
 type Props = {

@@ -5,12 +5,12 @@ import ListItem from '@mui/material/ListItem'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
 import IconButton from '@mui/material/IconButton'
-import SvgIcon from '../SvgIcon'
+import SvgIcon from '@/components/SvgIcon'
 import { sideBarItems } from './consts/sideBarItems'
 import { sideBarStyles } from './styles'
 import { useNavigate, useLocation } from 'react-router-dom'
-import { useParams } from '../../hooks/useParams'
-import { ProjectStore } from '../../mobx/project'
+import { useParams } from '@/hooks/useParams'
+import { ProjectStore } from '@/mobx/project'
 
 export default function Navbar() {
   const navigate = useNavigate()

@@ -1,12 +1,11 @@
 import AppBar from '@mui/material/AppBar'
 import Toolbar from '@mui/material/Toolbar'
-import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
-import { headerStyles } from './styles'
+import SvgIcon from '@/components/SvgIcon/index'
 import List from './components/List'
 import Search from './components/Search'
 import Button from './components/Button'
-import SvgIcon from '../SvgIcon/index'
+import { headerStyles } from './styles'
 
 export default function Navbar() {
   return (

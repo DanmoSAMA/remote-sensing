@@ -1,7 +1,7 @@
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
 import ListItemText from '@mui/material/ListItemText'
-import { ProjectStore } from '../../../../mobx/project'
+import { ProjectStore } from '@/mobx/project'
 import { listStyles } from './styles'
 import { listItems } from './consts/listItems'
 import { useNavigate, useLocation } from 'react-router-dom'

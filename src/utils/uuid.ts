@@ -1,9 +1,5 @@
-// 根据图片的信息，求出uuid
-// export function generateUUID(file) {
-//   return (file.lastModified * file.size) % 100001651
-// }
+// 根据图片的信息，求出32位uuid
 
-// 32位uuid
 export function generateUUID() {
   var buf = new Uint32Array(4)
   window.crypto.getRandomValues(buf)

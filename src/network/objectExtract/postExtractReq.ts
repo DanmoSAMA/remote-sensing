@@ -2,8 +2,8 @@ import { request } from '../request'
 import {
   PostSortReqData,
   PostSortResData,
-  PostSortRes
-} from '../../types/terrainClassification/TerrainClassification'
+  PostSortRes,
+} from '@/types/terrainClassification/TerrainClassification'
 
 export async function postExtractReq(
   data: PostSortReqData
@@ -11,7 +11,7 @@ export async function postExtractReq(
   const res = await request<PostSortResData>({
     method: 'POST',
     data,
-    url: '/v1/project/picture/oa'
+    url: '/v1/project/picture/oa',
   })
 
   return res

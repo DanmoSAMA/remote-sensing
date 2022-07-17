@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { ConfigOpts } from '../../../../../types/user/ConfigOpts'
+import { ConfigOpts } from '@/types/user/ConfigOpts'
 
 export function useForm<T extends { [name: string]: ConfigOpts }>(config: T) {
   // 表单

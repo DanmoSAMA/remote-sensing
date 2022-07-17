@@ -1,20 +1,19 @@
 import { createTheme } from '@mui/material/styles'
 
 export const theme = createTheme({
-  components: {},
   palette: {
     primary: {
       main: '#E2DCCD',
       dark: '#E2DECD',
-      light: '#FCFBF4'
+      light: '#FCFBF4',
     },
     secondary: {
       main: '#01555A',
-      light: '#89ABAC'
+      light: '#89ABAC',
     },
     info: {
-      main: '#C39984'
-    }
+      main: '#C39984',
+    },
   },
   typography: {
     fontFamily: [
@@ -27,8 +26,8 @@ export const theme = createTheme({
       'sans-serif',
       '"Apple Color Emoji"',
       '"Segoe UI Emoji"',
-      '"Segoe UI Symbol"'
-    ].join(',')
+      '"Segoe UI Symbol"',
+    ].join(','),
   },
-  spacing: 4
+  spacing: 4,
 })

@@ -4,8 +4,8 @@ import Typography from '@mui/material/Typography'
 import { useState, useRef } from 'react'
 import { formStyles } from '../../styles'
 import { useForm } from '../../hooks/useForm'
-import { FormConfig } from '../../../../../../types/user/ConfigOpts'
-import { register } from '../../../../../../network/user/register'
+import { FormConfig } from '@/types/user/ConfigOpts'
+import { register } from '@/network/user/register'
 
 type Props = {
   showLogin: boolean

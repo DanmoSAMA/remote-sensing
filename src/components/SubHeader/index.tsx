@@ -1,13 +1,13 @@
 import Box from '@mui/material/Box'
 import SvgIcon from '../SvgIcon'
-import { ProjectStore } from '../../mobx/project'
 import { subHeaderStyles } from './styles'
 import { observer } from 'mobx-react-lite'
 import { useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
-import { getRecentProjects } from '../../network/project/getRecentProjects'
-import { useParams } from '../../hooks/useParams'
-import { Project } from '../../types/project/Project'
+import { getRecentProjects } from '@/network/project/getRecentProjects'
+import { useParams } from '@/hooks/useParams'
+import { Project } from '@/types/project/Project'
+import { ProjectStore } from '@/mobx/project'
 
 function _SubHeader() {
   const navigate = useNavigate()

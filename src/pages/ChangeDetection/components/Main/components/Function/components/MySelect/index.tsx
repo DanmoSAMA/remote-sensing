@@ -1,10 +1,10 @@
 import Box from '@mui/material/Box'
-import SvgIcon from '../../../../../../../../components/SvgIcon'
 import FormControl from '@mui/material/FormControl'
 import Select from '@mui/material/Select'
 import MenuItem from '@mui/material/MenuItem'
-import { WaitingGroup } from '../../../../../../../../types/project/ImgAndGroup'
-import { ProjectStore } from '../../../../../../../../mobx/project'
+import SvgIcon from '@/components/SvgIcon'
+import { WaitingGroup } from '@/types/project/ImgAndGroup'
+import { ProjectStore } from '@/mobx/project'
 import { mainStyles } from '../../../../styles'
 import { observer } from 'mobx-react-lite'
 

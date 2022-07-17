@@ -1,5 +1,5 @@
 // 判断用户是否已登录
-import { getUserData } from '../network/user/getUserData'
+import { getUserData } from '@/network/user/getUserData'
 
 export async function checkLogin(): Promise<boolean> {
   const res = await getUserData()

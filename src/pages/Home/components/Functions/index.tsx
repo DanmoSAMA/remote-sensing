@@ -5,12 +5,12 @@ import CardContent from '@mui/material/CardContent'
 import Typography from '@mui/material/Typography'
 import IconButton from '@mui/material/IconButton'
 import useMediaQuery from '@mui/material/useMediaQuery'
-import { checkLogin } from '../../../../utils/checkLogin'
+import { checkLogin } from '@/utils/checkLogin'
 import { functionsStyles } from './styles'
 import { functionItems } from './consts/functionItems'
 import { useNavigate } from 'react-router-dom'
-import { createProject } from '../../../../network/project/createProject'
-import { ProjectStore } from '../../../../mobx/project'
+import { createProject } from '@/network/project/createProject'
+import { ProjectStore } from '@/mobx/project'
 
 type Props = {
   name: string

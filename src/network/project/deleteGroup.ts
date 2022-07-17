@@ -2,8 +2,8 @@ import { request } from '../request'
 import {
   DeleteGroupReqData,
   DeleteGroupResData,
-  DeleteGroupRes
-} from '../../types/project/ImgAndGroup'
+  DeleteGroupRes,
+} from '@/types/project/ImgAndGroup'
 
 export async function deleteGroup(
   data: DeleteGroupReqData
@@ -11,7 +11,7 @@ export async function deleteGroup(
   const res = await request<DeleteGroupResData>({
     method: 'DELETE',
     data,
-    url: '/v1/project/group'
+    url: '/v1/project/group',
   })
 
   return res

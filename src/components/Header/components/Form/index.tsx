@@ -1,6 +1,6 @@
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
-import SvgIcon from '../../../SvgIcon'
+import SvgIcon from '@/components/SvgIcon'
 import Login from './components/Login'
 import Register from './components/Register'
 import { formStyles } from './styles'

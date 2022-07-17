@@ -3,13 +3,13 @@ import Button from '@mui/material/Button'
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
 import Slider from '@mui/material/Slider'
-import SvgIcon from '../../../../../../components/SvgIcon'
+import SvgIcon from '@/components/SvgIcon'
 import MySelect from './components/MySelect'
-import { ProjectStore } from '../../../../../../mobx/project'
+import { ProjectStore } from '@/mobx/project'
 import { perspectiveStyles } from './styles'
 import { observer } from 'mobx-react-lite'
 import { useState, useEffect } from 'react'
-import { objectDetectionColors } from '../../../../../../consts/color'
+import { objectDetectionColors } from '@/consts/color'
 
 function _Perspective() {
   let odImg = document.querySelector('#od') as HTMLElement

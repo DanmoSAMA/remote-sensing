@@ -2,8 +2,8 @@ import { request } from '../request'
 import {
   UpdateImgNameReqData,
   UpdateImgNameRes,
-  UpdateImgNameResData
-} from '../../types/project/ImgAndGroup'
+  UpdateImgNameResData,
+} from '@/types/project/ImgAndGroup'
 
 export async function updateImgName(
   data: UpdateImgNameReqData
@@ -11,7 +11,7 @@ export async function updateImgName(
   const res = await request<UpdateImgNameResData>({
     method: 'POST',
     data,
-    url: `/v1/project/picture/name`
+    url: `/v1/project/picture/name`,
   })
   return res
 }

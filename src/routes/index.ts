@@ -28,48 +28,48 @@ const routesConfig: RouteConfig[] = [
   {
     path: '/home',
     exact: true,
-    element: Home
+    element: Home,
   },
   {
     path: '/home/create',
     exact: true,
-    element: Create
+    element: Create,
   },
   {
     path: '/recent',
     exact: true,
-    element: Recent
+    element: Recent,
   },
   {
     path: '/bin',
     exact: true,
-    element: Bin
+    element: Bin,
   },
   {
     path: '/analysis',
     exact: true,
-    element: Analysis
+    element: Analysis,
   },
   {
     path: '/change-detection',
     exact: true,
-    element: CD
+    element: CD,
   },
   {
     path: '/terrain-classification',
     exact: true,
-    element: TC
+    element: TC,
   },
   {
     path: '/object-extract',
     exact: true,
-    element: OE
+    element: OE,
   },
   {
     path: '/object-detection',
     exact: true,
-    element: OD
-  }
+    element: OD,
+  },
 ]
 
 export default routesConfig

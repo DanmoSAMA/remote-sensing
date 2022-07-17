@@ -1,7 +1,7 @@
 import { Route, Routes, Navigate} from 'react-router-dom'
-import routes from './routes'
+import routes from '@/routes'
 import { Grid } from '@mui/material'
-import './styles/index.css'
+import '@/styles/index.css'
 
 function App() {
   return (

@@ -1,7 +1,7 @@
 import Box from '@mui/material/Box'
 import { observer } from 'mobx-react-lite'
-import { resultColors } from '../../../../consts/color'
-import { ProjectStore } from '../../../../mobx/project'
+import { resultColors } from '@/consts/color'
+import { ProjectStore } from '@/mobx/project'
 
 type Props = {
   detectType: 1 | 2 | 3 | 4 | 5

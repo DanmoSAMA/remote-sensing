@@ -3,13 +3,13 @@ import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import MySelect from './components/MySelect'
 import TypeSelect from './components/TypeSelect'
-import Loading from '../../../../../../components/Loading'
-import { ProjectStore } from '../../../../../../mobx/project'
-import { HeightStore } from '../../../../../../mobx/height'
+import Loading from '@/components/Loading'
+import { ProjectStore } from '@/mobx/project'
+import { HeightStore } from '@/mobx/height'
 import { mainStyles } from '../../styles'
 import { observer } from 'mobx-react-lite'
 import { useState } from 'react'
-import { ObjectType } from '../../../../../../types/objectDetection/ObjectType'
+import { ObjectType } from '@/types/objectDetection/ObjectType'
 
 function _Function() {
   const [isChecking, setIsChecking] = useState(false)

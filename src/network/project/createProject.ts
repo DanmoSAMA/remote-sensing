@@ -2,8 +2,8 @@ import { request } from '../request'
 import {
   CreateProjectReqData,
   CreateProjectResData,
-  CreateProjectRes
-} from '../../types/project/Project'
+  CreateProjectRes,
+} from '@/types/project/Project'
 
 export async function createProject(
   data: CreateProjectReqData
@@ -11,7 +11,7 @@ export async function createProject(
   const res = await request<CreateProjectResData>({
     method: 'POST',
     data,
-    url: '/v1/project'
+    url: '/v1/project',
   })
 
   return res

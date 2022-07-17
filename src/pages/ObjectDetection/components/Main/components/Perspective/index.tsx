@@ -1,12 +1,12 @@
 import Box from '@mui/material/Box'
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
-import SvgIcon from '../../../../../../components/SvgIcon'
-import { ProjectStore } from '../../../../../../mobx/project'
+import SvgIcon from '@/components/SvgIcon'
+import { ProjectStore } from '@/mobx/project'
 import { observer } from 'mobx-react-lite'
 import { useState, useEffect } from 'react'
 import { perspectiveStyles } from './styles'
-import { objectDetectionColors } from '../../../../../../consts/color'
+import { objectDetectionColors } from '@/consts/color'
 
 function _Perspective() {
   let squareImg = document.querySelector('#squareImg') as HTMLImageElement
