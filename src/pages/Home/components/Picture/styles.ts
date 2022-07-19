@@ -7,4 +7,11 @@ export const pictureStyles = {
     overflow: 'hidden',
     zIndex: -1,
   },
+  imgWrapper: {
+    '&': {
+      position: 'absolute',
+      top: 0,
+      zIndex: 1,
+    },
+  },
 }

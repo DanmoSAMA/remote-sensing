@@ -27,7 +27,7 @@ export default function Form(props: Props) {
     setIsCreated(true)
 
     const reqData = {
-      name: projectName
+      name: projectName,
     }
     const res = await createProject(reqData)
     setProjectId(res.data.projectID)
@@ -36,37 +36,34 @@ export default function Form(props: Props) {
 
   return (
     <Box
-      sx={formStyles.wrapper}
-      style={{
+      sx={{
+        ...formStyles.wrapper,
         top: breakPoint ? '10rem' : '155px',
         left: breakPoint ? '8rem' : '80px',
         height: breakPoint ? '32rem' : '200px',
-        width: breakPoint ? '50rem' : '500px'
+        width: breakPoint ? '50rem' : '500px',
       }}
     >
       <FormControl
         variant="standard"
-        sx={formStyles.left}
-        style={{ paddingLeft: breakPoint ? '1rem' : '10px' }}
+        sx={{ ...formStyles.left, paddingLeft: breakPoint ? '1rem' : '10px' }}
       >
         <Input
           disableUnderline={true}
           placeholder="请输入项目名称（不多于50个字符）"
-          sx={formStyles.input}
-          style={{
-            // width: breakPoint ? '100%' : '300px',
+          sx={{
+            ...formStyles.input,
             height: breakPoint ? '6rem' : '60px',
             borderRadius: breakPoint ? '1rem' : '15px',
             fontSize: breakPoint ? '1.5rem' : '16px',
             padding: breakPoint ? '0 1rem' : '0 15px',
-            marginBottom: breakPoint ? '4rem' : '40px'
+            marginBottom: breakPoint ? '4rem' : '40px',
           }}
           onChange={(e) => setProjectName(e.target.value)}
         />
         <Button
           variant="contained"
-          sx={formStyles.button}
-          style={{ display: !isCreated ? 'block' : 'none' }}
+          sx={{ ...formStyles.button, display: !isCreated ? 'block' : 'none' }}
           onClick={() => {
             clickToCreateProject()
           }}

@@ -54,7 +54,7 @@ function Project() {
   }
 
   return (
-    <Box sx={binStyles.wrapper}>
+    <Box sx={{ ...binStyles.wrapper, marginTop: breakPoint ? '5rem' : '50px' }}>
       {binProjects?.slice(0, 8).map((item) => (
         <Box key={item.id} sx={{ position: 'relative' }}>
           <Box
@@ -68,15 +68,15 @@ function Project() {
               position: 'relative',
 
               '&:hover + .mask': {
-                display: 'flex!important'
+                display: 'flex!important',
               },
               '& + .mask:hover': {
-                display: 'flex!important'
+                display: 'flex!important',
               },
               '& img': {
                 width: breakPoint ? '11rem' : '110px',
-                borderRadius: '1rem'
-              }
+                borderRadius: '1rem',
+              },
             }}
           >
             <img src={projectCover} />
@@ -84,11 +84,11 @@ function Project() {
           </Box>
           <Box
             className="mask"
-            sx={binStyles.mask}
-            style={{
+            sx={{
+              ...binStyles.mask,
               width: breakPoint ? '18rem' : '180px',
               height: breakPoint ? '18rem' : '180px',
-              borderRadius: breakPoint ? '1rem' : '10px'
+              borderRadius: breakPoint ? '1rem' : '10px',
             }}
           >
             <Box

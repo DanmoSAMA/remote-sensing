@@ -48,10 +48,7 @@ function Project() {
 
   return (
     <Box
-      sx={projectStyles.wrapper}
-      style={{
-        marginTop: breakPoint ? '5rem' : '50px'
-      }}
+      sx={{ ...projectStyles.wrapper, marginTop: breakPoint ? '5rem' : '50px' }}
     >
       {recentProjects?.slice(0, 8).map((item) => (
         <Box key={item.id} sx={{ position: 'relative' }}>
@@ -66,15 +63,15 @@ function Project() {
               position: 'relative',
 
               '&:hover + .mask': {
-                display: 'flex!important'
+                display: 'flex!important',
               },
               '& + .mask:hover': {
-                display: 'flex!important'
+                display: 'flex!important',
               },
               '& img': {
                 width: breakPoint ? '11rem' : '110px',
-                borderRadius: '1rem'
-              }
+                borderRadius: '1rem',
+              },
             }}
           >
             <img src={projectCover} />
@@ -82,11 +79,11 @@ function Project() {
           </Box>
           <Box
             className="mask"
-            sx={projectStyles.mask}
-            style={{
+            sx={{
+              ...projectStyles.mask,
               width: breakPoint ? '18rem' : '180px',
               height: breakPoint ? '18rem' : '180px',
-              borderRadius: breakPoint ? '1rem' : '10px'
+              borderRadius: breakPoint ? '1rem' : '10px',
             }}
           >
             <Typography color={'secondary.main'} fontSize={'1rem'}>
