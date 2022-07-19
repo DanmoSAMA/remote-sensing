@@ -12,16 +12,16 @@ export const sideBarStyles = {
       borderRight: 'none',
       borderRadius: '20px',
       marginLeft: '10px',
-      marginTop: '1vh'
+      marginTop: '1vh',
     },
     '& .Mui-selected': {
-      backgroundColor: '#FCFBF4!important'
+      backgroundColor: '#FCFBF4!important',
     },
     '& .Mui-selected span': {
-      color: 'secondary.main'
+      color: 'secondary.main',
     },
     '& .Mui-selected:hover': {
-      backgroundColor: '#FCFBF4'
+      backgroundColor: '#FCFBF4',
     },
     '& .MuiListItem-root': {
       marginLeft: '10%',
@@ -29,8 +29,8 @@ export const sideBarStyles = {
       borderTopLeftRadius: '25px',
       borderBottomLeftRadius: '25px',
       height: '60px',
-      marginTop: '30px'
-    }
+      marginTop: '30px',
+    },
   },
   icons: {
     color: '#000',
@@ -39,31 +39,32 @@ export const sideBarStyles = {
       backgroundColor: '#fff',
 
       '& svg': {
-        zoom: 1.4
-      }
+        zoom: 1.4,
+      },
     },
     '& .MuiIconButton-root:hover': {
-      backgroundColor: '#fff'
-    }
+      backgroundColor: '#fff',
+    },
   },
   text: {
     marginLeft: '16px',
+
     '& span': {
       marginLeft: '-10px',
       fontWeight: '300',
-      fontSize: '16px'
-    }
+      fontSize: '16px',
+    },
   },
   logo: {
     '&': {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      padding: '20px'
+      padding: '20px',
     },
     '& .svg-icon': {
       zoom: '1.6',
-      marginRight: '8px'
-    }
-  }
+      marginRight: '8px',
+    },
+  },
 }

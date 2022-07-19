@@ -9,7 +9,7 @@ export const toolBarStyles = {
     borderRadius: '20px',
     zIndex: 1,
     userSelect: 'none',
-    overflow: 'hidden'
+    overflow: 'hidden',
   },
   top: {
     height: '30px',
@@ -22,29 +22,30 @@ export const toolBarStyles = {
       lineHeight: '30px',
       color: '#fff',
       fontWeight: 300,
-      ml: '20px'
+      ml: '20px',
     },
     '& button': {
       backgroundColor: '#313131',
+      color: '#FCFBF4',
       boxShadow: 'none',
-      color: '#fff',
-      fontWeight: '300'
+      fontWeight: '300',
+      fontSize: '16px',
     },
     '& button:hover': {
       backgroundColor: '#313131',
-      boxShadow: 'none'
+      boxShadow: 'none',
     },
     '& svg': {
-      marginRight: '6px'
-    }
+      marginRight: '6px',
+    },
   },
   listWrapper: {
     height: '82.5vh',
     overflow: 'auto',
-    padding: '0px 10px'
+    padding: '0px 10px',
   },
   list: {
-    padding: 0
+    padding: 0,
   },
   listItem: {
     color: '#fff',
@@ -58,15 +59,15 @@ export const toolBarStyles = {
     fontSize: '15px',
 
     '&:last-of-type': {
-      marginBottom: '0px'
-    }
+      marginBottom: '0px',
+    },
   },
   listGroup: {
     borderRadius: '10px',
     border: '1px solid #fff',
     marginLeft: '20px',
     borderTop: 'none',
-    fontSize: '15px'
+    fontSize: '15px',
   },
   listItemInGroup: {
     color: '#fff',
@@ -78,11 +79,11 @@ export const toolBarStyles = {
 
     '&:first-of-type': {
       borderTopLeftRadius: '10px',
-      borderTopRightRadius: '10px'
+      borderTopRightRadius: '10px',
     },
     '&:last-child': {
-      borderRadius: '10px'
-    }
+      borderRadius: '10px',
+    },
   },
   listParent: {
     color: '#fff',
@@ -92,7 +93,7 @@ export const toolBarStyles = {
     padding: '0 10px',
     position: 'relative',
     fontSize: '15px',
-    cursor: 'pointer'
+    cursor: 'pointer',
   },
   dropDown: {
     position: 'absolute',
@@ -104,13 +105,13 @@ export const toolBarStyles = {
     top: '49px',
     zIndex: 1,
     borderRadius: '5px',
-    color: 'secondary.main'
+    color: 'secondary.main',
   },
   dropDownItem: {
     height: '43px',
     lineHeight: '43px',
     padding: '0px',
-    cursor: 'pointer'
+    cursor: 'pointer',
   },
   mask: {
     position: 'absolute',
@@ -119,6 +120,6 @@ export const toolBarStyles = {
     width: '100%',
     height: '100%',
     backgroundColor: '#313131',
-    opacity: '.9'
-  }
+    opacity: '.9',
+  },
 }

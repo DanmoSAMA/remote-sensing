@@ -25,13 +25,24 @@ export const formStyles = {
       marginRight: '.5rem'
     }
   },
+  iconWrapper: {
+    position: 'absolute',
+    top: '10px',
+    right: '2px',
+    cursor: 'pointer',
+    height: '30px',
+    width: '30px',
+    lineHeight: '30px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
   form: {
     display: 'flex',
-    flexDirection: 'column',
     width: '75%',
     alignItems: 'center',
     justifyContent: 'space-around',
-    marginTop: '20px'
+    marginTop: '20px',
   },
   input: {
     height: '38px',
@@ -41,7 +52,6 @@ export const formStyles = {
     borderRadius: '5px',
     backgroundColor: '#E5E5E5',
     padding: '0 10px',
-    boxSizing: 'border-box'
   },
   button: {
     width: '75%',
@@ -56,8 +66,23 @@ export const formStyles = {
       backgroundColor: 'secondary.main'
     }
   },
-  hint: {
+  formHint: {
     fontSize: '12px',
     color: '#908F8E'
+  },
+  switchHint: {
+    fontSize: '.9rem',
+    color: '#01555A',
+    fontWeight: 500,
+    cursor: 'pointer',
+  },
+  mask: {
+    width: '100vw',
+    height: '100vh',
+    position: 'fixed',
+    top: '0',
+    left: '0',
+    backgroundColor: 'rgba(0, 0, 0, .3)',
+    cursor: 'default',
   }
 }

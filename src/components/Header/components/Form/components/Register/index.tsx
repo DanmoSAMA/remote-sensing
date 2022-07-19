@@ -16,11 +16,11 @@ type Props = {
 const formConfig: FormConfig = {
   account: {
     validator: (s) =>
-      /^(?=.*[a-z])(?=.*\d)[a-z]{1}[a-z\d]{3,15}$/.test(s) ? true : false
+      /^(?=.*[a-z])(?=.*\d)[a-z]{1}[a-z\d]{3,15}$/.test(s) ? true : false,
   },
   password: {
-    validator: (s) => (/^[a-zA-Z\d]{8,20}$/.test(s) ? true : false)
-  }
+    validator: (s) => (/^[a-zA-Z\d]{8,20}$/.test(s) ? true : false),
+  },
 }
 
 const color = ['#E46A69', '#908F8E']
@@ -39,7 +39,7 @@ export default function Register(props: Props) {
     if (formIsValidate.account && formIsValidate.password && !pwNotSame) {
       const reqData = {
         account,
-        password
+        password,
       }
       const resData = await register(reqData)
 
@@ -61,7 +61,7 @@ export default function Register(props: Props) {
         width: '100%',
         flexDirection: 'column',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
       }}
     >
       {/*@ts-ignore*/}
@@ -81,11 +81,11 @@ export default function Register(props: Props) {
           }}
         />
         <Typography
-          sx={formStyles.hint}
+          sx={formStyles.formHint}
           margin="5px 0"
           width="95%"
           style={{
-            color: formIsValidate.account === false ? color[0] : color[1]
+            color: formIsValidate.account === false ? color[0] : color[1],
           }}
         >
           账号以字母开头，由小写英文字母和数字组成的4-16位字符
@@ -105,11 +105,11 @@ export default function Register(props: Props) {
           }}
         />
         <Typography
-          sx={formStyles.hint}
+          sx={formStyles.formHint}
           margin="5px 0"
           width="95%"
           style={{
-            color: formIsValidate.password === false ? color[0] : color[1]
+            color: formIsValidate.password === false ? color[0] : color[1],
           }}
         >
           长度8-20位，仅可包括数字、大写字母、小写字母
@@ -133,7 +133,7 @@ export default function Register(props: Props) {
           }}
         />
         <Typography
-          sx={formStyles.hint}
+          sx={formStyles.formHint}
           margin="5px 0"
           width="95%"
           style={{ color: pwNotSame ? color[0] : color[1] }}
@@ -141,7 +141,7 @@ export default function Register(props: Props) {
           两次输入的密码不同，请重新确认您的密码
         </Typography>
         <Typography
-          sx={formStyles.hint}
+          sx={formStyles.formHint}
           margin="5px 0"
           style={{ color: color[0], display: hasRegistered ? 'block' : 'none' }}
         >
@@ -164,15 +164,7 @@ export default function Register(props: Props) {
         color={hasRegistered ? color[0] : color[1]}
       >
         已有账户？
-        <span
-          style={{
-            fontSize: '.9rem',
-            color: '#01555A',
-            fontWeight: 500,
-            cursor: 'pointer'
-          }}
-          onClick={() => setShowLogin(true)}
-        >
+        <span style={formStyles.switchHint} onClick={() => setShowLogin(true)}>
           点击登录
         </span>
       </Typography>

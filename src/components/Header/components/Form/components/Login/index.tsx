@@ -16,11 +16,11 @@ type Props = {
 
 const formConfig: FormConfig = {
   account: {
-    validator: (s) => s.length > 0
+    validator: (s) => s.length > 0,
   },
   password: {
-    validator: (s) => s.length > 0
-  }
+    validator: (s) => s.length > 0,
+  },
 }
 
 const color = ['#E46A69', '#908F8E']
@@ -36,7 +36,7 @@ export default function Login(props: Props) {
   async function clickToLogin(account: string, password: string) {
     const reqData = {
       account,
-      password
+      password,
     }
     const resData = await login(reqData)
     if (resData.code === 2003 || resData.code === 2006) {
@@ -61,16 +61,20 @@ export default function Login(props: Props) {
         width: '100%',
         flexDirection: 'column',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
       }}
     >
-      {/*@ts-ignore*/}
-      <form style={formStyles.form} ref={formRef}>
+      <form
+        style={{
+          ...formStyles.form,
+          flexDirection: 'column',
+        }}
+        ref={formRef}
+      >
         <input
           type="text"
           placeholder="输入您的账号"
-          /*@ts-ignore*/
-          style={formStyles.input}
+          style={{ ...formStyles.input, boxSizing: 'border-box' }}
           className="form_input"
           autoComplete="true"
           onChange={(e) => {
@@ -81,12 +85,12 @@ export default function Login(props: Props) {
           }}
         />
         <Typography
-          sx={formStyles.hint}
+          sx={formStyles.formHint}
           margin="5px 0"
           width="95%"
           style={{
             color: color[0],
-            visibility: formIsValidate.account === false ? 'visible' : 'hidden'
+            visibility: formIsValidate.account === false ? 'visible' : 'hidden',
           }}
         >
           账号不能为空
@@ -94,8 +98,7 @@ export default function Login(props: Props) {
         <input
           type="password"
           placeholder="输入您的密码"
-          /*@ts-ignore*/
-          style={formStyles.input}
+          style={{ ...formStyles.input, boxSizing: 'border-box' }}
           className="form_input"
           autoComplete="true"
           onChange={(e) => {
@@ -106,18 +109,19 @@ export default function Login(props: Props) {
           }}
         />
         <Typography
-          sx={formStyles.hint}
+          sx={formStyles.formHint}
           margin="5px 0"
           width="95%"
           style={{
             color: color[0],
-            visibility: formIsValidate.password === false ? 'visible' : 'hidden'
+            visibility:
+              formIsValidate.password === false ? 'visible' : 'hidden',
           }}
         >
           密码不能为空
         </Typography>
         <Typography
-          sx={formStyles.hint}
+          sx={formStyles.formHint}
           mb="5px"
           style={{ color: color[0], display: !isCorrect ? 'block' : 'none' }}
         >
@@ -125,10 +129,10 @@ export default function Login(props: Props) {
         </Typography>
       </form>
       <Typography
-        sx={formStyles.hint}
+        sx={formStyles.formHint}
         style={{
           color: color[0],
-          display: loginFail ? 'block' : 'none'
+          display: loginFail ? 'block' : 'none',
         }}
       >
         账号或密码错误，请重新输入
@@ -144,15 +148,7 @@ export default function Login(props: Props) {
       </Button>
       <Typography display="flex" mt="20px" fontSize=".9rem" color="#B6B5B3">
         未使用过该系统？
-        <span
-          style={{
-            fontSize: '.9rem',
-            color: '#01555A',
-            fontWeight: 500,
-            cursor: 'pointer'
-          }}
-          onClick={() => setShowLogin(false)}
-        >
+        <span style={formStyles.switchHint} onClick={() => setShowLogin(false)}>
           点击注册
         </span>
       </Typography>

@@ -8,29 +8,27 @@ export const headerStyles = {
       boxShadow: 'none',
       position: 'fixed',
       top: 0,
-      zIndex: 1
+      zIndex: 1,
     },
     '& .MuiToolbar-root': {
       height: '60px',
       display: 'flex',
       justifyContent: 'space-between',
-      padding: '0 53px 0 36px'
-    }
+      padding: '0 53px 0 36px',
+    },
   },
   logo: {
     '&': {
       display: 'flex',
-      alignItems: 'center'
+      alignItems: 'center',
     },
     '& .svg-icon': {
       zoom: '1.6',
-      marginRight: '5px'
-    }
+      marginRight: '5px',
+    },
   },
   search: {
-    '&': {
-      display: 'flex',
-      alignItems: 'center'
-    }
-  }
+    display: 'flex',
+    alignItems: 'center',
+  },
 }

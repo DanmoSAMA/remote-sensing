@@ -23,26 +23,15 @@ export default function Form(props: Props) {
           display: showDialogue ? 'flex' : 'none'
         })}
       >
-        <div
-          style={{
-            position: 'absolute',
-            top: '10px',
-            right: '2px',
-            cursor: 'pointer',
-            height: '30px',
-            width: '30px',
-            lineHeight: '30px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center'
-          }}
+        <Box
+          sx={formStyles.iconWrapper}
           onClick={() => {
             setShowDialogue(false)
             setShowLogin(true)
           }}
         >
           <SvgIcon name="cross" class="form cross" />
-        </div>
+        </Box>
 
         <Typography
           height="2.5rem"
@@ -67,13 +56,7 @@ export default function Form(props: Props) {
       </Box>
       <Box
         sx={{
-          width: '100vw',
-          height: '100vh',
-          position: 'fixed',
-          top: '0',
-          left: '0',
-          backgroundColor: 'rgba(0, 0, 0, .3)',
-          cursor: 'default',
+          ...formStyles.mask,
           display: showDialogue ? 'block' : 'none'
         }}
       ></Box>

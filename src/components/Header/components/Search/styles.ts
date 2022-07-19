@@ -1,11 +1,9 @@
 export const searchStyles = {
   wrapper: {
-    '&': {
-      display: 'flex',
-      justifyContent: 'end',
-      alignItems: 'center',
-      width: '25rem'
-    }
+    display: 'flex',
+    justifyContent: 'end',
+    alignItems: 'center',
+    width: '25rem',
   },
   input: {
     '&': {
@@ -15,32 +13,30 @@ export const searchStyles = {
       width: '18.75rem',
       fontSize: '18px',
       position: 'relative',
-      left: '46px'
+      left: '46px',
     },
     '& .MuiInput-input': {
       height: '40px',
       lineHeight: '40px',
       padding: '0 55px 0 10px',
-      boxSizing: 'border-box'
+      boxSizing: 'border-box',
     },
     '&:focus': {
-      border: 'none'
-    }
+      border: 'none',
+    },
   },
   search: {
     '&': {
       backgroundColor: 'primary.main',
       height: '40px',
-      width: '40px'
+      width: '40px',
     },
     '&:hover': {
-      backgroundColor: 'primary.main'
-    }
+      backgroundColor: 'primary.main',
+    },
   },
   icon: {
-    '&': {
-      color: 'secondary.main',
-      fontSize: '30px'
-    }
-  }
+    color: 'secondary.main',
+    fontSize: '30px',
+  },
 }

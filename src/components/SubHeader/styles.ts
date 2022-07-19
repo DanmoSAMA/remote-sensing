@@ -14,7 +14,7 @@ export const subHeaderStyles = {
     position: 'fixed',
     top: '60px',
     userSelect: 'none',
-    marginRight: '240px'
+    marginRight: '240px',
   },
   left: {
     position: 'absolute',
@@ -24,6 +24,6 @@ export const subHeaderStyles = {
     justifyContent: 'center',
     alignItems: 'center',
     cursor: 'pointer',
-    fontWeight: '500'
-  }
+    fontWeight: '500',
+  },
 }

@@ -27,10 +27,10 @@
       "@/hooks/*": ["hooks/*"],
       "@/mobx/*": ["mobx/*"],
       "@/network/*": ["network/*"],
-      "@/constants/*": ["constants/*"],
       "@/plugins/*": ["plugins/*"],
       "@/env/*": ["env/*"],
-      "@/types/*": ["types/*"]
+      "@/types/*": ["types/*"],
+      "@/consts/*": ["consts/*"],
     }
   },
   "include": ["src"],

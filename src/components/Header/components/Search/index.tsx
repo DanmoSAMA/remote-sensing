@@ -18,9 +18,11 @@ function Search() {
     <Box sx={searchStyles.wrapper}>
       <FormControl variant="standard" onClick={(e) => e.stopPropagation()}>
         <Input
-          sx={searchStyles.input}
+          sx={{
+            ...searchStyles.input,
+            display: showInput ? 'inline-block' : 'none',
+          }}
           disableUnderline={true}
-          style={{ display: showInput ? 'inline-block' : 'none' }}
           onChange={(e) => {
             setKeyword(e.target.value)
           }}

@@ -10,7 +10,6 @@ export const buttonStyles = {
       color: 'secondary.main',
       fontWeight: '400',
       padding: '0',
-      display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
       outline: '2px solid #01555A',
@@ -32,5 +31,11 @@ export const buttonStyles = {
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'column'
+  },
+  avatar: {
+    marginLeft: '1rem',
+    cursor: 'pointer',
+    height: '40px',
+    width: '40px',
   }
 }

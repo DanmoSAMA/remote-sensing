@@ -36,14 +36,14 @@ function _ToolBar() {
       : pathname === '/object-extract'
       ? 2
       : 4
-  
+
   // to fix
   const currentInfo =
     type !== 1
       ? ProjectStore.currentShownGroup.info
-      // @ts-ignore
-      : ProjectStore.currentShownGroup.info.infos[1]
-  
+      : // @ts-ignore
+        ProjectStore.currentShownGroup.info.infos[1]
+
   console.log(currentInfo)
 
   useEffect(() => {
@@ -151,17 +151,7 @@ function _ToolBar() {
                   justifyContent: 'center',
                 }}
               >
-                <Button
-                  variant="contained"
-                  component="span"
-                  style={{
-                    backgroundColor: '#313131',
-                    color: '#FCFBF4',
-                    boxShadow: 'none',
-                    fontWeight: '300',
-                    fontSize: '16px',
-                  }}
-                >
+                <Button variant="contained" component="span">
                   <SvgIcon name="import" />
                   导入图片
                 </Button>
@@ -202,7 +192,7 @@ function _ToolBar() {
             </Typography>
             <hr />
           </Box>
-          {(type === 5 || (type === 1 && currentInfo.num !== undefined))  && (
+          {(type === 5 || (type === 1 && currentInfo.num !== undefined)) && (
             <Box
               sx={{
                 color: 'primary.light',

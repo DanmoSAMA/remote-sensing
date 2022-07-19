@@ -42,8 +42,10 @@ function _Button() {
   return (
     <>
       <Box
-        sx={buttonStyles.button}
-        style={{ display: token === null ? 'flex' : 'none' }}
+        sx={{
+          ...buttonStyles.button,
+          display: token === null ? 'flex' : 'none',
+        }}
       >
         <span onClick={() => setShowDialogue(true)}>登录</span>
         <Form showDialogue={showDialogue} setShowDialogue={setShowDialogue} />
@@ -53,11 +55,8 @@ function _Button() {
           alt="default avatar"
           src={avatar}
           sx={{
-            height: '40px',
-            width: '40px',
+            ...buttonStyles.avatar,
             display: token !== null ? 'block' : 'none',
-            marginLeft: '1rem',
-            cursor: 'pointer'
           }}
           onClick={(e) => {
             e.stopPropagation()
@@ -65,8 +64,7 @@ function _Button() {
           }}
         />
         <Box
-          sx={buttonStyles.dropdown}
-          style={{ display: showDropDown ? 'flex' : 'none' }}
+          sx={{ ...buttonStyles.dropdown, display: showDropDown ? 'flex' : 'none' }}
           onClick={(e) => {
             e.stopPropagation()
           }}
@@ -78,18 +76,15 @@ function _Button() {
               alignItems: 'center',
               justifyContent: 'center',
               width: '100%',
-              marginBottom: '10px'
+              marginBottom: '10px',
             }}
           >
             <Avatar
               alt="default avatar"
               src={avatar}
               sx={{
-                height: '40px',
-                width: '40px',
+                ...buttonStyles.avatar,
                 display: token !== null ? 'block' : 'none',
-                marginLeft: '1rem',
-                cursor: 'pointer'
               }}
             />
             <Typography ml="10px" fontSize="20px" color="secondary.main">

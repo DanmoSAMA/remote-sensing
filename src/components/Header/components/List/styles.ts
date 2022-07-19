@@ -1,8 +1,6 @@
 export const listStyles = {
   list: {
-    '&': {
-      display: 'flex'
-    }
+    display: 'flex',
   },
   item: {
     '&': {
@@ -14,22 +12,22 @@ export const listStyles = {
       textAlign: 'center',
       color: '#fff',
       marginRight: '36px',
-      borderRadius: '10px'
+      borderRadius: '10px',
     },
     '& .MuiTypography-root': {
       fontSize: '16px',
-      fontWeight: '300'
+      fontWeight: '300',
     },
     '&.Mui-selected': {
       backgroundColor: 'primary.light',
-      color: 'secondary.main'
+      color: 'secondary.main',
     },
     '&.Mui-selected .MuiTypography-root': {
-      fontWeight: '400'
+      fontWeight: '400',
     },
     '&.Mui-selected:hover': {
       backgroundColor: 'primary.light',
-      color: 'secondary.main'
-    }
-  }
+      color: 'secondary.main',
+    },
+  },
 }
