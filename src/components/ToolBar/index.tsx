@@ -24,6 +24,7 @@ function _ToolBar() {
   const id = useParams('id') as string
   const body = document.body
   const [isUploading, setIsUploading] = useState(false)
+  const [curInfo, setCurInfo] = useState(null)
   const { pathname } = useLocation()
 
   const type =
@@ -36,15 +37,6 @@ function _ToolBar() {
       : pathname === '/object-extract'
       ? 2
       : 4
-
-  // to fix
-  const currentInfo =
-    type !== 1
-      ? ProjectStore.currentShownGroup.info
-      : // @ts-ignore
-        ProjectStore.currentShownGroup.info.infos[1]
-
-  console.log(currentInfo)
 
   useEffect(() => {
     ProjectStore.init(parseInt(id))
@@ -65,6 +57,17 @@ function _ToolBar() {
       HeightStore.updateHeight(body.offsetHeight)
     }
   }, [])
+
+  useEffect(() => {
+    const curInfoVal =
+      type !== 1
+        ? ProjectStore.currentShownGroup.info
+        : // @ts-ignore
+        Array.isArray(ProjectStore.currentShownGroup.info.infos)
+        ? ProjectStore.currentShownGroup.info.infos[1]
+        : ProjectStore.currentShownGroup.info
+    setCurInfo(curInfoVal)
+  }, [ProjectStore.currentShownGroup])
 
   // 图片预加载
   function preload() {
@@ -151,7 +154,17 @@ function _ToolBar() {
                   justifyContent: 'center',
                 }}
               >
-                <Button variant="contained" component="span">
+                <Button
+                  variant="contained"
+                  component="span"
+                  sx={{
+                    backgroundColor: '#313131',
+                    color: '#FCFBF4',
+                    boxShadow: 'none',
+                    fontWeight: '300',
+                    fontSize: '16px',
+                  }}
+                >
                   <SvgIcon name="import" />
                   导入图片
                 </Button>
@@ -192,7 +205,7 @@ function _ToolBar() {
             </Typography>
             <hr />
           </Box>
-          {(type === 5 || (type === 1 && currentInfo.num !== undefined)) && (
+          {(type === 5 || (type === 1 && curInfo.num !== undefined)) && (
             <Box
               sx={{
                 color: 'primary.light',
@@ -200,10 +213,10 @@ function _ToolBar() {
                 margin: '15px 0 30px 15px',
               }}
             >
-              图块数量：{currentInfo.num} 个
+              图块数量：{curInfo.num} 个
             </Box>
           )}
-          {(type === 4 || (type === 1 && currentInfo.boxs !== undefined)) && (
+          {(type === 4 || (type === 1 && curInfo.boxs !== undefined)) && (
             <Box
               sx={{
                 color: 'primary.light',
@@ -211,10 +224,10 @@ function _ToolBar() {
                 margin: '20px 0 30px 15px',
               }}
             >
-              目标数量：{currentInfo.boxs.length} 个
+              目标数量：{curInfo.boxs.length} 个
             </Box>
           )}
-          {(type === 3 || (type === 1 && currentInfo.nums !== undefined)) && (
+          {(type === 3 || (type === 1 && curInfo.nums !== undefined)) && (
             <Box
               sx={{
                 color: 'primary.light',

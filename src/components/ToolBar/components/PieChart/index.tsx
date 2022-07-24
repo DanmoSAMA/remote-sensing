@@ -12,26 +12,26 @@ type Props = {
 function _MyPieChart(props: Props) {
   const { detectType, displayType } = props
 
-  const currentInfo =
-  detectType !== 1
-    ? ProjectStore.currentShownGroup.info
-    // @ts-ignore
-    : ProjectStore.currentShownGroup.info.infos[1]
+  const curInfo =
+    detectType !== 1
+      ? ProjectStore.currentShownGroup.info
+      : // @ts-ignore
+        ProjectStore.currentShownGroup.info.infos[1]
 
   const data =
     displayType === 1
-      // @ts-ignore
-      ? currentInfo.colors.map((item, index) => {
+      ? // @ts-ignore
+        curInfo.colors.map((item) => {
           return {
             name: '',
-            value: item
+            value: item,
           }
-      })
-      // @ts-ignore
-      : currentInfo.nums.map((item, index) => {
+        })
+      : // @ts-ignore
+        curInfo.nums.map((item) => {
           return {
             name: '',
-            value: item
+            value: item,
           }
         })
 

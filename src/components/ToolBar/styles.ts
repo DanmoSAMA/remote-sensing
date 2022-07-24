@@ -24,13 +24,6 @@ export const toolBarStyles = {
       fontWeight: 300,
       ml: '20px',
     },
-    '& button': {
-      backgroundColor: '#313131',
-      color: '#FCFBF4',
-      boxShadow: 'none',
-      fontWeight: '300',
-      fontSize: '16px',
-    },
     '& button:hover': {
       backgroundColor: '#313131',
       boxShadow: 'none',

@@ -27,8 +27,14 @@ export const perspectiveStyles = {
     '& img': {
       position: 'absolute',
       top: '20rem',
-      height: 'auto',
       cursor: 'pointer',
+      border: '3px solid #01555A',
+    },
+    '& canvas': {
+      position: 'absolute',
+      top: '20rem',
+      cursor: 'pointer',
+      border: '3px solid #01555A',
     },
   },
   cubeAtConer: {
@@ -43,6 +49,14 @@ export const perspectiveStyles = {
       top: '0',
       height: 'auto',
       cursor: 'pointer',
+      border: '3px solid #01555A',
+    },
+    '& canvas': {
+      position: 'absolute',
+      top: '0',
+      height: 'auto',
+      cursor: 'pointer',
+      border: '3px solid #01555A',
     },
   },
   detail: {

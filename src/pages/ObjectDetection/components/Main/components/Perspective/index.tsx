@@ -10,7 +10,7 @@ import { objectDetectionColors } from '@/consts/color'
 
 function _Perspective() {
   let squareImg = document.querySelector('#squareImg') as HTMLImageElement
-  const [size, setSize] = useState(500)
+  const [size, setSize] = useState(60)
   const [angle, setAngle] = useState(-15)
   const [imgHeight, setImgHeight] = useState(
     squareImg ? squareImg.offsetHeight : 0
@@ -55,14 +55,14 @@ function _Perspective() {
   }, [])
 
   function zoom() {
-    if (size <= 620) {
-      setSize(size + 10)
+    if (size <= 75) {
+      setSize(size + 2)
     }
   }
 
   function lessen() {
-    if (size >= 400) {
-      setSize(size - 10)
+    if (size >= 45) {
+      setSize(size - 2)
     }
   }
 
@@ -206,33 +206,32 @@ function _Perspective() {
         }
       >
         <img
+          id="od"
           style={{
-            width: !ProjectStore.showDetail ? `${size}px` : `${size / 2.5}px`,
-            height: !ProjectStore.showDetail ? `${size}px` : `${size / 2.5}px`,
+            width: `${size}%`,
             transform: `translateY(${
-              !ProjectStore.showDetail ? -5 : 5
+              !ProjectStore.showDetail ? (size + 100) / 10 : (size + 300) / 20
             }rem) rotateX(57deg) rotateZ(${-20 + angle}deg)`,
+            border: 'none',
             cursor: 'default',
           }}
           src={ProjectStore.currentShownGroup.pictures[0].url}
         />
         <img
+          id="cubeImg"
           style={{
             width: 'auto',
             height: 'auto',
             visibility: 'hidden',
             position: 'absolute',
           }}
-          id="cubeImg"
           src={ProjectStore.currentShownGroup.pictures[1].url}
         />
         <canvas
           id="canvas"
           style={{
-            width: !ProjectStore.showDetail ? `${size}px` : `${size / 2.5}px`,
-            height: !ProjectStore.showDetail ? `${size}px` : `${size / 2.5}px`,
             transform: `translateY(${
-              !ProjectStore.showDetail ? (size - 380) / 10 : (size - 200) / 20
+              !ProjectStore.showDetail ? (size + 300) / 10 : (size + 450) / 20
             }rem) rotateX(57deg) rotateZ(${-20 + angle}deg)`,
             cursor: 'pointer',
           }}
