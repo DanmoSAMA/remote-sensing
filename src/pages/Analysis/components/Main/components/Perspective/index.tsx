@@ -17,6 +17,7 @@ function _Perspective() {
   const [angle, setAngle] = useState(-15)
   const [detailImgUrl, setDetailImgUrl] = useState('')
   const [showDropDown, setShowDropDown] = useState(false)
+  const dpr = window.devicePixelRatio
 
   // 判断逻辑
   // const layerNum = ProjectStore.currentShownGroup.info.mark.reduce(
@@ -120,7 +121,7 @@ function _Perspective() {
     let imgHeight = 0
 
     if (odImg) imgHeight = odImg.offsetHeight
-    // 一个莫名其妙的bug，因此需要这样写以避免bug产生
+    // 一个莫名其妙的bug，需要这样写以避免bug产生
     if (imgHeight < 100) {
       imgHeight = (cubeWrapper.clientWidth * size) / 100
     }
@@ -145,10 +146,12 @@ function _Perspective() {
   ) {
     const img = document.getElementById('cubeImg') as HTMLImageElement
 
-    c.width = imgHeight
-    c.height = imgHeight
-    c.style.width = c.width + 'px'
-    c.style.height = c.height + 'px'
+    c.width = imgHeight * dpr
+    c.height = imgHeight * dpr
+    c.style.width = imgHeight + 'px'
+    c.style.height = imgHeight + 'px'
+
+    ctx.scale(dpr, dpr)
 
     // 绘制图片
     img.onload = draw
