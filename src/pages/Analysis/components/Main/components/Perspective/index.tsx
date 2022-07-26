@@ -1,8 +1,6 @@
 import Box from '@mui/material/Box'
-import Button from '@mui/material/Button'
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
-import Slider from '@mui/material/Slider'
 import SvgIcon from '@/components/SvgIcon'
 import MySelect from './components/MySelect'
 import { ProjectStore } from '@/mobx/project'
@@ -10,14 +8,17 @@ import { perspectiveStyles } from './styles'
 import { observer } from 'mobx-react-lite'
 import { useState, useEffect } from 'react'
 import { objectDetectionColors } from '@/consts/color'
+import { throttle } from '@/utils/throttle'
 
 function _Perspective() {
   let odImg = document.querySelector('#od') as HTMLElement
   const [size, setSize] = useState(60)
   const [angle, setAngle] = useState(-15)
-  const [detailImgUrl, setDetailImgUrl] = useState('')
   const [showDropDown, setShowDropDown] = useState(false)
+  const [imgIndex, setImgIndex] = useState<-1 | 0 | 1 | 2 | 3 | 4 | 5>(-1)
   const dpr = window.devicePixelRatio
+
+  let cubeLayerDoms = document.querySelectorAll('.cube_layer')
 
   // 判断逻辑
   // const layerNum = ProjectStore.currentShownGroup.info.mark.reduce(
@@ -70,6 +71,7 @@ function _Perspective() {
   //   ODIndex,
   //   CDIndex
   // )
+
   let cubeCanvas: HTMLCanvasElement
   let ctx: CanvasRenderingContext2D
   let color: string
@@ -91,11 +93,17 @@ function _Perspective() {
   }
 
   useEffect(() => {
-    window.addEventListener('resize', TheDrawMethod)
+    window.addEventListener('resize', throttle(TheDrawCubeMethod, 10))
   }, [])
 
+  useEffect(TheDrawDetailMethod, [imgIndex])
+
   useEffect(() => {
-    TheDrawMethod()
+    window.addEventListener('resize', throttle(TheDrawDetailMethod, 10))
+  }, [imgIndex])
+
+  useEffect(() => {
+    TheDrawCubeMethod()
   }, [size, ProjectStore.showDetail, ProjectStore.currentShownGroup])
 
   function zoom() {
@@ -110,45 +118,58 @@ function _Perspective() {
     }
   }
 
-  function viewDetail(type: 0 | 1 | 2 | 3 | 4 | 5) {
-    ProjectStore.setShowDetail(true)
-    setDetailImgUrl(ProjectStore.currentShownGroup.pictures[type].url)
-  }
-
-  function handleHeight(): Promise<number> {
+  function handleSizeInCube(): Promise<any> {
     odImg = document.querySelector('#od') as HTMLElement
-    const cubeWrapper = document.querySelector('#cubeWrapper') as HTMLElement
-    let imgHeight = 0
+    let imgWidth = 0,
+      imgHeight = 0
 
-    if (odImg) imgHeight = odImg.offsetHeight
-    // 一个莫名其妙的bug，需要这样写以避免bug产生
-    if (imgHeight < 100) {
-      imgHeight = (cubeWrapper.clientWidth * size) / 100
+    if (odImg) {
+      imgWidth = odImg.offsetWidth
+      imgHeight = odImg.offsetHeight
     }
 
     return new Promise((resolve) => {
-      if (odImg) {
-        return resolve(imgHeight)
+      if (imgWidth && imgHeight) {
+        return resolve({ imgWidth, imgHeight })
       }
-      odImg = document.querySelector('#od') as HTMLElement
-      if (odImg) {
-        odImg.onload = () => {
-          resolve(imgHeight)
-        }
-      } else resolve(0)
+      setTimeout(() => {
+        odImg = document.querySelector('#od') as HTMLElement
+        imgWidth = odImg.offsetWidth
+        imgHeight = odImg.offsetHeight
+        resolve({ imgWidth, imgHeight })
+      }, 100)
+    })
+  }
+
+  function handleWidthInDetail(): Promise<number> {
+    let detailWrapper = document.querySelector('#detail_wrapper') as HTMLElement
+
+    let detailWidth = 0
+
+    if (detailWrapper) detailWidth = detailWrapper.offsetWidth
+
+    return new Promise((resolve) => {
+      if (detailWidth) {
+        return resolve(detailWidth)
+      }
+      setTimeout(() => {
+        detailWrapper = document.querySelector('#detail_wrapper') as HTMLElement
+        resolve(detailWrapper.offsetWidth)
+      }, 0)
     })
   }
 
   function drawCubeCanvas(
+    imgWidth: number,
     imgHeight: number,
     c: HTMLCanvasElement,
     ctx: CanvasRenderingContext2D
   ) {
     const img = document.getElementById('cubeImg') as HTMLImageElement
 
-    c.width = imgHeight * dpr
+    c.width = imgWidth * dpr
     c.height = imgHeight * dpr
-    c.style.width = imgHeight + 'px'
+    c.style.width = imgWidth + 'px'
     c.style.height = imgHeight + 'px'
 
     ctx.scale(dpr, dpr)
@@ -166,15 +187,15 @@ function _Perspective() {
         img.offsetHeight,
         0,
         0,
-        imgHeight + 5,
+        imgWidth + 5,
         imgHeight + 5
       )
 
       // 绘制方框
       // @ts-ignore
-      const sw = ProjectStore.currentShownGroup.info.infos[1].w
+      const sw = ProjectStore.currentShownGroup.info.infos[ODIndex].w
       // @ts-ignore
-      const sh = ProjectStore.currentShownGroup.info.infos[1].h
+      const sh = ProjectStore.currentShownGroup.info.infos[ODIndex].h
       const ratioX = sw / (imgHeight + 5)
       const ratioY = sh / (imgHeight + 5)
 
@@ -186,29 +207,129 @@ function _Perspective() {
       ctx.strokeStyle = color
 
       // @ts-ignore
-      ProjectStore.currentShownGroup.info.infos[1].boxs &&
+      ProjectStore.currentShownGroup.info.infos[ODIndex].boxs &&
         // @ts-ignore
-        ProjectStore.currentShownGroup.info.infos[1].boxs.forEach((item) => {
-          // 实际绘制的位置
-          const sx = item[0] / ratioX
-          const sy = item[1] / ratioY
-          // 实际绘制的宽高
-          const dw = item[2] / ratioX
-          const dh = item[3] / ratioY
+        ProjectStore.currentShownGroup.info.infos[ODIndex].boxs.forEach(
+          // @ts-ignore
+          (item) => {
+            // 实际绘制的位置
+            const sx = item[0] / ratioX
+            const sy = item[1] / ratioY
+            // 实际绘制的宽高
+            const dw = item[2] / ratioX
+            const dh = item[3] / ratioY
 
-          ctx.strokeRect(sx, sy, dw, dh)
-        })
+            ctx.strokeRect(sx, sy, dw, dh)
+          }
+        )
     }
   }
 
   // 改变宽高和绘图，一气呵成
-  function TheDrawMethod() {
-    handleHeight().then((imgHeight: number) => {
-      // cube canvas
+  function TheDrawCubeMethod() {
+    handleSizeInCube().then((size: any) => {
+      const { imgWidth, imgHeight } = size
       cubeCanvas = document.getElementById('canvas') as HTMLCanvasElement
       ctx = cubeCanvas?.getContext('2d') as CanvasRenderingContext2D
-      ctx && drawCubeCanvas(imgHeight, cubeCanvas, ctx)
+      ctx && drawCubeCanvas(imgWidth, imgHeight, cubeCanvas, ctx)
     })
+  }
+
+  function TheDrawDetailMethod() {
+    if (ProjectStore.showDetail) {
+      handleWidthInDetail().then((detailWidth) => {
+        const detailCanvas = document.getElementById(
+          'detail_canvas'
+        ) as HTMLCanvasElement
+        ctx = detailCanvas?.getContext('2d') as CanvasRenderingContext2D
+        ctx && drawDetailCanvas(detailWidth, detailCanvas, ctx, imgIndex)
+      })
+    }
+  }
+
+  function viewDetail(_imgIndex: -1 | 0 | 1 | 2 | 3 | 4 | 5) {
+    setImgIndex(_imgIndex)
+    ProjectStore.setShowDetail(true)
+  }
+
+  function drawDetailCanvas(
+    detailWidth: number,
+    c: HTMLCanvasElement,
+    ctx: CanvasRenderingContext2D,
+    imgIndex: -1 | 0 | 1 | 2 | 3 | 4 | 5
+  ) {
+    cubeLayerDoms = document.querySelectorAll('.cube_layer')
+    const cubeImg = document.getElementById('cubeImg') as HTMLImageElement
+
+    const img =
+      imgIndex !== 2
+        ? (cubeLayerDoms[imgIndex] as HTMLImageElement)
+        : (cubeLayerDoms[5] as HTMLImageElement)
+
+    c.width = detailWidth * dpr
+    c.height = detailWidth * dpr
+    c.style.width = detailWidth + 'px'
+    c.style.height = detailWidth + 'px'
+
+    ctx.scale(dpr, dpr)
+
+    console.log('测节流')
+
+    // 绘制图片
+    if (img) {
+      img.onload = draw
+      if (img.complete) draw()
+    }
+
+    function draw() {
+      ctx.drawImage(
+        img as CanvasImageSource,
+        0,
+        0,
+        cubeImg.offsetWidth - 5,
+        cubeImg.offsetHeight - 5,
+        0,
+        0,
+        detailWidth,
+        detailWidth
+      )
+
+      if (imgIndex === 2) {
+        // 绘制方框
+        // @ts-ignore
+        const sw = ProjectStore.currentShownGroup.info.infos[ODIndex].w
+        // @ts-ignore
+        const sh = ProjectStore.currentShownGroup.info.infos[ODIndex].h
+        const ratioX = sw / detailWidth
+        const ratioY = sh / detailWidth
+
+        // 线宽
+        ctx.lineWidth = 3
+        // 颜色
+        ctx.fillStyle = color
+        ctx.strokeStyle = color
+        // 透明
+        ctx.globalAlpha = 0.5
+
+        // @ts-ignore
+        ProjectStore.currentShownGroup.info.infos[ODIndex].boxs &&
+          // @ts-ignore
+          ProjectStore.currentShownGroup.info.infos[ODIndex].boxs.forEach(
+            // @ts-ignore
+            (item) => {
+              // 实际绘制的位置
+              const sx = item[0] / ratioX
+              const sy = item[1] / ratioY
+              // 实际绘制的宽高
+              const dw = item[2] / ratioX
+              const dh = item[3] / ratioY
+
+              ctx.fillRect(sx, sy, dw, dh)
+              ctx.strokeRect(sx, sy, dw, dh)
+            }
+          )
+      }
+    }
   }
 
   return (
@@ -231,6 +352,7 @@ function _Perspective() {
           /* 目标提取 */
           hasOEGroup && (
             <img
+              className="cube_layer"
               style={{
                 width: `${size}%`,
                 transform: `translateY(${
@@ -248,6 +370,7 @@ function _Perspective() {
           /* 地物分类 */
           hasTCGroup && (
             <img
+              className="cube_layer"
               style={{
                 width: `${size}%`,
                 transform: `translateY(${
@@ -290,17 +413,14 @@ function _Perspective() {
                 }}
                 id="cubeImg"
                 src={
-                  hasCDGroup
-                    ? ProjectStore.currentShownGroup.pictures[
-                        ProjectStore.currentShownGroup.pictures.length - 2
-                      ].url
-                    : ProjectStore.currentShownGroup.pictures[
-                        ProjectStore.currentShownGroup.pictures.length - 1
-                      ].url
+                  ProjectStore.currentShownGroup.pictures[
+                    ProjectStore.currentShownGroup.pictures.length - 1
+                  ].url
                 }
               />
               <canvas
                 id="canvas"
+                className="cube_layer"
                 style={{
                   transform: `translateY(${
                     !ProjectStore.showDetail
@@ -308,6 +428,9 @@ function _Perspective() {
                       : (size + 450) / 20
                   }rem) rotateX(57deg) rotateZ(${-20 + angle}deg)`,
                   cursor: 'pointer',
+                }}
+                onClick={() => {
+                  viewDetail(2)
                 }}
               ></canvas>
             </>
@@ -318,12 +441,13 @@ function _Perspective() {
           hasCDGroup && (
             <>
               <img
+                className="cube_layer"
                 style={{
                   width: `${size}%`,
                   transform: `translateY(${
                     !ProjectStore.showDetail
                       ? (size + 500) / 10
-                      : (size - 1200) / 20
+                      : (size + 600) / 20
                   }rem) rotateX(57deg) rotateZ(${-20 + angle}deg)`,
                 }}
                 src={ProjectStore.currentShownGroup.pictures[CDIndex].url}
@@ -338,7 +462,7 @@ function _Perspective() {
                     transform: `translateY(${
                       !ProjectStore.showDetail
                         ? (size + 699) / 10
-                        : (size + 599) / 20
+                        : (size + 749) / 20
                     }rem) rotateX(57deg) rotateZ(${-20 + angle}deg)`,
                     opacity: 0.25,
                   }}
@@ -346,12 +470,13 @@ function _Perspective() {
                 />
               )}
               <img
+                className="cube_layer"
                 style={{
                   width: `${size}%`,
                   transform: `translateY(${
                     !ProjectStore.showDetail
                       ? (size + 700) / 10
-                      : (size + 600) / 20
+                      : (size + 750) / 20
                   }rem) rotateX(57deg) rotateZ(${-20 + angle}deg)`,
                 }}
                 src={ProjectStore.currentShownGroup.pictures[CDIndex + 1].url}
@@ -366,7 +491,7 @@ function _Perspective() {
                     transform: `translateY(${
                       !ProjectStore.showDetail
                         ? (size + 899) / 10
-                        : (size + 749) / 20
+                        : (size + 899) / 20
                     }rem) rotateX(57deg) rotateZ(${-20 + angle}deg)`,
                     opacity: 0.25,
                   }}
@@ -374,12 +499,13 @@ function _Perspective() {
                 />
               )}
               <img
+                className="cube_layer"
                 style={{
                   width: `${size}%`,
                   transform: `translateY(${
                     !ProjectStore.showDetail
                       ? (size + 900) / 10
-                      : (size + 750) / 20
+                      : (size + 900) / 20
                   }rem) rotateX(57deg) rotateZ(${-20 + angle}deg)`,
                 }}
                 src={ProjectStore.currentShownGroup.pictures[CDIndex + 2].url}
@@ -392,16 +518,15 @@ function _Perspective() {
         }
       </Box>
       {ProjectStore.showDetail && (
-        <Box sx={perspectiveStyles.detail}>
-          <img
-            src={detailImgUrl}
+        <Box sx={perspectiveStyles.detail} id="detail_wrapper">
+          <canvas
+            id="detail_canvas"
             style={{
-              width: '100%',
               borderRadius: '1rem',
               position: 'absolute',
-              top: '0',
+              top: 0,
             }}
-          />
+          ></canvas>
           <div
             onClick={() => {
               ProjectStore.setShowDetail(false)

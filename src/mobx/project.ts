@@ -279,8 +279,6 @@ class ProjectState {
       }[],
       isShown: true,
     }
-
-    console.log(this.currentShownGroup)
   }
   // 用于平面视角
   updateCurShownGroups(type: 1 | 2 | 3 | 4 | 5) {
